@@ -47,7 +47,9 @@ This is a base cms setup with OAuth 2 authentication in vue.js and Laravel 5.5.
 
 	```
 	DB_DATABASE=laravel_base_cms
+
 	DB_USERNAME=
+
 	DB_PASSWORD=
 	```
 
@@ -57,8 +59,11 @@ This is a base cms setup with OAuth 2 authentication in vue.js and Laravel 5.5.
 
 	```
 	php artisan migrate
+
 	php artisan passport:install
+
 	php artisan db:seed
+	
 	php artisan migrate --database=testing
 	```
 
