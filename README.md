@@ -21,11 +21,12 @@ This is a base cms setup with OAuth 2 authentication in vue.js and Laravel 5.5.
 </ul>
 
 ## Setup process
-
+```
 	git clone https://github.com/bickyraj/base_crm.git
-
+```
+```
 	composer update
-
+```
 <ul>
 <li>this would load all the necessary vendor files.</li>
 <li>create a database named laravel_base_cms</li>
