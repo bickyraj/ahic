@@ -45,26 +45,17 @@ This is a base cms setup with OAuth 2 authentication in vue.js and Laravel 5.5.
 	<li>In the .env file enter the database name, username and password of your database in</li>
 </ul>
 
-	```
 	DB_DATABASE=laravel_base_cms
-
 	DB_USERNAME=
-
 	DB_PASSWORD=
-	```
 
 <ul>
 	<li>In the cmd prompt run the following command sequentially</li>
 </ul>
 
-	```
 	php artisan migrate
-
-	php artisan passport:install
-
+	php artisan passport:install 
 	php artisan db:seed
-	
 	php artisan migrate --database=testing
-	```
 
 now go to browser and enter your url, the project is ready.
