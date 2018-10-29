@@ -33,27 +33,27 @@ This is a base cms setup with OAuth 2 authentication in vue.js and Laravel 5.5.
 <li>Also create a database named testing_base_crm</li>
 <li>open .env file  and edit the env variables, Default name of project folder is base_cms</li>
 
-```
-	BASE_URL=localhost/YOUR_PROJECT_FOLDER_NAME/
-```
-```
-	VUE_BASE_URL = /YOUR_PROJECT_FOLDER_NAME/
-```
+	```
+		BASE_URL=localhost/YOUR_PROJECT_FOLDER_NAME/
+	```
+	```
+		VUE_BASE_URL = /YOUR_PROJECT_FOLDER_NAME/
+	```
 <li>In the .env file enter the database name, username and password of your database in</li>
 
-```
-	DB_DATABASE=laravel_base_cms
-	DB_USERNAME=
-	DB_PASSWORD=
-```
+	```
+		DB_DATABASE=laravel_base_cms
+		DB_USERNAME=
+		DB_PASSWORD=
+	```
 <li>In the cmd prompt run the following command sequentially</li>
 
-```
-	php artisan migrate
-	php artisan passport:install
-	php artisan db:seed
-	php artisan migrate --database=testing
-```
+	```
+		php artisan migrate
+		php artisan passport:install
+		php artisan db:seed
+		php artisan migrate --database=testing
+	```
 </ul>
 
 now go to browser and enter your url, the project is ready.
