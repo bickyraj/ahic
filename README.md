@@ -22,10 +22,10 @@ This is a base cms setup with OAuth 2 authentication in vue.js and Laravel 5.5.
 
 ## Setup process
 ```
-	git clone http://git.innologysolution.com/Bicky/cms.git
+git clone http://git.innologysolution.com/Bicky/cms.git
 ```
 ```
-	composer update
+composer update
 ```
 <ul>
 <li>this would load all the necessary vendor files.</li>
@@ -34,12 +34,9 @@ This is a base cms setup with OAuth 2 authentication in vue.js and Laravel 5.5.
 <li>open .env file  and edit the env variables, Default name of project folder is base_cms</li>
 </ul>
 
-```
-	BASE_URL=localhost/YOUR_PROJECT_FOLDER_NAME/
-```
 
 ```
-	VUE_BASE_URL = /YOUR_PROJECT_FOLDER_NAME/
+VUE_BASE_URL = /YOUR_PROJECT_FOLDER_NAME/
 ```
 <ul>
 	<li>In the .env file enter the database name, username and password of your database in</li>
