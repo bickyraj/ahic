@@ -22,7 +22,7 @@ This is a base cms setup with OAuth 2 authentication in vue.js and Laravel 5.5.
 
 ## Setup process
 ```
-	git clone https://github.com/bickyraj/base_crm.git
+	git clone http://git.innologysolution.com/Bicky/cms.git
 ```
 ```
 	composer update
