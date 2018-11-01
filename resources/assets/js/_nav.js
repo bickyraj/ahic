@@ -21,6 +21,24 @@ export default {
       }
     },
     {
+      name: 'Menus',
+      url: url + 'menus',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Pages',
+      url: url + 'pages',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
       name: 'Import / Export',
       url: url + 'import-export',
       icon: 'fas fa-cloud-download-alt',

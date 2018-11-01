@@ -82,6 +82,44 @@ const routes = [
         },
     },
     { 
+        path: admin_url + 'menus', 
+        component: require('./components/Admin/Menu/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Menus',
+                    path: admin_url + 'menus', 
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'Pages', 
+        component: require('./components/Admin/Page/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Pages',
+                    path: admin_url + 'pages', 
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
         path: admin_url + 'import-export', 
         component: require('./components/Admin/ImportExport/Index'),
         meta: {

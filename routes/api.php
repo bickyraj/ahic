@@ -43,4 +43,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('user', 'UserController@store');
     Route::post('user/update', 'UserController@update');
     Route::delete('user/{id}', 'UserController@destroy');
+
+    // Menu functions.
+    Route::get('menus', 'MenuController@index');
+    Route::get('menu/{id}', 'MenuController@show');
+    Route::post('menu', 'MenuController@store');
+    Route::post('edit-menu', 'MenuController@update');
+    Route::delete('menu/{id}', 'MenuController@destroy');
+    
+    // User functions.
+    Route::get('pages', 'PageController@index');
+    Route::get('page/{id}', 'PageController@show');
+    Route::post('page', 'PageController@store');
+    Route::post('edit-page', 'PageController@update');
+    Route::delete('page/{id}', 'PageController@destroy');
 });
