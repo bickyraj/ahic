@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCourseUnitCompetencesTable extends Migration
+class CreateCourseUnitCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCourseUnitCompetencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_unit_competences', function (Blueprint $table) {
+        Schema::create('course_unit_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('course_unit_category');
-            $table->string('unit_code');
-            $table->longText('description');
+            $table->string('name');
+            $table->integer('order_by');
+            $table->integer('status');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCourseUnitCompetencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_unit_competences');
+        Schema::dropIfExists('course_unit_categories');
     }
 }
