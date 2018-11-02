@@ -16,7 +16,7 @@ class CreateCourseEntryRequirementsTable extends Migration
         Schema::create('course_entry_requirements', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('course_id');
-            $table-longText('description');
+            $table->longText('description');
             $table->integer('order');
             $table->timestamps();
         });
