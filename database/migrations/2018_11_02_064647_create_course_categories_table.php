@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBannersTable extends Migration
+class CreateCourseCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateBannersTable extends Migration
      */
     public function up()
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('course_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('page_id');
-            $table->string('banner');
+            $table->string('name');
+            $table->string('image_background')->nullable();
+            $table->integer('order_by');
+            $table->integer('status');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateBannersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banners');
+        Schema::dropIfExists('course_categories');
     }
 }
