@@ -9,15 +9,9 @@ use App\Http\Resources\Role as RoleResource;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+   public function index()
     {
         $role = Role::where('id', '!=', 1)->paginate(15);
-
         // return collection of role as a resource.
         return RoleResource::collection($role);
     }
