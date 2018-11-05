@@ -39,6 +39,24 @@ export default {
       }
     },
     {
+      name: 'Unit Competences',
+      url: url + 'course_unit_competences',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Unit Categories',
+      url: url + 'course_unit_categories',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
       name: 'Import / Export',
       url: url + 'import-export',
       icon: 'fas fa-cloud-download-alt',

@@ -120,6 +120,44 @@ const routes = [
         },
     },
     { 
+        path: admin_url + 'course_unit_competences', 
+        component: require('./components/Admin/CourseUnitCompetences/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Course Unit Competences',
+                    path: admin_url + 'course_unit_competences',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'course_unit_categories', 
+        component: require('./components/Admin/CourseUnitCategories/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Course Unit Categories',
+                    path: admin_url + 'course_unit_categories',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
         path: admin_url + 'import-export', 
         component: require('./components/Admin/ImportExport/Index'),
         meta: {

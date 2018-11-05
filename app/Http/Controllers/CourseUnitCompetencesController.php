@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
-use App\Course_Unit_Competences;
+use App\CourseUnitCompetences;
 use Illuminate\Http\Request;
+use App\Http\Resources\Menu as Resource;
+
 
 class CourseUnitCompetencesController extends Controller
 {
@@ -14,7 +17,8 @@ class CourseUnitCompetencesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = CourseUnitCompetences::all();
+        return Resource::collection($categories);
     }
 
     /**
@@ -22,40 +26,28 @@ class CourseUnitCompetencesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data['course_unit_category_id'] = $request->input('course_unit_category_id');
+        $data['unit_code'] = $request->input('unit_code');
+        $data['description'] = $request->input('description');
+    $create = CourseUnitCompetences::create($data);
+            return new Resource($create);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Course_Unit_Competences  $course_Unit_Competences
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Course_Unit_Competences $course_Unit_Competences)
+    public function show($id)
     {
-        //
+        $category = CourseUnitCompetences::findOrFail($id);
+        return new Resource($category);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Course_Unit_Competences  $course_Unit_Competences
+     * @param  \App\CourseUnitCompetences  $courseunitcompetences
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course_Unit_Competences $course_Unit_Competences)
+    public function edit(CourseUnitCompetences $courseunitcompetences)
     {
         //
     }
@@ -64,22 +56,36 @@ class CourseUnitCompetencesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Course_Unit_Competences  $course_Unit_Competences
+     * @param  \App\CourseUnitCompetences  $courseunitcompetences
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course_Unit_Competences $course_Unit_Competences)
+    public function update(Request $request)
     {
-        //
+        $status = 0;
+        $id = $request->id;
+        $category = CourseUnitCompetences::findOrFail($id);
+        $category->course_unit_category_id = $request->course_unit_category_id;
+        $category->unit_code = $request->unit_code;
+        if($category->save()){
+            $status =1;
+        }
+        return new Resource($category);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Course_Unit_Competences  $course_Unit_Competences
+     * @param  \App\CourseUnitCompetences  $courseunitcompetences
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course_Unit_Competences $course_Unit_Competences)
+    public function destroy($id)
     {
-        //
+   $page = CourseUnitCompetences::findOrFail($id);
+        if ($page->delete()) {
+            $status = 1;
+        }
+        return response()->json([
+            'status' => $status,
+        ]);
     }
 }

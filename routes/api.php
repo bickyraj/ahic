@@ -28,8 +28,6 @@ Route::get('/test', function() {
 
 Route::post('admin/change-password', 'AdminController@changePassword');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth:api', 'admin']], function () {
-
-
     // Role functions.
     Route::get('roles', 'RoleController@index');
     Route::get('role/{id}', 'RoleController@show');
@@ -57,4 +55,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('page', 'PageController@store');
     Route::post('edit-page', 'PageController@update');
     Route::delete('page/{id}', 'PageController@destroy');
+
+    //Course Category
+    Route::get('course_unit_categories','CourseUnitCategoryController@index');
+    Route::get('course_unit_category/{id}','CourseUnitCategoryController@show');
+    Route::post('course_unit_category', 'CourseUnitCategoryController@store');
+    Route::post('course_unit_category/edit', 'CourseUnitCategoryController@update');
+    Route::delete('course_unit_category/{id}', 'CourseUnitCategoryController@destroy');
+    
+    //Course Competences
+    Route::get('course_unit_competences','CourseUnitCompetences@index');
+    Route::get('course_unit_competence/{id}','CourseUnitCompetences@show');
+    Route::post('course_unit_competence', 'CourseUnitCompetences@store');
+    Route::post('course_unit_competence/edit', 'CourseUnitCompetences@update');
+    Route::delete('course_unit_competence/{id}', 'CourseUnitCompetences@destroy');
+
 });
