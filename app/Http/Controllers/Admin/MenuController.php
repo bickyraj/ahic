@@ -20,7 +20,7 @@ class MenuController extends Controller
     }
 
     public function store(Request $request){
-    	$status =0;
+    	$status = 0;
     	$data['name'] = $request->input('name');
     	$data['parent_id'] = $request->input('parent_id');
     	$data['page_id'] = $request->input('page_id');
@@ -46,7 +46,6 @@ class MenuController extends Controller
         if ($user->save()) {
             $status = 1;
         }
-
         return new MenuResource($user);
 
     }

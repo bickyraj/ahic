@@ -64,10 +64,45 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::delete('course_unit_category/{id}', 'CourseUnitCategoryController@destroy');
     
     //Course Competences
-    Route::get('course_unit_competences','CourseUnitCompetences@index');
-    Route::get('course_unit_competence/{id}','CourseUnitCompetences@show');
-    Route::post('course_unit_competence', 'CourseUnitCompetences@store');
-    Route::post('course_unit_competence/edit', 'CourseUnitCompetences@update');
-    Route::delete('course_unit_competence/{id}', 'CourseUnitCompetences@destroy');
+    Route::get('course_unit_competences','CourseUnitCompetencesController@index');
+    Route::get('course_unit_competence/{id}','CourseUnitCompetencesController@show');
+    Route::post('course_unit_competence', 'CourseUnitCompetencesController@store');
+    Route::post('course_unit_competence/edit', 'CourseUnitCompetencesController@update');
+    Route::delete('course_unit_competence/{id}', 'CourseUnitCompetencesController@destroy');
+    
+    //Courses
+    Route::get('courses','CourseController@index');
+    Route::get('course/{id}','CourseController@show');
+    Route::post('course', 'CourseController@store');
+    Route::post('course/edit', 'CourseController@update');
+    Route::delete('course/{id}', 'CourseController@destroy');
+
+    //Courses Category
+    Route::get('course_categories','CourseCategoryController@index');
+    Route::get('course_category/{id}','CourseCategoryController@show');
+    Route::post('course_category', 'CourseCategoryController@store');
+    Route::post('course_category/edit', 'CourseCategoryController@update');
+    Route::delete('course_category/{id}', 'CourseCategoryController@destroy');
+
+    //Career Outcome
+    Route::get('career_outcomes','CourseCareerOutcomeController@index');
+    Route::get('career_outcome/{id}','CourseCareerOutcomeController@show');
+    Route::post('career_outcome', 'CourseCareerOutcomeController@store');
+    Route::post('career_outcome/edit', 'CourseCareerOutcomeController@update');
+    Route::delete('career_outcome/{id}', 'CourseCareerOutcomeController@destroy');
+
+    //Course Assessments
+    Route::get('course_assessments','CourseAssessmentController@index');
+    Route::get('course_assessment/{id}','CourseAssessmentController@show');
+    Route::post('course_assessment', 'CourseAssessmentController@store');
+    Route::post('course_assessment/edit', 'CourseAssessmentController@update');
+    Route::delete('course_assessment/{id}', 'CourseAssessmentController@destroy');
+
+    //Course RPL
+    Route::get('course_rpls','CourseRplController@index');
+    Route::get('course_rpl/{id}','CourseRplController@show');
+    Route::post('course_rpl', 'CourseRplController@store');
+    Route::post('course_rpl/edit', 'CourseRplController@update');
+    Route::delete('course_rpl/{id}', 'CourseRplController@destroy');
 
 });

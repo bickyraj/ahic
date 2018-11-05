@@ -20,6 +20,7 @@ class CreateMenusTable extends Migration
             $table->integer('page_id')->nullable();
             $table->integer('status');
             $table->integer('menu_order');
+            $table->integer('count');
             $table->timestamps();
         });
     }

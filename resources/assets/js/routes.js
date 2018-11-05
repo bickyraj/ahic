@@ -158,6 +158,101 @@ const routes = [
         },
     },
     { 
+        path: admin_url + 'course_categories', 
+        component: require('./components/Admin/CourseCategories/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Course Categories',
+                    path: admin_url + 'course_categories',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'courses', 
+        component: require('./components/Admin/Course/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Course',
+                    path: admin_url + 'courses',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'career_outcomes', 
+        component: require('./components/Admin/CareerOutcome/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Career Outcomes',
+                    path: admin_url + 'career_outcomes',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'course_assessments', 
+        component: require('./components/Admin/CourseAssessments/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Course Assessments',
+                    path: admin_url + 'course_assessments',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'course_rpls', 
+        component: require('./components/Admin/CourseRPL/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Career RPLs',
+                    path: admin_url + 'course_rpls',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
         path: admin_url + 'import-export', 
         component: require('./components/Admin/ImportExport/Index'),
         meta: {

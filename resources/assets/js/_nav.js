@@ -57,6 +57,51 @@ export default {
       }
     },
     {
+      name: 'Course Categories',
+      url: url + 'course_categories',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Courses',
+      url: url + 'courses',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Career Outcomes',
+      url: url + 'career_outcomes',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Course Assessments',
+      url: url + 'course_assessments',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Course RPL',
+      url: url + 'course_rpls',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
       name: 'Import / Export',
       url: url + 'import-export',
       icon: 'fas fa-cloud-download-alt',
