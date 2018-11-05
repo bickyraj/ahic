@@ -72,6 +72,9 @@ class RoleController extends Controller
     public function edit(Request $request)
     {
         $status = 0;
+        $validatedData = $request->validate([
+            'name' => 'required|unique:roles,name,' . $request->id . '|max:255',
+        ]);
 
         $role = Role::findOrFail($request->id);
         $role->id = $request->input('id');

@@ -5,7 +5,7 @@
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
-              <h5><i class="fas fa-key"></i> Couse Unit Competences </h5>
+              <h5><i class="fas fa-key"></i> Course Unit Competences </h5>
             </div>
             <div class="caption card-title-actions">
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Competence</b-button>
