@@ -13,14 +13,14 @@
                 <form @submit.prevent="addCareerOutcome" ref="addCourseOutcomeForm">
                   <div class="form-group">
                     <label for=""> Course </label>
-                      <select name="course_id" class="form-control">
+                      <select name="course_id" class="form-control" required>
                           <option value="">Select A Course</option>
                           <option  v-for="course in courses" :value="course.id" :key="course.id">{{course.name}}</option>
                       </select>
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-                    <textarea name="description" id="" class="form-control" rows="5"></textarea>
+                    <textarea name="description" id="" class="form-control" rows="5" required></textarea>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Course Outcome</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -40,6 +40,7 @@
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
                 <td>{{ menu.course.name}}</td>
+                <!-- <td>{{menu}}</td> -->
                 <td>{{ menu.description}}</td>
                 <td>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
@@ -198,13 +199,7 @@
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/career_outcome';
         axios.post(url, formData).then(function(response) {
-              var menu = response.data.data;
-              var menu_data = {
-                id: menu.id,
-                course_id: menu.course_id,
-                description: menu.description,
-              }
-              self.table_items.push(menu_data);
+              self.table_items = response.data.data;
               $(form)[0].reset();
               self.hideModal();
               self.$toastr.s("A course outcome has been added.");

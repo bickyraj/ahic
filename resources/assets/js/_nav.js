@@ -102,6 +102,15 @@ export default {
       }
     },
     {
+      name: 'Entry Requirement',
+      url: url + 'course_entry_requirement',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
       name: 'Import / Export',
       url: url + 'import-export',
       icon: 'fas fa-cloud-download-alt',

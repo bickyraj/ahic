@@ -14,7 +14,7 @@ class CourseCareerOutcomeController extends Controller
      */
     public function index()
     {
-           $outcome = CourseCareerOutcome::with('course')->get();
+     $outcome = CourseCareerOutcome::with('course')->get();
         return Resource::collection($outcome);
     }
 
@@ -27,7 +27,8 @@ class CourseCareerOutcomeController extends Controller
     	if ($create) {
     		$status = 1;
     	}
-        return new Resource($create);
+        $outcome = CourseCareerOutcome::with('course')->get();
+        return Resource::collection($outcome);
     }
 
     /**

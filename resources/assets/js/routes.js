@@ -253,6 +253,25 @@ const routes = [
         },
     },
     { 
+        path: admin_url + 'course_entry_requirement', 
+        component: require('./components/Admin/CourseEntryRequirement/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Course Entry Requirement',
+                    path: admin_url + 'course_entry_requirement',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
         path: admin_url + 'import-export', 
         component: require('./components/Admin/ImportExport/Index'),
         meta: {

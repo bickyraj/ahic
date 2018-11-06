@@ -32,7 +32,9 @@ class CourseUnitCompetencesController extends Controller
         $data['unit_code'] = $request->input('unit_code');
         $data['description'] = $request->input('description');
          $create = CourseUnitCompetences::create($data);
-        return new Resource($create);
+
+        $categories = CourseUnitCompetences::with('category')->get();
+        return Resource::collection($categories);
      
     }
 

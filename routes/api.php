@@ -105,4 +105,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('course_rpl/edit', 'CourseRplController@update');
     Route::delete('course_rpl/{id}', 'CourseRplController@destroy');
 
+    //Course Assessments
+    Route::get('course_entry_requirements','CourseEntryRequirementController@index');
+    Route::get('course_entry_requirement/{id}','CourseEntryRequirementController@show');
+    Route::post('course_entry_requirement', 'CourseEntryRequirementController@store');
+    Route::post('course_entry_requirement/edit', 'CourseEntryRequirementController@update');
+    Route::delete('course_entry_requirement/{id}', 'CourseEntryRequirementController@destroy');
+
 });
