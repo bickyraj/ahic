@@ -145,7 +145,11 @@
               })
             }
           })
-          .catch(function(error) {});
+          .catch(function(error) {
+            if (error.response.status === 422) {
+              self.$toastr.e(error.response.data.errors.name);
+            }
+          });
       },
       deleteRole: function(item, row, event) {
         var self = this;
