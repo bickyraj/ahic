@@ -48,9 +48,9 @@
               <tr v-for="(menu, index) in table_items" :key="menu.id">
                 <td>{{ menu.name}}</td>
                 <td v-if="menu.parent_menu">{{ menu.parent_menu.name }}</td>
-                <td v-else>null</td>
+                <td v-else>--</td>
                 <td v-if="menu.parent_page">{{ menu.parent_page.name }}</td>
-                <td v-else>null</td>
+                <td v-else>--</td>
                 <td>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
                     Edit
@@ -215,7 +215,6 @@
         formData.append('description', des);
         let url = self.$root.baseUrl + '/api/admin/menu';
         axios.post(url, formData).then(function(response) {
-          console.log(response);
             if (response.status === 201) {
               var menu = response.data.data;
               var menu_data = {

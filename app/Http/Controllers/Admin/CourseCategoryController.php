@@ -8,6 +8,7 @@ use App\Http\Resources\Menu as Resource;
 
 class CourseCategoryController extends Controller
 {
+    public $destination = 'public/images/course_category/';
   
     public function index()
     {
@@ -33,7 +34,23 @@ class CourseCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new CourseCategory;
+        $category->name = $request->input('name');
+        $category->order_by = $request->input('order_by');
+        $file = $request->file('image_background');
+        $category->status = 1;
+        if($file != null){
+            $ext = $file->getClientOriginalExtension();
+            $filename = md5(rand(0,999999)).'.'.$ext;
+            $category->image_background = $filename;
+            $file->move($this->destination,$filename);
+
+        }
+        $create = $category->save();
+        if($create){
+        return new Resource($category);
+        }
+
     }
 
     /**
@@ -42,32 +59,33 @@ class CourseCategoryController extends Controller
      * @param  \App\CourseCategory  $courseCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(CourseCategory $courseCategory)
+    public function show($id)
     {
-        //
+      $category = CourseCategory::findOrFail($id);
+        return new Resource($category);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\CourseCategory  $courseCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CourseCategory $courseCategory)
+    public function update(Request $request)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\CourseCategory  $courseCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CourseCategory $courseCategory)
-    {
-        //
+        $status = 0;
+        $id = $request->id;
+        $category = CourseCategory::findOrFail($id);
+        $category->name = $request->name;
+        $category->order_by = $request->order_by;
+        $category->status = $request->status;
+           $file = $request->file('image_background');
+        if($file != null){
+            $oldimg = $category->image_background;
+            $this->destroyimage($oldimg);
+            $ext = $file->getClientOriginalExtension();
+            $filename = md5(rand(0,999999)).'.'.$ext;
+            $category->image_background = $filename;
+            $file->move($this->destination,$filename);
+        }
+        if($category->update()){
+                   $categories = CourseCategory::all();
+        return Resource::collection($categories);
+        };
     }
 
     /**
@@ -76,8 +94,22 @@ class CourseCategoryController extends Controller
      * @param  \App\CourseCategory  $courseCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CourseCategory $courseCategory)
+    public function destroy($id)
     {
-        //
+      $page = CourseCategory::findOrFail($id);
+       $this->destroyimage($page->image_background);
+        if ($page->delete()) {
+            $status = 1;
+        }
+        return response()->json([
+            'status' => $status,
+        ]);
+    }
+
+    public function destroyimage($image){
+        $oldimg = $this->destination.$image;
+        if(file_exists($oldimg)){
+            @unlink($oldimg);
+        }
     }
 }
