@@ -145,7 +145,7 @@ class CourseController extends Controller
             $file->move($this->destination,$filename);
         }
         if($course->update()){
-         $course = Course::with('category')->get();
+         $courses = Course::with('category')->get();
        
         return Resource::collection($courses);
         };

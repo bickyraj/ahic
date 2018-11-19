@@ -119,6 +119,25 @@ const routes = [
             roleId: 1
         },
     },
+    {
+        path: admin_url + 'page/:id',
+        component: require('./components/Admin/Page/Detail'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Page',
+                    path: admin_url + 'pages',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
     { 
         path: admin_url + 'course_unit_competences', 
         component: require('./components/Admin/CourseUnitCompetences/Index'),

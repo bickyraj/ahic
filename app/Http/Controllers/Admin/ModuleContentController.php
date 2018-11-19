@@ -17,7 +17,7 @@ class ModuleContentController extends Controller
      */
     public function index()
     {
-$modules = ModuleContent::all();
+$modules = ModuleContent::with('module')->get();
         return Resource::collection($modules);
     }
 

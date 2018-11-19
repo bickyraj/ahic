@@ -21,6 +21,16 @@ class PageController extends Controller
         return new PageResource($page);
     }
 
+    public function get($id){
+        $page = Page::where('id',$id);
+        if(count($page->get())>0){
+            $page = $page->first();
+        return new PageResource($page);
+        }
+        else{
+            return 'error';
+        }
+    }
     public function store(Request $request){
         $status = 0;
         $data['name'] = $request->input('name');
@@ -43,7 +53,8 @@ class PageController extends Controller
     	if ($create) {
     		$status = 1;
     	}
-        return new PageResource($create);
+       $page = Page::with('parent_page')->get();
+        return PageResource::collection($page);
 
 
     }
@@ -62,7 +73,7 @@ class PageController extends Controller
         $page->parent_id = $request->input('parent_id');
         $page->description=$request->input('description');
         $page->sub_title=$request->input('sub_title');
-                   $file = $request->file('background_image');
+                   $file = $request->file('image');
         if($file != null){
             $oldimg = $page->image;
             $this->destroyimage($oldimg);
@@ -76,7 +87,8 @@ class PageController extends Controller
             $status = 1;
         }
 
-        return new PageResource($page);
+        $page = Page::with('parent_page')->get();
+        return PageResource::collection($page);
 
     }
 

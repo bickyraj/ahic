@@ -41,24 +41,24 @@
               <tr>
                 <th>Module </th>
                 <th>Title</th>
-                <th>Image</th>
+                <th class="col-md-2"> Image</th>
                 <th>Description</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
-              <tr v-for="(module, index) in table_items" :key="module.id">
-                <td>{{ module.module_id}}</td>
-                <td>{{ module.title}}</td>
-                <td>{{ module.image}}</td>
-                <td>{{ module.description}}</td>
-                <td>{{ module.status}}</td>
+              <tr v-for="(m, index) in table_items" :key="m.id">
+                <td>{{ m.module.title}}</td>
+                <td>{{ m.title}}</td>
+                       <td> <img :src="'../public/images/module/'+m.image" class="img-fluid" /></td>
+                <td>{{ m.description}}</td>
+                <td>{{ m.status}}</td>
                 <td>
-                  <b-button size="sm" @click.stop="info(module, index, $event.target)" class="mr-1 btn-success">
+                  <b-button size="sm" @click.stop="info(m, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
-                  <b-button size="sm" @click="deleteModule(module, index, $event.target)" class="mr-1 btn-danger">
+                  <b-button size="sm" @click="deleteModule(m, index, $event.target)" class="mr-1 btn-danger">
                     Delete
                   </b-button>
                 </td>

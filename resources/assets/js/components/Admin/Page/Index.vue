@@ -8,7 +8,7 @@
               <h5><i class="fas fa-key"></i> Pages</h5>
             </div>
             <div class="caption card-title-actions">
-              <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New page</b-button>
+              <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Page</b-button>
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add page">
                 <form @submit.prevent="addMenu" ref="addMenuForm">
                   <div class="form-group">
@@ -43,7 +43,7 @@
           <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th>Name</th>
+                <th>  Name </th>
                 <th class="col-md-2">Image</th>
                 <th>Parent id</th>
                 <th>Action</th>
@@ -51,7 +51,7 @@
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(page, index) in table_items" :key="page.id">
-                <td>{{ page.name}}</td>
+                <td> <router-link :to="'page/'+page.id"> {{ page.name}} </router-link> </td>
                        <td> <img :src="'../public/images/pages/'+page.image" class="img-fluid" /></td>
                   <td v-if="page.parent_page">{{page.parent_page.name}} </td>
                   <td v-else> -- </td>
@@ -92,7 +92,7 @@
 
                <div class="form-group" v-else> 
                     <label for="">Image  </label> <br>
-               <img :src="'../public/images/courses/'+modalInfo.data.image" class="img-fluid" />
+               <img :src="'../public/images/pages/'+modalInfo.data.image" class="img-fluid" />
                     <input type="file" name="image" class="form-control">
 
                   </div>
@@ -159,7 +159,7 @@
           });
       },
       resetModal() {
-        this.modalInfo.title = 'Edit page'
+        this.modalInfo.title = 'Edit Page'
         this.modalInfo.content = ''
       },
       editMenu: function() {
@@ -171,13 +171,12 @@
         axios.post(url, formData).then(function(response) {
           console.log(response);
             if (response.status === 200) {
-              self.table_items[row_index].name = response.data.data.name;
-              // self.table_items[row_index].name = response.data.data.name;
+              self.table_items = response.data.data;
               self.hideMenuModal();
               self.$swal({
                 // position: 'top-end',
                 type: 'success',
-                title: 'page updated successfully.',
+                title: 'Page updated successfully.',
                 showConfirmButton: true,
                 // timer: 1500,
                 customClass: 'crm-swal',
@@ -227,22 +226,10 @@
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/page';
         axios.post(url, formData).then(function(response) {
-            if (response.status === 201) {
-              var page = response.data.data;
-              var menu_data = {
-                id: page.id,
-                name: page.name,
-                parent_id: page.parent_id,
-                page_id: page.page_id,
-                sub_title: page.sub_title,
-                description: page.description,
-                image: page.image,
-              }
-              self.table_items.push(menu_data);
+              self.table_items  = response.data.data;
               $(form)[0].reset();
               self.hideModal();
-              self.$toastr.s("A page has been added.");
-            }
+              self.$toastr.s("A Page has been added.");
           })
           .catch(function(error) {
             if (error.response.status === 422) {

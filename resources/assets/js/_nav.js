@@ -101,15 +101,15 @@ export default {
         // text: 'NEW'
       }
     },
-    {
-      name: 'Page Modules',
-      url: url + 'page_modules',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
+    // {
+    //   name: 'Page Modules',
+    //   url: url + 'page_modules',
+    //   icon: 'fas fa-book-open',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
     // {
     //   name: 'Career Outcomes',
     //   url: url + 'career_outcomes',

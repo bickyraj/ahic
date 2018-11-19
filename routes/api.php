@@ -51,6 +51,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     
     // User functions.
     Route::get('pages', 'PageController@index');
+    Route::get('pages/{id}', 'PageController@get');
     Route::get('page/{id}', 'PageController@show');
     Route::post('page', 'PageController@store');
     Route::post('edit-page', 'PageController@update');
@@ -145,7 +146,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     //Module Content
     Route::get('page_modules','PageModuleController@index');
     Route::get('page_module/{id}','PageModuleController@show');
-    Route::get('page_modules/{id}','PageModuleController@showByCourse');
+    Route::get('page_modules/{id}','PageModuleController@showByPage');
     Route::post('page_module', 'PageModuleController@store');
     Route::post('page_module/edit', 'PageModuleController@update');
     Route::delete('page_module/{id}', 'PageModuleController@destroy');

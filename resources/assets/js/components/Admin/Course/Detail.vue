@@ -456,12 +456,10 @@
                 if(response.data == 'error'){
         self.$router.push('../courses');
                 }
-            // console.log(response);
             self.course = response.data.data;
             self.loading=false;
           })
           .catch(function(error) {
-          //  window.location =self.$root.baseUrl + '/admin/courses/';
             self.$toastr.e('Something went wrong please try again.');
           });
       },
