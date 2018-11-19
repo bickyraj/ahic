@@ -5,7 +5,7 @@
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
-              <h5><i class="fas fa-key"></i> Couse Unit Courses </h5>
+              <h5><i class="fas fa-key"></i> Courses </h5>
             </div>
             <div class="caption card-title-actions">
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Course</b-button>
@@ -39,6 +39,14 @@
                     <input type="text" name="study_method" class="form-control" placeholder="" required>
                   </div>
                   <div class="form-group">
+                    <label for="">Onshore Fee </label>
+                    <input type="text" name="onshore_fee" class="form-control" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Offshore Fee </label>
+                    <input type="text" name="offshore_fee" class="form-control" placeholder="" required>
+                  </div>
+                  <div class="form-group">
                     <label for="">Description</label>
                     <textarea name="description" id="" class="form-control" rows="5"></textarea>
                   </div>
@@ -56,24 +64,24 @@
                 <table class="table trump-table table-hover">
             <thead>
               <tr>
+                <th class="col-md-2">Background Image</th>
                 <th>Name</th>
                 <th>Video Link</th>
-                <th>Background Image</th>
                 <th>Duration</th>
                 <th>Study Method</th>
-                <th>Description</th>
-                <th>Order By</th>
+                <!-- <th>Description</th> -->
+                <!-- <th>Order By</th> -->
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
-                <td>{{ menu.name}}</td>
+                       <td> <img :src="'../public/images/courses/'+menu.background_image" class="img-fluid" /></td>
+                <td> <router-link :to="'course/'+menu.id"> {{ menu.name}} </router-link>  </td>
                 <td>{{ menu.video_link}}</td>
-                <td> <img :src="'../public/images/courses/'+menu.background_image" class="img-fluid" /></td>
                 <td>{{ menu.duration}}</td>
                 <td>{{ menu.study_method}}</td>
-                <td>{{ menu.description}}</td>
+                <!-- <td>{{ menu.description}}</td> -->
                 <td>{{ menu.order_by}}</td>
                 <td>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
@@ -139,6 +147,14 @@
                     <input type="text" name="study_method" class="form-control"  :value="modalInfo.data.study_method" placeholder="" required>
                   </div>
                   <div class="form-group">
+                    <label for="">Onshore Fee  </label>
+                    <input type="text" name="onshore_fee" class="form-control"  :value="modalInfo.data.onshore_fee" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Offshore Fee </label>
+                    <input type="text" name="offshore_fee" class="form-control"  :value="modalInfo.data.offshore_fee" placeholder="" required>
+                  </div>
+                  <div class="form-group">
                     <label for="">Description</label>
                     <textarea name="description" id="" class="form-control" rows="5" :value="modalInfo.data.description"></textarea>
                   </div>
@@ -169,7 +185,7 @@
         loading: true,
         table_items: [],
         pages:[],
-        menu_table_fields: ['id', 'name','course_category_id','description','video_link','duration','study_method','order_by','status'],
+        menu_table_fields: ['id', 'name','course_category_id','description','onshore_fee','offshore_fee','video_link','duration','study_method','order_by','status'],
         modalInfo: {
           title: '',
           content: '',
@@ -320,6 +336,7 @@
           });
 
       },
+  
       showModal() {
         this.$refs.myModalRef.show()
       },

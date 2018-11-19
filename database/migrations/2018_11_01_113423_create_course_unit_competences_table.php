@@ -15,9 +15,7 @@ class CreateCourseUnitCompetencesTable extends Migration
     {
         Schema::create('course_unit_competences', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('course_unit_category_id');
             $table->string('unit_code');
-           
             $table->longText('description');
             $table->timestamps();
         });

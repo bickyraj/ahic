@@ -17,7 +17,7 @@ class CourseUnitCompetencesController extends Controller
      */
     public function index()
     {
-        $categories = CourseUnitCompetences::with('category')->get();
+        $categories = CourseUnitCompetences::all();
         return Resource::collection($categories);
     }
 
@@ -28,12 +28,11 @@ class CourseUnitCompetencesController extends Controller
      */
     public function store(Request $request)
     {
-        $data['course_unit_category_id'] = $request->input('course_unit_category_id');
         $data['unit_code'] = $request->input('unit_code');
         $data['description'] = $request->input('description');
          $create = CourseUnitCompetences::create($data);
 
-        $categories = CourseUnitCompetences::with('category')->get();
+        $categories = CourseUnitCompetences::all();
         return Resource::collection($categories);
      
     }
@@ -67,12 +66,11 @@ class CourseUnitCompetencesController extends Controller
         $status = 0;
         $id = $request->id;
         $category = CourseUnitCompetences::findOrFail($id);
-        $category->course_unit_category_id = $request->course_unit_category_id;
         $category->unit_code = $request->unit_code;
         if($category->save()){
             $status =1;
         }
-   $categories = CourseUnitCompetences::with('category')->get();
+        $categories = CourseUnitCompetences::all();
         return Resource::collection($categories);
     }
 

@@ -23,6 +23,17 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('test123'),
         ]);
 
+        DB::table('course_unit_categories')->insert([
+            'name' => 'Core Units',
+            'order_by' => 1,
+            'status' => 1,
+        ]);
+        DB::table('course_unit_categories')->insert([
+            'name' => 'Elective Units',
+            'order_by' => 1,
+            'status' => 1,
+        ]);
+
         // add admin role to roles table
         DB::table('roles')->insert([
             'name' => 'admin',

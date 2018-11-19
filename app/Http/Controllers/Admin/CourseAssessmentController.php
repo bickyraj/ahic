@@ -48,6 +48,11 @@ class CourseAssessmentController extends Controller
         return Resource::collection($outcome);
 
     }
+    public function edit(Request $request){
+             $outcome = CourseAssessment::where('course_id',$request->course_id);
+        $data['description'] = $request->input('description');
+        $outcome->update($data);
+    }
 
 
         public function destroy($id)

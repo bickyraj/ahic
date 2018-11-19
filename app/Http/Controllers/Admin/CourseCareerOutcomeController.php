@@ -42,6 +42,10 @@ class CourseCareerOutcomeController extends Controller
     	 $outcome = CourseCareerOutcome::findOrFail($id);
         return new Resource($outcome);
     }
+    public function showByCourse($id){
+    	 $outcome = CourseCareerOutcome::where('course_id',$id)->get();
+        return new Resource($outcome);
+    }
 
     /**
      * Show the form for editing the specified resource.

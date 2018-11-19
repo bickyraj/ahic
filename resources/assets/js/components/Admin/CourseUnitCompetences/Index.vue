@@ -11,21 +11,15 @@
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Competence</b-button>
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add Competence">
                 <form @submit.prevent="addCompetence" ref="addCompetenceForm">
-                  <div class="form-group">
-                    <label for=""> Course Unit Category</label>
-                      <select name="course_unit_category_id" class="form-control">
-                          <option value="">Select A Category</option>
-                          <option  v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
-                      </select>
+                   <div class="form-group">
+                    <label for="">Title</label>
+                    <textarea name="description" id="" class="form-control" rows="5"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="">Unit Code </label>
                     <input type="text" name="unit_code" class="form-control" placeholder="" required>
                   </div>
-                  <div class="form-group">
-                    <label for="">Description</label>
-                    <textarea name="description" id="" class="form-control" rows="5"></textarea>
-                  </div>
+                 
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Competence</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
@@ -36,14 +30,14 @@
                 <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th>Category</th>
+                <th>Title</th>
                 <th>Unit Code</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
-                <td>{{ menu.category.name}}</td>
+                <td>{{ menu.description}}</td>
                 <td>{{ menu.unit_code}}</td>
                 <td>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
@@ -75,21 +69,15 @@
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
       <form @submit.prevent="editMenu" :row="modalInfo.row" ref="editMenuForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
-         <div class="form-group">
-           <label for=""> Course Unit Category</label>
-                      <select name="course_unit_category_id"  v-bind:value="modalInfo.data.course_unit_category_id" class="form-control">
-                          <option value="">Select A Category</option>
-                          <option  v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
-                      </select>
+          <div class="form-group">
+                    <label for="">Title</label>
+                    <textarea name="description" id="" class="form-control" rows="5" :value="modalInfo.data.description"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="">Unit Code </label>
                     <input type="text" name="unit_code" class="form-control" :value="modalInfo.data.unit_code" placeholder="" required>
                   </div>
-                  <div class="form-group">
-                    <label for="">Description</label>
-                    <textarea name="description" id="" class="form-control" rows="5" :value="modalInfo.data.description"></textarea>
-                  </div>
+                
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>

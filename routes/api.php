@@ -69,12 +69,22 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('course_unit_competence', 'CourseUnitCompetencesController@store');
     Route::post('course_unit_competence/edit', 'CourseUnitCompetencesController@update');
     Route::delete('course_unit_competence/{id}', 'CourseUnitCompetencesController@destroy');
+
+    //Course Relations
+    Route::get('course_unit_relations','CourseUnitRelationController@index');
+    Route::get('course_unit_relations/{id}','CourseUnitRelationController@showByCourse');
+    Route::get('course_unit_relation/{id}','CourseUnitRelationController@show');
+    Route::post('course_unit_relation', 'CourseUnitRelationController@store');
+    Route::post('course_unit_relation/edit', 'CourseUnitRelationController@update');
+    Route::delete('course_unit_relation/{id}', 'CourseUnitRelationController@destroy');
     
     //Courses
     Route::get('courses','CourseController@index');
     Route::get('course/{id}','CourseController@show');
+    Route::get('courses/{id}','CourseController@showByCourse');
     Route::post('course', 'CourseController@store');
     Route::post('course/edit', 'CourseController@update');
+    Route::post('course/update', 'CourseController@edit');
     Route::delete('course/{id}', 'CourseController@destroy');
 
     //Courses Category
@@ -87,6 +97,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     //Career Outcome
     Route::get('career_outcomes','CourseCareerOutcomeController@index');
     Route::get('career_outcome/{id}','CourseCareerOutcomeController@show');
+    Route::get('career_outcomes/{id}','CourseCareerOutcomeController@showByCourse');
     Route::post('career_outcome', 'CourseCareerOutcomeController@store');
     Route::post('career_outcome/edit', 'CourseCareerOutcomeController@update');
     Route::delete('career_outcome/{id}', 'CourseCareerOutcomeController@destroy');
@@ -96,6 +107,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('course_assessment/{id}','CourseAssessmentController@show');
     Route::post('course_assessment', 'CourseAssessmentController@store');
     Route::post('course_assessment/edit', 'CourseAssessmentController@update');
+    Route::post('course_assessment/update', 'CourseAssessmentController@edit');
     Route::delete('course_assessment/{id}', 'CourseAssessmentController@destroy');
 
     //Course RPL
@@ -103,13 +115,39 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('course_rpl/{id}','CourseRplController@show');
     Route::post('course_rpl', 'CourseRplController@store');
     Route::post('course_rpl/edit', 'CourseRplController@update');
+    Route::post('course_rpl/update', 'CourseRplController@edit');
     Route::delete('course_rpl/{id}', 'CourseRplController@destroy');
 
     //Course Assessments
     Route::get('course_entry_requirements','CourseEntryRequirementController@index');
     Route::get('course_entry_requirement/{id}','CourseEntryRequirementController@show');
+    Route::get('course_entry_requirements/{id}','CourseEntryRequirementController@showByCourse');
     Route::post('course_entry_requirement', 'CourseEntryRequirementController@store');
     Route::post('course_entry_requirement/edit', 'CourseEntryRequirementController@update');
     Route::delete('course_entry_requirement/{id}', 'CourseEntryRequirementController@destroy');
+    
+    //Modules
+    Route::get('modules','ModuleController@index');
+    Route::get('module/{id}','ModuleController@show');
+    Route::get('modules/{id}','ModuleController@showByCourse');
+    Route::post('module', 'ModuleController@store');
+    Route::post('module/edit', 'ModuleController@update');
+    Route::delete('module/{id}', 'ModuleController@destroy');
+
+    //Module Content
+    Route::get('module_contents','ModuleContentController@index');
+    Route::get('module_content/{id}','ModuleContentController@show');
+    Route::get('module_contents/{id}','ModuleContentController@showByCourse');
+    Route::post('module_content', 'ModuleContentController@store');
+    Route::post('module_content/edit', 'ModuleContentController@update');
+    Route::delete('module_content/{id}', 'ModuleContentController@destroy');
+
+    //Module Content
+    Route::get('page_modules','PageModuleController@index');
+    Route::get('page_module/{id}','PageModuleController@show');
+    Route::get('page_modules/{id}','PageModuleController@showByCourse');
+    Route::post('page_module', 'PageModuleController@store');
+    Route::post('page_module/edit', 'PageModuleController@update');
+    Route::delete('page_module/{id}', 'PageModuleController@destroy');
 
 });

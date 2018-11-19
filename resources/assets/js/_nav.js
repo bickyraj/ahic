@@ -57,6 +57,15 @@ export default {
       }
     },
     {
+      name: 'Unit Relation',
+      url: url + 'course_unit_relations',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
       name: 'Course Categories',
       url: url + 'course_categories',
       icon: 'fas fa-book-open',
@@ -75,8 +84,8 @@ export default {
       }
     },
     {
-      name: 'Career Outcomes',
-      url: url + 'career_outcomes',
+      name: 'Modules',
+      url: url + 'modules',
       icon: 'fas fa-book-open',
       badge: {
         variant: 'primary',
@@ -84,8 +93,8 @@ export default {
       }
     },
     {
-      name: 'Course Assessments',
-      url: url + 'course_assessments',
+      name: 'Module Contents',
+      url: url + 'module_contents',
       icon: 'fas fa-book-open',
       badge: {
         variant: 'primary',
@@ -93,23 +102,50 @@ export default {
       }
     },
     {
-      name: 'Course RPL',
-      url: url + 'course_rpls',
+      name: 'Page Modules',
+      url: url + 'page_modules',
       icon: 'fas fa-book-open',
       badge: {
         variant: 'primary',
         // text: 'NEW'
       }
     },
-    {
-      name: 'Entry Requirement',
-      url: url + 'course_entry_requirement',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
+    // {
+    //   name: 'Career Outcomes',
+    //   url: url + 'career_outcomes',
+    //   icon: 'fas fa-book-open',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
+    // {
+    //   name: 'Course Assessments',
+    //   url: url + 'course_assessments',
+    //   icon: 'fas fa-book-open',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
+    // {
+    //   name: 'Course RPL',
+    //   url: url + 'course_rpls',
+    //   icon: 'fas fa-book-open',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
+    // {
+    //   name: 'Entry Requirement',
+    //   url: url + 'course_entry_requirement',
+    //   icon: 'fas fa-book-open',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
     {
       name: 'Import / Export',
       url: url + 'import-export',
