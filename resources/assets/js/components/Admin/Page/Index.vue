@@ -15,6 +15,10 @@
                     <label for="">Name</label>
                     <input type="text" name="name" class="form-control" placeholder="" required>
                   </div>
+                   <div class="form-group">
+                    <label for=""> Image </label>
+                    <input type="file" name="image" class="form-control" placeholder="" required>
+                  </div>
                   <div class="form-group">
                     <label for="">Parent Page</label>
                    <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control">
@@ -40,6 +44,7 @@
             <thead>
               <tr>
                 <th>Name</th>
+                <th class="col-md-2">Image</th>
                 <th>Parent id</th>
                 <th>Action</th>
               </tr>
@@ -47,8 +52,9 @@
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(page, index) in table_items" :key="page.id">
                 <td>{{ page.name}}</td>
+                       <td> <img :src="'../public/images/pages/'+page.image" class="img-fluid" /></td>
                   <td v-if="page.parent_page">{{page.parent_page.name}} </td>
-                  <td v-else> null </td>
+                  <td v-else> -- </td>
                 <td>
                   <b-button size="sm" @click.stop="info(page, index, $event.target)" class="mr-1 btn-success">
                     Edit
@@ -79,6 +85,17 @@
           <label for="">Name</label>
           <input type="text" name="name" v-bind:value="modalInfo.data.name" class="form-control" placeholder="" required>
         </div>
+          <div class="form-group" v-if="modalInfo.data.image == null"> 
+                    <label for="">Image  </label>
+                    <input type="file" name="image" class="form-control">
+                  </div>
+
+               <div class="form-group" v-else> 
+                    <label for="">Image  </label> <br>
+               <img :src="'../public/images/courses/'+modalInfo.data.image" class="img-fluid" />
+                    <input type="file" name="image" class="form-control">
+
+                  </div>
 
         <div class="form-group">
           <label for="">Parent page</label>
@@ -111,7 +128,7 @@
       return {
         loading: true,
         table_items: [],
-        menu_table_fields: ['name', 'parent_id','sub_title','description','parent_menu'],
+        menu_table_fields: ['name', 'parent_id','sub_title','image','description','parent_menu'],
         modalInfo: {
           title: '',
           content: '',
@@ -219,6 +236,7 @@
                 page_id: page.page_id,
                 sub_title: page.sub_title,
                 description: page.description,
+                image: page.image,
               }
               self.table_items.push(menu_data);
               $(form)[0].reset();
@@ -247,6 +265,7 @@
               rObj['sub_title'] = obj.sub_title;
               rObj['description'] = obj.description;
               rObj['parent_page'] = obj.parent_page;
+              rObj['image'] = obj.image;
               return rObj;
             });
             vm.loading = false;

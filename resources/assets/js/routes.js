@@ -177,8 +177,47 @@ const routes = [
         },
     },
     { 
+        path: admin_url + 'course_unit_relations', 
+        component: require('./components/Admin/CourseUnitRelations/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Course Unit Relation',
+                    path: admin_url + 'course_unit_relations',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
         path: admin_url + 'courses', 
         component: require('./components/Admin/Course/Index'),
+        name:'courses',
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Course',
+                    path: admin_url + 'courses',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'course/:id', 
+        component: require('./components/Admin/Course/Detail'),
         meta: {
             layout: 'admin',
             breadcrumb: [
@@ -265,6 +304,63 @@ const routes = [
                 {
                     name: 'Course Entry Requirement',
                     path: admin_url + 'course_entry_requirement',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'modules', 
+        component: require('./components/Admin/Module/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Modules',
+                    path: admin_url + 'modules',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'module_contents', 
+        component: require('./components/Admin/ModuleContent/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Module Contents',
+                    path: admin_url + 'module_contents',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'page_modules', 
+        component: require('./components/Admin/PageModule/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Page Module',
+                    path: admin_url + 'page_modules',
                 }
             ],
             middlewareAuth: true,

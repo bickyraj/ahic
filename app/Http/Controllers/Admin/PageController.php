@@ -9,6 +9,9 @@ use App\Http\Resources\Page as PageResource;
 
 class PageController extends Controller
 {
+    public $destination = 'public/images/pages/';
+
+
     public function index(){
         $page = Page::with('parent_page')->get();
         return PageResource::collection($page);
@@ -26,6 +29,14 @@ class PageController extends Controller
         $data['sub_title'] = $request->input('sub_title');
         $data['description'] = $request->input('description');
         $data['status']=1;
+         $file = $request->file('image');
+        if($file != null){
+            $ext = $file->getClientOriginalExtension();
+            $filename = md5(rand(0,999999)).'.'.$ext;
+            $data['image'] = $filename;
+            $file->move($this->destination,$filename);
+        }
+
         $data['slug'] = $this->create_slug_title($request->input('name'));
 	$create = Page::create($data);
 
@@ -45,17 +56,27 @@ class PageController extends Controller
 
     public function update(Request $request){
 	        $status = 0;
-        $user = Page::findOrFail($request->id);
-        $user->name = $request->input('name');
-        $user->slug = $this->create_slug_title($request->input('name'));
-        $user->parent_id = $request->input('parent_id');
-        $user->description=$request->input('description');
-        $user->sub_title=$request->input('sub_title');
-        if ($user->save()) {
+        $page = Page::findOrFail($request->id);
+        $page->name = $request->input('name');
+        $page->slug = $this->create_slug_title($request->input('name'));
+        $page->parent_id = $request->input('parent_id');
+        $page->description=$request->input('description');
+        $page->sub_title=$request->input('sub_title');
+                   $file = $request->file('background_image');
+        if($file != null){
+            $oldimg = $page->image;
+            $this->destroyimage($oldimg);
+            $ext = $file->getClientOriginalExtension();
+            $filename = md5(rand(0,999999)).'.'.$ext;
+            $page->image = $filename;
+            $file->move($this->destination,$filename);
+        }
+
+        if ($page->save()) {
             $status = 1;
         }
 
-        return new PageResource($user);
+        return new PageResource($page);
 
     }
 
@@ -68,6 +89,13 @@ class PageController extends Controller
         return response()->json([
             'status' => $status,
         ]);
+    }
+
+    public function destroyimage($image){
+        $oldimg = $this->destination.$image;
+        if(file_exists($oldimg)){
+            @unlink($oldimg);
+        }
     }
 
     

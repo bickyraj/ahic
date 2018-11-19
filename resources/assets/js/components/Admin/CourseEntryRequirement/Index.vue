@@ -87,6 +87,10 @@
                     <label for="">Description</label>
                     <textarea name="description" id="" class="form-control" rows="5" :value="modalInfo.data.description"></textarea>
                   </div>
+                   <div class="form-group">
+           <label for=""> Order</label>
+           <input type="text" class="form-control" :value="modalInfo.data.order" name="order">
+                  </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>

@@ -38,6 +38,10 @@ class CourseEntryRequirementController extends Controller
     	 $outcome = CourseEntryRequirement::findOrFail($id);
         return new Resource($outcome);
     }
+    public function showByCourse($id){
+    	 $outcome = CourseEntryRequirement::where('course_id',$id)->get();
+        return new Resource($outcome);
+    }
 
     /**
      * Show the form for editing the specified resource.

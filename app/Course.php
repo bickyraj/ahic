@@ -12,4 +12,17 @@ class Course extends Model
  public function category(){
     return $this->belongsTo('App\CourseCategory','course_category_id','id');
   }
+  public function requirements(){
+      return $this->hasMany('App\CourseEntryRequirement','course_id','id');
+  }
+  public function outcomes(){
+      return $this->hasMany('App\CourseCareerOutcome','course_id','id');
+  }
+  public function assessment(){
+      return $this->hasOne('App\CourseAssessment','course_id','id');
+  }
+  public function rpl(){
+      return $this->hasOne('App\CourseRpl','course_id','id');
+  }
+  
 }

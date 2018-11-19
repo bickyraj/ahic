@@ -46,6 +46,11 @@ class CourseRplController extends Controller
         return Resource::collection($outcome);
 
     }
+       public function edit(Request $request){
+             $outcome = CourseRpl::where('course_id',$request->course_id);
+        $data['description'] = $request->input('description');
+        $outcome->update($data);
+    }
 
 
         public function destroy($id)
