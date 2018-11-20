@@ -88,7 +88,7 @@ $modules = ModuleContent::with('module')->get();
             $this->destroyimage($oldimg);
             $ext = $file->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
-            $course->background_image = $filename;
+            $course->image = $filename;
             $file->move($this->destination,$filename);
         }
         if($course->update()){

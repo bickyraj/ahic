@@ -12,13 +12,30 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-    	DB::table('users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@test.com',
-            'firstname' => 'admin',
-            'lastname' => 'admin',
-            'role_id' => 1,
-            'password' => bcrypt('test123'),
+    	DB::table('modules')->insert([
+            'title' => 'Student Support',
+            'display_type' => '1',
+            'status' => '1',
+        ]);
+    	DB::table('modules')->insert([
+            'title' => 'Airport Pickup',
+            'display_type' => '1',
+            'status' => '1',
+        ]);
+    	DB::table('modules')->insert([
+            'title' => 'Useful Links',
+            'display_type' => '1',
+            'status' => '1',
+        ]);
+    	DB::table('modules')->insert([
+            'title' => 'Study In Austrailia',
+            'display_type' => '1',
+            'status' => '1',
+        ]);
+    	DB::table('modules')->insert([
+            'title' => 'Agent List',
+            'display_type' => '1',
+            'status' => '1',
         ]);
     }
 }

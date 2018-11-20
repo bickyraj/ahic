@@ -44,7 +44,7 @@
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
                 <td>{{ menu.name}}</td>
-                <td class="col-md-3"> <img :src="'../public/images/course_category/'+menu.image_background" class="img-fluid" /></td>
+                <td class="col-md-3"> <img :src="'../public/images/course_category/'+menu.image_background" v-if="menu.image_background" class="img-fluid" /></td>
                 <td>{{ menu.order_by}}</td>
                 <td>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
@@ -58,7 +58,7 @@
             </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="2">
+                <td colspan="4">
                   <div v-if="!loading"> No Data.</div>
                   <div v-else> loading...</div>
                 </td>

@@ -62,7 +62,7 @@
             </tbody>
           </table>
 
-         
+
         </b-card>
       </b-col>
     </b-row>

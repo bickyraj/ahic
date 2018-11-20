@@ -1,3 +1,14 @@
+::-webkit-scrollbar {
+	display: none;
+}
+@-moz-document url-prefix() {
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+
 $trump_blue: #5263ff;
 $border_color: #ebebeb;
 button:focus {

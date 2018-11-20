@@ -64,8 +64,8 @@
                 <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th class="col-md-2">Background Image</th>
                 <th>Name</th>
+                <th class="col-md-2">Background Image</th>
                 <th>Video Link</th>
                 <th>Duration</th>
                 <th>Study Method</th>
@@ -76,13 +76,13 @@
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
-                       <td> <img :src="'../public/images/courses/'+menu.background_image" class="img-fluid" /></td>
                 <td> <router-link :to="'course/'+menu.id"> {{ menu.name}} </router-link>  </td>
+                <td> <img :src="'../public/images/courses/'+menu.background_image"  v-if="menu.background_image" class="img-fluid" /></td>
                 <td>{{ menu.video_link}}</td>
                 <td>{{ menu.duration}}</td>
                 <td>{{ menu.study_method}}</td>
                 <!-- <td>{{ menu.description}}</td> -->
-                <td>{{ menu.order_by}}</td>
+                <!-- <td>{{ menu.order_by}}</td> -->
                 <td>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
                     Edit
@@ -95,7 +95,7 @@
             </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="2">
+                <td colspan="6">
                   <div v-if="!loading"> No Data.</div>
                   <div v-else> loading...</div>
                 </td>

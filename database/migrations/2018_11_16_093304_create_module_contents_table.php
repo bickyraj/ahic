@@ -18,7 +18,7 @@ class CreateModuleContentsTable extends Migration
             $table->integer('module_id');
             $table->string('title');
             $table->longText('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('status');
             $table->timestamps();
         });

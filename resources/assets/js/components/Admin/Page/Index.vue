@@ -45,7 +45,7 @@
               <tr>
                 <th>  Name </th>
                 <th class="col-md-2">Image</th>
-                <th>Parent id</th>
+                <th>Parent Page</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -67,7 +67,7 @@
             </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="2">
+                <td colspan="4">
                   <div v-if="!loading"> No Data.</div>
                   <div v-else> loading...</div>
                 </td>

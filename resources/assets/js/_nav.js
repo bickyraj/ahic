@@ -101,6 +101,33 @@ export default {
         // text: 'NEW'
       }
     },
+    {
+      name: 'Agent Information',
+      url: url + 'agent_information',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Agent Documents',
+      url: url + 'agent_documents',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Agreement Process',
+      url: url + 'agent_agreement_process',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
     // {
     //   name: 'Page Modules',
     //   url: url + 'page_modules',

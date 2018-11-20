@@ -151,4 +151,28 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('page_module/edit', 'PageModuleController@update');
     Route::delete('page_module/{id}', 'PageModuleController@destroy');
 
+      //Agent Information
+    Route::get('agent_informations','AgentInformationController@index');
+    Route::get('agent_information/{id}','AgentInformationController@show');
+    Route::get('agent_informations/{id}','AgentInformationController@get');
+    Route::post('agent_information', 'AgentInformationController@store');
+    Route::post('agent_information/edit', 'AgentInformationController@update');
+    Route::delete('agent_information/{id}', 'AgentInformationController@destroy');
+
+      //Agent Documents
+    Route::get('agent_documents','AgentDocumentController@index');
+    Route::get('agent_document/{id}','AgentDocumentController@show');
+    Route::get('agent_documents/{id}','AgentDocumentController@get');
+    Route::post('agent_document', 'AgentDocumentController@store');
+    Route::post('agent_document/edit', 'AgentDocumentController@update');
+    Route::delete('agent_document/{id}', 'AgentDocumentController@destroy');
+
+      //Agent Agreement
+    Route::get('agent_agreement_processes','AgentAgreementProcessController@index');
+    Route::get('agent_agreement_process/{id}','AgentAgreementProcessController@show');
+    Route::get('agent_agreement_processes/{id}','AgentAgreementProcessController@get');
+    Route::post('agent_agreement_process', 'AgentAgreementProcessController@store');
+    Route::post('agent_agreement_process/edit', 'AgentAgreementProcessController@update');
+    Route::delete('agent_agreement_process/{id}', 'AgentAgreementProcessController@destroy');
+
 });

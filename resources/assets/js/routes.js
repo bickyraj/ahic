@@ -387,6 +387,82 @@ const routes = [
         },
     },
     { 
+        path: admin_url + 'agent_information', 
+        component: require('./components/Admin/AgentInformation/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Agent Information',
+                    path: admin_url + 'agent_information',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
+        path: admin_url + 'agent/:id',
+        component: require('./components/Admin/AgentInformation/Detail'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Agent Information',
+                    path: admin_url + 'agent_information',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'agent_documents', 
+        component: require('./components/Admin/AgentDocument/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Agent Document',
+                    path: admin_url + 'agent_documents',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'agent_agreement_process', 
+        component: require('./components/Admin/AgentAgreementProcess/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Agent Agreement Process',
+                    path: admin_url + 'agent_agreement_process',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
         path: admin_url + 'import-export', 
         component: require('./components/Admin/ImportExport/Index'),
         meta: {

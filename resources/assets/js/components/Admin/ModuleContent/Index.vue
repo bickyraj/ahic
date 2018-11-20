@@ -50,9 +50,10 @@
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(m, index) in table_items" :key="m.id">
                 <td>{{ m.module.title}}</td>
-                <td>{{ m.title}}</td>
-                       <td> <img :src="'../public/images/module/'+m.image" class="img-fluid" /></td>
-                <td>{{ m.description}}</td>
+                <td>{{ m.title.substring(0,25) + ".."}}</td>
+                       <td v-if="m.image"> <img :src="'../public/images/module/'+m.image" class="img-fluid" /></td>
+                       <td v-else> -- </td>
+                <td >{{ m.description.substring(0,25) + ".."}}</td>
                 <td>{{ m.status}}</td>
                 <td>
                   <b-button size="sm" @click.stop="info(m, index, $event.target)" class="mr-1 btn-success">
@@ -131,6 +132,7 @@
       this.fetchModules();
     },
     computed: {
+      
     },
     methods: {
       info(module, index, button) {
