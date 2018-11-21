@@ -47,24 +47,24 @@ export default {
         // text: 'NEW'
       }
     },
-    {
-      name: 'Unit Categories',
-      url: url + 'course_unit_categories',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
-    {
-      name: 'Unit Relation',
-      url: url + 'course_unit_relations',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
+    // {
+    //   name: 'Unit Categories',
+    //   url: url + 'course_unit_categories',
+    //   icon: 'fas fa-book-open',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
+    // {
+    //   name: 'Unit Relation',
+    //   url: url + 'course_unit_relations',
+    //   icon: 'fas fa-book-open',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
     {
       name: 'Course Categories',
       url: url + 'course_categories',
@@ -111,8 +111,8 @@ export default {
       }
     },
     {
-      name: 'Agent Documents',
-      url: url + 'agent_documents',
+      name: 'Countries',
+      url: url + 'countries',
       icon: 'fas fa-book-open',
       badge: {
         variant: 'primary',
@@ -120,8 +120,8 @@ export default {
       }
     },
     {
-      name: 'Agreement Process',
-      url: url + 'agent_agreement_process',
+      name: 'Branch Locations',
+      url: url + 'branch_locations',
       icon: 'fas fa-book-open',
       badge: {
         variant: 'primary',

@@ -333,7 +333,7 @@
             </form>
           </b-modal>
           <b-modal class="ess-modal" ref="competenceModal" hide-footer title="Add Unit Of Competence">
-            <form @submit.prevent="addCompetence" ref="addCompetence">
+            <form @submit.prevent="addCompetence" ref="addCompetenceForm">
               <input type="hidden" name="course_id" :value="course.id">
               <div class="form-group">
                 <label for=""> Category</label>
@@ -537,6 +537,24 @@
               $(form)[0].reset();
               self.hideReqModal();
               self.$toastr.s("A course assessment has been added.");
+            })
+            .catch(function(error) {
+              if (error.response.status === 422) {
+                self.$toastr.e(error.response.data.errors.name);
+              }
+            });
+
+          },
+          addCompetence() {
+            var self = this;
+            var form = self.$refs.addCompetenceForm;
+            var formData = new FormData(form);
+            let url = self.$root.baseUrl + '/api/admin/course_unit_relation';
+            axios.post(url, formData).then(function(response) {
+              self.fetchCompetences();
+              $(form)[0].reset();
+              self.hideCompetenceModal();
+              self.$toastr.s("A course unit competence has been added.");
             })
             .catch(function(error) {
               if (error.response.status === 422) {

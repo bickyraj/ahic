@@ -175,4 +175,20 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('agent_agreement_process/edit', 'AgentAgreementProcessController@update');
     Route::delete('agent_agreement_process/{id}', 'AgentAgreementProcessController@destroy');
 
+      //Country
+    Route::get('countries','CountryController@index');
+    Route::get('country/{id}','CountryController@show');
+    Route::get('countries/{id}','CountryController@get');
+    Route::post('country', 'CountryController@store');
+    Route::post('country/edit', 'CountryController@update');
+    Route::delete('country/{id}', 'CountryController@destroy');
+
+      //Agent Agreement
+    Route::get('branch_locations','BranchLocationController@index');
+    Route::get('branch_location/{id}','BranchLocationController@show');
+    Route::get('branch_locations/{id}','BranchLocationController@get');
+    Route::post('branch_location', 'BranchLocationController@store');
+    Route::post('branch_location/edit', 'BranchLocationController@update');
+    Route::delete('branch_location/{id}', 'BranchLocationController@destroy');
+
 });

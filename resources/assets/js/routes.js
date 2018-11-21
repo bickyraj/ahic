@@ -519,6 +519,44 @@ const routes = [
             roleId: 1
         },
     },
+    { 
+        path: admin_url + 'countries', 
+        component: require('./components/Admin/Country/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Countries',
+                    path: admin_url + 'countries', 
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'branch_locations', 
+        component: require('./components/Admin/BranchLocation/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Branch Locations',
+                    path: admin_url + 'branch_location',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
 ];
 
 export default routes;

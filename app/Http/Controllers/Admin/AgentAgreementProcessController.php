@@ -37,7 +37,20 @@ class AgentAgreementProcessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $data['agent_id'] = $request->input('agent_id');
+            $data['agent_document_id'] = $request->input('agent_document_id');
+            $data['sent_date'] = $request->input('sent_date');
+            $data['received_date'] = $request->input('received_date');
+            $data['signed'] = $request->input('signed');
+                $agreement = $request->file('agreement');
+          if($agreement != null){
+            $ext = $agreement->getClientOriginalExtension();
+            $filename = md5(rand(0,999999)).'.'.$ext;
+            $data['agreement'] = $filename;
+            $agreement->move($this->destination,$filename);
+        }
+        $creater = AgentAgreementProcess::create($data);
+        return new Resource($creater);
     }
 
     /**

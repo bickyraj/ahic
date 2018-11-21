@@ -22,6 +22,7 @@ class CreateAgentDocumentsTable extends Migration
             $table->string('reference');
             $table->string('qualification');
             $table->string('profile');
+            $table->string('location');
             $table->string('address');
             $table->string('country');
             $table->timestamps();

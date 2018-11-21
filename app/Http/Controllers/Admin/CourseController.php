@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Menu as Resource;
 use App\Course;
 use Illuminate\Http\Request;
-use App\Http\Resources\Menu as Resource;
+
 
 class CourseController extends Controller
 {

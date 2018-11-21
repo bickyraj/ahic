@@ -452,5 +452,55 @@ $competences = [
             DB::table('course_unit_competences')->insert($competence);
         };
 
+        $countries = [
+    ['status'=>'1','name'=>'Nepal'],
+    ['status'=>'1','name'=>'Austrailia'],
+];
+
+;
+
+        foreach($countries as $country){
+            DB::table('countries')->insert($country);
+        };
+
+               	DB::table('branch_locations')->insert([
+            'country_id' => '1',
+            'location' => 'Kathmandu',
+            'status'=>'1',
+        ]);
+               	DB::table('branch_locations')->insert([
+            'country_id' => '1',
+            'location' => 'Lalitpur',
+            'status'=>'1',
+
+        ]);
+               	DB::table('branch_locations')->insert([
+            'country_id' => '1',
+            'location' => 'Bhaktapur',
+            'status'=>'1',
+
+        ]);
+               	DB::table('branch_locations')->insert([
+            'country_id' => '2',
+            'location' => 'Sydney',
+            'status'=>'1',
+
+        ]);
+               	DB::table('branch_locations')->insert([
+            'country_id' => '2',
+            'location' => 'Melbourne',
+            'status'=>'1',
+
+        ]);
+               	DB::table('branch_locations')->insert([
+            'country_id' => '2',
+            'location' => 'New Wales',
+            'status'=>'1',
+
+        ]);
+
+
+
+
 }
 }

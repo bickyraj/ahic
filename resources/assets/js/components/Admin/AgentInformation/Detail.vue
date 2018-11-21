@@ -103,7 +103,7 @@
                       </tr>
                       <tr>
                           <th class="col-md-2"> Address <span class="float-right">:</span> </th>
-                          <td class="col-md-8">  {{company.address}}</td>
+                          <td class="col-md-8">  {{company.location}}</td>
                       </tr>
                   </table>
                   <hr>
@@ -158,6 +158,7 @@
                   </div>
 
                 </div>
+<div v-if="company.process">
 
                   <table class="table table-borderless">
                       <tr>
@@ -177,6 +178,7 @@
                           <td class="col-md-8">  {{company.process.signed}}  </td>
                       </tr>
                   </table>
+</div>
                 <p class="pt-3" v-html="agent.description"></p>
 
               </div>
@@ -269,9 +271,21 @@
                 <label for=""> Address </label>
                 <input type="text" name="address" class="form-control" >
               </div>
+             
               <div class="form-group">
                 <label for=""> Country </label>
-                <input type="text" name="country" class="form-control" >
+                <select name="country" id="" class="form-control" @change="changeLocation"> 
+                  <option value=""> Choose A Country</option>
+                  <option v-for="(country,index) in countries" :value="country.id" :key="country.id" :index="index"> {{country.name}} </option>
+                </select>
+              </div>
+
+               <div class="form-group">
+                <label for=""> Location </label>
+                  <select name="location" id="" class="form-control" >
+                  <option value=""> Choose A Location</option>
+                  <option v-for="country in locations" :value="country.location" :key="country.id" > {{country.location}} </option>
+                </select>
               </div>
            
               <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add Company</b-btn>
@@ -286,13 +300,24 @@
                 <label for=""> Company Name</label>
                 <input type="text" name="company_name" class="form-control" :value="document.company_name" >
               </div>
-                  <div class="form-group">
-                <label for=""> Address </label>
-                <input type="text" name="address" class="form-control" :value="document.address">
-              </div>
               <div class="form-group">
+                <label for=""> Address</label>
+                <input type="text" name="address" class="form-control" :value="document.address" >
+              </div>
+         <div class="form-group">
                 <label for=""> Country </label>
-                <input type="text" name="country" class="form-control" :value="document.country">
+                <select name="country" id="" class="form-control" @change="changeLocation" :value="document.country"> 
+                  <option value=""> Choose A Country</option>
+                  <option v-for="(country,index) in countries" :value="country.id" :key="country.id" :index="index"> {{country.name}} </option>
+                </select>
+              </div>
+
+               <div class="form-group">
+                <label for=""> Location </label>
+                  <select name="location" id="" class="form-control" :value="document.location">
+                  <option value=""> Choose A Country</option>
+                  <option v-for="country in locations" :value="country.location" :key="country.id" > {{country.location}} </option>
+                </select>
               </div>
               <div class="form-group">
                 <label for=""> EOI </label>
@@ -318,6 +343,31 @@
            
               <b-btn class="mt-3 pull-right" variant="primary" type="submit">Edit Document</b-btn>
               <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditDocumentModal">Cancel</b-btn>
+            </form>
+          </b-modal>
+          
+                 <b-modal class="ess-modal" ref="addProcessModal" hide-footer title="Add Agreement Process">
+            <form @submit.prevent="addProcess" ref="addProcessForm">
+              <input type="" name="agent_id" :value="agent.id">
+              <input type="" name="agent_document_id" :value="companyid">
+              <div class="form-group">
+                <label for=""> Sent Date</label>
+                <input type="text" name="sent_date" class="form-control">
+              </div>
+                  <div class="form-group">
+                <label for=""> Agreement </label>
+                <input type="file" name="agreement" class="form-control" >
+              </div>
+              <div class="form-group">
+                <label for=""> Recieved Date </label>
+                <input type="text" name="received_date" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for=""> Signed </label>
+                <input type="text" name="signed" class="form-control" >
+              </div>
+              <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add Process</b-btn>
+              <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideAddProcessModal">Cancel</b-btn>
             </form>
           </b-modal>
           
@@ -358,16 +408,65 @@
            agent:'',
            process:'',
            companies:'',
+           companyid:'',
            document:'',
+           countries:'',
+           locations:'',
             loading: true,
           }
         },
         created() {
           this.fetchAgent();
           this.fetchDocuments();
+          this.fetchCountries();
         },
         computed: {},
         methods: {
+          changeLocation(event){
+            var self =this;
+            let index = (event.target.selectedOptions[0].index);
+            index = index-1;
+            let loc = self.countries[index];
+            if(loc){
+            self.locations = self.countries[index].locations;
+            }
+          
+
+            
+          },
+            fetchCountries() {
+        let vm = this;
+        let self = this;
+        let url = self.$root.baseUrl + '/api/admin/countries';
+        axios.get(url)
+          .then(function(response) {
+            vm.countries = response.data.data;
+            vm.loading = false;
+          })
+          .catch(function(error) {
+            console.log(error);
+            vm.loading = false;
+          });
+
+      },
+
+          addProcess(){
+            var self = this;
+            var form = self.$refs.addProcessForm;
+            var formData = new FormData(form);
+            let url = self.$root.baseUrl + '/api/admin/agent_agreement_process';
+            axios.post(url, formData).then(function(response) {
+              self.fetchDocuments();
+              $(form)[0].reset();
+              self.hideAddProcessModal();
+              self.$toastr.s("A agent agreement process has been added.");
+            })
+            .catch(function(error) {
+              if (error.response.status === 422) {
+                self.$toastr.e(error.response.data.errors.name);
+              }
+            });
+          },
             editProcess(){
   var self = this;
             var form = self.$refs.editProcessForm;
@@ -470,9 +569,10 @@
             let url = self.$root.baseUrl + '/api/admin/agent_document';
             axios.post(url, formData).then(function(response) {
               self.fetchAgent();
+          self.fetchDocuments();
               $(form)[0].reset();
               self.hideAddCompanyModal();
-              self.$toastr.s("A company has been edited.");
+              self.$toastr.s("A company has been added.");
             })
             .catch(function(error) {
               if (error.response.status === 422) {
@@ -497,6 +597,13 @@
             let url = self.$root.baseUrl + '/api/admin/agent_document/';
             axios.get(url +docid).then(function(response) {
                 self.document = response.data.data;
+                let country = (response.data.data.country);
+                    let url = self.$root.baseUrl + '/api/admin/branch_locations/';
+            axios.get(url + country).then(function(response) {
+              console.log(response.data.data);
+                self.locations = response.data.data.locations;
+            })
+
             })
             .catch(function(error) {
               if (error.response.status === 422) {
@@ -509,10 +616,12 @@
         hideEditDocumentModal(){
                 this.$refs.editDocumentModal.hide();
         },
-              showAddProcessModal(){
+              showAddProcessModal(id){
+            this.companyid = id;
                 this.$refs.addProcessModal.show();
         },
         hideAddProcessModal(){
+                this.companyid ='';
                 this.$refs.addProcessModal.hide();
         },
       showEditProcessModal(id){

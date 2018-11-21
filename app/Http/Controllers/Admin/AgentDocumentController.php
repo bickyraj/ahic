@@ -42,6 +42,7 @@ class AgentDocumentController extends Controller
     {
         $data['agent_id']  = $request->agent_id;
         $data['company_name'] = $request->company_name;
+        $data['location'] = $request->location;
         $data['address'] = $request->address;
         $data['country'] = $request->country;
         $eoi = $request->file('EOI');
@@ -122,6 +123,7 @@ class AgentDocumentController extends Controller
         $id = $request->input('id');
         $doc = AgentDocument::findOrFail($id);
          $data['company_name'] = $request->company_name;
+        $data['location'] = $request->location;
         $data['address'] = $request->address;
         $data['country'] = $request->country;
         $eoi = $request->file('EOI');
@@ -194,6 +196,7 @@ class AgentDocumentController extends Controller
         $doc = AgentDocument::findOrFail($id);
          $data['company_name'] = $request->input('company_name');
         $data['address'] = $request->input('address');
+        $data['location'] = $request->input('location');
         $data['country'] = $request->input('country');
         $eoi = $request->file('EOI');
           if($eoi != null){
