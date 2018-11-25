@@ -13,6 +13,8 @@ import Vuex from 'vuex';
 import Auth from './auth.js';
 import Api from './api.js';
 import VeeValidate from 'vee-validate';
+import Editor from '@tinymce/tinymce-vue';
+
 
 import NProgress from  'nprogress';
 import 'nprogress/nprogress.css';
@@ -57,7 +59,7 @@ window.auth = new Auth();
 window.Vue = require('vue');
 Vue.use(VueRouter);
 
-
+Vue.component('editor', Editor)
 import io from 'socket.io-client';
 window.io = io;
 // import VueSocketio from 'vue-socket.io';
@@ -184,3 +186,4 @@ const app = new Vue({
       App
 	},
 });
+

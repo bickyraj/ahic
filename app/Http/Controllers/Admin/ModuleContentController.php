@@ -39,6 +39,21 @@ $modules = ModuleContent::with('module')->get();
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'title'=>'required|min:3|max:6',
+            'module_id'=>'required',
+            'description'=>'required',
+            'image'=>'required',
+        ],
+    [
+        'title.required'=>'Content Title is required.',
+        'title.min'=>'Three chars min.',
+        'title.max'=>'Six chars max.',
+        'title.required'=>'Content Title is required.',
+        'module_id.required'=>'Select Any Module.',
+        'description.required'=>'Description is required.',
+        'image.required'=>'Choose An Image.',
+    ]);
       $data['module_id'] = $request->input('module_id');
         $data['title'] = $request->input('title');
         $data['description'] = $request->input('description');
@@ -51,7 +66,7 @@ $modules = ModuleContent::with('module')->get();
             $file->move($this->destination,$filename);
         }
         $create = ModuleContent::create($data);
-             $modules = ModuleContent::all();
+$modules = ModuleContent::with('module')->get();
         return Resource::collection($modules);
     }
 
@@ -92,8 +107,8 @@ $modules = ModuleContent::with('module')->get();
             $file->move($this->destination,$filename);
         }
         if($course->update()){
-         $courses = ModuleContent::all();
-        return Resource::collection($courses);
+     $modules = ModuleContent::with('module')->get();
+        return Resource::collection($modules);
         };
     }
 
@@ -109,10 +124,10 @@ $modules = ModuleContent::with('module')->get();
              $status = 0;
         $id = $request->id;
         $course = ModuleContent::findOrFail($id);
-         $course->module_id = $request->module_id;
-        $course->title = $request->title;
-        $course->description = $request->description;
-        $course->status = $request->status;
+         $course->module_id = $request->input('module_id');
+        $course->title = $request->input('title');
+        $course->description = $request->input('description');
+        $course->status = $request->input('status');
            $file = $request->file('image');
         if($file != null){
             $oldimg = $course->image;
@@ -123,9 +138,8 @@ $modules = ModuleContent::with('module')->get();
             $file->move($this->destination,$filename);
         }
         if($course->update()){
-         $course = ModuleContent::all();
-       
-        return Resource::collection($course);
+       $modules = ModuleContent::with('module')->get();
+        return Resource::collection($modules);
         };
     }
 
