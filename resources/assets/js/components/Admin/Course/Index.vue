@@ -48,7 +48,9 @@
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-                    <textarea name="description" id="" class="form-control" rows="5"></textarea>
+                    <!-- <textarea name="description" id="" class="form-control" rows="5"></textarea> -->
+               <editor id="description" name="description" :init="editor"></editor>
+
                   </div>
                    <div class="form-group">
                     <label for="">Order By </label>
@@ -156,7 +158,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-                    <textarea name="description" id="" class="form-control" rows="5" :value="modalInfo.data.description"></textarea>
+                   <editor  name="description" v-model="modalInfo.data.description" :init="editor"></editor>
                   </div>
                    <div class="form-group">
                     <label for="">Order By </label>
@@ -164,7 +166,7 @@
                   </div>
                       <div class="form-group">
           <label for="">Status</label>
-          <select name="status" id="" v-bind:value="modalInfo.data.status" class="form-control">
+          <select name="status" id="" v-model="modalInfo.data.status" class="form-control">
             <option value="0"> Disable</option>
             <option value="1"> Enable</option>
           </select>
@@ -191,6 +193,48 @@
           content: '',
           data: []
         },
+             editor:{
+                  plugins:['table','link','image code'],
+                  toolbar:['undo redo | link image |code'],
+                  setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save();
+                });
+                editor.on('load', function () {
+                  console.log('loaded');
+                    editor.save();
+                });
+                editor.on('keyup', function () {
+                  console.log('loaded');
+                    editor.save();
+                });
+      },
+          image_title:true,
+          automatic_uploads: true,
+          file_picker_types: 'image', 
+          // and here's our custom image picker
+          file_picker_callback: function(cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+                input.onchange = function() {
+              var file = this.files[0];
+              var reader = new FileReader();
+              reader.onload = function () {
+                var id = 'blobid' + (new Date()).getTime();
+                var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                var base64 = reader.result.split(',')[1];
+                var blobInfo = blobCache.create(id, file, base64);
+                blobCache.add(blobInfo);
+                cb(blobInfo.blobUri(), { title: file.name });
+              };
+              reader.readAsDataURL(file);
+            };
+            input.click();
+          }
+        },
+
+        
       }
     },
     created() {

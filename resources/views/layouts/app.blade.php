@@ -24,9 +24,15 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/animate.css') }}">
     <link href="{{ asset('public/css/admin-style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/login-style.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+    .mce-widget.mce-notification.mce-in{
+      display:none !important;
+    }
+    </style>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
   <div id="app"></div>
   <script src="{{ asset('public/js/app.js') }}"></script>
+
 </body>
 </html>

@@ -128,6 +128,15 @@ export default {
         // text: 'NEW'
       }
     },
+    {
+      name: 'Form',
+      url: url + 'form',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
     // {
     //   name: 'Page Modules',
     //   url: url + 'page_modules',

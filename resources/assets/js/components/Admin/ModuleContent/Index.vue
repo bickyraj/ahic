@@ -13,22 +13,34 @@
                 <form @submit.prevent="addModule" ref="addModuleForm">
                         <div class="form-group">
                     <label for="">Title</label>
-                    <input type="text" name="title" class="form-control" placeholder="" required>
+                    <input type="text" name="title" class="form-control" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.title" class="text-danger"> {{error.title[0]}}</p>
+                    </transition>
                   </div>
                       <div class="form-group">
                     <label for="">Parent Menu</label>
                    <select  name="module_id" class="form-control">
                      <option value="" selected> Choose Parent Menu </option>
-            <option v-for="menu in modules" :value="menu.id" :key="menu.id"> {{menu.title}}</option>
-          </select>
+                    <option v-for="menu in modules" :value="menu.id" :key="menu.id"> {{menu.title}}</option>
+                  </select>
+            <transition name="fade">
+                    <p v-if="error.module_id" class="text-danger"> {{error.module_id[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Image</label>
-                    <input type="file" name="image" class="form-control" placeholder="" required>
+                    <input type="file" name="image" class="form-control" >
+                             <transition name="fade">
+                    <p v-if="error.image" class="text-danger"> {{error.image[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-                      <textarea name="description" id="" class="form-control"  rows="6"></textarea>
+                   <editor  name="description" :init="editor"></editor>
+                            <transition name="fade">
+                    <p v-if="error.description" class="text-danger"> {{error.description[0]}}</p>
+                    </transition>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Module Content</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -83,7 +95,7 @@
         <input type="hidden" name="id" :value="modalInfo.data.id">
            <div class="form-group">
                     <label for="">Title</label>
-                    <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="" required>
+                    <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="Enter A Title">
                   </div>
           <div class="form-group">
                     <label for="">Parent Menu</label>
@@ -92,17 +104,20 @@
             <option v-for="menu in modules" :value="menu.id" :key="menu.id"> {{menu.title}}</option>
           </select>
                   </div>
-<div class="form-group">
+              <div class="form-group">
                     <label for="">Image</label>
-                    <input type="file" name="image" class="form-control" placeholder="" >
+                    <input type="file" name="image" class="form-control"  >
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-                      <textarea name="description" id="" class="form-control"  rows="6" :value="modalInfo.data.description"></textarea>
+                   <editor name="description" v-model="modalInfo.data.description" :init="editor"></editor>
                   </div> 
-        <div class="form-group">
+       <div class="form-group">
           <label for="">Status</label>
-          <input type="text" name="status" v-bind:value="modalInfo.data.status" class="form-control" placeholder="" required>
+          <select name="status" id="" v-model="modalInfo.data.status" class="form-control">
+            <option value="0"> Disable</option>
+            <option value="1"> Enable</option>
+          </select>
         </div>
        
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
@@ -125,6 +140,48 @@
           content: '',
           data: []
         },
+        error:'',
+        editor:{
+          plugins:['table','link','image code'],
+          toolbar:['undo redo | link image |code'],
+           setup: function (editor) {
+        editor.on('change', function () {
+            editor.save();
+        });
+        editor.on('load', function () {
+          console.log('loaded');
+            editor.save();
+        });
+        editor.on('keyup', function () {
+          console.log('loaded');
+            editor.save();
+        });
+    },
+          image_title:true,
+          automatic_uploads: true,
+          file_picker_types: 'image', 
+          // and here's our custom image picker
+          file_picker_callback: function(cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+                input.onchange = function() {
+              var file = this.files[0];
+              var reader = new FileReader();
+              reader.onload = function () {
+                var id = 'blobid' + (new Date()).getTime();
+                var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                var base64 = reader.result.split(',')[1];
+                var blobInfo = blobCache.create(id, file, base64);
+                blobCache.add(blobInfo);
+                cb(blobInfo.blobUri(), { title: file.name });
+              };
+              reader.readAsDataURL(file);
+            };
+            input.click();
+          }
+        },
+
       }
     },
     created() {
@@ -135,10 +192,10 @@
       
     },
     methods: {
-      info(module, index, button) {
-        let self = this;
+      info(m, index, button) {
+         let self = this;
         let url = self.$root.baseUrl + '/api/admin/module_content/';
-        axios.get(url + module.id).then(function(response) {
+        axios.get(url + m.id).then(function(response) {
             if (response.status === 200 || response.status === 201) {
               self.modalInfo.row = index
               self.modalInfo.title = `Edit Module Content`
@@ -163,6 +220,7 @@
         let url = self.$root.baseUrl + '/api/admin/module_content/edit';
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
+              $(form)[0].reset();
             self.table_items = response.data.data;
               self.hideModuleModal();
               self.$swal({
@@ -224,6 +282,8 @@
               self.$toastr.s("A module content has been added.");
           })
           .catch(function(error) {
+            self.error = '';
+            self.error = error.response.data.errors;
             if (error.response.status === 422) {
               self.$toastr.e(error.response.data.errors.name);
             }
@@ -265,6 +325,7 @@
       },
       hideModal() {
         this.$refs.myModalRef.hide()
+        this.error=''
       },
       hideModuleModal() {
         this.$refs.editModal.hide();

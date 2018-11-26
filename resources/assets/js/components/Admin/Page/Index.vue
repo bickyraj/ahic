@@ -32,7 +32,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-                      <textarea name="description" refs="desc" id="" class="form-control" rows="5"></textarea>
+               <editor id="description" name="description"></editor>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create page</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -113,7 +113,7 @@
 
         <div class="form-group">
           <label for="">Description</label>
-          <textarea name="description" id="" class="form-control" rows="5" v-bind:value="modalInfo.data.description" ></textarea>
+                   <editor  name="description" v-model="modalInfo.data.description"></editor>
         </div>
        
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>

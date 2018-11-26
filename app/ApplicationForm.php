@@ -1,0 +1,12 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ApplicationForm extends Model
+{
+     protected $fillable=[
+        'date_of_intake_id','firstname','middlename','familyname','dob','gender','country','usi_number','in_australia','visa_category','visa_category','visa_expired_date','visa+office_applying_for','islander_orgin'
+    ];
+}

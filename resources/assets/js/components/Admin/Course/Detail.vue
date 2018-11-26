@@ -9,6 +9,7 @@
   width: 100%;
 }
 
+
 </style>
 
 <template>
@@ -134,7 +135,7 @@
                   </div>
 
                   <b-collapse id="collapse3">
-                    <p v-if="course.assessment"> {{course.assessment.description}}</p>
+                    <div class="col-md-12" v-if="course.assessment" v-html="course.assessment.description"> </div>
                   </b-collapse>
                 </div>
               </b-card>
@@ -154,7 +155,7 @@
 
 
                     <b-collapse id="collapse4">
-                      <p v-if="course.rpl"> {{course.rpl.description}}</p>
+                      <div class="col-md-12" v-if="course.rpl" v-html="course.rpl.description"> </div>
                     </b-collapse>
                   </div>
                 </b-card>
@@ -163,7 +164,7 @@
                   <div class="col-md-12">
                     <div class="card-title">
                       <div class="caption">
-                        <h5 v-b-toggle.collapse4> <i class="fas fa-key"></i>  Unit Of Competence
+                        <h5 v-b-toggle.collapse5> <i class="fas fa-key"></i>  Unit Of Competence
                           <small class="float-right">
                             <button class="btn btn-success" @click="showCompetenceModal"> Add </button>
                           </small></h5>
@@ -172,7 +173,7 @@
                       </div>
 
 
-                      <b-collapse id="collapse4">
+                      <b-collapse id="collapse5">
                         <div class="col-md-12" v-for="category in ucategories" :key="category.id">
                           <h5> {{category.name}} </h5>
                           <ul class="">
@@ -236,8 +237,7 @@
               </div>
               <div class="form-group">
                 <label for="">Description</label>
-                <!-- //fix the br frm controller -->
-                <textarea name="description" id="" class="form-control" rows="5" v-model="course.description"></textarea>
+                   <editor  name="description" v-model="course.description" :init="editor"></editor>
               </div>
               <div class="form-group">
                 <label for="">Order By </label>
@@ -314,7 +314,7 @@
               <input type="hidden" name="course_id" :value="course.id">
               <div class="form-group">
                 <label for=""> Assessment Method </label>
-                <textarea name="description" id="" class="form-control" rows="6" :value="course.assessment.description"> </textarea>
+        <editor  name="description" v-model="course.assessment.description" :init="editor"></editor>
               </div>
               <b-btn class="mt-3 pull-right" variant="primary" type="submit">Edit Assessment Method</b-btn>
               <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditAssessmentModal">Cancel</b-btn>
@@ -325,8 +325,8 @@
             <form @submit.prevent="editRPL" ref="editRplForm">
               <input type="hidden" name="course_id" :value="course.id">
               <div class="form-group">
-                <label for=""> Recognition Of PriorLearning</label>
-                <textarea name="description" id="" class="form-control" rows="10" :value="course.rpl.description"></textarea>
+                <label for=""> Recognition Of Prior Learning</label>
+                   <editor  name="description" v-model="course.rpl.description" :init="editor"></editor>
               </div>
               <b-btn class="mt-3 pull-right" variant="primary" type="submit">Edit RPL</b-btn>
               <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditRplModal">Cancel</b-btn>
@@ -370,6 +370,48 @@
             requirements: '',
             outcomes: '',
             loading: true,
+                         editor:{
+                  plugins:['table','link','image code'],
+                  toolbar:['undo redo | link image |code'],
+                  setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save();
+                });
+                editor.on('load', function () {
+                  console.log('loaded');
+                    editor.save();
+                });
+                editor.on('keyup', function () {
+                  console.log('loaded');
+                    editor.save();
+                });
+      },
+          image_title:true,
+          automatic_uploads: true,
+          file_picker_types: 'image', 
+          // and here's our custom image picker
+          file_picker_callback: function(cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+                input.onchange = function() {
+              var file = this.files[0];
+              var reader = new FileReader();
+              reader.onload = function () {
+                var id = 'blobid' + (new Date()).getTime();
+                var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                var base64 = reader.result.split(',')[1];
+                var blobInfo = blobCache.create(id, file, base64);
+                blobCache.add(blobInfo);
+                cb(blobInfo.blobUri(), { title: file.name });
+              };
+              reader.readAsDataURL(file);
+            };
+            input.click();
+          }
+        },
+
+        
           }
         },
         created() {

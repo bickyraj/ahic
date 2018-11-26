@@ -308,7 +308,7 @@
                 <label for=""> Country </label>
                 <select name="country" id="" class="form-control" @change="changeLocation" :value="document.country"> 
                   <option value=""> Choose A Country</option>
-                  <option v-for="(country,index) in countries" :value="country.id" :key="country.id" :index="index"> {{country.name}} </option>
+                  <option v-for="(country,index) in countries" :value="country.name" :key="country.name" :index="index"> {{country.name}} </option>
                 </select>
               </div>
 
