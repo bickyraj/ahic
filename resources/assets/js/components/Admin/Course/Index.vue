@@ -19,7 +19,7 @@
                     <label for=""> Course Category</label>
                       <select name="course_category_id" class="form-control">
                           <option value="">Select A Category</option>
-                          <option  v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
+                          <option v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
                       </select>
                   </div>
                   <div class="form-group">
