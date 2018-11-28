@@ -63,15 +63,15 @@ class CourseUnitCompetencesController extends Controller
      */
     public function update(Request $request)
     {
-        $status = 0;
         $id = $request->id;
-        $category = CourseUnitCompetences::findOrFail($id);
+        $category = CourseUnitCompetences::where('id',$id)->first();
+        $category->description = $request->description;
         $category->unit_code = $request->unit_code;
         if($category->save()){
-            $status =1;
-        }
-        $categories = CourseUnitCompetences::all();
+          $categories = CourseUnitCompetences::all();
         return Resource::collection($categories);
+        }
+        
     }
 
     /**

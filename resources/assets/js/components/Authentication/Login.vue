@@ -104,8 +104,6 @@ export default {
 		            axios.post('./api/login', data)
 		            .then(({data}) => {
 		            	auth.login(data.token, data.user);
-		    	        // this.$router.push('admin');
-		    	        // window.location.href = "./admin"
 		            })
 		            .catch(({response}) => {                    
 		            	console.log(response);

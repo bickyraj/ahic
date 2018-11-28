@@ -90,11 +90,10 @@
   export default {
     data() {
       return {
-          categories:'',
         loading: true,
         table_items: [],
         pages:[],
-        menu_table_fields: ['id', 'course_unit_category_id','unit_code','description','category'],
+        menu_table_fields: ['id','unit_code','description','category'],
         modalInfo: {
           title: '',
           content: '',
@@ -104,7 +103,6 @@
     },
     created() {
       this.fetchCompetences();
-      this.fetchCategories();
     },
     computed: {
     },
@@ -211,21 +209,6 @@
         axios.get(url)
           .then(function(response) {
             vm.table_items = response.data.data;
-            vm.loading = false;
-          })
-          .catch(function(error) {
-            console.log(error);
-            vm.loading = false;
-          });
-
-      },
-      fetchCategories() {
-        let vm = this;
-        let self = this;
-        let url = self.$root.baseUrl + '/api/admin/course_unit_categories';
-        axios.get(url)
-          .then(function(response) {
-            vm.categories = response.data.data;
             vm.loading = false;
           })
           .catch(function(error) {

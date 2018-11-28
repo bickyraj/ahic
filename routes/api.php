@@ -28,6 +28,8 @@ Route::get('/test', function() {
 
 Route::post('admin/change-password', 'AdminController@changePassword');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth:api', 'admin']], function () {
+Route::post('/form/submit', 'FormController@store');
+
     // Role functions.
     Route::get('roles', 'RoleController@index');
     Route::get('role/{id}', 'RoleController@show');

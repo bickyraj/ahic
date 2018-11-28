@@ -14,7 +14,8 @@ import Auth from './auth.js';
 import Api from './api.js';
 import VeeValidate from 'vee-validate';
 import Editor from '@tinymce/tinymce-vue';
-
+window.$ = require('jquery')
+window.JQuery = require('jquery')
 
 import NProgress from  'nprogress';
 import 'nprogress/nprogress.css';

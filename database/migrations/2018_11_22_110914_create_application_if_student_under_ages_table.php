@@ -18,6 +18,7 @@ class CreateApplicationIfStudentUnderAgesTable extends Migration
             $table->integer('application_form_id');
             $table->string('parent_name');
             $table->integer('contact_detail');
+            $table->date('date');
             $table->timestamps();
         });
     }

@@ -17,10 +17,12 @@ class CreateApplicationFormsTable extends Migration
             $table->increments('id');
             $table->integer('date_of_intake_id');
             $table->string('firstname');
+            $table->string('familyname');
             $table->string('middlename')->nullable();
             $table->date('dob');
             $table->string('gender');
-            $table->string('country');
+            $table->string('birth_city');
+            $table->string('birth_country');
             $table->string('usi_number');
             $table->enum('in_australia',['0','1']);
             $table->string('visa_category');
