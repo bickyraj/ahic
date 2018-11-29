@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            CourseTableSeeder::class,
-            AgentTableSeeder::class,
+            // CourseTableSeeder::class,
+            // AgentTableSeeder::class,
         ]);
         
         // add admin to users table.

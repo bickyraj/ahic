@@ -10,6 +10,4 @@ class CourseUnitCompetences extends Model
  protected $fillable =[
   'unit_code','description'
  ];
-
-
 }
