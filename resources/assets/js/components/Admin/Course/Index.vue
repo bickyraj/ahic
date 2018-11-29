@@ -111,11 +111,11 @@
         <input type="hidden" name="id" :value="modalInfo.data.id">
             <div class="form-group">
                     <label for="">Name </label>
-                    <input type="text" name="name" class="form-control"  :value="modalInfo.data.name" placeholder="" required>
+                    <input type="text" name="name" class="form-control" ref="modalname" v-model="modalInfo.data.name" placeholder="" required>
                   </div>
             <div class="form-group">
                     <label for=""> Course Category</label>
-                      <select name="course_category_id" class="form-control" :value="modalInfo.data.course_category_id" >
+                      <select name="course_category_id" class="form-control" v-model="modalInfo.data.course_category_id" >
                           <option value="">Select A Category</option>
                           <option  v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
                       </select>
@@ -132,23 +132,23 @@
                   </div>
                   <div class="form-group">
                     <label for="">Video Link </label>
-                    <input type="text" name="video_link" class="form-control"  :value="modalInfo.data.video_link" placeholder="" required>
+                    <input type="text" name="video_link" class="form-control"  v-model="modalInfo.data.video_link" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="">Duration </label>
-                    <input type="text" name="duration" class="form-control"  :value="modalInfo.data.duration" placeholder="" required>
+                    <input type="text" name="duration" class="form-control"  v-model="modalInfo.data.duration" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="">Study Method </label>
-                    <input type="text" name="study_method" class="form-control"  :value="modalInfo.data.study_method" placeholder="" required>
+                    <input type="text" name="study_method" class="form-control"  v-model="modalInfo.data.study_method" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="">Onshore Fee  </label>
-                    <input type="text" name="onshore_fee" class="form-control"  :value="modalInfo.data.onshore_fee" placeholder="" required>
+                    <input type="text" name="onshore_fee" class="form-control"  v-model="modalInfo.data.onshore_fee" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="">Offshore Fee </label>
-                    <input type="text" name="offshore_fee" class="form-control"  :value="modalInfo.data.offshore_fee" placeholder="" required>
+                    <input type="text" name="offshore_fee" class="form-control"  v-model="modalInfo.data.offshore_fee" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
@@ -156,7 +156,7 @@
                   </div>
                    <div class="form-group">
                     <label for="">Order By </label>
-                    <input type="text" name="order_by" class="form-control"  :value="modalInfo.data.order_by" placeholder="" required>
+                    <input type="text" name="order_by" class="form-control"  v-model="modalInfo.data.order_by" placeholder="" required>
                   </div>
                       <div class="form-group">
           <label for="">Status</label>

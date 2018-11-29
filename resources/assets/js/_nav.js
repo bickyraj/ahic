@@ -128,18 +128,10 @@ export default {
         // text: 'NEW'
       }
     },
+
     {
-      name: 'Form',
-      url: url + 'form',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
-    {
-      name: 'Admissions',
-      url: url + 'admissions',
+      name: 'Students',
+      url: url + 'students',
       icon: 'fas fa-book-open',
       badge: {
         variant: 'primary',

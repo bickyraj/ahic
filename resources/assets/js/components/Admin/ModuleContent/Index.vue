@@ -95,11 +95,11 @@
         <input type="hidden" name="id" :value="modalInfo.data.id">
            <div class="form-group">
                     <label for="">Title</label>
-                    <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="Enter A Title">
+                    <input type="text" name="title" v-model="modalInfo.data.title" class="form-control" placeholder="Enter A Title">
                   </div>
           <div class="form-group">
                     <label for="">Parent Menu</label>
-                   <select v-bind:value="modalInfo.data.module_id" name="module_id" class="form-control">
+                   <select v-model="modalInfo.data.module_id" name="module_id" class="form-control">
                      <option value="" selected> Choose Parent Menu </option>
             <option v-for="menu in modules" :value="menu.id" :key="menu.id"> {{menu.title}}</option>
           </select>

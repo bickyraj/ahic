@@ -158,7 +158,7 @@ const routes = [
         },
     },
     {
-        path: admin_url + 'admissions',
+        path: admin_url + 'students',
         component: require('./components/Admin/Form/Home'),
         meta: {
             layout: 'admin',
@@ -168,8 +168,8 @@ const routes = [
                     path: admin_url,
                 },
                 {
-                    name: 'admissions',
-                    path: admin_url + 'admissions',
+                    name: 'Students',
+                    path: admin_url + 'students',
                 }
             ],
             middlewareAuth: true,
@@ -177,7 +177,7 @@ const routes = [
         },
     },
     {
-        path: admin_url + 'admission/:id',
+        path: admin_url + 'student/:id',
         component: require('./components/Admin/Form/Detail'),
         meta: {
             layout: 'admin',
@@ -187,8 +187,8 @@ const routes = [
                     path: admin_url,
                 },
                 {
-                    name: 'admissions',
-                    path: admin_url + 'admissions',
+                    name: 'Students',
+                    path: admin_url + 'students',
                 }
             ],
             middlewareAuth: true,

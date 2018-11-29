@@ -248,7 +248,7 @@
     <div class="row" v-for="(n,qs) in q" :key="n" :ref="'Q'+n" :use="qs">
     <div class="col-md-12">
         <label for="">Qualification </label> <small> <button class="btn-danger" @click.prevent="removeQ(n)"> Remove </button> </small>
-        <input type="text" :value="n">
+        <!-- <input type="text" :value="n"> -->
     </div>
 
                      <div class="form-group col-md-6">

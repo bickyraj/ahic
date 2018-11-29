@@ -5,7 +5,7 @@
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
-              <h5><i class="fas fa-key"></i> Couse Category </h5>
+              <h5><i class="fas fa-key"></i> Course Category </h5>
             </div>
             <div class="caption card-title-actions">
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Course Category</b-button>

@@ -4,8 +4,8 @@
       <b-col>
         <b-card class="mb-2 trump-card">
           <div class="card-title">
-            <div class="caption">
-              <h5><i class="fas fa-key"></i> Menus</h5>
+            <div class="caption w-100">
+              <h5 class="col-md-12"><i class="fas fa-key"></i> Students <small class="float-right"> <router-link to="form"> <button class="btn btn-success">  Add Student</button> </router-link> </small> </h5>
             </div>
             <div class="caption card-title-actions">
             </div>
@@ -21,7 +21,7 @@
             </thead>
             <tbody v-if="applications.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in applications" :key="menu.id">
-                <td> <router-link :to="'admission/'+menu.id"> {{ menu.firstname}} </router-link> </td>
+                <td> <router-link :to="'student/'+menu.id"> {{ menu.firstname}} </router-link> </td>
                 <td>{{ menu.gender}}</td>
                 <td>{{ menu.birth_country}}</td>
                 <td>

@@ -195,7 +195,7 @@
               <input type="hidden" name="id" :value="course.id">
               <div class="form-group">
                 <label for="">Name </label>
-                <input type="text" name="name" class="form-control" :value="course.name" placeholder="" required>
+                <input type="text" name="name" class="form-control" v-model="course.name" placeholder="" required>
               </div>
               <div class="form-group">
                 <label for=""> Course Category</label>
@@ -217,23 +217,23 @@
               </div>
               <div class="form-group">
                 <label for="">Video Link </label>
-                <input type="text" name="video_link" class="form-control" :value="course.video_link" placeholder="" required>
+                <input type="text" name="video_link" class="form-control" v-model="course.video_link" placeholder="" required>
               </div>
               <div class="form-group">
                 <label for="">Duration </label>
-                <input type="text" name="duration" class="form-control" :value="course.duration" placeholder="" required>
+                <input type="text" name="duration" class="form-control" v-model="course.duration" placeholder="" required>
               </div>
               <div class="form-group">
                 <label for="">Study Method </label>
-                <input type="text" name="study_method" class="form-control" :value="course.study_method" placeholder="" required>
+                <input type="text" name="study_method" class="form-control" v-model="course.study_method" placeholder="" required>
               </div>
               <div class="form-group">
                 <label for="">Onshore Fee </label>
-                <input type="text" name="onshore_fee" class="form-control" :value="course.onshore_fee" placeholder="" required>
+                <input type="text" name="onshore_fee" class="form-control" v-model="course.onshore_fee" placeholder="" required>
               </div>
               <div class="form-group">
                 <label for="">Offshore Fee </label>
-                <input type="text" name="offshore_fee" class="form-control" :value="course.offshore_fee" placeholder="" required>
+                <input type="text" name="offshore_fee" class="form-control" v-model="course.offshore_fee" placeholder="" required>
               </div>
               <div class="form-group">
                 <label for="">Description</label>
@@ -241,11 +241,11 @@
               </div>
               <div class="form-group">
                 <label for="">Order By </label>
-                <input type="text" name="order_by" class="form-control" :value="course.order_by" placeholder="" required>
+                <input type="text" name="order_by" class="form-control" v-model="course.order_by" placeholder="" required>
               </div>
               <div class="form-group">
                 <label for="">Status</label>
-                <select name="status" id="" v-bind:value="course.status" class="form-control">
+                <select name="status" id="" v-model="course.status" class="form-control">
                   <option value="0"> Disable</option>
                   <option value="1"> Enable</option>
                 </select>
