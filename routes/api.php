@@ -193,4 +193,8 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('branch_location/edit', 'BranchLocationController@update');
     Route::delete('branch_location/{id}', 'BranchLocationController@destroy');
 
+      //Agent Agreement
+    Route::get('application_forms','ApplicationFormController@index');
+    Route::get('application_form/{id}','ApplicationFormController@fetch');
+
 });

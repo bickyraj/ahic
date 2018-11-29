@@ -16,10 +16,10 @@ class CreateApplicationAdditionalServicesTable extends Migration
         Schema::create('application_additional_services', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('application_form_id');
-            $table->enum('airport_pickup',['0','1']);
-            $table->enum('assistance_with_accomodation',['0','1']);
+            $table->integer('airport_pickup');
+            $table->integer('assistance_with_accomodation');
             $table->date('accomodation_start_date');
-            $table->enum('disability',['0','1']);
+            $table->integer('disability');
             $table->string('if_disability')->nullable();
             $table->timestamps();
         });

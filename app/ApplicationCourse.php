@@ -9,4 +9,5 @@ class ApplicationCourse extends Model
    protected $fillable=[
         'course_id','application_form_id'
     ];
+
 }

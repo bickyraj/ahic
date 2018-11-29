@@ -137,6 +137,15 @@ export default {
         // text: 'NEW'
       }
     },
+    {
+      name: 'Admissions',
+      url: url + 'admissions',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
     // {
     //   name: 'Page Modules',
     //   url: url + 'page_modules',

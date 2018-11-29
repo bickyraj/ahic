@@ -19,7 +19,7 @@
                     <label for=""> Course Category</label>
                       <select name="course_category_id" class="form-control">
                           <option value="">Select A Category</option>
-                          <option  v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
+                          <option v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
                       </select>
                   </div>
                   <div class="form-group">
@@ -48,9 +48,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-                    <!-- <textarea name="description" id="" class="form-control" rows="5"></textarea> -->
-               <editor id="description" name="description" :init="editor"></editor>
-
+               <editor  name="description" :init="editor"></editor>
                   </div>
                    <div class="form-group">
                     <label for="">Order By </label>
@@ -68,28 +66,24 @@
               <tr>
                 <th>Name</th>
                 <th class="col-md-2">Background Image</th>
-                <th>Video Link</th>
+                <!-- <th>Video Link</th> -->
                 <th>Duration</th>
                 <th>Study Method</th>
-                <!-- <th>Description</th> -->
-                <!-- <th>Order By</th> -->
-                <th>Action</th>
+                <th class="col-md-2">Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
                 <td> <router-link :to="'course/'+menu.id"> {{ menu.name}} </router-link>  </td>
                 <td> <img :src="'../public/images/courses/'+menu.background_image"  v-if="menu.background_image" class="img-fluid" /></td>
-                <td>{{ menu.video_link}}</td>
+                <!-- <td>{{ menu.video_link}}</td> -->
                 <td>{{ menu.duration}}</td>
                 <td>{{ menu.study_method}}</td>
-                <!-- <td>{{ menu.description}}</td> -->
-                <!-- <td>{{ menu.order_by}}</td> -->
                 <td>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
-                  <b-button size="sm" @click="deleteMenu(menu, index, $event.target)" class="mr-1 btn-danger">
+                  <b-button size="sm" @click="deleteCourse(menu, index, $event.target)" class="mr-1 btn-danger">
                     Delete
                   </b-button>
                 </td>
@@ -113,7 +107,7 @@
 
      <!-- Info modal -->
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
-      <form @submit.prevent="editMenu" :row="modalInfo.row" ref="editMenuForm">
+      <form @submit.prevent="editCourse" :row="modalInfo.row" ref="editCourseForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
             <div class="form-group">
                     <label for="">Name </label>
@@ -187,7 +181,7 @@
         loading: true,
         table_items: [],
         pages:[],
-        menu_table_fields: ['id', 'name','course_category_id','description','onshore_fee','offshore_fee','video_link','duration','study_method','order_by','status'],
+        menu_table_fields: ['id','name','course_category_id','description','onshore_fee','offshore_fee','video_link','duration','study_method','order_by','status'],
         modalInfo: {
           title: '',
           content: '',
@@ -200,14 +194,7 @@
                 editor.on('change', function () {
                     editor.save();
                 });
-                editor.on('load', function () {
-                  console.log('loaded');
-                    editor.save();
-                });
-                editor.on('keyup', function () {
-                  console.log('loaded');
-                    editor.save();
-                });
+            
       },
           image_title:true,
           automatic_uploads: true,
@@ -251,7 +238,7 @@
             console.log(response.data.data);
             if (response.status === 200 || response.status === 201) {
               self.modalInfo.row = index
-              self.modalInfo.title = `Edit Menu`
+              self.modalInfo.title = `Edit Course`
               self.modalInfo.data = response.data.data
               self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
               self.$root.$emit('bv::show::modal', 'modalInfo', button)
@@ -262,18 +249,18 @@
           });
       },
       resetModal() {
-        this.modalInfo.title = 'Edit Menu'
+        this.modalInfo.title = 'Edit Course'
         this.modalInfo.content = ''
       },
-      editMenu: function() {
+      editCourse: function() {
         var self = this;
-        var form = self.$refs.editMenuForm;
+        var form = self.$refs.editCourseForm;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course/edit';
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
-           self.table_items = response.data.data
+           self.table_items = response.data.data;
               self.hideMenuModal();
               self.$swal({
                 // position: 'top-end',
@@ -288,7 +275,7 @@
           })
           .catch(function(error) {});
       },
-      deleteMenu: function(menu, row, event) {
+      deleteCourse: function(menu, row, event) {
         var self = this;
         self.$swal({
           // position: 'top-end',
@@ -338,6 +325,7 @@
                 order_by: menu.order_by,
                 status: menu.status,
                 description: menu.description,
+                study_method: menu.study_method,
               }
               self.table_items.push(menu_data);
               $(form)[0].reset();

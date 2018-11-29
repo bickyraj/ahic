@@ -65,6 +65,7 @@ class CourseController extends Controller
     $course = Course::findOrFail($id);
         return new Resource($course);
     }
+
     public function showByCourse($id)
     {
     $course = Course::where('id',$id);
@@ -89,16 +90,16 @@ class CourseController extends Controller
            $status = 0;
         $id = $request->input('id');
         $course = Course::findOrFail($id);
-        $course->course_category_id = $request->course_category_id;
-        $course->name = $request->name;
-        $course->video_link = $request->video_link;
-        $course->duration = $request->duration;
-        $course->study_method = $request->study_method;
-        $course->description = $request->description;
+        $course->course_category_id = $request->input('course_category_id');
+        $course->name = $request->input('name');
+        $course->video_link = $request->input('video_link');
+        $course->duration = $request->input('duration');
+        $course->study_method = $request->input('study_method');
+        $course->description = $request->input('description');
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
-        $course->order_by = $request->order_by;
-        $course->status = $request->status;
+        $course->order_by = $request->input('order_by');
+        $course->status = $request->input('status');
            $file = $request->file('background_image');
         if($file != null){
             $oldimg = $course->background_image;
@@ -108,7 +109,7 @@ class CourseController extends Controller
             $course->background_image = $filename;
             $file->move($this->destination,$filename);
         }
-        if($course->update()){
+        if($course->save()){
          $courses = Course::with('category')->get();
         return Resource::collection($courses);
         };
@@ -126,16 +127,16 @@ class CourseController extends Controller
             $status = 0;
         $id = $request->id;
         $course = Course::findOrFail($id);
-        $course->course_category_id = $request->course_category_id;
-        $course->name = $request->name;
-        $course->video_link = $request->video_link;
-        $course->duration = $request->duration;
-        $course->study_method = $request->study_method;
-        $course->description = $request->description;
-                $course->onshore_fee = $request->input('onshore_fee');
+        $course->course_category_id = $request->input('course_category_id');
+        $course->name = $request->input('name');
+        $course->video_link = $request->input('video_link');
+        $course->duration = $request->input('duration');
+        $course->study_method = $request->input('study_method');
+        $course->description = $request->input('description');
+        $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
-        $course->order_by = $request->order_by;
-        $course->status = $request->status;
+        $course->order_by = $request->input('order_by');
+        $course->status = $request->input('status');
            $file = $request->file('background_image');
         if($file != null){
             $oldimg = $course->background_image;
@@ -145,9 +146,8 @@ class CourseController extends Controller
             $course->background_image = $filename;
             $file->move($this->destination,$filename);
         }
-        if($course->update()){
+        if($course->save()){
          $courses = Course::with('category')->get();
-       
         return Resource::collection($courses);
         };
     }

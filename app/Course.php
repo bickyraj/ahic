@@ -24,5 +24,6 @@ class Course extends Model
   public function rpl(){
       return $this->hasOne('App\CourseRpl','course_id','id');
   }
+
   
 }

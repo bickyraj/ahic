@@ -157,6 +157,44 @@ const routes = [
             roleId: 1
         },
     },
+    {
+        path: admin_url + 'admissions',
+        component: require('./components/Admin/Form/Home'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'admissions',
+                    path: admin_url + 'admissions',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
+        path: admin_url + 'admission/:id',
+        component: require('./components/Admin/Form/Detail'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'admissions',
+                    path: admin_url + 'admissions',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
     { 
         path: admin_url + 'course_unit_competences', 
         component: require('./components/Admin/CourseUnitCompetences/Index'),

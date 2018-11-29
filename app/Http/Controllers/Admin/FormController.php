@@ -101,9 +101,10 @@ class FormController extends Controller
                 $data['email'] = $request->input('e_email');
                 $creater = ApplicationEmergencyContact::create($data);
 //Application Education Qualification
-                $data = [];
                 $eq = $request->input('edu');
+                // return $eq;
                 foreach($eq as $e){
+                $data = [];
                  $data['application_form_id'] = $application_form_id;
                     $data['qualification']= $e['qualification'];
                     $data['educational_institution']= $e['institution'];
@@ -120,7 +121,7 @@ class FormController extends Controller
         $data =[];    
                  $data['application_form_id'] = $application_form_id;
                 $data['english_first_lang'] = $request->input('eng_lang');
-                $data['eng_lang_text'] = $request->input('evidence');
+                $data['english_lang_test'] = $request->input('evidence');
                 $data['score_achieved'] = $request->input('score_achieved');
                 $data['year_taken'] = $request->input('year_taken');
                 $data['listening'] = $request->input('listening');
@@ -146,7 +147,7 @@ class FormController extends Controller
         $data =[];    
                  $data['application_form_id'] = $application_form_id;
                 $data['airport_pickup'] = $request->input('pickup');
-                $data['assistance_with_accommodation'] = $request->input('acco_assistance');
+                $data['assistance_with_accomodation'] = $request->input('acco_assistance');
                 $data['accomodation_start_date'] = $request->input('acco_start_date');
                 $data['disability'] = $request->input('disability');
                 $data['if_disability'] = $request->input('if_disability');

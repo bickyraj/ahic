@@ -148,14 +148,7 @@
         editor.on('change', function () {
             editor.save();
         });
-        editor.on('load', function () {
-          console.log('loaded');
-            editor.save();
-        });
-        editor.on('keyup', function () {
-          console.log('loaded');
-            editor.save();
-        });
+    
     },
           image_title:true,
           automatic_uploads: true,

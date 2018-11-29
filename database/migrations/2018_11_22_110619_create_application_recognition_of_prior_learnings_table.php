@@ -16,7 +16,7 @@ class CreateApplicationRecognitionOfPriorLearningsTable extends Migration
         Schema::create('application_recognition_of_prior_learnings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('application_form_id');
-            $table->enum('status',['0','1']);
+            $table->integer('status');
             $table->timestamps();
         });
     }

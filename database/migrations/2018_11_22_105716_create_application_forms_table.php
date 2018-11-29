@@ -24,11 +24,11 @@ class CreateApplicationFormsTable extends Migration
             $table->string('birth_city');
             $table->string('birth_country');
             $table->string('usi_number');
-            $table->enum('in_australia',['0','1']);
+            $table->integer('in_australia');
             $table->string('visa_category');
             $table->date('visa_expired_date');
             $table->string('visa_office_applying_for');
-            $table->enum('islander_origin',['0','1','2','3']);
+            $table->integer('islander_origin');
             $table->timestamps();
         });
     }

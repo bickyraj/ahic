@@ -121,7 +121,7 @@
                          </div>
                             <div class="form-group col-md-9">
                             <label for="">Are You Aboriginal or Torress Strait Islander origin?</label><br>
-                                <input type="radio" name="origin" value="0" checked> No
+                                <input type="radio" name="origin" value="0" > No
                                 <input type="radio" name="origin" value="1"> Yes, Aboriginal
                                 <input type="radio" name="origin" value="2"> Yes, Torress Strait Islander
                                 <input type="radio" name="origin" value="3"> Yes, both Aboriginal Torress Strait Islander
@@ -292,11 +292,11 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for=""> Please Provide evidence of your English languafe proficiency.</label> <br>
-                                         <input type="radio" name="evidence" value="IELTS"> IELTS
-                                <input type="radio" name="evidence" value="TOEFL"> TOEFL
-                                <input type="radio" name="evidence" checked  value="PTE"> PTE
-                                <input type="radio" name="evidence" value="CAE"> CAE
-                                <input type="radio" name="evidence" value="Other"> Other
+                                <input type="radio" name="evidence" value="1"> IELTS
+                                <input type="radio" name="evidence" value="2"> TOEFL
+                                <input type="radio" name="evidence" value="3"> PTE
+                                <input type="radio" name="evidence" value="4"> CAE
+                                <input type="radio" name="evidence" value="5"> Other
                         </div>
                         <div class="form-group col-md-3">
                             <label for=""> Score Achieved</label>
@@ -382,8 +382,8 @@
                             <label for=""> Do you require assistance with accomodation? </label> <br>
                                <input type="radio" name="acco_assistance" value="0"> No
                                <input type="radio" name="acco_assistance" value="1" checked> Yes
-                               <label for=""> Length Of Stay(week)</label>
-                               <input type="text" class="form-control" name="acco_if_yes">
+                               <!-- <label for=""> Length Of Stay(week)</label> -->
+                               <!-- <input type="text" class="form-control" name="acco_if_yes"> -->
                                     <i> If yes, please fill a seperate form</i>
                         </div> 
 

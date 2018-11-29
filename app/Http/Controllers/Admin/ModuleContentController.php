@@ -40,7 +40,7 @@ $modules = ModuleContent::with('module')->get();
     public function store(Request $request)
     {
         $this->validate($request,[
-            'title'=>'required|min:3|max:6',
+            'title'=>'required|min:3',
             'module_id'=>'required',
             'description'=>'required',
             'image'=>'required',
@@ -48,7 +48,6 @@ $modules = ModuleContent::with('module')->get();
     [
         'title.required'=>'Content Title is required.',
         'title.min'=>'Three chars min.',
-        'title.max'=>'Six chars max.',
         'title.required'=>'Content Title is required.',
         'module_id.required'=>'Select Any Module.',
         'description.required'=>'Description is required.',
@@ -134,7 +133,7 @@ $modules = ModuleContent::with('module')->get();
             $this->destroyimage($oldimg);
             $ext = $file->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
-            $course->background_image = $filename;
+            $course->image = $filename;
             $file->move($this->destination,$filename);
         }
         if($course->update()){

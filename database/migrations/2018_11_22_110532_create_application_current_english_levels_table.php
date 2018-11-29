@@ -16,8 +16,8 @@ class CreateApplicationCurrentEnglishLevelsTable extends Migration
         Schema::create('application_current_english_levels', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('application_form_id');
-            $table->enum('english_first_lang',['0','1']);
-            $table->enum('english_lang_test',['1'.'2','3'.'4','5']);
+            $table->string('english_first_lang');
+            $table->integer('english_lang_test');
             $table->string('score_achieved');
             $table->integer('year_taken');
             $table->integer('listening');
