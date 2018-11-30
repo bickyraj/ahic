@@ -1,3 +1,16 @@
+<style lang="">
+    .vdp-datepicker__calendar{
+        background-color: black !important;
+        color:white;
+    }
+    .day__month_btn:hover ,.month__year_btn:hover{
+        background-color: black !important;
+
+    }
+    .form-control:disabled, .form-control[readonly]{
+        background-color: transparent !important;
+    }
+</style>
 <template>
   <div class="animated">
     <b-row>
@@ -20,8 +33,10 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for=""> Choose A Date</label>
-                                <input type="text" name="intake_year" class="form-control" value="2017">
-                                <input type="text" name="intake_date" class="form-control" value="10/21/2018">
+                            <p> Intake Year</p>
+                            <datepicker format="yyyy" name="intake_year" bootstrap-styling  :minimumView="'year'" :maximumView="'year'" :initialView="'year'" ></datepicker>
+                            <p> Intake Date</p>
+                            <datepicker format="dd" name="intake_date"  bootstrap-styling :minimumView="'month'" :maximumView="'year'" :initialView="'year'" ></datepicker>
                         </div>
                        </div>
                        <div class="row">
@@ -33,6 +48,14 @@
                             <label for=""> Choose A Course</label>
                             <select name="course_id" id="" class="form-control">
                                 <option  v-for="course in courses" :key="course.id" :value="course.id"> {{course.name}} </option>
+                            </select>
+                        </div>
+                        
+
+                        <div class="form-group col-md-12">
+                            <label for=""> Choose Agent </label>
+                            <select name="agent_id" id="" class="form-control">
+                                <option  v-for="course in agents" :key="course.id" :value="course.id"> {{course.company_name}} </option>
                             </select>
                         </div>
                         
@@ -477,21 +500,29 @@
 
 
 
-
   export default {
       data() {
           return{
                 q:['1'],
                 n:'',
+               agents:'', 
                courses:'', 
          }
       },
       created(){
           this.fetchCourses();
+          this.fetchAgents();
               this.n = this.q.length;
+var els = $('.vdp-datepicker').find('input');
+$('.vdp-datepicker').find('input').addClass('form-control');
+console.log(els);
+
 
       },
       methods:{
+          formatter(date){
+              return moment(date).format('yyyy-MM-dd');
+          },
           submit(){
                   var self = this;
             var form = self.$refs.admissionForm;
@@ -526,6 +557,21 @@
         axios.get(url)
           .then(function(response) {
             vm.courses = response.data.data;
+            vm.loading = false;
+          })
+          .catch(function(error) {
+            console.log(error);
+            vm.loading = false;
+          });
+
+      },
+           fetchAgents() {
+        let vm = this;
+        let self = this;
+        let url = self.$root.baseUrl + '/api/admin/agent_documents';
+        axios.get(url)
+          .then(function(response) {
+            vm.agents = response.data.data;
             vm.loading = false;
           })
           .catch(function(error) {

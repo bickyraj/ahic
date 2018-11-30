@@ -20,6 +20,9 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for=""> Choose A Date</label>
+                            <select name="intake_year" id="">
+                                <option value="" v-for="intake in intakes" :key="intake.id">{{intake.year}} </option>
+                            </select>
                                 <input type="text" name="intake_year" class="form-control" value="2017">
                                 <input type="text" name="intake_date" class="form-control" value="2012-02-01">
                         </div>
@@ -33,6 +36,14 @@
                             <label for=""> Choose A Course</label>
                             <select name="course_id" id="" class="form-control">
                                 <option  v-for="course in courses" :key="course.id" :value="course.id"> {{course.name}} </option>
+                            </select>
+                        </div>
+                        
+
+                        <div class="form-group col-md-12">
+                            <label for=""> Choose Agent </label>
+                            <select name="company_id" id="" class="form-control">
+                                <option  v-for="company in agents" :key="company.id" :value="company.id"> {{company.company_name}} </option>
                             </select>
                         </div>
                         
@@ -123,7 +134,7 @@
                             <label for="">Are You Aboriginal or Torress Strait Islander origin?</label><br>
                                 <input type="radio" name="origin" value="0" > No
                                 <input type="radio" name="origin" value="1"> Yes, Aboriginal
-                                <input type="radio" name="origin" value="2"> Yes, Torress Strait Islander
+                                <input type="radio" name="origin" value="2" checked> Yes, Torress Strait Islander
                                 <input type="radio" name="origin" value="3"> Yes, both Aboriginal Torress Strait Islander
                          </div>
 
@@ -293,7 +304,7 @@
                         <div class="form-group col-md-6">
                             <label for=""> Please Provide evidence of your English languafe proficiency.</label> <br>
                                 <input type="radio" name="evidence" value="1"> IELTS
-                                <input type="radio" name="evidence" value="2"> TOEFL
+                                <input type="radio" name="evidence" value="2" checked> TOEFL
                                 <input type="radio" name="evidence" value="3"> PTE
                                 <input type="radio" name="evidence" value="4"> CAE
                                 <input type="radio" name="evidence" value="5"> Other
@@ -380,11 +391,14 @@
 
                         <div class="form-group col-md-3">
                             <label for=""> Do you require assistance with accomodation? </label> <br>
-                               <input type="radio" name="acco_assistance" value="0"> No
-                               <input type="radio" name="acco_assistance" value="1" checked> Yes
-                               <!-- <label for=""> Length Of Stay(week)</label> -->
-                               <!-- <input type="text" class="form-control" name="acco_if_yes"> -->
-                                    <i> If yes, please fill a seperate form</i>
+                               <input type="radio" name="acco_assistance" value="0" v-model="acco"> No
+                               <input type="radio" name="acco_assistance" value="1" checked v-model="acco"> Yes
+                               <transistion>
+                                   <br>
+                               <label for="" v-if="acco == 1 "> Length Of Stay(week)</label>
+                               <input type="text" class="form-control" name="acco_if_yes" v-if="acco == 1">
+                               </transistion>
+
                         </div> 
 
                         <div class="form-group col-md-3">
@@ -393,10 +407,14 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for=""> Do you consider yourself to have a disablity, impairment or a long-term health condition?</label> <br>
-                               <input type="radio" name="disability" value="1"> Yes
-                               <input type="radio" name="disability" value="0" checked> No
-                               <labeL> IF YES</labeL> 
-                               <input type="text" class="form-control" name="if_disability">   
+                               <input type="radio" name="disability" value="0" checked v-model="disable"> No
+                               <input type="radio" name="disability" value="1" v-model="disable"> Yes
+                                    <transistion>
+                                   <br>
+                               <label for="" v-if="disable == 1 ">If Yes </label>
+                               <input type="text" class="form-control" name="if_disability" v-if="disable == 1">
+                               </transistion>
+
                         </div>
                       
                        </div>
@@ -481,17 +499,40 @@
   export default {
       data() {
           return{
+              acco:'',
+              disable:'',
                 q:['1'],
                 n:'',
                courses:'', 
+               agents:'', 
+               intakes:'', 
          }
       },
       created(){
+          this.fetchAgents();
           this.fetchCourses();
+          this.fetchIntakes();
               this.n = this.q.length;
 
       },
+      watch:{
+      },
       methods:{
+          fetchIntakes(){
+    let vm = this;
+        let self = this;
+        let url = self.$root.baseUrl + '/api/admin/intakes';
+        axios.get(url)
+          .then(function(response) {
+            vm.intakes = response.data.data;
+            vm.loading = false;
+          })
+          .catch(function(error) {
+            console.log(error);
+            vm.loading = false;
+          });
+
+          },
           submit(){
                   var self = this;
             var form = self.$refs.admissionForm;
@@ -499,7 +540,7 @@
             let url = self.$root.baseUrl + '/api/admin/form/submit';
             axios.post(url, formData).then(function(response) {
                 console.log(response);
-            //   self.$toastr.s("A agent agreement process has been edited.");
+              self.$toastr.s("A form has been submitted.");
             })
             .catch(function(error) {
               if (error.response.status === 422) {
@@ -508,8 +549,8 @@
             });
           },
           removeQ(a){
-                        for( var i = 0; i < this.q.length; i++){ 
-            if ( this.q[i] === a) {
+    for( var i = 0; i < this.q.length; i++){ 
+            if (this.q[i] === a) {
                 this.q.splice(i, 1); 
             }
             }
@@ -526,6 +567,21 @@
         axios.get(url)
           .then(function(response) {
             vm.courses = response.data.data;
+            vm.loading = false;
+          })
+          .catch(function(error) {
+            console.log(error);
+            vm.loading = false;
+          });
+
+      },
+           fetchAgents() {
+        let vm = this;
+        let self = this;
+        let url = self.$root.baseUrl + '/api/admin/agent_documents';
+        axios.get(url)
+          .then(function(response) {
+            vm.agents = response.data.data;
             vm.loading = false;
           })
           .catch(function(error) {

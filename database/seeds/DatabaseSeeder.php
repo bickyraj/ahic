@@ -12,10 +12,44 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // CourseTableSeeder::class,
-            // AgentTableSeeder::class,
+            CourseTableSeeder::class,
+            AgentTableSeeder::class,
         ]);
-        
+
+
+        $intakes =[
+            ['year' => '2018' ,'date' =>' 22 Jan'],
+            ['year' => '2018' ,'date' =>' 26 Feb'],
+            ['year' => '2018' ,'date' =>' 23 Apr'],
+            ['year' => '2018' ,'date' =>' 28 May'],
+            ['year' => '2018' ,'date' =>' 16 Jul'],
+            ['year' => '2018' ,'date' =>' 20 Aug'],
+            ['year' => '2018' ,'date' =>' 15 Oct'],
+            ['year' => '2018' ,'date' =>' 19 Nov'],
+            ['year' => '2019' ,'date' =>' 21 Jan'],
+            ['year' => '2019' ,'date' =>' 25 Feb'],
+            ['year' => '2019' ,'date' =>' 22 Apr'],
+            ['year' => '2019' ,'date' =>' 27 May'],
+            ['year' => '2019' ,'date' =>' 15 Jul'],
+            ['year' => '2019' ,'date' =>' 19 Aug'],
+            ['year' => '2019' ,'date' =>' 14 Oct'],
+            ['year' => '2019' ,'date' =>' 18 Nov'],
+            ['year' => '2020' ,'date' =>' 20 Jan'],
+            ['year' => '2020' ,'date' =>' 24 Feb'],
+            ['year' => '2020' ,'date' =>' 20 Apr'],
+            ['year' => '2020' ,'date' =>' 25 May'],
+            ['year' => '2020' ,'date' =>' 13 Jul'],
+            ['year' => '2020' ,'date' =>' 17 Aug'],
+            ['year' => '2020' ,'date' =>' 12 Oct'],
+            ['year' => '2020' ,'date' =>' 16 Nov'],
+        ];
+
+
+        foreach($intakes as $intake){
+            DB::table('application_date_of_intakes')->insert($intakes);
+        };
+         
+                            
         // add admin to users table.
         DB::table('users')->insert([
             'name' => 'admin',

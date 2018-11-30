@@ -42,7 +42,7 @@ margin-bottom:20px;
                   <h4> B. Course Chosen </h4>
                 </div>
                 <div class="col-md-12 data-content">
-                  <p>Course :  {{application.course}}</p>
+                  <p>Course :  {{application.application_course.course.name}}</p>
                 </div>
               </div>
               

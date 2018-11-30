@@ -3,6 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import 'babel-polyfill'
 
 require('./bootstrap');
 
@@ -16,6 +17,8 @@ import VeeValidate from 'vee-validate';
 import Editor from '@tinymce/tinymce-vue';
 window.$ = require('jquery')
 window.JQuery = require('jquery')
+
+
 
 import NProgress from  'nprogress';
 import 'nprogress/nprogress.css';
@@ -59,6 +62,9 @@ window.auth = new Auth();
 
 window.Vue = require('vue');
 Vue.use(VueRouter);
+
+import Datepicker from 'vuejs-datepicker';
+Vue.component('datepicker', Datepicker);
 
 Vue.component('editor', Editor)
 import io from 'socket.io-client';

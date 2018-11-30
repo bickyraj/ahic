@@ -25,5 +25,9 @@ class Course extends Model
       return $this->hasOne('App\CourseRpl','course_id','id');
   }
 
+  public function application_course(){
+      return $this->hasMany('App\ApplicationCourse');
+  }
+
   
 }

@@ -77,7 +77,7 @@ public function update(Request $request){
 
    public function destroy($id)
     {
-      $outcome = PageModule::findOrFail($id);
+      $outcome = CourseUnitRelation::findOrFail($id);
         if ($outcome->delete()) {
             $status = 1;
         }

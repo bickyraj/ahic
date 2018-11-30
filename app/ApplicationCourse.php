@@ -10,4 +10,8 @@ class ApplicationCourse extends Model
         'course_id','application_form_id'
     ];
 
+    public function course(){
+        return $this->belongsTo('App\Course');
+    }
+
 }

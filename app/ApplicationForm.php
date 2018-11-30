@@ -16,10 +16,9 @@ class ApplicationForm extends Model
     public function date_of_intake(){
         return $this->belongsTo('App\ApplicationDateOfIntake','date_of_intake_id','id');
     }
-    public function course(){
+    public function application_course(){
        return $this->belongsTo('App\ApplicationCourse','id','application_form_id');
     }
- 
     public function passport(){
         return $this->hasOne('App\ApplicantPassport','application_form_id','id');
     }
@@ -49,5 +48,8 @@ class ApplicationForm extends Model
     }
     public function underage(){
         return $this->hasOne('App\ApplicationIfStudentUnderAge','application_form_id','id');
+    }
+    public function application_agent(){
+        return $this->hasOne('App\ApplicationAgent','application_form_id','id');
     }
 }

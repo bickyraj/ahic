@@ -36,7 +36,6 @@
               <div class="col-md-12">
                 <h5> Course Description </h5>
                 <img v-if="course.background_image" :src="'../../public/images/courses/'+course.background_image" class="img-fluid" />
-                <!-- <p v-else> No Image </p> -->
                 <h5>
                   <small v-if="course.category">
                     Category : {{course.category.name}}
@@ -177,7 +176,7 @@
                         <div class="col-md-12" v-for="category in ucategories" :key="category.id">
                           <h5> {{category.name}} </h5>
                           <ul class="">
-                            <li v-for="c in competences" :key="c.id" v-if="c.course_unit_category_id == category.id"> {{c.competence.description}} </li>
+                            <li v-for="c in competences" :key="c.id" v-if="c.course_unit_category_id == category.id"> {{c.competence.description}}  <i class="fas fa-times-circle text-danger float-right " @click="remove($event,c.id)" type="course_unit_relation"></i> </li>
                           </ul>
                         </div>
                       </b-collapse>
@@ -290,7 +289,7 @@
               <input type="hidden" name="course_id" :value="course.id">
               <div class="form-group">
                 <label for=""> Assessment Method </label>
-                <textarea name="description" id="" class="form-control" rows="6"></textarea>
+                   <editor  name="description" :init="editor"></editor>
               </div>
               <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add Assessment Method</b-btn>
               <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideAssessmentModal">Cancel</b-btn>
@@ -302,7 +301,7 @@
               <input type="hidden" name="course_id" :value="course.id">
               <div class="form-group">
                 <label for=""> Recognition Of Prior Learning</label>
-                <textarea name="description" id="" class="form-control" rows="6"></textarea>
+                   <editor  name="description" :init="editor"></editor>
               </div>
               <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add RPL</b-btn>
               <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideRPLModal">Cancel</b-btn>
@@ -381,10 +380,6 @@
                   console.log('loaded');
                     editor.save();
                 });
-                editor.on('keyup', function () {
-                  console.log('loaded');
-                    editor.save();
-                });
       },
           image_title:true,
           automatic_uploads: true,
@@ -431,7 +426,15 @@
             let url = self.$root.baseUrl + '/api/admin/' + type + '/';
             console.log(url);
             axios.delete(url + id).then(function(response) {
-              vm.fetchCourse();
+              if(type == 'course_unit_relation'){
+              self.$toastr.s("A course unit relation has been removed.");
+
+              }
+                vm.fetchCourse();
+          vm.fetchCategories();
+          vm.fetchAllCompetences();
+          vm.fetchUCategories();
+          vm.fetchCompetences();
             })
             .catch(function(error) {
               console.log(error);

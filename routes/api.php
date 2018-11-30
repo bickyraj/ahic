@@ -197,4 +197,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('application_forms','ApplicationFormController@index');
     Route::get('application_form/{id}','ApplicationFormController@fetch');
 
+
+    Route::get('intakes','ApplicationDateOfIntakeController@index');
+
 });

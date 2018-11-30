@@ -14,6 +14,7 @@ use App\ApplicationRecognitionOfPriorLearning;
 use App\ApplicationAdditionalServices;
 use App\ApplicationCourseAndOtherFees;
 use App\ApplicationCheckList;
+use App\ApplicationAgent;
 use App\ApplicationIfStudentUnderAge;
 
 use Illuminate\Http\Request;
@@ -26,6 +27,8 @@ class FormController extends Controller
         public function store(Request $request){
             $intake_id = '';
             $application_form_id ='';
+
+$data=[];
             $data['year'] = $request->input('intake_year');
             $data['date'] = $request->input('intake_date');
             $creater = ApplicationDateOfIntake::create($data);
@@ -99,10 +102,15 @@ class FormController extends Controller
                 $data['telephone'] = $request->input('e_telephone');
                 $data['mobile'] = $request->input('e_mobile');
                 $data['email'] = $request->input('e_email');
-                $creater = ApplicationEmergencyContact::create($data);
+                ApplicationEmergencyContact::create($data);
+//Application Agent
+                $data=[];
+            $data['application_form_id'] = $application_form_id;
+            $data['company_id'] = $request->input('company_id');
+            ApplicationAgent::create($data);
+
 //Application Education Qualification
                 $eq = $request->input('edu');
-                // return $eq;
                 foreach($eq as $e){
                 $data = [];
                  $data['application_form_id'] = $application_form_id;
@@ -112,9 +120,7 @@ class FormController extends Controller
                     $data['start_month']= $e['started_month'];
                     $data['completed_year']= $e['completed_year'];
                     $data['completed_month']= $e['completed_month'];
-
                     ApplicationEducationalQualification::create($data);
-
                 }
 
   //Application Current English Level
@@ -164,10 +170,10 @@ class FormController extends Controller
                 ApplicationCheckList::create($data);
   //Application If underage
         $data =[];    
-    $data['application_form_id'] = $application_form_id;
-	$data['parent_name'] = $request->input('parent_name');
-	$data['contact_detail'] = $request->input('contact_detail');
-	$data['date'] = $request->input('date');
+        $data['application_form_id'] = $application_form_id;
+        $data['parent_name'] = $request->input('parent_name');
+        $data['contact_detail'] = $request->input('contact_detail');
+        $data['date'] = $request->input('date');
                 ApplicationIfStudentUnderAge::create($data);
 
             }

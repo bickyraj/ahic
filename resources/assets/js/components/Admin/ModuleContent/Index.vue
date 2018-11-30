@@ -106,6 +106,7 @@
                   </div>
               <div class="form-group">
                     <label for="">Image</label>
+                        <img :src="'../public/images/module/'+modalInfo.data.image" class="img-fluid" />
                     <input type="file" name="image" class="form-control"  >
                   </div>
                   <div class="form-group">
