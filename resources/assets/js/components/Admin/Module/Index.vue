@@ -36,7 +36,7 @@
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(module, index) in table_items" :key="module.id">
-                <td>{{ module.title}}</td>
+                <td> <router-link :to="'module/'+module.id"> {{ module.title}} </router-link> </td>
                 <td>{{ module.display_type}}</td>
                 <td>{{ module.status}}</td>
                 <td>

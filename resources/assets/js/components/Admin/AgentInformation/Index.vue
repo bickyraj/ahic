@@ -57,10 +57,9 @@
 
           <div class="col-md-12">
             <div class="col-md-2 offset-md-7 float-left">
-                <select name="" id="" class="form-control">
-                      <option value="" selected> All</option>
-                      <option value=""> Onshore</option>
-                      <option value=""> Offshore</option>
+                <select name="" id="" class="form-control" v-model="shore">
+                      <option value="on" > Onshore</option>
+                      <option value="off"> Offshore</option>
                 </select>
             </div>
             <div class="col-md-3 float-left">
@@ -73,7 +72,6 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Telephone</th>
                 <th>Mobile No</th>
                 <th>Email</th>
                 <th>Address</th>
@@ -84,7 +82,6 @@
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(agent, index) in table_items" :key="agent.id">
                 <td> <router-link :to="'agent/'+agent.id"> {{ agent.first_name}} {{agent.last_name}} </router-link>  </td>
-                <td>{{ agent.telephone || '  --' }}</td>
                 <td>{{ agent.mobile_no || '  --' }}</td>
                 <td>{{ agent.email}}</td>
                 <td>{{ agent.address.substring(0,30) + ".."}}</td>
@@ -174,6 +171,7 @@
   export default {
     data() {
       return {
+        shore:"on",
           categories:'',
         loading: true,
         table_items: [],

@@ -253,6 +253,29 @@ const routes = [
         },
     },
     { 
+        path: admin_url + 'course_category/:id', 
+        component: require('./components/Admin/CourseCategories/Detail'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Course Categories',
+                    path: admin_url + 'course_categories',
+                },
+                {
+                    name: 'Course',
+                    path: admin_url + 'courses',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
         path: admin_url + 'course_unit_relations', 
         component: require('./components/Admin/CourseUnitRelations/Index'),
         meta: {
@@ -299,9 +322,14 @@ const routes = [
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
-                },
-                {
+                    path: admin_url,
+                }, {
+                    name: 'Course Categories',
+                    path: admin_url + 'course_categories',
+                }, {
+                    name: 'Courses',
+                    path: admin_url + 'course_category/:id',
+                }, {
                     name: 'Course',
                     path: admin_url + 'courses',
                 }
@@ -398,6 +426,29 @@ const routes = [
                 },
                 {
                     name: 'Modules',
+                    path: admin_url + 'modules',
+                }
+            ],
+            middlewareAuth: true,
+        roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'module/:id', 
+        component: require('./components/Admin/Module/Detail'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Modules',
+                    path: admin_url + 'modules',
+                },
+                {
+                    name: 'Module',
                     path: admin_url + 'modules',
                 }
             ],

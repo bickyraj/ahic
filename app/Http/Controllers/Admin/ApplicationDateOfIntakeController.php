@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Menu as Resource;
+use DB;
 
 
 use App\ApplicationDateOfIntake;
@@ -18,14 +19,10 @@ class ApplicationDateOfIntakeController extends Controller
     public function index()
     {
         $intakes  = ApplicationDateOfIntake::all();
-        $year =[];
-        $n =0;
+        $year = (object) [];
         foreach($intakes as $intake){
-            $year['year'][$n]= $intake['year'];
-            $n++;
+         $year->year($intake['year']);
         }
-        $year = array_unique($year['year']);
-        // $year =  (object) $year;
         return $year;
         // return Resource::collection($year);
     }

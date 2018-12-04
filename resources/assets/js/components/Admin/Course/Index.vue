@@ -65,8 +65,6 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th class="col-md-2">Background Image</th>
-                <!-- <th>Video Link</th> -->
                 <th>Duration</th>
                 <th>Study Method</th>
                 <th class="col-md-2">Action</th>
@@ -75,8 +73,6 @@
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
                 <td> <router-link :to="'course/'+menu.id"> {{ menu.name}} </router-link>  </td>
-                <td> <img :src="'../public/images/courses/'+menu.background_image"  v-if="menu.background_image" class="img-fluid" /></td>
-                <!-- <td>{{ menu.video_link}}</td> -->
                 <td>{{ menu.duration}}</td>
                 <td>{{ menu.study_method}}</td>
                 <td>

@@ -36,15 +36,13 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Image Background</th>
                 <th>Order By</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
-                <td>{{ menu.name}}</td>
-                <td class="col-md-3"> <img :src="'../public/images/course_category/'+menu.image_background" v-if="menu.image_background" class="img-fluid" /></td>
+                <td> <router-link :to="'course_category/'+menu.id"> {{ menu.name}} </router-link> </td>
                 <td>{{ menu.order_by}}</td>
                 <td>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">

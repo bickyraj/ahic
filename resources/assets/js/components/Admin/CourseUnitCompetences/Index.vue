@@ -30,7 +30,7 @@
                 <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th>Title</th>
+                <th class="col-md-5">Title</th>
                 <th>Unit Code</th>
                 <th>Action</th>
               </tr>

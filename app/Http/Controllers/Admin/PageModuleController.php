@@ -47,6 +47,11 @@ class PageModuleController extends Controller
              $module=  $module->with('module')->get();
               return new Resource($module);
     }
+    public function showByParent($id){
+        $module = PageModule::where('module_id',$id);
+             $module=  $module->with('module')->get();
+              return Resource::collection($module);
+    }
 
 
     public function edit(PageModule $pageModule)

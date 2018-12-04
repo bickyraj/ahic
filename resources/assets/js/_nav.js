@@ -66,7 +66,7 @@ export default {
     //   }
     // },
     {
-      name: 'Course Categories',
+      name: 'Course & Categories',
       url: url + 'course_categories',
       icon: 'fas fa-book-open',
       badge: {
@@ -74,15 +74,15 @@ export default {
         // text: 'NEW'
       }
     },
-    {
-      name: 'Courses',
-      url: url + 'courses',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
+    // {
+    //   name: 'Courses',
+    //   url: url + 'courses',
+    //   icon: 'fas fa-book-open',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
     {
       name: 'Modules',
       url: url + 'modules',

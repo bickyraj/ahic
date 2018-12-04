@@ -65,6 +65,11 @@ class CourseController extends Controller
     $course = Course::findOrFail($id);
         return new Resource($course);
     }
+    public function showByCategory($id){
+     $courses = Course::where('course_category_id',$id)->get();
+        return Resource::collection($courses);
+
+    }
 
     public function showByCourse($id)
     {
