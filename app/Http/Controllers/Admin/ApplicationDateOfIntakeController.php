@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Menu as Resource;
-use DB;
-
 
 use App\ApplicationDateOfIntake;
 use Illuminate\Http\Request;
@@ -19,12 +17,12 @@ class ApplicationDateOfIntakeController extends Controller
     public function index()
     {
         $intakes  = ApplicationDateOfIntake::all();
-        $year = (object) [];
-        foreach($intakes as $intake){
-         $year->year($intake['year']);
-        }
-        return $year;
-        // return Resource::collection($year);
+        return Resource::collection($intakes);
+    }
+    public function form()
+    {
+        $intakes  = ApplicationDateOfIntake::groupBy('year')->get();
+        return Resource::collection($intakes);
     }
 
     /**
@@ -34,62 +32,64 @@ class ApplicationDateOfIntakeController extends Controller
      */
     public function create()
     {
-        //
+   
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(Request $request)
     {
-        //
+           $intake['year'] = $request->input('year');
+        $intake['date'] = $request->input('date');
+        $create = ApplicationDateOfIntake::create($intake);
+        if($create){
+         $intakes  = ApplicationDateOfIntake::all();
+        return Resource::collection($intakes);  
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ApplicationDateOfIntake  $applicationDateOfIntake
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ApplicationDateOfIntake $applicationDateOfIntake)
+    public function show($id)
     {
+       $intake = ApplicationDateOfIntake::findOrFail($id);
+       return new Resource($intake);
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ApplicationDateOfIntake  $applicationDateOfIntake
-     * @return \Illuminate\Http\Response
-     */
+    public function getByYear($year)
+    {
+       $intake = ApplicationDateOfIntake::where('year',$year)->get();
+       return Resource::collection($intake);
+    }
+    public function find($year,$date)
+    {
+       $intake = ApplicationDateOfIntake::where('year',$year)->where('date',$date)->first();
+       return new Resource($intake);
+    }
+
+
     public function edit(ApplicationDateOfIntake $applicationDateOfIntake)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ApplicationDateOfIntake  $applicationDateOfIntake
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ApplicationDateOfIntake $applicationDateOfIntake)
+  
+    public function update(Request $request)
     {
-        //
+        $intake = ApplicationDateOfIntake::findOrFail($request->id);
+        $intake->year = $request->input('year');
+        $intake->date = $request->input('date');
+        $intake->save();
+                $intakes  = ApplicationDateOfIntake::all();
+        return Resource::collection($intakes);
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ApplicationDateOfIntake  $applicationDateOfIntake
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ApplicationDateOfIntake $applicationDateOfIntake)
+    public function destroy($id)
     {
-        //
+       $intake = ApplicationDateOfIntake::findOrFail($id);
+       if($intake){
+           $intake->delete();
+                   $intakes  = ApplicationDateOfIntake::all();
+        return Resource::collection($intakes);
+       }
     }
 }

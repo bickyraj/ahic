@@ -288,9 +288,10 @@
         let vm = this;
         let self = this;
                     let id = parseInt(this.$route.params.id);
-        let url = self.$root.baseUrl + '/api/admin/page_module/'+id+'/showByParent';
+        let url = self.$root.baseUrl + '/api/admin/module_content/'+id+'/showByParent';
         axios.get(url)
           .then(function(response) {
+              console.log(response);
             vm.table_items = response.data.data;
             vm.loading = false;
           })

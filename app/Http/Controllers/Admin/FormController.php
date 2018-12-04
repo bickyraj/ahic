@@ -25,17 +25,11 @@ use App\Http\Resources\Menu as Resource;
 class FormController extends Controller
 {
         public function store(Request $request){
-            $intake_id = '';
             $application_form_id ='';
 
 $data=[];
-            $data['year'] = $request->input('intake_year');
-            $data['date'] = $request->input('intake_date');
-            $creater = ApplicationDateOfIntake::create($data);
-            if($creater){
-                $intake_id = $creater->id;
                 $data = [];
-                $data['date_of_intake_id'] = $intake_id;
+                $data['date_of_intake_id'] =$request->input('intake_id');
                 $data['firstname']= $request->input('firstname');
                 $data['middlename']= $request->input('middlename');
                 $data['familyname']= $request->input('familyname');
@@ -57,10 +51,6 @@ $data=[];
                     $data['course_id'] = $request->input('course_id');
                     $data['application_form_id'] = $application_form_id;
                     $creater  = ApplicationCourse::create($data);
-                }
-                else{
-                }
-
 // Application Passport 
 
                 $data = [];
@@ -176,7 +166,8 @@ $data=[];
         $data['date'] = $request->input('date');
                 ApplicationIfStudentUnderAge::create($data);
 
-            }
-
+ }
+                else{
+                }
         }
 }

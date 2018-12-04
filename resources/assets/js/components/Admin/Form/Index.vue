@@ -19,12 +19,17 @@
                             <h5 class="">Course And Date Commencement</h5>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for=""> Choose A Date</label>
-                            <select name="intake_year" id="">
-                                <option value="" v-for="intake in intakes" :key="intake.id">{{intake.year}} </option>
+                            <label for=""> Choose A Year</label>
+                            <select name="intake_year" id="" v-model="intake_year" class="form-control">
+                                <option value="" selected >Select A Year </option>
+                                <option  v-for="intake in intakes" :key="intake.id" :value="intake.year">{{intake.year}} </option>
                             </select>
-                                <input type="text" name="intake_year" class="form-control" value="2017">
-                                <input type="text" name="intake_date" class="form-control" value="2012-02-01">
+                            <label for=""> Choose A Date</label>
+                            <select name="intake_date" id=""  v-model="date" class="form-control">
+                                <option  selected value="">Select A Date </option>
+                                <option  v-for="intake_date in intake_dates" :key="intake_date.id" :value="intake_date.date">{{intake_date.date}} </option>
+                            </select>
+                            <input type="hidden" v-model="date_of_intake_id" name="intake_id">
                         </div>
                        </div>
                        <div class="row">
@@ -393,7 +398,7 @@
                             <label for=""> Do you require assistance with accomodation? </label> <br>
                                <input type="radio" name="acco_assistance" value="0" v-model="acco"> No
                                <input type="radio" name="acco_assistance" value="1" checked v-model="acco"> Yes
-                               <transistion>
+                               <transistion name="fade">
                                    <br>
                                <label for="" v-if="acco == 1 "> Length Of Stay(week)</label>
                                <input type="text" class="form-control" name="acco_if_yes" v-if="acco == 1">
@@ -409,7 +414,7 @@
                             <label for=""> Do you consider yourself to have a disablity, impairment or a long-term health condition?</label> <br>
                                <input type="radio" name="disability" value="0" checked v-model="disable"> No
                                <input type="radio" name="disability" value="1" v-model="disable"> Yes
-                                    <transistion>
+                                    <transistion name="fade">
                                    <br>
                                <label for="" v-if="disable == 1 ">If Yes </label>
                                <input type="text" class="form-control" name="if_disability" v-if="disable == 1">
@@ -499,6 +504,10 @@
   export default {
       data() {
           return{
+              date_of_intake_id:'',
+              date:'',
+              intake_year:'',
+              intake_dates:'',
               acco:'',
               disable:'',
                 q:['1'],
@@ -516,12 +525,44 @@
 
       },
       watch:{
+          date(){
+              console.log('a');
+                  let vm = this;
+        let self = this;
+        let url = self.$root.baseUrl + '/api/admin/intakes/find/'+vm.intake_year+'/'+vm.date;
+        axios.get(url)
+          .then(function(response) {
+            vm.date_of_intake_id = response.data.data.id;
+            vm.loading = false;
+          })
+          .catch(function(error) {
+            console.log(error);
+            vm.loading = false;
+          });
+
+          },
+          intake_year(){
+        let vm = this;
+        let self = this;
+        let url = self.$root.baseUrl + '/api/admin/intakes/form/'+vm.intake_year;
+        axios.get(url)
+          .then(function(response) {
+              console.log(response.data.data);
+            vm.intake_dates = response.data.data;
+            vm.loading = false;
+          })
+          .catch(function(error) {
+            console.log(error);
+            vm.loading = false;
+          });
+
+          }
       },
       methods:{
           fetchIntakes(){
     let vm = this;
         let self = this;
-        let url = self.$root.baseUrl + '/api/admin/intakes';
+        let url = self.$root.baseUrl + '/api/admin/intakes/form';
         axios.get(url)
           .then(function(response) {
             vm.intakes = response.data.data;

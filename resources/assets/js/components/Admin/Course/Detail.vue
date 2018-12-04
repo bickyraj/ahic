@@ -82,11 +82,10 @@
               <div class="col-md-12">
                 <div class="card-title">
                   <div class="caption">
-                    <h5 v-b-toggle.collapse1><i class="fas fa-key"></i>  Course Entry Requirements <small class="float-right"> <button class="btn btn-success" @click="showReqModal"> Add </button> </small></h5>
+                    <h5 ><i class="fas fa-key"></i>  Course Entry Requirements <small class="float-right"> <button class="btn btn-success" @click="showReqModal"> Add </button> <button class="btn" v-b-toggle.collapse1> <i class="far fa-eye" ></i></button></small></h5>
                   </div>
-
                 </div>
-                <b-collapse id="collapse1">
+                <b-collapse visible id="collapse1">
                   <div class="col-md-12">
                     <ul class="no-m-p">
                       <li v-for="require in course.requirements" :key="require.id"> {{require.description}} <i class="fas fa-times-circle text-danger float-right " @click="remove($event,require.id)" type="course_entry_requirement"></i> </li>
@@ -100,16 +99,19 @@
               <div class="col-md-12">
                 <div class="card-title">
                   <div class="caption">
-                    <h5 v-b-toggle.collapse2><i class="fas fa-key"></i> Career Outcomes
+                    <h5><i class="fas fa-key"></i> Career Outcomes
                       <small class="float-right">
                         <button class="btn btn-success" @click="showCareerModal"> Add </button>
+                          <button class="btn" v-b-toggle.collapse2> 
+                          <i class="far fa-eye" ></i>
+                               </button>
                       </small>
                     </h5>
                   </div>
                 </div>
                 <div class="col-md-12">
 
-                  <b-collapse id="collapse2">
+                  <b-collapse visible id="collapse2">
                     <div class="col-md-12">
                       <ul class="no-m-p">
                         <li v-for="outcome in course.outcomes" :key="outcome.id"> {{outcome.description}}<i class="fas fa-times-circle text-danger float-right " @click="remove($event,outcome.id)" type="career_outcome"></i> </li>
@@ -124,16 +126,19 @@
               <div class="col-md-12">
                 <div class="card-title">
                   <div class="caption">
-                    <h5 v-b-toggle.collapse3> <i class="fas fa-key"></i>  Course Assessments
+                    <h5> <i class="fas fa-key"></i>  Course Assessments
                       <small class="float-right">
                         <button class="btn btn-primary" v-if="course.assessment" @click="showEditAssessmentModal"> Edit </button>
                         <button class="btn btn-success" v-else @click="showAssessmentModal"> Add </button>
+                          <button class="btn " v-b-toggle.collapse3> 
+                          <i class="far fa-eye" ></i>
+                               </button>
                       </small></h5>
                     </div>
 
                   </div>
 
-                  <b-collapse id="collapse3">
+                  <b-collapse visible id="collapse3">
                     <div class="col-md-12" v-if="course.assessment" v-html="course.assessment.description"> </div>
                   </b-collapse>
                 </div>
@@ -143,17 +148,21 @@
                 <div class="col-md-12">
                   <div class="card-title">
                     <div class="caption">
-                      <h5 v-b-toggle.collapse4> <i class="fas fa-key"></i>  Course RPL
+                      <h5> <i class="fas fa-key"></i>  Course RPL
                         <small class="float-right">
                           <button class="btn btn-primary" v-if="course.rpl" @click="showEditRplModal"> Edit </button>
                           <button class="btn btn-success" v-else @click="showRPLModal"> Add </button>
+                            <button class="btn " v-b-toggle.collapse4> 
+                          <i class="far fa-eye" ></i>
+                               </button>
+
                         </small></h5>
                       </div>
 
                     </div>
 
 
-                    <b-collapse id="collapse4">
+                    <b-collapse visible id="collapse4">
                       <div class="col-md-12" v-if="course.rpl" v-html="course.rpl.description"> </div>
                     </b-collapse>
                   </div>
@@ -163,16 +172,21 @@
                   <div class="col-md-12">
                     <div class="card-title">
                       <div class="caption">
-                        <h5 v-b-toggle.collapse5> <i class="fas fa-key"></i>  Unit Of Competence
+                        <h5 > <i class="fas fa-key"></i>  Unit Of Competence
                           <small class="float-right">
                             <button class="btn btn-success" @click="showCompetenceModal"> Add </button>
-                          </small></h5>
+                            <button class="btn" v-b-toggle.collapse5> 
+                          <i class="far fa-eye" ></i>
+                               </button>
+
+                          </small>
+                          </h5>
                         </div>
 
                       </div>
 
 
-                      <b-collapse id="collapse5">
+                      <b-collapse visible id="collapse5">
                         <div class="col-md-12" v-for="category in ucategories" :key="category.id">
                           <h5> {{category.name}} </h5>
                           <ul class="">

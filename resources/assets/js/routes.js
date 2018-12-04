@@ -28,6 +28,24 @@ const routes = [
             layout: 'error'
         }
     },
+        {
+            path: admin_url + 'date_of_intakes',
+            component: require('./components/Admin/DateOfIntakes/Index'),
+            meta: {
+                layout: 'admin',
+                breadcrumb: [{
+                        name: 'Home',
+                        path: admin_url,
+                    },
+                    {
+                        name: 'Date OF Intakes',
+                        path: admin_url + 'date_of_intakes',
+                    }
+                ],
+                middlewareAuth: true,
+                roleId: 1
+            },
+        },
     { 
         path: url + 'login', 
         component: require('./components/Authentication/Login'),
@@ -227,6 +245,25 @@ const routes = [
                 {
                     name: 'Course Unit Categories',
                     path: admin_url + 'course_unit_categories',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    { 
+        path: admin_url + 'payment_options', 
+        component: require('./components/Admin/PaymentOptions/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url, 
+                },
+                {
+                    name: 'Payment Options',
+                    path: admin_url + 'payment_options',
                 }
             ],
             middlewareAuth: true,

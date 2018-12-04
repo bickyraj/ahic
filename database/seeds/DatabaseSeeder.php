@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
             AgentTableSeeder::class,
         ]);
 
-
         $intakes =[
             ['year' => '2018' ,'date' =>' 22 Jan'],
             ['year' => '2018' ,'date' =>' 26 Feb'],
@@ -46,7 +45,7 @@ class DatabaseSeeder extends Seeder
 
 
         foreach($intakes as $intake){
-            DB::table('application_date_of_intakes')->insert($intakes);
+            DB::table('application_date_of_intakes')->insert($intake);
         };
          
                             
@@ -235,10 +234,24 @@ $competences = [
     ['status'=>'1','name'=>'Austrailia'],
 ];
 
-;
+
 
         foreach($countries as $country){
             DB::table('countries')->insert($country);
+        };
+
+        $a = [
+    ['title'=>'BY MAIL','description'=>'<p>Please send to: AHIC<br />Level 4, 114-120 Castlereagh<br />Street, Sydney NSW 2000<br />Australia.</p>'],
+    ['title'=>'DIRECT DEPOSIT/TELEGRAPHIC TRANSFER','description'=>'<p>Please quote student name and number for each transaction, Otherwise, AHIC may not be able to trace the payment, which could mean that enrolment may be delayed.</p>'],
+    ['title'=>'BANK PAYMENT','description'=>'<p>Bank: Commonwealth Bank<br />Branch Name: Cnr of George &amp; Market St, Sydney NSW 2000 Australia<br />Account Name: Australian Harvard International College<br />BSB: 062 005<br />Account No: 1116 1515<br />Swift Code: CTBAAU2S (for international transfer)</p>'],
+    ['title'=>'CREDIT CARD/ CASH PAYMENT','description'=>'<p>Credit Cards are accepted and surcharges apply according to the type of card. We accept Bankcards, MasterCard &amp; Visa Card. Cash payment is not accepted.</p>'],
+    ['title'=>'PAYMENT ADVICE','description'=>'<p>Contact AHIC Accounts for details: accounts@ahic.edu.au</p>'],
+];
+
+
+
+        foreach($a as $b){
+            DB::table('payment_options')->insert($b);
         };
 
                	DB::table('branch_locations')->insert([

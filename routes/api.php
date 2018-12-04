@@ -143,6 +143,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('module_content/{id}','ModuleContentController@show');
     Route::get('module_contents/{id}','ModuleContentController@showByCourse');
     Route::post('module_content', 'ModuleContentController@store');
+    Route::get('module_content/{id}/showByParent','ModuleContentController@showByParent');
     Route::post('module_content/edit', 'ModuleContentController@update');
     Route::delete('module_content/{id}', 'ModuleContentController@destroy');
 
@@ -150,10 +151,16 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('page_modules','PageModuleController@index');
     Route::get('page_module/{id}','PageModuleController@show');
     Route::get('page_modules/{id}','PageModuleController@showByPage');
-    Route::get('page_module/{id}/showByParent','PageModuleController@showByParent');
     Route::post('page_module', 'PageModuleController@store');
     Route::post('page_module/edit', 'PageModuleController@update');
     Route::delete('page_module/{id}', 'PageModuleController@destroy');
+
+    //Payment Option
+    Route::get('payment_options','PaymentOptionController@index');
+    Route::get('payment_option/{id}','PaymentOptionController@show');
+    Route::post('payment_option', 'PaymentOptionController@store');
+    Route::post('payment_option/edit', 'PaymentOptionController@update');
+    Route::delete('payment_option/{id}', 'PaymentOptionController@destroy');
 
       //Agent Information
     Route::get('agent_informations','AgentInformationController@index');
@@ -200,6 +207,13 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('application_form/{id}','ApplicationFormController@fetch');
 
 
+    Route::post('intake','ApplicationDateOfIntakeController@store');
     Route::get('intakes','ApplicationDateOfIntakeController@index');
+    Route::get('intake/{id}','ApplicationDateOfIntakeController@show');
+    Route::get('intakes/form','ApplicationDateOfIntakeController@form');
+    Route::get('intakes/form/{year}','ApplicationDateOfIntakeController@getByYear');
+    Route::get('intakes/find/{year}/{month}','ApplicationDateOfIntakeController@find');
+        Route::post('intake/edit', 'ApplicationDateOfIntakeController@update');
+    Route::delete('intake/{id}', 'ApplicationDateOfIntakeController@destroy');
 
 });

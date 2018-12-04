@@ -30,6 +30,12 @@ $modules = ModuleContent::with('module')->get();
     {
 
     }
+        public function showByParent($id){
+        $module = ModuleContent::where('module_id',$id);
+             $module=  $module->with('module')->get();
+              return Resource::collection($module);
+    }
+
 
     /**
      * Store a newly created resource in storage.

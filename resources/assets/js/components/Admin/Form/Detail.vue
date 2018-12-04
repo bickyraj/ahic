@@ -32,7 +32,7 @@ margin-bottom:20px;
                 </div>
                 <div class="col-md-12 data-content">
                   <p> Intake Year :  {{application.date_of_intake.year}}</p>
-                 <p> Inake Date {{application.date_of_intake.date}} </p>
+                 <p> Inake Date : {{application.date_of_intake.date}} </p>
                 </div>
               </div>
               

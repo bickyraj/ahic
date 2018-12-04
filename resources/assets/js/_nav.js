@@ -92,15 +92,15 @@ export default {
         // text: 'NEW'
       }
     },
-    {
-      name: 'Module Contents',
-      url: url + 'module_contents',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
+    // {
+    //   name: 'Module Contents',
+    //   url: url + 'module_contents',
+    //   icon: 'fas fa-book-open',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
     {
       name: 'Agent Information',
       url: url + 'agent_information',
@@ -132,6 +132,24 @@ export default {
     {
       name: 'Students',
       url: url + 'students',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Dates Of Intake',
+      url: url + 'date_of_intakes',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Payment Options',
+      url: url + 'payment_options',
       icon: 'fas fa-book-open',
       badge: {
         variant: 'primary',
