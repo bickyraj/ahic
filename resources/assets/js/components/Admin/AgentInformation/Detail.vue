@@ -42,11 +42,11 @@
                       </tr>
                       <tr>
                           <th class="col-md-2"> Telephone <span class="float-right">:</span> </th>
-                          <td class="col-md-8">  {{agent.telephone}}</td>
+                          <td class="col-md-8">  {{agent.telephone || '--' }}</td>
                       </tr>
                       <tr>
                           <th class="col-md-2"> Mobile No <span class="float-right">:</span> </th>
-                          <td class="col-md-8">  {{agent.mobile_no}}</td>
+                          <td class="col-md-8">  {{agent.mobile_no || '--'  }}</td>
                       </tr>
                       <tr>
                           <th class="col-md-2"> Email <span class="float-right">:</span> </th>
@@ -60,7 +60,7 @@
                 <p class="pt-3" v-html="agent.description"></p>
 
               </div>
-             
+
             </b-card>
 
           </div>
@@ -76,7 +76,7 @@
                 </div>
                 <b-collapse id="collapse1">
                   <div class="col-md-12">
-                   
+
                   </div>
                 </b-collapse>
               </div>
@@ -92,11 +92,12 @@
                         <div class="col-md-12">
           <h4 class="p-4 caption"> Company Details<small class="float-right"> <button class="btn btn-success" @click="showAddCompanyModal"> Add A Company </button> </small></h4>
                     </div>
-          
+
           <div class="col-md-12" v-for="company in companies" :key="company.id">
             <b-card class="col-md-12 mb-2 trump-card ">
               <div class="col-md-12">
-                  <table class="table table-borderless">
+
+                  <table class="table table-borderless col-md-10">
                       <tr>
                           <th class="col-md-1"> Company Name <span class="float-right">:</span> </th>
                           <td class="col-md-8">  {{company.company_name}} </td>
@@ -107,7 +108,7 @@
                       </tr>
                   </table>
                   <hr>
-           
+
            <div class="row">
                <div class="col-md-6 float-left">
                    <b-card class="col-md-12 mb-2 trump-card ">
@@ -144,7 +145,7 @@
                 <p class="pt-3" v-html="agent.description"></p>
 
               </div>
-             
+
             </b-card>
                </div>
                <div class="col-md-6 float-left">
@@ -182,14 +183,14 @@
                 <p class="pt-3" v-html="agent.description"></p>
 
               </div>
-             
+
             </b-card>
 
                </div>
            </div>
 
               </div>
-             
+
             </b-card>
 
           </div>
@@ -197,7 +198,7 @@
             </b-col>
           </b-row>
 
-         
+
 
                  <b-modal class="ess-modal" ref="editAgentModal" hide-footer title="Edit Agent">
             <form @submit.prevent="editAgent" ref="editAgentForm">
@@ -234,7 +235,7 @@
                 <label for=""> Start Date </label>
                 <input type="text" name="start_date" class="form-control" :value="agent.start_date">
               </div>
-           
+
               <b-btn class="mt-3 pull-right" variant="primary" type="submit">Save Agent</b-btn>
               <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditAgentModal">Cancel</b-btn>
             </form>
@@ -271,12 +272,12 @@
                 <label for=""> Address </label>
                 <input type="text" name="address" class="form-control" >
               </div>
-             
+
               <div class="form-group">
                 <label for=""> Country </label>
-                <select name="country" id="" class="form-control" @change="changeLocation"> 
+                <select name="country" id="" class="form-control" @change="changeLocation">
                   <option value=""> Choose A Country</option>
-                  <option v-for="(country,index) in countries" :value="country.id" :key="country.id" :index="index"> {{country.name}} </option>
+                  <option v-for="(country,index) in countries" :value="country.name" :key="country.id" :index="index"> {{country.name}} </option>
                 </select>
               </div>
 
@@ -287,7 +288,7 @@
                   <option v-for="country in locations" :value="country.location" :key="country.id" > {{country.location}} </option>
                 </select>
               </div>
-           
+
               <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add Company</b-btn>
               <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideAddCompanyModal">Cancel</b-btn>
             </form>
@@ -306,7 +307,7 @@
               </div>
          <div class="form-group">
                 <label for=""> Country </label>
-                <select name="country" id="" class="form-control" @change="changeLocation" :value="document.country"> 
+                <select name="country" id="" class="form-control" @change="changeLocation" :value="document.country">
                   <option value=""> Choose A Country</option>
                   <option v-for="(country,index) in countries" :value="country.name" :key="country.name" :index="index"> {{country.name}} </option>
                 </select>
@@ -315,7 +316,7 @@
                <div class="form-group">
                 <label for=""> Location </label>
                   <select name="location" id="" class="form-control" :value="document.location">
-                  <option value=""> Choose A Country</option>
+                  <option value=""> Choose A Location</option>
                   <option v-for="country in locations" :value="country.location" :key="country.id" > {{country.location}} </option>
                 </select>
               </div>
@@ -339,13 +340,13 @@
                 <label for=""> Profile </label>
                 <input type="file" name="profile" class="form-control" >
               </div>
-          
-           
-              <b-btn class="mt-3 pull-right" variant="primary" type="submit">Edit Document</b-btn>
+
+              <b-btn class="mt-3 pull-right" variant="danger" @click="hideEditDocumentModal">Delete</b-btn>
+              <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="primary" type="submit">Edit Document</b-btn>
               <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditDocumentModal">Cancel</b-btn>
             </form>
           </b-modal>
-          
+
                  <b-modal class="ess-modal" ref="addProcessModal" hide-footer title="Add Agreement Process">
             <form @submit.prevent="addProcess" ref="addProcessForm">
               <input type="" name="agent_id" :value="agent.id">
@@ -370,7 +371,7 @@
               <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideAddProcessModal">Cancel</b-btn>
             </form>
           </b-modal>
-          
+
                  <b-modal class="ess-modal" ref="editProcessModal" hide-footer title="Edit Agreement Process">
             <form @submit.prevent="editProcess" ref="editProcessForm">
               <input type="hidden" name="id" :value="process.id">
@@ -430,9 +431,9 @@
             if(loc){
             self.locations = self.countries[index].locations;
             }
-          
 
-            
+
+
           },
             fetchCountries() {
         let vm = this;
@@ -641,9 +642,9 @@
         hideEditProcessModal(){
                 this.$refs.editProcessModal.hide();
         },
-          
+
         },
-      
+
       }
 
       </script>

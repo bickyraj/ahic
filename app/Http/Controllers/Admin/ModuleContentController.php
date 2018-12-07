@@ -49,7 +49,7 @@ $modules = ModuleContent::with('module')->get();
             'title'=>'required|min:3',
             'module_id'=>'required',
             'description'=>'required',
-            'image'=>'required',
+            // 'image'=>'required',
         ],
     [
         'title.required'=>'Content Title is required.',
@@ -57,7 +57,7 @@ $modules = ModuleContent::with('module')->get();
         'title.required'=>'Content Title is required.',
         'module_id.required'=>'Select Any Module.',
         'description.required'=>'Description is required.',
-        'image.required'=>'Choose An Image.',
+        // 'image.required'=>'Choose An Image.',
     ]);
       $data['module_id'] = $request->input('module_id');
         $data['title'] = $request->input('title');

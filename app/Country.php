@@ -13,4 +13,5 @@ class Country extends Model
     public function locations(){
         return $this->hasMany('App\BranchLocation','country_id','id');
     }
+
 }

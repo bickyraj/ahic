@@ -11,7 +11,20 @@
 |
 */
 
-// Route::get('/', 'HomeController@index');
+
+Route::get('/', 'HomeController@index')->name('home');
+
+
+
+Route::get('/course/{course}', 'HomeController@course')->name('course');
+Route::get('/courses', 'HomeController@courses')->name('courses');
+Route::get('/courses/{category}', 'HomeController@courseCategory')->name('courseCategory');
+Route::get('/admission', 'HomeController@admission')->name('admission');
+Route::get('/student-service', 'HomeController@studentService')->name('student-service');
+Route::get('/agents', 'HomeController@agents')->name('agents');
+Route::get('/download', 'HomeController@download')->name('download');
+Route::get('/contact', 'HomeController@contact')->name('contact');
+
 
 Route::get('/logout', function () {
     Auth::logout();
@@ -29,9 +42,10 @@ Route::get('sendNotification', function () {
     return "event fired";
 });
 
+
 Route::get('{any}', function () {
     return view('layouts.app');
 })->where('any', '.*');
 
-
-
+Route::get('{slug}/{subslug}','PageController@slug');
+Route::get('{slug}/','PageController@slug');

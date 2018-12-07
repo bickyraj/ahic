@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Providers;
+use Illuminate\Support\Facades\Schema;
 
 use Illuminate\Support\ServiceProvider;
+use App\Menu;
+use App\CourseCategory;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +17,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+      Schema::defaultStringLength(191);
+          $menus = Menu::where('parent_id',null)->where('status','1')->orderBy('menu_order','asc')->with('submenus.parent_page','parent_page')->get()->toArray();
+          $cats = CourseCategory::all();
+          view()->share('menus', $menus);
+          view()->share('cats',$cats);
     }
 
     /**

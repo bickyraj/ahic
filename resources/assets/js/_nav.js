@@ -84,7 +84,7 @@ export default {
     //   }
     // },
     {
-      name: 'Modules',
+      name: 'Module & Contents',
       url: url + 'modules',
       icon: 'fas fa-book-open',
       badge: {

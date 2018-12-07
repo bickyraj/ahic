@@ -13,4 +13,7 @@ class AgentDocument extends Model
     public function process(){
         return $this->hasOne('App\AgentAgreementProcess','agent_document_id','id');
     }
+    public function shore(){
+        return $this->belongsTo('App\Country','country');
+    }
 }

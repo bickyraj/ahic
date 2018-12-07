@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CourseTableSeeder::class,
             AgentTableSeeder::class,
+            MenuTableSeeder::class,
         ]);
 
         $intakes =[
@@ -47,8 +48,8 @@ class DatabaseSeeder extends Seeder
         foreach($intakes as $intake){
             DB::table('application_date_of_intakes')->insert($intake);
         };
-         
-                            
+
+
         // add admin to users table.
         DB::table('users')->insert([
             'name' => 'admin',
@@ -200,7 +201,17 @@ www.realestate.com.au ',
             'status' => '1',
         ]);
 
-   
+$pm = [
+  ['page_id'=>4,'module_id'=>1],
+  ['page_id'=>4,'module_id'=>2],
+  ['page_id'=>4,'module_id'=>3],
+  ['page_id'=>4,'module_id'=>4],
+];
+
+foreach ($pm as $m) {
+  DB::table('page_modules')->insert($m);
+}
+
 
 
 
@@ -231,7 +242,7 @@ $competences = [
 
         $countries = [
     ['status'=>'1','name'=>'Nepal'],
-    ['status'=>'1','name'=>'Austrailia'],
+    ['status'=>'1','name'=>'Australia'],
 ];
 
 

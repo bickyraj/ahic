@@ -12,6 +12,8 @@ class PageController extends Controller
     public $destination = 'public/images/pages/';
 
 
+
+
     public function index(){
         $page = Page::with('parent_page')->get();
         return PageResource::collection($page);
@@ -110,5 +112,5 @@ class PageController extends Controller
         }
     }
 
-    
+
 }

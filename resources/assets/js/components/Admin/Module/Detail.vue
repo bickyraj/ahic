@@ -19,9 +19,9 @@
                     </transition>
                   </div>
                       <div class="form-group">
-                    <label for="">Parent Menu</label>
+                    <label for="">Parent Module</label>
                    <select  name="module_id" class="form-control">
-                     <option value="" selected> Choose Parent Menu </option>
+                     <option value="" selected> Choose Parent Module </option>
                     <option v-for="menu in modules" :value="menu.id" :key="menu.id"> {{menu.title}}</option>
                   </select>
             <transition name="fade">
@@ -51,9 +51,9 @@
           <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th>Module </th>
+                <!-- <th>Module </th> -->
                 <th>Title</th>
-                <th class="col-md-2"> Image</th>
+                <!-- <th class="col-md-2"> Image</th> -->
                 <th>Description</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -61,10 +61,10 @@
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(m, index) in table_items" :key="m.id">
-                <td>{{ m.module.title}}</td>
+                <!-- <td>{{ m.module.title}}</td> -->
                 <td>{{ m.title.substring(0,25) + ".."}}</td>
-                       <td v-if="m.image"> <img :src="'../public/images/module/'+m.image" class="img-fluid" /></td>
-                       <td v-else> -- </td>
+                       <!-- <td v-if="m.image"> <img :src="'../public/images/module/'+m.image" class="img-fluid" /></td>
+                       <td v-else> - - </td> -->
                 <td >{{ m.description.substring(0,25) + ".."}}</td>
                 <td>{{ m.status}}</td>
                 <td>
@@ -98,9 +98,9 @@
                     <input type="text" name="title" v-model="modalInfo.data.title" class="form-control" placeholder="Enter A Title">
                   </div>
           <div class="form-group">
-                    <label for="">Parent Menu</label>
+                    <label for="">Parent Module</label>
                    <select v-model="modalInfo.data.module_id" name="module_id" class="form-control">
-                     <option value="" selected> Choose Parent Menu </option>
+                     <option value="" selected> Choose Parent Module </option>
             <option v-for="menu in modules" :value="menu.id" :key="menu.id"> {{menu.title}}</option>
           </select>
                   </div>
@@ -112,7 +112,7 @@
                   <div class="form-group">
                     <label for="">Description</label>
                    <editor name="description" v-model="modalInfo.data.description" :init="editor"></editor>
-                  </div> 
+                  </div>
        <div class="form-group">
           <label for="">Status</label>
           <select name="status" id="" v-model="modalInfo.data.status" class="form-control">
@@ -120,7 +120,7 @@
             <option value="1"> Enable</option>
           </select>
         </div>
-       
+
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModuleModal">Cancel</b-btn>
       </form>
@@ -149,11 +149,11 @@
         editor.on('change', function () {
             editor.save();
         });
-    
+
     },
           image_title:true,
           automatic_uploads: true,
-          file_picker_types: 'image', 
+          file_picker_types: 'image',
           // and here's our custom image picker
           file_picker_callback: function(cb, value, meta) {
             var input = document.createElement('input');
@@ -183,7 +183,7 @@
       this.fetchModules();
     },
     computed: {
-      
+
     },
     methods: {
       info(m, index, button) {

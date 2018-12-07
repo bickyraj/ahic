@@ -28,6 +28,7 @@ class Course extends Model
   public function application_course(){
       return $this->hasMany('App\ApplicationCourse');
   }
-
-  
+  public function relation(){
+    return $this->hasMany('App\CourseUnitRelation');
+  }
 }

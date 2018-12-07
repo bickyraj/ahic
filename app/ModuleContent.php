@@ -12,4 +12,5 @@ class ModuleContent extends Model
   public function module(){
     return $this->belongsTo('App\Module','module_id','id');
   }
+
 }

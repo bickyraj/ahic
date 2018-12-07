@@ -11,7 +11,7 @@ class AgentTableSeeder extends Seeder
      */
     public function run()
     {
-      
+
         	DB::table('agent_informations')->insert([
             'pan' => '1Qaw2',
             'first_name' => 'Suresh',
@@ -24,15 +24,15 @@ class AgentTableSeeder extends Seeder
         ]);
                         DB::table('agent_documents')->insert([
                         'agent_id' => '1',
-                        'company_name' => '1Qaw2',
+                        'company_name' => 'Offshore ',
                         'EOI' => 'Suresh',
                         'ABN' => 'Rai',
                         'reference' => '+97725532677',
                         'qualification' => '+9779852056315',
                         'profile' => 'enquiry@edeneac.com',
-                        'location' => 'Dharan-6, Bhanuchowk, Sunsari, Nepal ',
-                        'address' => '2018-02-14',
-                        'country' => '2018-02-14',
+                        'location' => 'Lalitpur',
+                        'address' => 'Lalitpur',
+                        'country' => 'Nepal',
                     ]);
 
 
@@ -45,6 +45,19 @@ class AgentTableSeeder extends Seeder
             'address' => 'Chipledhunga, (Opp: Ratna Emporium) Pokhara Sub-Metropolitan City-4, Kaski, Nepal ',
             'start_date' => '2018-02-14',
         ]);
+
+        DB::table('agent_documents')->insert([
+        'agent_id' => '2',
+        'company_name' => 'Onshore ',
+        'EOI' => 'Suresh',
+        'ABN' => 'Rai',
+        'reference' => '+97725532677',
+        'qualification' => '+9779852056315',
+        'profile' => 'shankar.bdrg@gmail.com',
+        'location' => 'Melbourne',
+        'address' => 'Melbourne',
+        'country' => 'Australia',
+    ]);
         	DB::table('agent_informations')->insert([
             'pan' => '1Qaw2',
             'first_name' => 'Gunjan',
