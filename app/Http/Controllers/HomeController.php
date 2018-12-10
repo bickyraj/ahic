@@ -9,6 +9,7 @@ use App\CourseCategory;
 use App\PaymentOption;
 use App\PageModule;
 use App\AgentInformation;
+use App\Country;
 
 
 class HomeController extends Controller
@@ -16,7 +17,8 @@ class HomeController extends Controller
     public function index()
     {
         $courses = Course::with('category')->get();
-        return view('front.index',compact('courses'));
+        $countries = Country::all();
+        return view('front.index',compact('courses','countries'));
     }
     public function courses()
     {

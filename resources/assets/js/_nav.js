@@ -147,9 +147,19 @@ export default {
         // text: 'NEW'
       }
     },
+
     {
       name: 'Payment Options',
       url: url + 'payment_options',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Enquiries',
+      url: url + 'enquiries',
       icon: 'fas fa-book-open',
       badge: {
         variant: 'primary',
@@ -219,7 +229,7 @@ export default {
     //     // text: 'NEW'
     //   }
     // },
-    
+
     /*{
       name: 'Buttons',
       url: '/buttons',

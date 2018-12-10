@@ -106,9 +106,7 @@
           <div class="col-md-6 my-5">
            <div class="position-relative">
             <img class="rounded w-100" src="{{asset('/')}}public/ahic/img/360x400/1.jpg" alt="">
-            <!-- <a href="https://www.youtube.com/watch?v=7e90gBu4pas" data-fancybox class="iconbox iconbox-lg bg-white position-absolute absolute-center">
-              <i class="ti-control-play text-primary"></i>
-            </a> -->
+
            </div>
           </div>
           <div class="col-md-6 mt-4">
@@ -134,106 +132,93 @@
           </div>
 
           <div class="p-4 border-bottom wow fadeInUp">
-            <!-- <p class="text-primary mb-1">
-              Name
-            </p> -->
+<form id="enquiry_form">
 
-              <div class="form-group">
-               <input type="text" class="form-control" placeholder="Name">
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
+                <div class="form-group">
+                 <input type="text" class="form-control name" placeholder="Name" name="name" >
+                 <span class="error text-danger"></span>
+                </div>
+                <div class="form-group">
+                 <input type="text" class="form-control email" placeholder="Email" name="email" >
+                 <span class="error text-danger"></span>
+                </div>
+                <div class="form-group">
+                 <input type="text" class="form-control phone" placeholder="Phone" name="phone" >
+                 <span class="error text-danger"></span>
+                </div>
+                <div class="form-group">
+                <div class="input-group">
+                  <select data-placeholder="Select Course" class="chosen-select ec-select my_select_box course_id" tabindex="5" name="course_id" >
+                    <option value=""></option>
+                    @foreach ($courses as $course)
+                      <option value="{{$course->id}}">{{$course->name}}</option>
+                    @endforeach
+                  </select>
+                  <span class="error text-danger"></span>
+                </div>
               </div>
               <div class="form-group">
-               <input type="text" class="form-control" placeholder="Email">
-              </div>
-              <div class="form-group">
-               <input type="text" class="form-control" placeholder="Phone">
-              </div>
-              <div class="form-group">
-              <div class="input-group">
-                <select data-placeholder="Select Course" class="chosen-select ec-select my_select_box" tabindex="5">
-                  <option value=""></option>
-                  <option>Certificate IV in Business</option>
-                  <option>Diploma of Business</option>
-                  <option>Advanced Diploma of Business</option>
-                  <option>Certificate IV in Accounting and Bookkeeping</option>
-                  <option>Diploma of Accounting</option>
-                </select>
+                <div class="input-group">
+                  <select data-placeholder="Your Country" class="select ec-select country_id" tabindex="3" name="country_id" >
+              <option value=""></option>
+              @foreach ($countries as $country)
+                <option value="{{$country->id}}">{{$country->name}}</option>
+              @endforeach
+              {{-- <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Afghanistan">Afghanistan</option>
+              <option value="Aland Islands">Aland Islands</option>
+              <option value="Albania">Albania</option>
+              <option value="Algeria">Algeria</option>
+              <option value="American Samoa">American Samoa</option>
+              <option value="Andorra">Andorra</option>
+              <option value="Angola">Angola</option>
+              <option value="Anguilla">Anguilla</option>
+              <option value="Antarctica">Antarctica</option>
+              <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Armenia">Armenia</option>
+              <option value="Aruba">Aruba</option>
+              <option value="Australia">Australia</option>
+              <option value="Austria">Austria</option>
+              <option value="Azerbaijan">Azerbaijan</option>
+              <option value="Bahamas">Bahamas</option>
+              <option value="Bahrain">Bahrain</option>
+              <option value="Bangladesh">Bangladesh</option>
+              <option value="Barbados">Barbados</option>
+              <option value="Belarus">Belarus</option>
+              <option value="Belgium">Belgium</option>
+              <option value="Belize">Belize</option>
+              <option value="Benin">Benin</option>
+              <option value="Bermuda">Bermuda</option>
+              <option value="Nepal">Nepal</option> --}}
+            </select>
+            <span class="error text-danger"></span>
 
+
+                </div>
               </div>
+                <div class="form-group">
+                   <textarea class="form-control message" placeholder="Message" name="message" ></textarea>
+                   <span class="error text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary mr-3 mb-3 enquiry_btn" type="button" style="float:right;"  >Submit</button>
+                </div>
             </div>
-            <div class="form-group">
-              <div class="input-group">
-                <select data-placeholder="Your Country" class="select ec-select" tabindex="3">
-            <option value=""></option>
-            <option value="United States">United States</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="Afghanistan">Afghanistan</option>
-            <option value="Aland Islands">Aland Islands</option>
-            <option value="Albania">Albania</option>
-            <option value="Algeria">Algeria</option>
-            <option value="American Samoa">American Samoa</option>
-            <option value="Andorra">Andorra</option>
-            <option value="Angola">Angola</option>
-            <option value="Anguilla">Anguilla</option>
-            <option value="Antarctica">Antarctica</option>
-            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Armenia">Armenia</option>
-            <option value="Aruba">Aruba</option>
-            <option value="Australia">Australia</option>
-            <option value="Austria">Austria</option>
-            <option value="Azerbaijan">Azerbaijan</option>
-            <option value="Bahamas">Bahamas</option>
-            <option value="Bahrain">Bahrain</option>
-            <option value="Bangladesh">Bangladesh</option>
-            <option value="Barbados">Barbados</option>
-            <option value="Belarus">Belarus</option>
-            <option value="Belgium">Belgium</option>
-            <option value="Belize">Belize</option>
-            <option value="Benin">Benin</option>
-            <option value="Bermuda">Bermuda</option>
-            <option value="Nepal">Nepal</option>
-          </select>
-              </div>
-            </div>
-              <div class="form-group">
-                 <textarea class="form-control" placeholder="Message"></textarea>
-              </div>
-              <div class="form-group">
-                <button class="btn btn-primary mr-3 mb-3" style="float:right;">Submit</button>
-              </div>
-          </div>
 
-          <!-- <div class="p-4 border-bottom wow fadeInUp">
-            <p class="text-primary mb-1">
-              July 17, 2018
-            </p>
-            <a href="#">
-              Nullam quis ante etiam sit amet eget eros faucibus
-            </a>
-          </div>
+</form>
 
-          <div class="p-4 border-bottom wow fadeInUp">
-            <p class="text-primary mb-1">
-              June 08, 2018
-            </p>
-            <a href="#">
-              Adsing eusmo tempor indeduny
-            </a>
-          </div>
-
-          <div class="p-4 border-bottom wow fadeInUp">
-            <p class="text-primary mb-1">
-              June 20, 2018
-            </p>
-            <a href="#">
-              Nullam quis ante etiam sit amet eget eros faucibus
-            </a>
-          </div>
-          <div class="p-4">
-            <a href="#" class="btn btn-link pl-0">
-              View All Notices
-            </a>
-          </div> -->
         </div>
       </div>
     </div> <!-- END row-->
@@ -473,4 +458,117 @@
   </div> <!-- END container-->
 </section>
 
+@endsection
+
+@section('style')
+<style media="screen">
+
+  .error.text-danger{
+      font-size:15px !important;
+  }
+</style>
+@endsection
+
+@section('script')
+  <script type="text/javascript">
+  $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+      $('.enquiry_btn').click(function(event){
+        $(this).parent().parent().find('.error').each(function(){
+          $(this).text(' ');
+        })
+        event.preventDefault();
+        var form = $('#enquiry_form');
+        var formData = form.serializeArray();
+        // console.log(formData);
+        var url = "{{route('enquiry')}}";
+
+        $.post(url, formData)
+    .done(function(data){
+      if(data == 'true'){
+        form.trigger('reset');
+
+        $.notify({
+        	// options
+        	icon: 'glyphicon glyphicon-warning-sign',
+        	message: 'Thank You For Enquiry',
+        	target: '_blank'
+        },{
+        	// settings
+        	element: 'body',
+        	position: null,
+        	type: "success",
+        	allow_dismiss: true,
+        	newest_on_top: false,
+        	showProgressbar: false,
+        	placement: {
+        		from: "top",
+        		align: "center"
+        	},
+        	offset: 120,
+        	spacing: 10,
+        	z_index: 1031,
+        	delay: 5000,
+        	timer: 1000,
+        	url_target: '_blank',
+        	mouse_over: null,
+        	animate: {
+        		enter: 'animated fadeInDown',
+        		exit: 'animated fadeOutUp'
+        	},
+        	onShow: null,
+        	onShown: null,
+        	onClose: null,
+        	onClosed: null,
+        	icon_type: 'class',
+        });
+      }
+      else if(data == 'false'){
+
+
+        $.notify({
+        	// options
+        	icon: 'glyphicon glyphicon-warning-sign',
+        	message: 'Enquiry Failed',
+        	target: '_blank'
+        },{
+        	// settings
+        	element: 'body',
+        	position: null,
+        	type: "danger",
+        	allow_dismiss: true,
+        	newest_on_top: false,
+        	showProgressbar: false,
+        	placement: {
+        		from: "top",
+        		align: "center"
+        	},
+        	offset: 120,
+        	spacing: 10,
+        	z_index: 1031,
+        	delay: 5000,
+        	timer: 1000,
+        	url_target: '_blank',
+        	mouse_over: null,
+        	animate: {
+        		enter: 'animated fadeInDown',
+        		exit: 'animated fadeOutUp'
+        	},
+        	onShow: null,
+        	onShown: null,
+        	onClose: null,
+        	onClosed: null,
+        	icon_type: 'class',
+        });
+
+      }
+    })
+    .fail(function(xhr, status, error) {
+        jQuery.each(xhr.responseJSON.errors, function(key, value){
+          $("."+key).parent().find('.error').text(value);
+    });
+
+          // alert('lets fo it');
+      });
+      });
+  </script>
 @endsection
