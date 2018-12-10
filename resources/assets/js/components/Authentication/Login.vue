@@ -1,11 +1,25 @@
 <template>
 	<div>
 		<div class="login-background">
-            <router-link title="Go To Home Page" :to="{ name: 'home'}" class="mr-1 btn btn-sm" style="position: absolute; top: 12px; left: 12px; z-index: 99999; color: #e6ebf1;"><i class="fas fa-long-arrow-alt-left"></i> Go To Home Page</router-link>
-		    <div class="diagonal-block"></div>
-		    <div class="transparent-background"></div>
+            <!-- <router-link title="Go To Home Page" :to="{ name: 'home'}" class="mr-1 btn btn-sm" style="position: absolute; top: 12px; left: 12px; z-index: 99999; color: #e6ebf1;"><i class="fas fa-long-arrow-alt-left"></i> Go To Home Page</router-link> -->
 		    <div class="login-container">
                 <b-col class="login-form-div">
+                    <div class="navbar-brand ahic-login-logo-block">
+                      <a class="logo-default" href="index.php">
+                        <div class="" style="float:left;">
+                          <img alt="" :src="logo" class="responsive" width="60">
+                        </div>
+                        <div class="marginTop-8" style="float:left; padding-left:15px;">
+                          <div class="">
+                            <span class="font-weight-bold" style="color: #dc0102;"> Harbour College </span>
+                          </div>
+                          <div style="margin-top:-10px;">
+                             <small class="text-primary" style="font-size:12px;"> "Where Seekers Become Achievers"</small>
+
+                          </div>
+                        </div>
+                        </a>
+                    </div>
                 	<form class="login-form" @submit.prevent="login">
                 	    <div class="form-title">
                 	        <span class="form-title">Welcome.</span>
@@ -53,16 +67,22 @@
                 	</form>
                 </b-col>
 		    </div>
-		    <div class="login-page-right-container">
+		    <!-- <div class="login-page-right-container">
 		    	<div class="login-app-logo animated fadeInRight">
 			        <div class="login-page-title">CRM</div>
 			        <small>Basic Crm Using Vue.js</small>
 		    	</div>
-		    </div>
+		    </div> -->
 		</div>
 	</div>
 </template>
 <style>
+    .ahic-login-logo-block {
+        margin-bottom: 15px;
+    }
+    .marginTop-8 {
+        margin-top: 8px;
+    }
 	.login-logo {
 		width: 150px;
 		margin-bottom: 30px;
@@ -84,7 +104,7 @@ export default {
             email: "",
             password: "" ,
             remember_me: "",
-            logo: this.$root.baseUrl + '/public/img/logo.png',
+            logo: this.$root.baseUrl + '/public/ahic/img/logo-black.png',
             loginBg: this.$root.baseUrl + '/public/img/login-bg.jpg',
             appstore: this.$root.baseUrl + '/public/img/appstore.png',
             applestore: this.$root.baseUrl + '/public/img/applestore.jpg',
