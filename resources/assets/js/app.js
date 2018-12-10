@@ -22,6 +22,10 @@ window.JQuery = require('jquery')
 
 import NProgress from  'nprogress';
 import 'nprogress/nprogress.css';
+
+window.api = new Api();
+window.auth = new Auth();
+
 NProgress.configure({ showSpinner: false });
 
 axios.interceptors.request.use(function (config) {
@@ -48,17 +52,16 @@ axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   NProgress.done() //shows the progress bar
-
   var status = error.response.status
-  if (status === 403) {
+
+  if (status === 401) {
+    auth.logout();
+  } else if (status === 403) {
     router.push({ name: '404'})
   } else {
     return Promise.reject(error);
   }
 });
-
-window.api = new Api();
-window.auth = new Auth();
 
 window.Vue = require('vue');
 Vue.use(VueRouter);
