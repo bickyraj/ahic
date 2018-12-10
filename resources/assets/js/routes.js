@@ -46,8 +46,8 @@ const routes = [
                 roleId: 1
             },
         },
-    { 
-        path: url + 'login', 
+    {
+        path: url + 'login',
         component: require('./components/Authentication/Login'),
         name: 'login',
         meta: {
@@ -57,15 +57,15 @@ const routes = [
         beforeEnter(to, from, next) {
             if (auth.check()) {
                 if (auth.roleId === 1) {
-                    next({name: 'admin'});                    
+                    next({name: 'admin'});
                 }
             } else {
                 next();
             }
         },
     },
-    { 
-    	path: admin_url, 
+    {
+    	path: admin_url,
     	component: require('./components/Admin/Index'),
         name: 'admin',
         meta: {
@@ -80,57 +80,76 @@ const routes = [
             roleId: 1
         }
     },
-    { 
-        path: admin_url + 'roles', 
+    {
+        path: admin_url + 'roles',
         component: require('./components/Admin/Role/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Roles',
-                    path: admin_url + 'roles', 
+                    path: admin_url + 'roles',
                 }
             ],
             middlewareAuth: true,
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'menus', 
+    {
+        path: admin_url + 'menus',
         component: require('./components/Admin/Menu/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Menus',
-                    path: admin_url + 'menus', 
+                    path: admin_url + 'menus',
                 }
             ],
             middlewareAuth: true,
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'Pages', 
+    {
+        path: admin_url + 'enquiries',
+        component: require('./components/Admin/Enquiry/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Enquiries',
+                    path: admin_url + 'enquiries', 
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
+        path: admin_url + 'Pages',
         component: require('./components/Admin/Page/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Pages',
-                    path: admin_url + 'pages', 
+                    path: admin_url + 'pages',
                 }
             ],
             middlewareAuth: true,
@@ -213,15 +232,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'course_unit_competences', 
+    {
+        path: admin_url + 'course_unit_competences',
         component: require('./components/Admin/CourseUnitCompetences/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Course Unit Competences',
@@ -232,15 +251,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'course_unit_categories', 
+    {
+        path: admin_url + 'course_unit_categories',
         component: require('./components/Admin/CourseUnitCategories/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Course Unit Categories',
@@ -251,15 +270,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'payment_options', 
+    {
+        path: admin_url + 'payment_options',
         component: require('./components/Admin/PaymentOptions/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Payment Options',
@@ -270,15 +289,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'course_categories', 
+    {
+        path: admin_url + 'course_categories',
         component: require('./components/Admin/CourseCategories/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Course Categories',
@@ -289,15 +308,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'course_category/:id', 
+    {
+        path: admin_url + 'course_category/:id',
         component: require('./components/Admin/CourseCategories/Detail'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Course Categories',
@@ -312,15 +331,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'course_unit_relations', 
+    {
+        path: admin_url + 'course_unit_relations',
         component: require('./components/Admin/CourseUnitRelations/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Course Unit Relation',
@@ -331,8 +350,8 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'courses', 
+    {
+        path: admin_url + 'courses',
         component: require('./components/Admin/Course/Index'),
         name:'courses',
         meta: {
@@ -340,7 +359,7 @@ const routes = [
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Course',
@@ -351,8 +370,8 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'course/:id', 
+    {
+        path: admin_url + 'course/:id',
         component: require('./components/Admin/Course/Detail'),
         meta: {
             layout: 'admin',
@@ -375,15 +394,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'career_outcomes', 
+    {
+        path: admin_url + 'career_outcomes',
         component: require('./components/Admin/CareerOutcome/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Career Outcomes',
@@ -394,15 +413,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'course_assessments', 
+    {
+        path: admin_url + 'course_assessments',
         component: require('./components/Admin/CourseAssessments/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Course Assessments',
@@ -413,15 +432,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'course_rpls', 
+    {
+        path: admin_url + 'course_rpls',
         component: require('./components/Admin/CourseRPL/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Career RPLs',
@@ -432,15 +451,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'course_entry_requirement', 
+    {
+        path: admin_url + 'course_entry_requirement',
         component: require('./components/Admin/CourseEntryRequirement/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Course Entry Requirement',
@@ -451,15 +470,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'modules', 
+    {
+        path: admin_url + 'modules',
         component: require('./components/Admin/Module/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Modules',
@@ -470,15 +489,15 @@ const routes = [
         roleId: 1
         },
     },
-    { 
-        path: admin_url + 'module/:id', 
+    {
+        path: admin_url + 'module/:id',
         component: require('./components/Admin/Module/Detail'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Modules',
@@ -493,15 +512,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'module_contents', 
+    {
+        path: admin_url + 'module_contents',
         component: require('./components/Admin/ModuleContent/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Module Contents',
@@ -512,15 +531,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'page_modules', 
+    {
+        path: admin_url + 'page_modules',
         component: require('./components/Admin/PageModule/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Page Module',
@@ -531,15 +550,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'agent_information', 
+    {
+        path: admin_url + 'agent_information',
         component: require('./components/Admin/AgentInformation/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Agent Information',
@@ -569,15 +588,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'agent_documents', 
+    {
+        path: admin_url + 'agent_documents',
         component: require('./components/Admin/AgentDocument/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Agent Document',
@@ -588,15 +607,15 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'agent_agreement_process', 
+    {
+        path: admin_url + 'agent_agreement_process',
         component: require('./components/Admin/AgentAgreementProcess/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Agent Agreement Process',
@@ -607,27 +626,27 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'import-export', 
+    {
+        path: admin_url + 'import-export',
         component: require('./components/Admin/ImportExport/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Import / Export',
-                    path: admin_url + 'import-export', 
+                    path: admin_url + 'import-export',
                 }
             ],
             middlewareAuth: true,
             roleId: 1
         },
     },
-    { 
-        path: admin_url +'change-password', 
+    {
+        path: admin_url +'change-password',
         component: require('./components/Admin/Auth/ChangePassword'),
         name: 'admin-change-password',
         meta: {
@@ -635,7 +654,7 @@ const routes = [
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Change Password',
@@ -645,53 +664,53 @@ const routes = [
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'url-shortner', 
+    {
+        path: admin_url + 'url-shortner',
         component: require('./components/Admin/UrlShortner/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Url Shortner',
-                    path: admin_url + 'url-shortner', 
+                    path: admin_url + 'url-shortner',
                 }
             ],
             middlewareAuth: true,
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'countries', 
+    {
+        path: admin_url + 'countries',
         component: require('./components/Admin/Country/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Countries',
-                    path: admin_url + 'countries', 
+                    path: admin_url + 'countries',
                 }
             ],
             middlewareAuth: true,
             roleId: 1
         },
     },
-    { 
-        path: admin_url + 'branch_locations', 
+    {
+        path: admin_url + 'branch_locations',
         component: require('./components/Admin/BranchLocation/Index'),
         meta: {
             layout: 'admin',
             breadcrumb: [
                 {
                     name: 'Home',
-                    path: admin_url, 
+                    path: admin_url,
                 },
                 {
                     name: 'Branch Locations',

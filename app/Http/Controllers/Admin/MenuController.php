@@ -26,6 +26,7 @@ class MenuController extends Controller
     	$data['page_id'] = $request->input('page_id');
     	$data['menu_order'] = rand(0,9);
     	$data['status'] =1;
+    	$data['count'] =0;
         $create = Menu::create($data);
     	if ($create) {
     		$status = 1;
@@ -34,7 +35,7 @@ class MenuController extends Controller
 
     }
 
-    
+
 
     public function update(Request $request){
     	$status = 0;
@@ -42,7 +43,7 @@ class MenuController extends Controller
         $user->name = $request->input('name');
         $user->parent_id = $request->input('parent_id');
         $user->page_id = $request->input('page_id');
-       
+
         if ($user->save()) {
             $status = 1;
         }

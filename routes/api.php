@@ -37,6 +37,13 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('edit-role', 'RoleController@edit');
     Route::delete('role/{id}', 'RoleController@destroy');
 
+    // Enq functions.
+    Route::get('enquiries', 'EnquiryController@index');
+    Route::get('enquiry/{id}', 'EnquiryController@show');
+    Route::post('enquiry', 'EnquiryController@store');
+    Route::post('enquiry/edit/{id}', 'EnquiryController@edit');
+    Route::delete('enquiry/{id}', 'EnquiryController@destroy');
+
     // User functions.
     Route::get('users', 'UserController@index');
     Route::get('user/{id}', 'UserController@show');
@@ -50,7 +57,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('menu', 'MenuController@store');
     Route::post('edit-menu', 'MenuController@update');
     Route::delete('menu/{id}', 'MenuController@destroy');
-    
+
     // User functions.
     Route::get('pages', 'PageController@index');
     Route::get('pages/{id}', 'PageController@get');
@@ -65,7 +72,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('course_unit_category', 'CourseUnitCategoryController@store');
     Route::post('course_unit_category/edit', 'CourseUnitCategoryController@update');
     Route::delete('course_unit_category/{id}', 'CourseUnitCategoryController@destroy');
-    
+
     //Course Competences
     Route::get('course_unit_competences','CourseUnitCompetencesController@index');
     Route::get('course_unit_competence/{id}','CourseUnitCompetencesController@show');
@@ -80,7 +87,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('course_unit_relation', 'CourseUnitRelationController@store');
     Route::post('course_unit_relation/edit', 'CourseUnitRelationController@update');
     Route::delete('course_unit_relation/{id}', 'CourseUnitRelationController@destroy');
-    
+
     //Courses
     Route::get('courses','CourseController@index');
     Route::get('course/{id}','CourseController@show');
@@ -129,7 +136,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('course_entry_requirement', 'CourseEntryRequirementController@store');
     Route::post('course_entry_requirement/edit', 'CourseEntryRequirementController@update');
     Route::delete('course_entry_requirement/{id}', 'CourseEntryRequirementController@destroy');
-    
+
     //Modules
     Route::get('modules','ModuleController@index');
     Route::get('module/{id}','ModuleController@show');

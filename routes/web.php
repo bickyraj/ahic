@@ -25,6 +25,8 @@ Route::get('/agents', 'HomeController@agents')->name('agents');
 Route::get('/download', 'HomeController@download')->name('download');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 
+Route::post('/enquiry','EnquiryController@store')->name('enquiry');
+
 
 Route::get('/logout', function () {
     Auth::logout();

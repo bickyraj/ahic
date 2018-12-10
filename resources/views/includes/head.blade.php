@@ -5,7 +5,7 @@
 
     <!-- Title-->
     <title>AHIC - Australian Harbour International College</title>
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- SEO Meta-->
     <meta name="description" content="Australian Harbour International College">
     <meta name="keywords" content="Australian Harbour International College">
