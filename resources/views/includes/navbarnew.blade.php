@@ -3,7 +3,11 @@
   <div class="container">
     <div class="navbar p-0 navbar-expand-lg">
       <div class="navbar-brand">
+<<<<<<< HEAD
         <a class="logo-default" href="{{route('home')}}">
+=======
+        <a class="logo-default" href="{{ url('/') }}">
+>>>>>>> 7c6afa3cb72f8a8c4d911ee8366c72a69c52d3a2
           <div class="" style="float:left;">
             <img alt="" src="{{asset('/')}}public/ahic/img/logo-black.png" class="responsive" width="60">
           </div>

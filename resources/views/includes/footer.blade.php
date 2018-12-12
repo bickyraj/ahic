@@ -7,7 +7,7 @@
       <div class="row">
 
         <div class="col-lg-3 col-md-6 mt-5">
-         <img src="assets/img/logo-black.png" alt="Logo" width="55"> Harbour College
+         <img src="{{asset('/')}}public/ahic/img/logo-black.png" alt="Logo" width="55"> Harbour College
          <div class="margin-y-40">
            <p>
             ABN: 74 603 036 102 <br> RTO NO: 41338 <br> CRICOS Provider Code: 03449J

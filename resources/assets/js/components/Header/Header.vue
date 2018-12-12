@@ -5,8 +5,8 @@
     </button>
     <b-link class="navbar-brand gym-navbar-brand" to="#">
       <!-- <div><strong style="color:#5f5f5f;"><span style="font-size: 21px;color: #64d0a3;">Y</span>enkii</strong></div> -->
-      CRM
-      <!-- <img class="yenkii-admin-logo" :src="this.$root.baseUrl + '/public/img/logo.png'"> -->
+      <!-- CRM -->
+      <img class="yenkii-admin-logo" :src="this.$root.baseUrl + '/public/ahic/img/logo-black.png'">
     </b-link>
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" @click="sidebarToggle">
       <span class="navbar-toggler-icon"></span>

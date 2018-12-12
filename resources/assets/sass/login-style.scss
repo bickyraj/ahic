@@ -28,11 +28,11 @@ h3 {
 }
 
 .login-background {
-  height: 100vh;
-  background-image: url("../img/wallpapers/wallpaper.png");
+  /*height: 100vh;*/
+  /*background-image: url("../img/wallpapers/wallpaper.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: cover;*/
 }
 
 .transparent-background {
@@ -58,11 +58,13 @@ h3 {
 }
 
 .login-container {
-  top: 20%;
-    float: left;
-    background-color: white;
+    /*top: 20%;*/
+    /*float: left;*/
+    margin-top: 10% !important;
+    margin: 0 auto;
+    background-color: black;
     width: 360px;
-    position: relative;
+    /*position: relative;*/
     z-index: 20;
     left: 8%;
 
@@ -133,9 +135,9 @@ h3 {
 }
 
 .login-container {
-  color: #e6ebf1;
+  color: black;
   padding: 30px 10px 40px;
-  background-color: #363a3f;
+  background-color: #ffffff;
   height: auto;
   overflow: hidden;
 }
@@ -149,7 +151,8 @@ h3 {
   position: absolute;
   widows: auto;
   background-color: #e66c4a;
-  color: #f9f9f9;
+  /*color: #f9f9f9;*/
+  color: #000000;
   text-transform: uppercase;
   left: 10%;
   top: 0%;
@@ -164,8 +167,9 @@ h3 {
 .login-form-div {
   >form {
     input {
-      -webkit-text-fill-color: #c4c9cf !important;
-      background-color: #363a3f;
+      -webkit-text-fill-color: black !important;
+      background-color: #ffffff;
+      color: black;
       padding: 5px 5px;
       border-radius: 0px;
       border: none;
@@ -173,17 +177,17 @@ h3 {
       border-bottom: 1px solid #4c4c4c;
       
       &:-webkit-autofill {
-          -webkit-text-fill-color: #c4c9cf !important;
-          -webkit-box-shadow:0 0 0 50px #363a3f inset;
+          -webkit-text-fill-color: black !important;
+          -webkit-box-shadow:0 0 0 50px #ffffff inset;
           background-color: white !important;
           &:focus {
-            -webkit-text-fill-color: #c4c9cf !important;
-            -webkit-box-shadow:0 0 0 50px #363a3f inset;
+            -webkit-text-fill-color: black !important;
+            -webkit-box-shadow:0 0 0 50px #ffffff inset;
           }
       }
       
         &:focus {
-          background-color: #363a3f;
+          background-color: #ffffff;
           outline: none !important;
           box-shadow: none;
         }
