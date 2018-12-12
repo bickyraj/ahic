@@ -75,6 +75,29 @@
               </div>
             </b-card>
 
+            <b-card class="col-md-12 trump-card ">
+
+                <div class="card-title">
+                  <div class="caption">
+                    <h5 > <i class="fas fa-key"></i>  Unit Of Competence
+                      <small class="float-right">
+                        <button class="btn btn-success" @click="showCompetenceModal"> Add </button>
+
+                      </small>
+                      </h5>
+                    </div>
+
+                  </div>
+
+
+                    <div class="col-md-12" v-for="category in ucategories" :key="category.id">
+                      <h5> {{category.name}} </h5>
+                      <ul class="">
+                        <li v-for="c in competences" :key="c.id" v-if="c.course_unit_category_id == category.id"> {{c.competence.description}}<span class="ml-5">  {{c.competence.unit_code}} </span>  <i class="fas fa-times-circle text-danger float-right " @click="remove($event,c.id)" type="course_unit_relation"></i> </li>
+                      </ul>
+                    </div>
+              </b-card>
+
           </div>
 
           <div class="col-md-5 float-left admin-right">
@@ -102,7 +125,7 @@
                     <h5><i class="fas fa-key"></i> Career Outcomes
                       <small class="float-right">
                         <button class="btn btn-success" @click="showCareerModal"> Add </button>
-                          <button class="btn" v-b-toggle.collapse2> 
+                          <button class="btn" v-b-toggle.collapse2>
                           <i class="far fa-eye" ></i>
                                </button>
                       </small>
@@ -130,7 +153,7 @@
                       <small class="float-right">
                         <button class="btn btn-primary" v-if="course.assessment" @click="showEditAssessmentModal"> Edit </button>
                         <button class="btn btn-success" v-else @click="showAssessmentModal"> Add </button>
-                          <button class="btn " v-b-toggle.collapse3> 
+                          <button class="btn " v-b-toggle.collapse3>
                           <i class="far fa-eye" ></i>
                                </button>
                       </small></h5>
@@ -152,7 +175,7 @@
                         <small class="float-right">
                           <button class="btn btn-primary" v-if="course.rpl" @click="showEditRplModal"> Edit </button>
                           <button class="btn btn-success" v-else @click="showRPLModal"> Add </button>
-                            <button class="btn " v-b-toggle.collapse4> 
+                            <button class="btn " v-b-toggle.collapse4>
                           <i class="far fa-eye" ></i>
                                </button>
 
@@ -167,35 +190,7 @@
                     </b-collapse>
                   </div>
                 </b-card>
-                <b-card class="col-md-12 trump-card ">
-
-                  <div class="col-md-12">
-                    <div class="card-title">
-                      <div class="caption">
-                        <h5 > <i class="fas fa-key"></i>  Unit Of Competence
-                          <small class="float-right">
-                            <button class="btn btn-success" @click="showCompetenceModal"> Add </button>
-                            <button class="btn" v-b-toggle.collapse5> 
-                          <i class="far fa-eye" ></i>
-                               </button>
-
-                          </small>
-                          </h5>
-                        </div>
-
-                      </div>
-
-
-                      <b-collapse visible id="collapse5">
-                        <div class="col-md-12" v-for="category in ucategories" :key="category.id">
-                          <h5> {{category.name}} </h5>
-                          <ul class="">
-                            <li v-for="c in competences" :key="c.id" v-if="c.course_unit_category_id == category.id"> {{c.competence.description}}  <i class="fas fa-times-circle text-danger float-right " @click="remove($event,c.id)" type="course_unit_relation"></i> </li>
-                          </ul>
-                        </div>
-                      </b-collapse>
-                    </div>
-                  </b-card>
+      
 
                 </div>
 
@@ -397,7 +392,7 @@
       },
           image_title:true,
           automatic_uploads: true,
-          file_picker_types: 'image', 
+          file_picker_types: 'image',
           // and here's our custom image picker
           file_picker_callback: function(cb, value, meta) {
             var input = document.createElement('input');
@@ -420,7 +415,7 @@
           }
         },
 
-        
+
           }
         },
         created() {

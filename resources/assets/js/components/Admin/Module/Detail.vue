@@ -68,6 +68,7 @@
                 <td >{{ m.description.substring(0,25) + ".."}}</td>
                 <td>{{ m.status}}</td>
                 <td>
+                  
                   <b-button size="sm" @click.stop="info(m, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>

@@ -21,22 +21,21 @@
             </thead>
             <tbody v-if="applications.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in applications" :key="menu.id">
-                <td> <router-link :to="'student/'+menu.id"> {{ menu.firstname}} </router-link> </td>
+                <td>  {{ menu.firstname}}  </td>
                 <td>{{ menu.gender}}</td>
                 <td>{{ menu.birth_country}}</td>
                 <td>
-                  <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
-                    Edit
+                <router-link :to="'student/'+menu.id">
+                  <b-button size="sm"  class="mr-1 btn-parimary">
+                    View
                   </b-button>
-                  <b-button size="sm" @click="deleteMenu(menu, index, $event.target)" class="mr-1 btn-danger">
-                    Delete
-                  </b-button>
+                  </router-link>
                 </td>
               </tr>
             </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="4">
+                <td colspan="3">
                   <div v-if="!loading"> No Data.</div>
                   <div v-else> loading...</div>
                 </td>
@@ -46,7 +45,7 @@
         </b-card>
       </b-col>
     </b-row>
-   
+
   </div>
 </template>
 <script>

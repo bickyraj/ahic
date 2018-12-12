@@ -38,7 +38,7 @@ class ApplicationForm extends Model
         return $this->hasOne('App\ApplicationRecognitionOfPriorLearning','application_form_id','id');
     }
     public function services(){
-        return $this->hasOne('App\ApplicationAdditionalServices','application_form_id','id');
+        return $this->hasOne('App\ApplicationAdditionalServices');
     }
     public function checklist(){
         return $this->hasOne('App\ApplicationCheckList','application_form_id','id');

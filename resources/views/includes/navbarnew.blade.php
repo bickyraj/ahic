@@ -3,7 +3,7 @@
   <div class="container">
     <div class="navbar p-0 navbar-expand-lg">
       <div class="navbar-brand">
-        <a class="logo-default" href="index.php">
+        <a class="logo-default" href="{{route('home')}}">
           <div class="" style="float:left;">
             <img alt="" src="{{asset('/')}}public/ahic/img/logo-black.png" class="responsive" width="60">
           </div>

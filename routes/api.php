@@ -43,6 +43,12 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('enquiry', 'EnquiryController@store');
     Route::post('enquiry/edit/{id}', 'EnquiryController@edit');
     Route::delete('enquiry/{id}', 'EnquiryController@destroy');
+    // Enq functions.
+    Route::get('downloads', 'DownloadController@index');
+    Route::get('download/{id}', 'DownloadController@show');
+    Route::post('download', 'DownloadController@store');
+    Route::post('download/edit', 'DownloadController@edit');
+    Route::delete('download/{id}', 'DownloadController@destroy');
 
     // User functions.
     Route::get('users', 'UserController@index');

@@ -25,6 +25,9 @@ use App\Http\Resources\Menu as Resource;
 class FormController extends Controller
 {
         public function store(Request $request){
+
+          
+
             $application_form_id ='';
 
 $data=[];
@@ -51,7 +54,7 @@ $data=[];
                     $data['course_id'] = $request->input('course_id');
                     $data['application_form_id'] = $application_form_id;
                     $creater  = ApplicationCourse::create($data);
-// Application Passport 
+// Application Passport
 
                 $data = [];
                  $data['application_form_id'] = $application_form_id;
@@ -114,7 +117,7 @@ $data=[];
                 }
 
   //Application Current English Level
-        $data =[];    
+        $data =[];
                  $data['application_form_id'] = $application_form_id;
                 $data['english_first_lang'] = $request->input('eng_lang');
                 $data['english_lang_test'] = $request->input('evidence');
@@ -127,12 +130,12 @@ $data=[];
                 $data['reading'] = $request->input('reading');
                 ApplicationCurrentEnglishLevel::create($data);
   //Application RPL
-        $data =[];    
+        $data =[];
                  $data['application_form_id'] = $application_form_id;
                 $data['status'] = $request->input('rpl');
                 ApplicationRecognitionOfPriorLearning::create($data);
   //Application course and other fees
-        $data =[];    
+        $data =[];
                  $data['application_form_id'] = $application_form_id;
                 $data['application_fee'] = $request->input('application_fee');
                 $data['tution_fee'] = $request->input('tution_fee');
@@ -140,7 +143,7 @@ $data=[];
                 $data['airport_pickup_fee'] = $request->input('airport_fee');
                 ApplicationCourseAndOtherFees::create($data);
   //Application additional Services
-        $data =[];    
+        $data =[];
                  $data['application_form_id'] = $application_form_id;
                 $data['airport_pickup'] = $request->input('pickup');
                 $data['assistance_with_accomodation'] = $request->input('acco_assistance');
@@ -149,7 +152,7 @@ $data=[];
                 $data['if_disability'] = $request->input('if_disability');
                 ApplicationAdditionalServices::create($data);
   //Application Check List
-        $data =[];    
+        $data =[];
     $data['application_form_id'] = $application_form_id;
 	$data['completed_all_form'] = $request->input('form_complete');
 	$data['enclosed_certified_passport_and_visa'] = $request->input('pv_compete');
@@ -159,7 +162,7 @@ $data=[];
 	$data['read_ticked_declaration'] = $request->input('all_complete');
                 ApplicationCheckList::create($data);
   //Application If underage
-        $data =[];    
+        $data =[];
         $data['application_form_id'] = $application_form_id;
         $data['parent_name'] = $request->input('parent_name');
         $data['contact_detail'] = $request->input('contact_detail');

@@ -158,6 +158,15 @@ export default {
       }
     },
     {
+      name: 'Downloads',
+      url: url + 'downloads',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
       name: 'Enquiries',
       url: url + 'enquiries',
       icon: 'fas fa-book-open',

@@ -36,10 +36,15 @@
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(module, index) in table_items" :key="module.id">
-                <td> <router-link :to="'module/'+module.id"> {{ module.title}} </router-link> </td>
+                <td> {{ module.title}}  </td>
                 <td>{{ module.display_type}}</td>
                 <td>{{ module.status}}</td>
                 <td>
+                  <router-link :to="'module/'+module.id"> 
+                  <b-button size="sm"  class="mr-1 btn-primary">
+                    View
+                  </b-button>
+                </router-link>
                   <b-button size="sm" @click.stop="info(module, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -77,7 +82,7 @@
           <label for="">Status</label>
           <input type="text" name="status" v-bind:value="modalInfo.data.status" class="form-control" placeholder="" required>
         </div>
-       
+
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModuleModal">Cancel</b-btn>
       </form>

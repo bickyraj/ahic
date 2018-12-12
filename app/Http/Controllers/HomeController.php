@@ -10,6 +10,7 @@ use App\PaymentOption;
 use App\PageModule;
 use App\AgentInformation;
 use App\Country;
+use App\Download;
 
 
 class HomeController extends Controller
@@ -57,7 +58,8 @@ class HomeController extends Controller
     }
 
     public function download(){
-      return view('front.download');
+      $downloads = Download::all();
+      return view('front.download',compact('downloads'));
     }
     public function contact(){
       return view('front.contact');

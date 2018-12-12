@@ -44,18 +44,21 @@
             <thead>
               <tr>
                 <th>  Name </th>
-                <th class="col-md-2">Image</th>
                 <th>Parent Page</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(page, index) in table_items" :key="page.id">
-                <td> <router-link :to="'page/'+page.id"> {{ page.name}} </router-link> </td>
-                       <td> <img :src="'../public/images/pages/'+page.image" class="img-fluid" /></td>
+                <td>  {{ page.name}}  </td>
                   <td v-if="page.parent_page">{{page.parent_page.name}} </td>
                   <td v-else> -- </td>
                 <td>
+                  <router-link :to="'page/'+page.id">
+                         <b-button size="sm"  class="mr-1 btn-primary">
+                           View
+                         </b-button>
+                       </router-link>
                   <b-button size="sm" @click.stop="info(page, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -85,12 +88,12 @@
           <label for="">Name</label>
           <input type="text" name="name" v-bind:value="modalInfo.data.name" class="form-control" placeholder="" required>
         </div>
-          <div class="form-group" v-if="modalInfo.data.image == null"> 
+          <div class="form-group" v-if="modalInfo.data.image == null">
                     <label for="">Image  </label>
                     <input type="file" name="image" class="form-control">
                   </div>
 
-               <div class="form-group" v-else> 
+               <div class="form-group" v-else>
                     <label for="">Image  </label> <br>
                <img :src="'../public/images/pages/'+modalInfo.data.image" class="img-fluid" />
                     <input type="file" name="image" class="form-control">
@@ -115,7 +118,7 @@
           <label for="">Description</label>
                    <editor  name="description" v-model="modalInfo.data.description"></editor>
         </div>
-       
+
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>

@@ -130,7 +130,26 @@ const routes = [
                 },
                 {
                     name: 'Enquiries',
-                    path: admin_url + 'enquiries', 
+                    path: admin_url + 'enquiries',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
+        path: admin_url + 'downloads',
+        component: require('./components/Admin/Download/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Downloads',
+                    path: admin_url + 'downloads',
                 }
             ],
             middlewareAuth: true,

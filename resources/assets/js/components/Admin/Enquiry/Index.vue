@@ -40,15 +40,15 @@
                 <td>{{ enquiry.message }}</td>
                 <td>
                   <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,index,$event.target)">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    <option value="1">Pending</option>
+                    <option value="2">Verified</option>
+                    <option value="3">Applied</option>
                   </select>
                 </td>
                 <td>
-                  <b-button size="sm" @click.stop="info(enquiry, index, $event.target)" class="mr-1 btn-success">
+                  <!-- <b-button size="sm" @click.stop="info(enquiry, index, $event.target)" class="mr-1 btn-success">
                     Edit
-                  </b-button>
+                  </b-button> -->
                   <b-button size="sm" @click="deleteEnquiry(enquiry, index, $event.target)" class="mr-1 btn-danger">
                     Delete
                   </b-button>
@@ -122,7 +122,16 @@
         let url = self.$root.baseUrl + '/api/admin/enquiry/edit/'+item;
         var val = el.value;
         axios.post(url,{val:val}).then(response=>{
-          console.log(response);
+          self.table_items = response.data.data;
+          self.$swal({
+            // position: 'top-end',
+            type: 'success',
+            title: 'Enquiry updated successfully.',
+            showConfirmButton: true,
+            // timer: 1500,
+            customClass: 'crm-swal',
+            confirmButtonText: 'Thanks',
+          })
         })
       },
       info(item, index, button) {

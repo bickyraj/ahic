@@ -67,15 +67,20 @@
                 <th>Name</th>
                 <th>Duration</th>
                 <th>Study Method</th>
-                <th class="col-md-2">Action</th>
+                <th class="col-md-2" colspan=2>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
-                <td> <router-link :to="'course/'+menu.id"> {{ menu.name}} </router-link>  </td>
+                <td>  {{ menu.name}}  </td>
                 <td>{{ menu.duration}}</td>
                 <td>{{ menu.study_method}}</td>
                 <td>
+                  <router-link :to="'course/'+menu.id">
+                  <b-button size="sm" class="mr-1 btn-primary">
+                    View
+                  </b-button>
+                   </router-link>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -95,7 +100,7 @@
             </tbody>
           </table>
 
-         
+
         </b-card>
       </b-col>
     </b-row>
@@ -116,11 +121,11 @@
                           <option  v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
                       </select>
                   </div>
-                    <div class="form-group" v-if="modalInfo.data.background_image == null"> 
+                    <div class="form-group" v-if="modalInfo.data.background_image == null">
                     <label for="">Image Background </label>
                     <input type="file" name="background_image" class="form-control">
                   </div>
-                  <div class="form-group" v-else> 
+                  <div class="form-group" v-else>
                     <label for="">Image Background </label> <br>
                <img :src="'../public/images/courses/'+modalInfo.data.background_image" class="img-fluid" />
                     <input type="file" name="background_image" class="form-control">
@@ -190,11 +195,11 @@
                 editor.on('change', function () {
                     editor.save();
                 });
-            
+
       },
           image_title:true,
           automatic_uploads: true,
-          file_picker_types: 'image', 
+          file_picker_types: 'image',
           // and here's our custom image picker
           file_picker_callback: function(cb, value, meta) {
             var input = document.createElement('input');
@@ -217,7 +222,7 @@
           }
         },
 
-        
+
       }
     },
     created() {
@@ -364,7 +369,7 @@
           });
 
       },
-  
+
       showModal() {
         this.$refs.myModalRef.show()
       },

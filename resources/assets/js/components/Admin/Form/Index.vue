@@ -1,3 +1,16 @@
+<style lang="">
+    .vdp-datepicker__calendar{
+        background-color: black !important;
+        color:white;
+    }
+    .day__month_btn:hover ,.month__year_btn:hover{
+        background-color: black !important;
+
+    }
+    .form-control:disabled, .form-control[readonly]{
+        background-color: transparent !important;
+    }
+</style>
 <template>
   <div class="animated">
     <b-row>
@@ -40,18 +53,19 @@
                         <div class="form-group col-md-12">
                             <label for=""> Choose A Course</label>
                             <select name="course_id" id="" class="form-control">
+                              <option selected> Choose A Course</option>
                                 <option  v-for="course in courses" :key="course.id" :value="course.id"> {{course.name}} </option>
                             </select>
                         </div>
-                        
 
                         <div class="form-group col-md-12">
                             <label for=""> Choose Agent </label>
                             <select name="company_id" id="" class="form-control">
+                              <option selected> Choose Agent</option>
                                 <option  v-for="company in agents" :key="company.id" :value="company.id"> {{company.company_name}} </option>
                             </select>
                         </div>
-                        
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -63,28 +77,28 @@
                             <label for="">Title And Family Name</label>
                                     <input type="text" class="form-control" name="familyname" value="Family Name">
                             </div>
-                      
+
                         <div class="form-group col-md-3">
                             <label for="">First Name</label>
                                     <input type="text" name="firstname" class="form-control" value="First">
                          </div>
-                      
+
                         <div class="form-group col-md-3">
                             <label for="">Middle Name</label>
                                     <input type="text" name="middlename" class="form-control" value="Middle">
                          </div>
-                         
-                      
+
+
                         <div class="form-group col-md-3">
                             <label for="">DOB</label>
-                                    <input type="text" name="dob" class="form-control" value="2018-11-07">
+                            <datepicker format="yyyy-MM-dd" name="dob"  bootstrap-styling  :initialView="'year'" ></datepicker>
                          </div>
-                      
+
                         <div class="form-group col-md-3">
                             <label for="">Gender</label>
                                     <input type="text" name="gender" class="form-control" value="male">
                          </div>
-                      
+
                         <div class="form-group col-md-3">
                             <label for="">Place Of Birth City </label>
                                     <input type="text" name="birth_city" class="form-control" value="ktm">
@@ -104,11 +118,11 @@
                          </div>
                         <div class="form-group col-md-3">
                             <label for="">Issued Date </label>
-                                    <input type="text" name="p_issued_date" class="form-control" value="2012-02-01">
+                            <datepicker format="yyyy-MM-dd" name="p_issued_date"  bootstrap-styling  :initialView="'year'" ></datepicker>
                          </div>
                         <div class="form-group col-md-3">
                             <label for="">Expired Date </label>
-                                    <input type="text" name="p_expired_date" class="form-control" value="2012-02-01">
+                            <datepicker format="yyyy-MM-dd" name="p_expired_date"  bootstrap-styling  :initialView="'year'" ></datepicker>
                          </div>
                         <div class="form-group col-md-3">
                             <label for="">Place Of Issue </label>
@@ -129,7 +143,7 @@
                          </div>
                             <div class="form-group col-md-3">
                             <label for="">Visa Expired Date</label>
-                                    <input type="text" name="v_exp_date" class="form-control"  value="2018-11-07">
+                            <datepicker format="yyyy-MM-dd" name="v_exp_date"  bootstrap-styling  :initialView="'year'" ></datepicker>
                          </div>
                             <div class="form-group col-md-3">
                             <label for="">At which office are you going to aplly for your visa</label>
@@ -146,7 +160,7 @@
                             </div>
 
                          </div>
-                      
+
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
                             <h5 class="">Address In Australia</h5>
@@ -164,27 +178,27 @@
                             <label for=""> Province/State</label>
                                 <input type="text" class="form-control" name="aus_province" value="Sydney">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Post Code </label>
                                 <input type="text" class="form-control" name="aus_postcode" value="code123">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Email </label>
                                 <input type="text" class="form-control" name="aus_email" value="email@aus.gmail.com">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Country </label>
                                 <input type="text" class="form-control" value="Australia" name="aus_country" >
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Telephone</label>
                                 <input type="text" class="form-control" name="aus_telephone"  value="123456789">
                         </div>
-                        
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -203,29 +217,29 @@
                             <label for=""> Province/State</label>
                                 <input type="text" class="form-control" name="home_province" value="Bagmati">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Email</label>
                                 <input type="text" class="form-control" name="home_email" value="home@gmail.com">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Post Code </label>
                                 <input type="text" class="form-control" name="home_postcode" value="987654">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Country </label>
                                 <input type="text" class="form-control" name="home_country" value="Nepal">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Telephone</label>
                                 <input type="text" class="form-control" name="home_telephone" value="5581324">
                         </div>
-                        
+
                        </div>
-                
+
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
                             <h5 class="">Emergency Contact</h5>
@@ -255,7 +269,7 @@
                             <label for=""> Email</label>
                                 <input type="text" class="form-control" name="e_email" value="dad@california.com">
                         </div>
-                        
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -277,24 +291,24 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for=""> Started Month</label>
-                                <input type="text" class="form-control" :name="'edu['+n+'][started_month]'" value="Jan">
+                            <datepicker format="MM" :name="'edu['+n+'][started_month]'"  bootstrap-styling :minimumView="'month'" :maximumView="'month'" :initialView="'month'"   ></datepicker>
                         </div>
                         <div class="form-group col-md-3">
                             <label for=""> Started Year</label>
-                                <input type="text" class="form-control" :name="'edu['+n+'][started_year]'" value="2012">
+                            <datepicker format="yyyy" :name="'edu['+n+'][started_year]'"  bootstrap-styling :minimumView="'year'" :maximumView="'year'" :initialView="'year'"   ></datepicker>
                         </div>
                         <div class="form-group col-md-3">
                             <label for=""> Completed Month</label>
-                                <input type="text" class="form-control" :name="'edu['+n+'][completed_month]'" value="Dec"> 
+                            <datepicker format="MM" :name="'edu['+n+'][completed_month]'"  bootstrap-styling :minimumView="'month'" :maximumView="'month'" :initialView="'month'"   ></datepicker>
                         </div>
                         <div class="form-group col-md-3">
                             <label for=""> Completed Year</label>
-                                <input type="text" class="form-control" :name="'edu['+n+'][completed_year]'" value="2018">
+                            <datepicker format="yyyy" :name="'edu['+n+'][completed_year]'"  bootstrap-styling :minimumView="'year'" :maximumView="'year'" :initialView="'year'"   ></datepicker>
                         </div>
 
     </div>
-                    
-                        
+
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -342,7 +356,7 @@
                             <label for=""> Total Score</label>
                                 <input type="text" class="form-control" name="total_score" value="100">
                         </div>
-                        
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -355,7 +369,7 @@
                                 <input type="radio" name="rpl" value="0"> No <br>
                                 <i> If yes, pleaserefer to CT and RPL in the International Student Handbook on oir website.</i>
                         </div>
-                      
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -380,7 +394,7 @@
                             <label for=""> Airport Pickup Fee (Optional)  </label> <br>
                                <input type="text"  value="$200" class="form-control" name="airport_fee">
                         </div>
-                      
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -392,7 +406,7 @@
                                <input type="radio" name="pickup" value="0"> No
                                <input type="radio"  name="pickup" checked value="1"> Yes
                                     <i> If yes, please fill a seperate form</i>
-                        </div> 
+                        </div>
 
                         <div class="form-group col-md-3">
                             <label for=""> Do you require assistance with accomodation? </label> <br>
@@ -404,11 +418,11 @@
                                <input type="text" class="form-control" name="acco_if_yes" v-if="acco == 1">
                                </transistion>
 
-                        </div> 
+                        </div>
 
                         <div class="form-group col-md-3">
                             <label for=""> Accommodation Start Date </label> <br>
-                               <input type="text" class="form-control" name="acco_start_date" value="2012-02-12">
+                            <datepicker format="yyyy-MM-dd" name="acco_start_date"  bootstrap-styling  :initialView="'year'" ></datepicker>
                         </div>
                         <div class="form-group col-md-3">
                             <label for=""> Do you consider yourself to have a disablity, impairment or a long-term health condition?</label> <br>
@@ -421,7 +435,7 @@
                                </transistion>
 
                         </div>
-                      
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -431,27 +445,27 @@
                         <div class="form-group col-md-6">
                             <label for=""> Completed all sections of this application form?</label> <br>
                                <input type="radio" name="form_complete" value="1" checked > Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Attached/enclosed certificed copied of your passport visa ?</label> <br>
                                <input type="radio" name="pv_compete" value="1" checked > Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Attached/enclosed certificed copies of your qualifications ?</label> <br>
                                <input type="radio" name="qualifications_complete" value="1" checked > Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Attached/enclosed certificed copies of English languafe proficiency ?</label> <br>
                                <input type="radio" name="language_complete"  value="1" checked> Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Attached/enclosed any other certified documents requested in this application forn ?</label> <br>
                                <input type="radio" name="documents_complete"  value="1" checked> Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Read and ticked/signed the declaration ?</label> <br>
                                <input type="radio" name="all_complete" value="1" checked > Yes
-                        </div> 
+                        </div>
 
                        </div>
                        <div class="row">
@@ -461,16 +475,16 @@
 
                         <div class="form-group col-md-6">
                             <label for=""> Parent Name</label> <br>
-                               <input type="text" name="parent_name" value="Parent Name" class="form-control"> 
-                        </div> 
+                               <input type="text" name="parent_name" value="Parent Name" class="form-control">
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Contact Detail</label> <br>
-                               <input type="text" name="contact_detail" value="12514151" class="form-control"> 
-                        </div> 
+                               <input type="text" name="contact_detail" value="12514151" class="form-control">
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Date</label> <br>
-                               <input type="text" name="date" value="2015-02-04" class="form-control"> 
-                        </div> 
+                            <datepicker format="yyyy-MM-dd" name="date"  bootstrap-styling  :initialView="'year'" ></datepicker>
+                        </div>
 
                        </div>
                        <hr>
@@ -481,12 +495,12 @@
                     </form>
                 </div>
             </div>
-        </div>                
-          
+        </div>
 
-                
 
-         
+
+
+
         </b-card>
       </b-col>
     </b-row>
@@ -512,9 +526,9 @@
               disable:'',
                 q:['1'],
                 n:'',
-               courses:'', 
-               agents:'', 
-               intakes:'', 
+               courses:'',
+               agents:'',
+               intakes:'',
          }
       },
       created(){
@@ -590,9 +604,9 @@
             });
           },
           removeQ(a){
-    for( var i = 0; i < this.q.length; i++){ 
+    for( var i = 0; i < this.q.length; i++){
             if (this.q[i] === a) {
-                this.q.splice(i, 1); 
+                this.q.splice(i, 1);
             }
             }
           },

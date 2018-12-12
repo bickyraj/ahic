@@ -57,7 +57,7 @@ class EnquiryController extends Controller
      */
      public function edit(Request $request,$id)
      {
-         $e = Enquiry::findOrFail($id)->first();
+         $e = Enquiry::findOrFail($id);
          $e->status = $request->val;
          $e->save();
          $enqs = Enquiry::all();

@@ -43,108 +43,22 @@
   <section class="padding-y-100 border-bottom border-white bg-light">
     <div class="container">
       <div class="row">
+        @foreach($downloads as $download)
         <div class="col-lg-4 col-md-4 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
           <div class="card height-100p shadow-v1 text-center">
             <!-- <img class="card-img-top" src="assets/img/262x230/5.jpg" alt=""> -->
             <div class="card-body">
               <h4>
-                Student Application Form
+               {{$download->title}}
               </h4>
-              <!-- <p class="mb-0">
-                Eden Academy Consultancy Pvt. Ltd.<br>
-                Dharan-6, Bhanuchowk, Sunsari, Nepal
-              </p> -->
+
             </div>
             <div class="card-footer border-top">
-              <button class="btn btn-primary mr-3 mb-3">Download Now</button>
+            <a href="{{asset('/')}}public/files/{{ $download->file }}"> <button class="btn btn-primary mr-3 mb-3">Download Now</button> </a>
             </div>
           </div>
         </div> <!-- END col-lg-3 col-md-6-->
-        <div class="col-lg-4 col-md-4 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
-          <div class="card height-100p shadow-v1 text-center">
-            <!-- <img class="card-img-top" src="assets/img/262x230/5.jpg" alt=""> -->
-            <div class="card-body">
-              <h4>
-                Student Handbook
-              </h4>
-              <!-- <p class="mb-0">
-                Eden Academy Consultancy Pvt. Ltd.<br>
-                Dharan-6, Bhanuchowk, Sunsari, Nepal
-              </p> -->
-            </div>
-            <div class="card-footer border-top">
-              <button class="btn btn-primary mr-3 mb-3">Download Now</button>
-            </div>
-          </div>
-        </div> <!-- END col-lg-3 col-md-6-->
-        <div class="col-lg-4 col-md-4 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
-          <div class="card height-100p shadow-v1 text-center">
-            <!-- <img class="card-img-top" src="assets/img/262x230/5.jpg" alt=""> -->
-            <div class="card-body">
-              <h4>
-                Terms and Condition / Refund Policy
-              </h4>
-              <!-- <p class="mb-0">
-                Eden Academy Consultancy Pvt. Ltd.<br>
-                Dharan-6, Bhanuchowk, Sunsari, Nepal
-              </p> -->
-            </div>
-            <div class="card-footer border-top">
-              <button class="btn btn-primary mr-3 mb-3">Download Now</button>
-            </div>
-          </div>
-        </div> <!-- END col-lg-3 col-md-6-->
-        <div class="col-lg-4 col-md-4 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
-          <div class="card height-100p shadow-v1 text-center">
-            <!-- <img class="card-img-top" src="assets/img/262x230/5.jpg" alt=""> -->
-            <div class="card-body">
-              <h4>
-                Assessment Cover Sheet
-              </h4>
-              <!-- <p class="mb-0">
-                Eden Academy Consultancy Pvt. Ltd.<br>
-                Dharan-6, Bhanuchowk, Sunsari, Nepal
-              </p> -->
-            </div>
-            <div class="card-footer border-top">
-              <button class="btn btn-primary mr-3 mb-3">Download Now</button>
-            </div>
-          </div>
-        </div> <!-- END col-lg-3 col-md-6-->
-        <div class="col-lg-4 col-md-4 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
-          <div class="card height-100p shadow-v1 text-center">
-            <!-- <img class="card-img-top" src="assets/img/262x230/5.jpg" alt=""> -->
-            <div class="card-body">
-              <h4>
-                AHIC Booklet
-              </h4>
-              <!-- <p class="mb-0">
-                Eden Academy Consultancy Pvt. Ltd.<br>
-                Dharan-6, Bhanuchowk, Sunsari, Nepal
-              </p> -->
-            </div>
-            <div class="card-footer border-top">
-              <button class="btn btn-primary mr-3 mb-3">Download Now</button>
-            </div>
-          </div>
-        </div> <!-- END col-lg-3 col-md-6-->
-        <div class="col-lg-4 col-md-4 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
-          <div class="card height-100p shadow-v1 text-center">
-            <!-- <img class="card-img-top" src="assets/img/262x230/5.jpg" alt=""> -->
-            <div class="card-body">
-              <h4>
-                Course Variation
-              </h4>
-              <!-- <p class="mb-0">
-                Eden Academy Consultancy Pvt. Ltd.<br>
-                Dharan-6, Bhanuchowk, Sunsari, Nepal
-              </p> -->
-            </div>
-            <div class="card-footer border-top">
-              <button class="btn btn-primary mr-3 mb-3">Download Now</button>
-            </div>
-          </div>
-        </div> <!-- END col-lg-3 col-md-6-->
+        @endforeach
 
       </div>
     </div>

@@ -11,7 +11,7 @@
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Course Category</b-button>
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add Course Category">
                 <form @submit.prevent="addCategory" ref="addCategoryForm" enctype="multipart/form-data">
-              
+
                   <div class="form-group">
                     <label for="">Name </label>
                     <input type="text" name="name" class="form-control" placeholder="" required>
@@ -24,7 +24,7 @@
                     <label for="">Order By </label>
                     <input type="text" name="order_by" class="form-control" placeholder="" required>
                   </div>
-               
+
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Course Category</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
@@ -42,9 +42,14 @@
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
-                <td> <router-link :to="'course_category/'+menu.id"> {{ menu.name}} </router-link> </td>
+                <td> {{ menu.name}}  </td>
                 <td>{{ menu.order_by}}</td>
                 <td>
+                  <router-link :to="'course_category/'+menu.id">
+                  <b-button size="sm"  class="mr-1 btn-parimary">
+                    View
+                  </b-button>
+                  </router-link>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -64,7 +69,7 @@
             </tbody>
           </table>
 
-         
+
         </b-card>
       </b-col>
     </b-row>
@@ -78,11 +83,11 @@
                     <label for="">Name </label>
                     <input type="text" name="name" :value="modalInfo.data.name" class="form-control" placeholder="" required>
                   </div>
-                  <div class="form-group" v-if="modalInfo.data.image_background == null"> 
+                  <div class="form-group" v-if="modalInfo.data.image_background == null">
                     <label for="">Image Background </label>
                     <input type="file" name="image_background" class="form-control">
                   </div>
-                  <div class="form-group" v-else> 
+                  <div class="form-group" v-else>
                     <label for="">Image Background </label> <br>
                <img :src="'../public/images/course_category/'+modalInfo.data.image_background" class="img-fluid" />
                     <input type="file" name="image_background" class="form-control">

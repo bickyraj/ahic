@@ -47,7 +47,7 @@
                     <label for="">Start Date</label>
                     <input type="text" name="start_date" class="form-control" placeholder="" required>
                   </div>
-                  
+
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Agent</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
@@ -65,7 +65,7 @@
             <div class="col-md-3 float-left">
                <input type="text" class="form-control" placeholder="Search">
             </div>
- 
+
           </div>
 
                 <table class="table trump-table table-hover">
@@ -81,12 +81,17 @@
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(agent, index) in table_items" :key="agent.id">
-                <td> <router-link :to="'agent/'+agent.id"> {{ agent.first_name}} {{agent.last_name}} </router-link>  </td>
+                <td>{{ agent.first_name}} {{agent.last_name}}  </td>
                 <td>{{ agent.mobile_no || '  --' }}</td>
                 <td>{{ agent.email}}</td>
                 <td>{{ agent.address.substring(0,30) + ".."}}</td>
                 <td>{{ agent.start_date}}</td>
                 <td>
+           <router-link :to="'agent/'+agent.id">
+                  <b-button size="sm"  class="mr-1 btn-primary">
+                    View
+                  </b-button>
+                </router-link>
                   <b-button size="sm" @click.stop="info(agent, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -106,7 +111,7 @@
             </tbody>
           </table>
 
-         
+
         </b-card>
       </b-col>
     </b-row>
@@ -120,11 +125,11 @@
                     <label for="">ABN / Registration No / PAN </label>
                     <input type="text" name="pan" class="form-control" placeholder="" :value="modalInfo.data.pan" required>
                   </div>
-                        <div class="form-group" v-if="modalInfo.data.logo == null"> 
+                        <div class="form-group" v-if="modalInfo.data.logo == null">
                     <label for="">Logo </label>
                     <input type="file" name="logo" class="form-control">
                   </div>
-                  <div class="form-group" v-else> 
+                  <div class="form-group" v-else>
                     <label for="">Logo </label> <br>
                <img :src="'../public/images/agents/'+modalInfo.data.logo" class="img-fluid" />
                     <input type="file" name="logo" class="form-control">
@@ -301,7 +306,7 @@
 
       },
 
-  
+
       showModal() {
         this.$refs.myModalRef.show()
       },

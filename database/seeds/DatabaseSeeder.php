@@ -243,6 +243,23 @@ $competences = [
         $countries = [
     ['status'=>'1','name'=>'Nepal'],
     ['status'=>'1','name'=>'Australia'],
+    ['status'=>'1','name'=>'United Stated'],
+    ['status'=>'1','name'=>'United Kingdom'],
+    ['status'=>'1','name'=>'Afghanistan'],
+    ['status'=>'1','name'=>'Aland Islands'],
+    ['status'=>'1','name'=>'Albania'],
+    ['status'=>'1','name'=>'Algeria'],
+    ['status'=>'1','name'=>'American Samoa'],
+    ['status'=>'1','name'=>'Andorra'],
+    ['status'=>'1','name'=>'Angola'],
+    ['status'=>'1','name'=>'Bahrain'],
+    ['status'=>'1','name'=>'Bangladesh'],
+    ['status'=>'1','name'=>'Belarus'],
+    ['status'=>'1','name'=>'Belgium'],
+    ['status'=>'1','name'=>'Benin'],
+    ['status'=>'1','name'=>'Bermuda'],
+    ['status'=>'1','name'=>'China'],
+    ['status'=>'1','name'=>'Russia'],
 ];
 
 
@@ -300,6 +317,42 @@ $competences = [
             'status'=>'1',
 
         ]);
+               	DB::table('branch_locations')->insert([
+            'country_id' => '3',
+            'location' => 'New York',
+            'status'=>'1',
+
+        ]);
+               	DB::table('branch_locations')->insert([
+            'country_id' => '3',
+            'location' => 'California',
+            'status'=>'1',
+
+        ]);
+               	DB::table('branch_locations')->insert([
+            'country_id' => '3',
+            'location' => 'Las Vegas',
+            'status'=>'1',
+
+        ]);
+               	DB::table('branch_locations')->insert([
+            'country_id' => '3',
+            'location' => 'Santa Rosa',
+            'status'=>'1',
+
+        ]);
+        $d = [
+          ['title'=>'Student Application Form','file'=>'Student_Admission_Form.pdf'],
+          ['title'=>'Student Handbook','file'=>''],
+          ['title'=>'Terms & Conditions / Refund Policy','file'=>'Term Conditions & Refund.pdf'],
+          ['title'=>'Assessment Cover Sheet','file'=>'Assessment-Cover-Page.pdf'],
+          ['title'=>'AHIC Booklet','file'=>''],
+          ['title'=>'Course Variation','file'=>'Course_Variation.pdf'],
+          ['title'=>'Student Request Form','file'=>'Student_Request_Form.pdf'],
+        ];
+        foreach ($d as $k) {
+          DB::table('downloads')->insert($k);
+        };
 
 
 
