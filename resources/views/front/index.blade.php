@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
-
  <div class="site-search">
    <div class="site-search__close bg-black-0_8"></div>
    <form class="form-site-search" action="#" method="POST">
@@ -17,10 +15,7 @@
 
 
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
-    <!-- <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class=""></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
-    </ol> -->
+    
 
     <div class="carousel-inner">
       <div class="carousel-item padding-y-80 height-80vh active">
@@ -117,7 +112,7 @@
             <p class="my-4">
               Harbour college is conveniently located in the heart of Sydney’s Central Business District (CBD). Harbour College can offer you a range of flexible course delivery options appropriate to your preferred learning style.
             </p>
-            <a href="welcome-read-more.php" class="btn btn-outline-primary">
+            <a href="{{route('welcome')}}" class="btn btn-outline-primary">
               Read More
             </a>
           </div>
@@ -173,34 +168,7 @@
               @foreach ($countries as $country)
                 <option value="{{$country->id}}">{{$country->name}}</option>
               @endforeach
-              {{-- <option value="United States">United States</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="Afghanistan">Afghanistan</option>
-              <option value="Aland Islands">Aland Islands</option>
-              <option value="Albania">Albania</option>
-              <option value="Algeria">Algeria</option>
-              <option value="American Samoa">American Samoa</option>
-              <option value="Andorra">Andorra</option>
-              <option value="Angola">Angola</option>
-              <option value="Anguilla">Anguilla</option>
-              <option value="Antarctica">Antarctica</option>
-              <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-              <option value="Argentina">Argentina</option>
-              <option value="Armenia">Armenia</option>
-              <option value="Aruba">Aruba</option>
-              <option value="Australia">Australia</option>
-              <option value="Austria">Austria</option>
-              <option value="Azerbaijan">Azerbaijan</option>
-              <option value="Bahamas">Bahamas</option>
-              <option value="Bahrain">Bahrain</option>
-              <option value="Bangladesh">Bangladesh</option>
-              <option value="Barbados">Barbados</option>
-              <option value="Belarus">Belarus</option>
-              <option value="Belgium">Belgium</option>
-              <option value="Belize">Belize</option>
-              <option value="Benin">Benin</option>
-              <option value="Bermuda">Bermuda</option>
-              <option value="Nepal">Nepal</option> --}}
+     
             </select>
             <span class="error text-danger"></span>
 
@@ -322,70 +290,38 @@
     </div> <!-- END row-->
 
     <div class="row mt-4">
-
+      @foreach($news as $new)
+                 @php
+              $date = date_create($new->date);
+              $newdate = date_format($date,'M d, Y');
+                  $slug = str_replace(' ', '_', $new->title);
+           @endphp
       <div class="col-lg-4 col-md-6 marginTop-30 wow slideInUp" data-wow-delay=".1s">
         <div class="card padding-30 shadow-v1">
          <p class="text-primary">
-           Oct 13, 2018
+           
+         {{$newdate}}
          </p>
-         <a href="news-detail.php" class="h4 mb-3">
-           Orientation Program
+         <a href="{{route('singleNews',$slug)}}" class="h4 mb-3">
+        
+            {{$new->title}}
          </a>
          <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/news-1.jpg" alt="">
 
          <p class="paddingTop-10">
-           Investig ationes demons trave sed vunt lectores legere do kurus qodk legunt saepiu claritas ekist conse tetur adipi sicing elit, sed kdo.
+                {!! html_entity_decode(str_limit($new->description, 180)) !!}
          </p>
-         <a href="news-detail.php" class="btn btn-outline-primary align-self-start mt-2">
+         <a href="{{route('singleNews',$slug)}}" class="btn btn-outline-primary align-self-start mt-2">
            Read More
          </a>
         </div>
       </div>
-
-      <div class="col-lg-4 col-md-6 marginTop-30 wow slideInUp" data-wow-delay=".2s">
-        <div class="card padding-30 shadow-v1">
-         <p class="text-primary">
-           Oct 13, 2018
-         </p>
-         <a href="news-detail.php" class="h4 mb-3">
-           Graduation Day
-         </a>
-         <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/news-2.jpg" alt="">
-
-         <p class="paddingTop-10">
-           Investig ationes demons trave sed vunt lectores legere do kurus qodk legunt saepiu claritas ekist conse tetur adipi sicing elit, sed kdo.
-         </p>
-         <a href="news-detail.php" class="btn btn-outline-primary align-self-start mt-2">
-           Read More
-         </a>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 marginTop-30 wow slideInUp" data-wow-delay=".3s">
-        <div class="card padding-30 shadow-v1">
-         <p class="text-primary">
-           Aug 13, 2018
-         </p>
-         <a href="news-detail.php" class="h4 mb-3">
-           New Year Celebration
-         </a>
-         <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/news-3.jpg" alt="">
-
-         <p class="paddingTop-10">
-           Investig ationes demons trave sed vunt lectores legere do kurus qodk legunt saepiu claritas ekist conse tetur adipi sicing elit, sed kdo.
-         </p>
-         <a href="news-detail.php" class="btn btn-outline-primary align-self-start mt-2">
-           Read More
-         </a>
-        </div>
-      </div>
-      <div class="col-12 mt-5 text-center">
-        <a href="news-listing.php" class="btn btn-primary">
+      @endforeach
+            <div class="col-12 mt-5 text-center">
+        <a href="{{route('news')}}" class="btn btn-primary">
           View All News
         </a>
       </div>
-
-
     </div> <!-- END row-->
   </div> <!-- END container-->
 </section>
@@ -407,48 +343,14 @@
 
     <div class="row marginTop-60">
       <div class="owl-carousel arrow-edge arrow-black" data-items="4" data-arrow="true" data-tablet-items="2" data-mobile-items="1">
+        @foreach($gallery as $image)
         <div class="hover:parent">
-          <img class="w-100 transition-0_3 hover:zoomin" src="{{asset('/')}}public/ahic/img/school/21.jpg" alt="">
+          <img class="w-100 transition-0_3 hover:zoomin" src="{{asset('/')}}public/images/gallery/{{$image->image}}" alt="">
           <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
-            <a href="{{asset('/')}}public/ahic/img/school/21.jpg" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
+            <a href="{{asset('/')}}public/images/gallery/{{$image->image}}" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
           </div>
         </div>
-        <div class="hover:parent">
-          <img class="w-100 transition-0_3 hover:zoomin" src="{{asset('/')}}public/ahic/img/school/22.jpg" alt="">
-          <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
-            <a href="{{asset('/')}}public/ahic/img/school/22.jpg" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
-          </div>
-        </div>
-        <div class="hover:parent">
-          <img class="w-100 transition-0_3 hover:zoomin" src="{{asset('/')}}public/ahic/img/school/23.jpg" alt="">
-          <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
-            <a href="{{asset('/')}}public/ahic/img/school/23.jpg" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
-          </div>
-        </div>
-        <div class="hover:parent">
-          <img class="w-100 transition-0_3 hover:zoomin" src="{{asset('/')}}public/ahic/img/school/24.jpg" alt="">
-          <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
-            <a href="{{asset('/')}}public/ahic/img/school/24.jpg" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
-          </div>
-        </div>
-        <div class="hover:parent">
-          <img class="w-100 transition-0_3 hover:zoomin" src="{{asset('/')}}public/ahic/img/school/15.jpg" alt="">
-          <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
-            <a href="{{asset('/')}}public/ahic/img/school/25.jpg" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
-          </div>
-        </div>
-        <div class="hover:parent">
-          <img class="w-100 transition-0_3 hover:zoomin" src="{{asset('/')}}public/ahic/img/school/18.jpg" alt="">
-          <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
-            <a href="{{asset('/')}}public/ahic/img/school/11.jpg" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
-          </div>
-        </div>
-        <div class="hover:parent">
-          <img class="w-100 transition-0_3 hover:zoomin" src="{{asset('/')}}public/ahic/img/school/26.jpg" alt="">
-          <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
-            <a href="{{asset('/')}}public/ahic/img/school/26.jpg" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div> <!-- END row-->
 

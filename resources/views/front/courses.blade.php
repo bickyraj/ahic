@@ -71,7 +71,6 @@
                       selected
                     @endif
                       value="{{$stripped}}">
-
                       {{$category->name}}
              </option>
             @endforeach

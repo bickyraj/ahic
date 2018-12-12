@@ -24,6 +24,12 @@ Route::get('/student-service', 'HomeController@studentService')->name('student-s
 Route::get('/agents', 'HomeController@agents')->name('agents');
 Route::get('/download', 'HomeController@download')->name('download');
 Route::get('/contact', 'HomeController@contact')->name('contact');
+Route::get('/welcome', 'HomeController@readMore')->name('welcome');
+
+// News
+Route::get('/news', 'NewsController@news')->name('news');
+Route::get('/news/{news}', 'NewsController@singleNews')->name('singleNews');
+
 
 Route::post('/enquiry','EnquiryController@store')->name('enquiry');
 

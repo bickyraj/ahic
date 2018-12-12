@@ -84,6 +84,22 @@ class CourseController extends Controller
   
     }
 
+   public function updateOrder(Request $request)
+    {
+        $status = 0;
+        $data = $request->all();
+        foreach ($data as $key => $value) {
+            $menu = Course::find($value['id']);
+            $menu->order_by = $key;
+            if ($menu->save()) {
+                $status = 1;
+            }
+        }
+        return response()->json([
+            'status' => $status,
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -103,7 +119,6 @@ class CourseController extends Controller
         $course->description = $request->input('description');
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
-        $course->order_by = $request->input('order_by');
         $course->status = $request->input('status');
            $file = $request->file('background_image');
         if($file != null){
@@ -127,7 +142,7 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$category)
     {
             $status = 0;
         $id = $request->id;
@@ -140,7 +155,6 @@ class CourseController extends Controller
         $course->description = $request->input('description');
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
-        $course->order_by = $request->input('order_by');
         $course->status = $request->input('status');
            $file = $request->file('background_image');
         if($file != null){
@@ -152,17 +166,11 @@ class CourseController extends Controller
             $file->move($this->destination,$filename);
         }
         if($course->save()){
-         $courses = Course::with('category')->get();
+        $courses = Course::where('course_category_id',$category)->with('category')->get();
         return Resource::collection($courses);
         };
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Course  $course
-     * @return \Illuminate\Http\Response
-     */
      public function destroy($id)
     {
       $course = Course::findOrFail($id);

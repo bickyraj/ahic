@@ -69,6 +69,9 @@ Vue.use(VueRouter);
 import Datepicker from 'vuejs-datepicker';
 Vue.component('datepicker', Datepicker);
 
+  import draggable from 'vuedraggable'
+
+Vue.component('draggable', draggable)
 Vue.component('editor', Editor)
 import io from 'socket.io-client';
 window.io = io;

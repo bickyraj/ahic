@@ -12,7 +12,7 @@ class CourseCategoryController extends Controller
   
     public function index()
     {
-        $categories = CourseCategory::all();
+        $categories = CourseCategory::orderBy('order_by','asc')->get();
         return Resource::collection($categories);
     }
 
@@ -72,7 +72,6 @@ class CourseCategoryController extends Controller
         $category = CourseCategory::findOrFail($id);
         $category->name = $request->name;
         $category->order_by = $request->order_by;
-        $category->status = $request->status;
            $file = $request->file('image_background');
         if($file != null){
             $oldimg = $category->image_background;
@@ -83,7 +82,7 @@ class CourseCategoryController extends Controller
             $file->move($this->destination,$filename);
         }
         if($category->update()){
-                   $categories = CourseCategory::all();
+        $categories = CourseCategory::orderBy('order_by','desc')->get();
         return Resource::collection($categories);
         };
     }
@@ -105,6 +104,22 @@ class CourseCategoryController extends Controller
             'status' => $status,
         ]);
     }
+     public function updateOrder(Request $request)
+    {
+        $status = 0;
+        $data = $request->all();
+        foreach ($data as $key => $value) {
+            $menu = CourseCategory::find($value['id']);
+            $menu->order_by = $key;
+            if ($menu->save()) {
+                $status = 1;
+            }
+        }
+        return response()->json([
+            'status' => $status,
+        ]);
+    }
+
 
     public function destroyimage($image){
         $oldimg = $this->destination.$image;

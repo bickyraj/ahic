@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ApplicationCurrentEnglishLevel;
+use App\Slider;
 use Illuminate\Http\Request;
 
-class ApplicationCurrentEnglishLevelController extends Controller
+class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ApplicationCurrentEnglishLevelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ApplicationCurrentEnglishLevel  $applicationCurrentEnglishLevel
+     * @param  \App\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function show(ApplicationCurrentEnglishLevel $applicationCurrentEnglishLevel)
+    public function show(Slider $slider)
     {
         //
     }
@@ -52,10 +52,10 @@ class ApplicationCurrentEnglishLevelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ApplicationCurrentEnglishLevel  $applicationCurrentEnglishLevel
+     * @param  \App\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function edit(ApplicationCurrentEnglishLevel $applicationCurrentEnglishLevel)
+    public function edit(Slider $slider)
     {
         //
     }
@@ -64,10 +64,10 @@ class ApplicationCurrentEnglishLevelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ApplicationCurrentEnglishLevel  $applicationCurrentEnglishLevel
+     * @param  \App\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ApplicationCurrentEnglishLevel $applicationCurrentEnglishLevel)
+    public function update(Request $request, Slider $slider)
     {
         //
     }
@@ -75,10 +75,10 @@ class ApplicationCurrentEnglishLevelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ApplicationCurrentEnglishLevel  $applicationCurrentEnglishLevel
+     * @param  \App\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ApplicationCurrentEnglishLevel $applicationCurrentEnglishLevel)
+    public function destroy(Slider $slider)
     {
         //
     }

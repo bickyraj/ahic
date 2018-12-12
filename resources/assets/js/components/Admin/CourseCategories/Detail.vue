@@ -50,10 +50,7 @@
                     <label for="">Description</label>
                <editor  name="description" :init="editor"></editor>
                   </div>
-                   <div class="form-group">
-                    <label for="">Order By </label>
-                    <input type="text" name="order_by" class="form-control" placeholder="" required>
-                  </div>
+               
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Course</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
@@ -70,9 +67,9 @@
                 <th class="col-md-2">Action</th>
               </tr>
             </thead>
-            <tbody v-if="table_items.length > 0" v-show="!loading">
+           <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" @update="updateCourseOrder">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
-                <td>  {{ menu.name}} </router-link>  </td>
+                <td>  {{ menu.name}}  </td>
                 <!-- <td>{{ menu.video_link}}</td> -->
                 <td>{{ menu.duration}}</td>
                 <td>{{ menu.study_method}}</td>
@@ -90,7 +87,7 @@
                   </b-button>
                 </td>
               </tr>
-            </tbody>
+             </draggable>
             <tbody v-else>
               <tr>
                 <td colspan="6">
@@ -156,10 +153,7 @@
                     <label for="">Description</label>
                    <editor  name="description" v-model="modalInfo.data.description" :init="editor"></editor>
                   </div>
-                   <div class="form-group">
-                    <label for="">Order By </label>
-                    <input type="text" name="order_by" class="form-control"  v-model="modalInfo.data.order_by" placeholder="" required>
-                  </div>
+                 
                       <div class="form-group">
           <label for="">Status</label>
           <select name="status" id="" v-model="modalInfo.data.status" class="form-control">
@@ -258,7 +252,8 @@
         var form = self.$refs.editCourseForm;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
-        let url = self.$root.baseUrl + '/api/admin/course/edit';
+                    let id = parseInt(this.$route.params.id);
+        let url = self.$root.baseUrl + '/api/admin/course/edit/'+id;
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
            self.table_items = response.data.data;
@@ -370,6 +365,16 @@
           });
 
       },
+     updateCourseOrder() {
+        var self = this;
+        let url = self.$root.baseUrl + '/api/admin/course/update-order';
+      	axios.post(url, self.table_items)
+		.then(function (response) {
+			if (response.data.status === 1) {
+				self.$toastr.s("Order Updated");  
+			}
+    })
+            },
 
       showModal() {
         this.$refs.myModalRef.show()

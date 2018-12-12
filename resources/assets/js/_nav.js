@@ -21,22 +21,69 @@ export default {
       }
     },
     {
-      name: 'Menus',
-      url: url + 'menus',
+      name: 'CMS',
+      url: '/cms',
       icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
-    {
-      name: 'Pages',
-      url: url + 'pages',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
+      children: [{
+         name: 'Menus',
+           url: url + 'menus',
+           icon: 'fas fa-book-open',
+           badge: {
+             variant: 'primary',
+           }
+        },
+        {
+         name: 'Pages',
+           url: url + 'pages',
+           icon: 'fas fa-book-open',
+           badge: {
+             variant: 'primary',
+             // text: 'NEW'
+           }
+        },
+         {
+           name: 'Module & Contents',
+           url: url + 'modules',
+           icon: 'fas fa-book-open',
+           badge: {
+             variant: 'primary',
+             // text: 'NEW'
+           }
+         },
+        {
+         name: 'News',
+           url: url + 'news',
+           icon: 'fas fa-book-open',
+           badge: {
+             variant: 'primary',
+           }
+        },
+        {
+         name: 'Gallery',
+           url: url + 'gallery',
+           icon: 'fas fa-book-open',
+           badge: {
+             variant: 'primary',
+           }
+        },
+        {
+         name: 'Slider',
+           url: url + 'sliders',
+           icon: 'fas fa-book-open',
+           badge: {
+             variant: 'primary',
+           }
+        },
+        {
+         name: 'Contents',
+           url: url + 'contents',
+           icon: 'fas fa-book-open',
+           badge: {
+             variant: 'primary',
+           }
+        },
+       
+      ]
     },
     {
       name: 'Unit Competences',
@@ -83,15 +130,7 @@ export default {
     //     // text: 'NEW'
     //   }
     // },
-    {
-      name: 'Module & Contents',
-      url: url + 'modules',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
+   
     // {
     //   name: 'Module Contents',
     //   url: url + 'module_contents',
@@ -266,36 +305,7 @@ export default {
         }
       ]
     },
-    {
-      name: 'Icons',
-      url: '/icons',
-      icon: 'icon-star',
-      children: [
-        {
-          name: 'Flags',
-          url: '/icons/flags',
-          icon: 'icon-star',
-          badge: {
-            variant: 'success',
-            text: 'NEW'
-          }
-        },
-        {
-          name: 'Font Awesome',
-          url: '/icons/font-awesome',
-          icon: 'icon-star',
-          badge: {
-            variant: 'secondary',
-            text: '4.7'
-          }
-        },
-        {
-          name: 'Simple Line Icons',
-          url: '/icons/simple-line-icons',
-          icon: 'icon-star'
-        }
-      ]
-    },
+    
     {
       name: 'Charts',
       url: '/charts',
