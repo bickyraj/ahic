@@ -38,14 +38,14 @@
           <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th>Name</th>
+                <th >Name</th>
                 <th>Parent Menu</th>
                 <th>Parent Page</th>
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody v-if="table_items.length > 0" v-show="!loading">
-              <tr v-for="(menu, index) in table_items" :key="menu.id">
+           <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" @update="updateMenuOrder">
+                <tr v-for="(menu, index) in table_items" :key="menu.id">
                 <td>{{ menu.name}}</td>
                 <td v-if="menu.parent_menu">{{ menu.parent_menu.name }}</td>
                 <td v-else>--</td>
@@ -60,7 +60,7 @@
                   </b-button>
                 </td>
               </tr>
-            </tbody>
+           </draggable>
             <tbody v-else>
               <tr>
                 <td colspan="2">
@@ -107,6 +107,7 @@
   export default {
     data() {
       return {
+          menus:[],
         loading: true,
         table_items: [],
         pages:[],
@@ -268,6 +269,16 @@
           });
 
       },
+            updateMenuOrder() {
+        var self = this;
+        let url = self.$root.baseUrl + '/api/admin/menus/update-order';
+      	axios.post(url, self.table_items)
+		.then(function (response) {
+			if (response.data.status === 1) {
+				self.$toastr.s("Updated");  
+			}
+    })
+            },
       showModal() {
         this.$refs.myModalRef.show()
       },

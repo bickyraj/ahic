@@ -10,7 +10,7 @@ use App\Http\Resources\Menu as MenuResource;
 class MenuController extends Controller
 {
   public function index(){
-      $menu = Menu::with('parent_menu','parent_page')->get();
+      $menu = Menu::with('parent_menu','parent_page')->orderBy('menu_order','asc')->get();
         return MenuResource::collection($menu);
     }
 
@@ -57,6 +57,22 @@ class MenuController extends Controller
         $menu = Menu::findOrFail($id);
         if ($menu->delete()) {
             $status = 1;
+        }
+        return response()->json([
+            'status' => $status,
+        ]);
+    }
+
+     public function updateOrder(Request $request)
+    {
+        $status = 0;
+        $data = $request->all();
+        foreach ($data as $key => $value) {
+            $menu = Menu::find($value['id']);
+            $menu->menu_order = $key;
+            if ($menu->save()) {
+                $status = 1;
+            }
         }
         return response()->json([
             'status' => $status,

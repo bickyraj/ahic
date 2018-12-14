@@ -119,6 +119,25 @@ const routes = [
         },
     },
     {
+        path: admin_url + 'news',
+        component: require('./components/Admin/News/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'News',
+                    path: admin_url + 'news',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
         path: admin_url + 'enquiries',
         component: require('./components/Admin/Enquiry/Index'),
         meta: {
@@ -226,6 +245,25 @@ const routes = [
                 {
                     name: 'Students',
                     path: admin_url + 'students',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
+        path: admin_url + 'gallery',
+        component: require('./components/Admin/Gallery/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Gallery',
+                    path: admin_url + 'gallery',
                 }
             ],
             middlewareAuth: true,

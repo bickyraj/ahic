@@ -11,6 +11,8 @@ use App\PageModule;
 use App\AgentInformation;
 use App\Country;
 use App\Download;
+use App\News;
+use App\Gallery;
 
 
 class HomeController extends Controller
@@ -19,7 +21,9 @@ class HomeController extends Controller
     {
         $courses = Course::with('category')->get();
         $countries = Country::all();
-        return view('front.index',compact('courses','countries'));
+        $news  = News::where('status','1')->limit(3)->get();
+        $gallery = Gallery::all();
+        return view('front.index',compact('courses','countries','news','gallery'));
     }
     public function courses()
     {
@@ -28,6 +32,9 @@ class HomeController extends Controller
         return view('front.courses',compact('courses','categories'));
     }
 
+    public function readMore(){
+      return view('front.readmore');
+    }
     public function course($course){
       $name = str_replace('_', ' ', $course);
       $course = Course::where('name',$name)->with('category','requirements','outcomes','assessment','rpl','relation.competence','relation.category')->first();

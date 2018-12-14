@@ -61,8 +61,24 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('menus', 'MenuController@index');
     Route::get('menu/{id}', 'MenuController@show');
     Route::post('menu', 'MenuController@store');
+    Route::post('menus/update-order', 'MenuController@updateOrder');
     Route::post('edit-menu', 'MenuController@update');
     Route::delete('menu/{id}', 'MenuController@destroy');
+
+    // News functions.
+    Route::get('news', 'NewsController@index');
+    Route::get('news/{id}', 'NewsController@show');
+    Route::post('news', 'NewsController@store');
+    Route::post('news/update-order', 'NewsController@updateOrder');
+    Route::post('news/edit', 'NewsController@update');
+    Route::delete('news/{id}', 'NewsController@destroy');
+
+    // Gallery functions.
+    Route::get('gallery', 'GalleryController@index');
+    Route::get('gallery/{id}', 'GalleryController@show');
+    Route::post('gallery', 'GalleryController@store');
+    Route::post('gallery/update-order', 'GalleryController@updateOrder');
+    Route::delete('gallery/{id}', 'GalleryController@destroy');
 
     // User functions.
     Route::get('pages', 'PageController@index');
@@ -100,7 +116,8 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('courses/{id}','CourseController@showByCourse');
     Route::get('courses/{id}/showByCategory','CourseController@showByCategory');
     Route::post('course', 'CourseController@store');
-    Route::post('course/edit', 'CourseController@update');
+    Route::post('course/edit/{category}', 'CourseController@update');
+    Route::post('course/update-order', 'CourseController@updateOrder');
     Route::post('course/update', 'CourseController@edit');
     Route::delete('course/{id}', 'CourseController@destroy');
 
@@ -108,6 +125,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('course_categories','CourseCategoryController@index');
     Route::get('course_category/{id}','CourseCategoryController@show');
     Route::post('course_category', 'CourseCategoryController@store');
+    Route::post('course_category/update-order', 'CourseCategoryController@updateOrder');
     Route::post('course_category/edit', 'CourseCategoryController@update');
     Route::delete('course_category/{id}', 'CourseCategoryController@destroy');
 

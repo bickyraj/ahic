@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ApplicationEmergencyContact;
+use App\Cms;
 use Illuminate\Http\Request;
 
-class ApplicationEmergencyContactController extends Controller
+class CmsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ApplicationEmergencyContactController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ApplicationEmergencyContact  $applicationEmergencyContact
+     * @param  \App\Cms  $cms
      * @return \Illuminate\Http\Response
      */
-    public function show(ApplicationEmergencyContact $applicationEmergencyContact)
+    public function show(Cms $cms)
     {
         //
     }
@@ -52,10 +52,10 @@ class ApplicationEmergencyContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ApplicationEmergencyContact  $applicationEmergencyContact
+     * @param  \App\Cms  $cms
      * @return \Illuminate\Http\Response
      */
-    public function edit(ApplicationEmergencyContact $applicationEmergencyContact)
+    public function edit(Cms $cms)
     {
         //
     }
@@ -64,10 +64,10 @@ class ApplicationEmergencyContactController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ApplicationEmergencyContact  $applicationEmergencyContact
+     * @param  \App\Cms  $cms
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ApplicationEmergencyContact $applicationEmergencyContact)
+    public function update(Request $request, Cms $cms)
     {
         //
     }
@@ -75,10 +75,10 @@ class ApplicationEmergencyContactController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ApplicationEmergencyContact  $applicationEmergencyContact
+     * @param  \App\Cms  $cms
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ApplicationEmergencyContact $applicationEmergencyContact)
+    public function destroy(Cms $cms)
     {
         //
     }
