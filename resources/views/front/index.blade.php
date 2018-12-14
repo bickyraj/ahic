@@ -15,49 +15,32 @@
 
 
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
-    
+
 
     <div class="carousel-inner">
-      <div class="carousel-item padding-y-80 height-80vh active">
-       <div class="bg-absolute" data-dark-overlay="5" style="background:url('{{asset('/')}}public/ahic/img/heroBanner/1.jpg') no-repeat"></div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-10 mx-auto  text-white">
-                <h1 class="display-lg-4 font-weight-bold text-primary animated slideInUp">
-                  Study In Australia
-                </h1>
-                <h4 class="display-lg-4 font-weight-bold animated slideInUp">
-                  Where Seekers Become <br>Achievers
-                </h4>
-                <p class="lead animated fadeInUp">
-                  Harbour College can offer you a range of flexible course delivery <br>options appropriate to your preferred learning style.
-                </p>
 
-                <!-- <a href="#" class="btn btn-primary mt-3 mx-2 animated slideInUp">Learn More</a> -->
+      @foreach ($sliders as $slider)
+        <div class="carousel-item padding-y-80 height-80vh @if($sliders[0] == $slider) active @endif">
+         <div class="bg-absolute" data-dark-overlay="5" style="background:url('{{asset('/')}}public/images/sliders/{{$slider->image}}') no-repeat"></div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-10 mx-auto  text-white">
+                  <h1 class="display-lg-4 font-weight-bold text-primary animated slideInUp">
+                    Study In Australia
+                    {{$slider->title}}
+                  </h1>
+                  <h4 class="display-lg-4 font-weight-bold animated slideInUp">
+                    {{$slider->sub_title}}
+                  </h4>
+                  <p class="lead animated fadeInUp">
+                    {!!html_entity_decode($slider->description)!!}
+                  </p>
+                  <!-- <a href="#" class="btn btn-primary mt-3 mx-2 animated slideInUp">Learn More</a> -->
+                </div>
               </div>
             </div>
-          </div>
-      </div>
-      <div class="carousel-item padding-y-80 height-80vh ">
-       <div class="bg-absolute" data-dark-overlay="5"  style="background:url('{{asset('/')}}public/ahic/img/heroBanner/2.jpg') no-repeat"></div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-10 mx-auto  text-white">
-                <h1 class="display-lg-4 font-weight-bold text-primary animated slideInUp">
-                  Study In Australia
-                </h1>
-                <h2 class="display-lg-3 font-weight-bold animated slideInUp">
-                  Where Seekers Become Achievers
-                </h2>
-                <p class="lead animated fadeInUp">
-                  Harbour College can offer you a range of flexible course delivery <br>options appropriate to your preferred learning style.
-                </p>
-
-                <!-- <a href="#" class="btn btn-primary mt-3 mx-2 animated slideInUp">Learn More</a> -->
-              </div>
-            </div>
-          </div>
-      </div>
+        </div>
+      @endforeach
 
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -68,30 +51,6 @@
     </a>
   </div>
 
-<!-- <section class="height-90vh py-5 flex-center jarallax" data-dark-overlay="2" style="background:url(assets/img/1920x800/1.jpg) no-repeat">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-9 text-white">
-        <h2 class="display-lg-4 font-weight-bold text-primary wow slideInUp">
-          Study In Australia
-        </h2>
-        <h1 class="display-lg-3 font-weight-bold text-white wow slideInUp">
-          Where Seekers Become Achievers
-        </h1>
-        <p class="lead wow slideInUp">
-          Harbour College can offer you a range of flexible course delivery options appropriate to your preferred learning style.
-        </p>
-        <a href="#" class="btn btn-primary btn-lg mt-3 wow slideInUp">Read More</a>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-
-
-
-
-
 
 <section class="padding-y-100">
   <div class="container">
@@ -100,17 +59,30 @@
         <div class="row align-items-center">
           <div class="col-md-6 my-5">
            <div class="position-relative">
-            <img class="rounded w-100" src="{{asset('/')}}public/ahic/img/360x400/1.jpg" alt="">
-
+             @if ($header['image'])
+            <img class="rounded w-100" src="{{asset('/')}}public/images/cms/{{$header['image']}}" alt="">
+            @endif
            </div>
           </div>
           <div class="col-md-6 mt-4">
             <h2>
-              <small class="d-block text-gray">Welcome to</small>
-               <span class="text-primary">Harbour</span> College
+              <small class="d-block text-gray">
+                @if ($header['title'])
+                  {{$header['title']}}
+                @endif
+              </small>
+              @if ($header['sub_title'])
+                @php
+                $string = explode(" ",$header['sub_title'],2);
+                @endphp
+               <span class="text-primary">{{$string[0]}}</span> {{$string[1]}}
+             @endif
+
             </h2>
             <p class="my-4">
-              Harbour college is conveniently located in the heart of Sydney’s Central Business District (CBD). Harbour College can offer you a range of flexible course delivery options appropriate to your preferred learning style.
+              @if ($header['description'])
+              {!!html_entity_decode($header['description'])!!}
+            @endif
             </p>
             <a href="{{route('welcome')}}" class="btn btn-outline-primary">
               Read More
@@ -168,7 +140,7 @@
               @foreach ($countries as $country)
                 <option value="{{$country->id}}">{{$country->name}}</option>
               @endforeach
-     
+
             </select>
             <span class="error text-danger"></span>
 
@@ -223,11 +195,14 @@
             </div>
             <div class="d-flex justify-content-between align-items-center border-top position-relative p-4">
              <span class="d-inline-block bg-primary text-white px-4 py-1 rounded-pill">
-               {{ str_limit($course->duration, 8) }}
-
+               @php
+                 $string = explode(' ',$course->duration);
+                 $slug = str_replace(' ', '_', $course->name);
+               @endphp
+               {{$string[0]}} {{$string[1]}}
              </span>
 
-              <a href="courseDetail.php" class="position-absolute btn btn-primary btn-m left-20 hover:show">
+              <a href="{{route('course',$slug)}}" class="position-absolute btn btn-primary btn-m left-20 hover:show">
                 View Details
               </a>
             </div>
@@ -237,7 +212,7 @@
        </div>
       </div>
       <div class="col-12 mt-5 text-center">
-        <a href="all-courses.php" class="btn btn-primary">
+        <a href="{{route('courses')}}" class="btn btn-primary">
           See All Courses
         </a>
       </div>
@@ -246,36 +221,36 @@
 </section>
 
 
-
-<section>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6 bg-cover bg-center text-white padding-y-80" style="background:url('{{asset('/')}}public/ahic/img/960x560/admission.jpg') no-repeat">
-        <div class="padding-x-lg-100 wow pulse">
-          <h2 class="text-white mb-4">
-            Admission Open for 2018
-          </h2>
-          <p>
-            Investig ationes demons travge vunt lectores legere lrus quodk legunt saepius claritas est cnsectetur adip sicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua. Consectetur adipi sicing.
-          </p>
-          <a href="apply-no1w.php" class="btn btn-white mt-4">Apply now</a>
+@if (isset($lc) && isset($rc))
+  <section>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 bg-cover bg-center text-white padding-y-80" style="background:url('{{asset('/')}}public/images/cms/{{$lc->image}}') no-repeat">
+          <div class="padding-x-lg-100 wow pulse">
+            <h2 class="text-white mb-4">
+            {{$lc['title']}}
+            </h2>
+            <p>
+              {!!html_entity_decode($lc['description'])!!}
+            </p>
+            <a href="apply-no1w.php" class="btn btn-white mt-4">Apply now</a>
+          </div>
+        </div>
+            <div class="col-md-6 bg-cover bg-center text-white padding-y-80" style="background:url('{{asset('/')}}public/images/cms/{{$rc->image}}') no-repeat">
+          <div class="padding-x-lg-100 wow pulse">
+            <h2 class="text-white mb-4">
+              {{$rc['title']}}
+            </h2>
+            <p>
+              {!!html_entity_decode($rc['description'])!!}
+            </p>
+            <a href="apply-no1w.php" class="btn btn-white mt-4">Apply now</a>
+          </div>
         </div>
       </div>
-      <div class="col-md-6 bg-cover bg-center text-white padding-y-80" style="background:url('{{asset('/')}}public/ahic/img/960x560/orientation.jpg') no-repeat">
-        <div class="padding-x-lg-100 wow pulse">
-          <h2 class="text-white mb-4">
-            Students Orientation 2018
-          </h2>
-          <p>
-            Investig ationes demons travge vunt lectores legere lrus quodk legunt saepius claritas est cnsectetur adip sicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua. Consectetur adipi sicing.
-          </p>
-          <a href="apply-no1w.php" class="btn btn-white mt-4">Apply now</a>
-        </div>
-      </div>
-    </div>
-  </div> <!-- END container-->
-</section>
-
+    </div> <!-- END container-->
+  </section>
+@endif
 
 <section class="padding-y-100 bg-light-v2">
   <div class="container">
@@ -299,11 +274,11 @@
       <div class="col-lg-4 col-md-6 marginTop-30 wow slideInUp" data-wow-delay=".1s">
         <div class="card padding-30 shadow-v1">
          <p class="text-primary">
-           
+
          {{$newdate}}
          </p>
          <a href="{{route('singleNews',$slug)}}" class="h4 mb-3">
-        
+
             {{$new->title}}
          </a>
          <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/news-1.jpg" alt="">

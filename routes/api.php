@@ -20,10 +20,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/get-user', 'Admin\UserController@getUser');
 });
 
-Route::get('/test', function() {
-    return [1,3,4];
-});
-
 // shorten url function in front page by user.
 
 Route::post('admin/change-password', 'AdminController@changePassword');
@@ -79,6 +75,21 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('gallery', 'GalleryController@store');
     Route::post('gallery/update-order', 'GalleryController@updateOrder');
     Route::delete('gallery/{id}', 'GalleryController@destroy');
+
+    // Slider functions.
+    Route::get('sliders', 'SliderController@index');
+    Route::get('slider/{id}', 'SliderController@show');
+    Route::post('slider', 'SliderController@store');
+    Route::post('slider/edit', 'SliderController@update');
+    Route::post('slider/update-order', 'SliderController@updateOrder');
+    Route::delete('slider/{id}', 'SliderController@destroy');
+
+    // CMS functions.
+    Route::get('cms', 'CmsController@index');
+    Route::get('cms/{slug}', 'CmsController@slug');
+    Route::post('cms', 'CmsController@store');
+    Route::post('cms/edit', 'CmsController@update');
+    Route::delete('cms/{id}', 'CmsController@destroy');
 
     // User functions.
     Route::get('pages', 'PageController@index');
@@ -229,6 +240,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('branch_locations','BranchLocationController@index');
     Route::get('branch_location/{id}','BranchLocationController@show');
     Route::get('branch_locations/{id}','BranchLocationController@get');
+    Route::get('branch_locations/getid/{id}','BranchLocationController@getid');
     Route::post('branch_location', 'BranchLocationController@store');
     Route::post('branch_location/edit', 'BranchLocationController@update');
     Route::delete('branch_location/{id}', 'BranchLocationController@destroy');

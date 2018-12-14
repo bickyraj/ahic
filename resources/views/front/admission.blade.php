@@ -309,467 +309,58 @@
             </div>
           </div>
           <div class="tab-pane fade" id="Tabs_4-3" role="tabpanel">
-            <div class="container marginTop-30">
-                <div class="row">
+
+
+                  @foreach ($intakeyear as $year)
+                    <div class="container marginTop-30">
+                        <div class="row">
                     <div class="col-12 text-center mb-4">
-                      <h4>Year - <span class="text-primary">2017</span></h4>
+                      <h4>Year - <span class="text-primary">{{$year->year}}</span></h4>
                     </div>
-
-                    <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".1s">
-                     <div class="card text-center height-100p border  p-4 p-lg-5 shadow-v2">
-                      <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                         1st Term
-                       </span>
-                       <div class="table-responsive my-4">
-                         <table class="table text-left table-hover">
-                           <thead>
-                             <tr>
-                               <th scope="col">Start Date</th>
-                               <th scope="col">06 Feb</th>
-
-                             </tr>
-                           </thead>
-                           <tbody>
-                             <tr>
-                               <th scope="row">Mid Term</th>
-                               <td>13 Mar</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">End Date</th>
-                               <td>8 Apr</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">Duration</th>
-                               <td>9 Weeks</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">Holiday Start</th>
-                               <td>9 Apr</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">Holiday End</th>
-                               <td>23 Apr</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">Holiday Duration</th>
-                               <td>2 Weeks</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">Credential Release</th>
-                               <td>28 Apr</td>
-                             </tr>
-
-                           </tbody>
-                         </table>
-                       </div>
-                     </div>
-                    </div>
-
-                    <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".2s">
-                     <div class="card height-100p border text-center p-4 p-lg-5 shadow-v2">
-                      <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                         2nd Term
-                       </span>
-                       <div class="table-responsive my-4">
-                         <table class="table text-left table-hover">
-                           <thead>
-                             <tr>
-                               <th scope="col">Start Date</th>
-                               <th scope="col">06 Feb</th>
-
-                             </tr>
-                           </thead>
-                           <tbody>
-                             <tr>
-                               <th scope="row">Mid Term</th>
-                               <td>13 Mar</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">End Date</th>
-                               <td>8 Apr</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">Duration</th>
-                               <td>9 Weeks</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">Holiday Start</th>
-                               <td>9 Apr</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">Holiday End</th>
-                               <td>23 Apr</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">Holiday Duration</th>
-                               <td>2 Weeks</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">Credential Release</th>
-                               <td>28 Apr</td>
-                             </tr>
-
-                           </tbody>
-                         </table>
-                       </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".3s">
-                      <div class="card height-100p border text-center p-4 p-lg-5 shadow-v2">
-                        <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                         3rd Term
-                        </span>
-                        <div class="table-responsive my-4">
-                          <table class="table text-left table-hover">
-                            <thead>
-                              <tr>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">06 Feb</th>
-
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">Mid Term</th>
-                                <td>13 Mar</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">End Date</th>
-                                <td>8 Apr</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Duration</th>
-                                <td>9 Weeks</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Holiday Start</th>
-                                <td>9 Apr</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Holiday End</th>
-                                <td>23 Apr</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Holiday Duration</th>
-                                <td>2 Weeks</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Credential Release</th>
-                                <td>28 Apr</td>
-                              </tr>
-
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".4s">
-                      <div class="card height-100p border text-center p-4 p-lg-5 shadow-v2">
-                        <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                         4th Term
-                        </span>
-                        <div class="table-responsive my-4">
-                          <table class="table text-left table-hover">
-                            <thead>
-                              <tr>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">06 Feb</th>
-
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">Mid Term</th>
-                                <td>13 Mar</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">End Date</th>
-                                <td>8 Apr</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Duration</th>
-                                <td>9 Weeks</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Holiday Start</th>
-                                <td>9 Apr</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Holiday End</th>
-                                <td>23 Apr</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Holiday Duration</th>
-                                <td>2 Weeks</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Credential Release</th>
-                                <td>28 Apr</td>
-                              </tr>
-
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-
-                </div> <!-- END row-->
-              </div>
-
-              <div class="container marginTop-30">
-                  <div class="row">
-                      <div class="col-12 text-center mb-4">
-                        <h4>Year - <span class="text-primary">2018</span></h4>
-                      </div>
-                      <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".5s">
-                       <div class="card text-center height-100p border  p-4 p-lg-5 shadow-v2">
-                        <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                           1st Term
-                         </span>
-                         <div class="table-responsive my-4">
-                           <table class="table text-left table-hover">
-                             <thead>
-                               <tr>
-                                 <th scope="col">Start Date</th>
-                                 <th scope="col">06 Feb</th>
-
-                               </tr>
-                             </thead>
-                             <tbody>
-                               <tr>
-                                 <th scope="row">Mid Term</th>
-                                 <td>13 Mar</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">End Date</th>
-                                 <td>8 Apr</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">Duration</th>
-                                 <td>9 Weeks</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">Holiday Start</th>
-                                 <td>9 Apr</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">Holiday End</th>
-                                 <td>23 Apr</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">Holiday Duration</th>
-                                 <td>2 Weeks</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">Credential Release</th>
-                                 <td>28 Apr</td>
-                               </tr>
-
-                             </tbody>
-                           </table>
-                         </div>
-                       </div>
-                      </div>
-
-                      <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".6s">
-                       <div class="card height-100p border text-center p-4 p-lg-5 shadow-v2">
-                        <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                           2nd Term
-                         </span>
-                         <div class="table-responsive my-4">
-                           <table class="table text-left table-hover">
-                             <thead>
-                               <tr>
-                                 <th scope="col">Start Date</th>
-                                 <th scope="col">06 Feb</th>
-
-                               </tr>
-                             </thead>
-                             <tbody>
-                               <tr>
-                                 <th scope="row">Mid Term</th>
-                                 <td>13 Mar</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">End Date</th>
-                                 <td>8 Apr</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">Duration</th>
-                                 <td>9 Weeks</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">Holiday Start</th>
-                                 <td>9 Apr</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">Holiday End</th>
-                                 <td>23 Apr</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">Holiday Duration</th>
-                                 <td>2 Weeks</td>
-                               </tr>
-                               <tr>
-                                 <th scope="row">Credential Release</th>
-                                 <td>28 Apr</td>
-                               </tr>
-
-                             </tbody>
-                           </table>
-                         </div>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".7s">
-                        <div class="card height-100p border text-center p-4 p-lg-5 shadow-v2">
-                          <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                           3rd Term
-                          </span>
-                          <div class="table-responsive my-4">
-                            <table class="table text-left table-hover">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Start Date</th>
-                                  <th scope="col">06 Feb</th>
-
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">Mid Term</th>
-                                  <td>13 Mar</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">End Date</th>
-                                  <td>8 Apr</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Duration</th>
-                                  <td>9 Weeks</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Holiday Start</th>
-                                  <td>9 Apr</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Holiday End</th>
-                                  <td>23 Apr</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Holiday Duration</th>
-                                  <td>2 Weeks</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Credential Release</th>
-                                  <td>28 Apr</td>
-                                </tr>
-
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".8s">
-                        <div class="card height-100p border text-center p-4 p-lg-5 shadow-v2">
-                          <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                           4th Term
-                          </span>
-                          <div class="table-responsive my-4">
-                            <table class="table text-left table-hover">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Start Date</th>
-                                  <th scope="col">06 Feb</th>
-
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">Mid Term</th>
-                                  <td>13 Mar</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">End Date</th>
-                                  <td>8 Apr</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Duration</th>
-                                  <td>9 Weeks</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Holiday Start</th>
-                                  <td>9 Apr</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Holiday End</th>
-                                  <td>23 Apr</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Holiday Duration</th>
-                                  <td>2 Weeks</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Credential Release</th>
-                                  <td>28 Apr</td>
-                                </tr>
-
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-
-                  </div> <!-- END row-->
-                </div>
-                <div class="container marginTop-30">
-                    <div class="row">
-                        <div class="col-12 text-center mb-4">
-                          <h4>Year - <span class="text-primary">2019</span></h4>
-                        </div>
-                        <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".5s">
+                    @foreach ($intakes as $intake)
+                      @if($intake->year == $year->year)
+                        <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".1s">
                          <div class="card text-center height-100p border  p-4 p-lg-5 shadow-v2">
                           <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                             1st Term
+                             {{$intake->term}} Term
                            </span>
                            <div class="table-responsive my-4">
                              <table class="table text-left table-hover">
                                <thead>
                                  <tr>
                                    <th scope="col">Start Date</th>
-                                   <th scope="col">06 Feb</th>
+                                   <th scope="col">{{$intake->date}}</th>
 
                                  </tr>
                                </thead>
                                <tbody>
                                  <tr>
                                    <th scope="row">Mid Term</th>
-                                   <td>13 Mar</td>
+                                   <td>{{$intake->mid_term}}</td>
                                  </tr>
                                  <tr>
                                    <th scope="row">End Date</th>
-                                   <td>8 Apr</td>
+                                   <td>{{$intake->end_date}}</td>
                                  </tr>
                                  <tr>
                                    <th scope="row">Duration</th>
-                                   <td>9 Weeks</td>
+                                   <td>{{$intake->duration}}</td>
                                  </tr>
                                  <tr>
                                    <th scope="row">Holiday Start</th>
-                                   <td>9 Apr</td>
+                                   <td>{{$intake->holiday_start}}</td>
                                  </tr>
                                  <tr>
                                    <th scope="row">Holiday End</th>
-                                   <td>23 Apr</td>
+                                   <td>{{$intake->holiday_end}}</td>
                                  </tr>
                                  <tr>
                                    <th scope="row">Holiday Duration</th>
-                                   <td>2 Weeks</td>
+                                   <td>{{$intake->holiday_duration}}</td>
                                  </tr>
                                  <tr>
                                    <th scope="row">Credential Release</th>
-                                   <td>28 Apr</td>
+                                   <td>{{$intake->credential_release}}</td>
                                  </tr>
 
                                </tbody>
@@ -778,157 +369,13 @@
                          </div>
                         </div>
 
-                        <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".6s">
-                         <div class="card height-100p border text-center p-4 p-lg-5 shadow-v2">
-                          <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                             2nd Term
-                           </span>
-                           <div class="table-responsive my-4">
-                             <table class="table text-left table-hover">
-                               <thead>
-                                 <tr>
-                                   <th scope="col">Start Date</th>
-                                   <th scope="col">06 Feb</th>
+                      @endif
+                    @endforeach
 
-                                 </tr>
-                               </thead>
-                               <tbody>
-                                 <tr>
-                                   <th scope="row">Mid Term</th>
-                                   <td>13 Mar</td>
-                                 </tr>
-                                 <tr>
-                                   <th scope="row">End Date</th>
-                                   <td>8 Apr</td>
-                                 </tr>
-                                 <tr>
-                                   <th scope="row">Duration</th>
-                                   <td>9 Weeks</td>
-                                 </tr>
-                                 <tr>
-                                   <th scope="row">Holiday Start</th>
-                                   <td>9 Apr</td>
-                                 </tr>
-                                 <tr>
-                                   <th scope="row">Holiday End</th>
-                                   <td>23 Apr</td>
-                                 </tr>
-                                 <tr>
-                                   <th scope="row">Holiday Duration</th>
-                                   <td>2 Weeks</td>
-                                 </tr>
-                                 <tr>
-                                   <th scope="row">Credential Release</th>
-                                   <td>28 Apr</td>
-                                 </tr>
-
-                               </tbody>
-                             </table>
-                           </div>
-                          </div>
-                        </div>
-
-                        <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".7s">
-                          <div class="card height-100p border text-center p-4 p-lg-5 shadow-v2">
-                            <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                             3rd Term
-                            </span>
-                            <div class="table-responsive my-4">
-                              <table class="table text-left table-hover">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">06 Feb</th>
-
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">Mid Term</th>
-                                    <td>13 Mar</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">End Date</th>
-                                    <td>8 Apr</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Duration</th>
-                                    <td>9 Weeks</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Holiday Start</th>
-                                    <td>9 Apr</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Holiday End</th>
-                                    <td>23 Apr</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Holiday Duration</th>
-                                    <td>2 Weeks</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Credential Release</th>
-                                    <td>28 Apr</td>
-                                  </tr>
-
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".8s">
-                          <div class="card height-100p border text-center p-4 p-lg-5 shadow-v2">
-                            <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                             4th Term
-                            </span>
-                            <div class="table-responsive my-4">
-                              <table class="table text-left table-hover">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">06 Feb</th>
-
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">Mid Term</th>
-                                    <td>13 Mar</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">End Date</th>
-                                    <td>8 Apr</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Duration</th>
-                                    <td>9 Weeks</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Holiday Start</th>
-                                    <td>9 Apr</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Holiday End</th>
-                                    <td>23 Apr</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Holiday Duration</th>
-                                    <td>2 Weeks</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Credential Release</th>
-                                    <td>28 Apr</td>
-                                  </tr>
-
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-
-                    </div> <!-- END row-->
                   </div>
+                  </div>
+
+                  @endforeach
           </div>
         </div> <!-- END tab-content-->
       </div> <!-- END col-12 -->

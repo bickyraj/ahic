@@ -92,14 +92,14 @@
                     <input type="file" name="image_background" class="form-control">
 
                   </div>
-               
-                  <div class="form-group">
+
+                  <!-- <div class="form-group">
                     <label for="">Status </label>
                     <select name="status" :value="modalInfo.data.status" id="" class="form-control">
                       <option value="0">Disable</option>
                       <option value="1">Enable</option>
                     </select>
-                  </div>
+                  </div> -->
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>
@@ -249,13 +249,13 @@
           });
 
       },
-                        updateCourseOrder() {
+    updateCourseOrder() {
         var self = this;
         let url = self.$root.baseUrl + '/api/admin/course_category/update-order';
       	axios.post(url, self.table_items)
 		.then(function (response) {
 			if (response.data.status === 1) {
-				self.$toastr.s("Order Updated");  
+				self.$toastr.s("Order Updated");
 			}
     })
             },

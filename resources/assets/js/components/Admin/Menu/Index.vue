@@ -17,14 +17,14 @@
                   </div>
                   <div class="form-group">
                     <label for="">Parent Menu</label>
-                   <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control">
+                   <select  name="parent_id" class="form-control">
                      <option value="" selected> Choose Parent Menu </option>
             <option v-for="menu in table_items" :value="menu.id" :key="menu.id"> {{menu.name}}</option>
           </select>
                   </div>
                   <div class="form-group">
                     <label for="">Parent Page</label>
-                     <select v-bind:value="modalInfo.data.page_id" name="page_id" class="form-control">
+                     <select name="page_id" class="form-control">
                       <option value="" selected> Choose Parent Page </option>
                       <option v-for="page in pages" :value="page.id" :key="page.id"> {{page.name}}</option>
                      </select>
@@ -85,18 +85,19 @@
         <div class="form-group">
           <label for="">Parent Menu</label>
           <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control">
-            <option v-for="menu in table_items" :value="menu.id" :key="menu.id"> {{menu.name}}</option>
+            <option value="" selected> Choose Parent Menu </option>
+            <option v-for="menu in table_items" :value="menu.id" :key="menu.id"  v-if="menu.id != modalInfo.data.id"> {{menu.name}}</option>
           </select>
         </div>
 
-       
+
 
           <label for="">Parent Page</label>
                      <select v-bind:value="modalInfo.data.page_id" name="page_id" class="form-control">
                      <option value="" selected> Choose Parent Page </option>
                     <option v-for="page in pages" :value="page.id" :key="page.id"> {{page.name}}</option>
                   </select>
-       
+
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>
@@ -132,7 +133,6 @@
         axios.get(url + menu.id).then(function(response) {
             if (response.status === 200 || response.status === 201) {
               self.modalInfo.row = index
-              console.log(response.data.data);
               self.modalInfo.title = `Edit Menu`
               self.modalInfo.data = response.data.data
               self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
@@ -275,7 +275,7 @@
       	axios.post(url, self.table_items)
 		.then(function (response) {
 			if (response.data.status === 1) {
-				self.$toastr.s("Updated");  
+				self.$toastr.s("Updated");
 			}
     })
             },

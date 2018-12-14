@@ -1,3 +1,4 @@
+
 ::-webkit-scrollbar {
 	display: none;
 }
@@ -7,6 +8,7 @@
 		display: none;
 	}
 }
+
 
 
 $trump_blue: #5263ff;
@@ -208,7 +210,7 @@ button:focus {
 	z-index: 9999;
 	top: 0px;
 	right: 0px;
-	
+
 	&.animated {
 		animation-duration: .2s !important;
 	}
@@ -381,7 +383,7 @@ button:focus {
 }
 .tgl {
 	display: none;
-  
+
 	// add default box-sizing for this scope
 	&,
   &:after,
@@ -395,7 +397,7 @@ button:focus {
 			background: none;
 		}
 	}
-  
+
 	+ .tgl-btn {
 		outline: 0;
 		display: block;
@@ -412,16 +414,16 @@ button:focus {
 			width: 50%;
 			height: 100%;
 		}
-    
+
 		&:after {
 			left: 0;
 		}
-    
+
 		&:before {
 			display: none;
 		}
 	}
-  
+
 	&:checked + .tgl-btn:after {
 		left: 50%;
 	}
@@ -439,11 +441,11 @@ button:focus {
 			background: #cecece;
 		    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0px 0 rgba(0, 0, 0, 0.08);
 		}
-    
+
     &:hover:after {
       will-change: padding;
     }
-    
+
 		&:active {
 			box-shadow: inset 0 0 0 2em #e8eae9;
 			&:after {
@@ -451,7 +453,7 @@ button:focus {
 			}
 		}
 	}
-  
+
 	&:checked + .tgl-btn {
     background: #86d993;
     &:active {

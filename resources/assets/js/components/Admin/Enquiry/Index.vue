@@ -1,57 +1,33 @@
 <template>
   <div class="animated">
     <b-row>
-      <b-col>
+      <b-col cols="6" >
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
               <h5><i class="fas fa-key"></i> Enquiries</h5>
             </div>
-            <div class="caption card-title-actions">
-              <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Enquiry</b-button>
-              <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add Enquiry">
-                <form @submit.prevent="addEnquiry" ref="addEnquiryForm">
-                  <div class="form-group">
-                    <label for="exampleFormControlInput1">Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="" required>
-                  </div>
-                  <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Enquiry</b-btn>
-                  <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
-                </form>
-              </b-modal>
-            </div>
           </div>
           <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Message</th>
-                <th class="col-md-1">Status</th>
-                <th>Action</th>
+                <th class="col-md-3">Name</th>
+                <th class="col-md-2">Phone</th>
+                <th class="col-md-3"> Email</th>
+                <th class="col-md-4">Status</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
-              <tr v-for="(enquiry, index) in table_items" :key="enquiry.id">
+              <tr v-for="(enquiry, index) in table_items" :key="enquiry.id" @click="view(enquiry,index)">
                 <td>{{ enquiry.name }}</td>
                 <td>{{ enquiry.phone }}</td>
                 <td>{{ enquiry.email }}</td>
-                <td>{{ enquiry.message }}</td>
                 <td>
-                  <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,index,$event.target)">
+                  <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,enquiry.i,$event.target)">
                     <option value="1">Pending</option>
                     <option value="2">Verified</option>
                     <option value="3">Applied</option>
                   </select>
-                </td>
-                <td>
-                  <!-- <b-button size="sm" @click.stop="info(enquiry, index, $event.target)" class="mr-1 btn-success">
-                    Edit
-                  </b-button> -->
-                  <b-button size="sm" @click="deleteEnquiry(enquiry, index, $event.target)" class="mr-1 btn-danger">
-                    Delete
-                  </b-button>
                 </td>
               </tr>
             </tbody>
@@ -64,6 +40,54 @@
               </tr>
             </tbody>
           </table>
+        </b-card>
+      </b-col>
+
+      <b-col cols="6" v-if="enquiry">
+        <b-card class="mb-2 trump-card">
+          <div class="card-title">
+            <div class="caption">
+              <h5><i class="fas fa-key"></i> Enquiry</h5>
+            </div>
+            <div class="caption card-title-actions">
+              <b-button size="sm" @click="deleteEnquiry(enquiry, index, $event.target)" class="mr-1 btn-danger">
+                Delete
+              </b-button>
+            </div>
+          </div>
+              <table class="table trump-table">
+                  <tr>
+                    <th> Name</th>
+                    <td>{{ enquiry.name }}</td>
+                  </tr>
+                  <tr>
+                    <th> Phone</th>
+                    <td>{{ enquiry.phone }}</td>
+                  </tr>
+                  <tr>
+                    <th> Email</th>
+                    <td>{{ enquiry.email }}</td>
+                  </tr>
+                  <tr>
+                    <th> Course </th>
+                    <td>{{ enquiry.course_id }}</td>
+                  </tr>
+                  <tr>
+                    <th> Country </th>
+                    <td>{{ enquiry.country_id }}</td>
+                  </tr>
+                  <tr>
+                    <th> Message </th>
+                    <td>{{ enquiry.message }}</td>
+                  </tr>
+              </table>
+
+                  <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id)">
+                    <option value="1">Pending</option>
+                    <option value="2">Verified</option>
+                    <option value="3">Applied</option>
+                  </select>
+
         </b-card>
       </b-col>
     </b-row>
@@ -86,6 +110,7 @@
   export default {
     data() {
       return {
+        enquiry:'',
         loading: true,
         table_items: [],
         role_table_fields: ['name', 'action'],
@@ -97,26 +122,13 @@
       }
     },
     created() {
-      // let socket = io(`http://localhost:3000`);
-
-      // socket.on('connect', function() {
-      //   if (socket.connect) {
-      //     console.log('connected bro');
-      //   }
-      // });
       this.fetchEnquirys();
-      // socket.on("test-channel:App\\Events\\TestNotification", function(message){
-      //     // increase the power everytime we load test route
-      //     // alert(parseInt(message.data.power))
-      //     console.log(message.data.users);
-      // });
-    },
-    computed: {
-      // edit_option_for_parent_role: function (roleOptionId, parentId, roleId) {
-      //  console.log(roleOptionId);
-      // }
     },
     methods: {
+      view(e,i){
+        this.enquiry = e;
+        this.enquiry.index = i;
+      },
       updateEnq(item,index,el){
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/enquiry/edit/'+item;
@@ -124,11 +136,9 @@
         axios.post(url,{val:val}).then(response=>{
           self.table_items = response.data.data;
           self.$swal({
-            // position: 'top-end',
             type: 'success',
             title: 'Enquiry updated successfully.',
             showConfirmButton: true,
-            // timer: 1500,
             customClass: 'crm-swal',
             confirmButtonText: 'Thanks',
           })
@@ -183,14 +193,13 @@
           });
       },
       deleteEnquiry: function(item, row, event) {
+        this.enquiry ="";
         var self = this;
         self.$swal({
-          // position: 'top-end',
           type: 'info',
           title: 'Are you sure you want to delete this?',
           showConfirmButton: true,
           showCancelButton: true,
-          // timer: 1500,
           customClass: 'crm-swal',
           confirmButtonText: 'Yes',
         }).then((result) => {

@@ -20,7 +20,7 @@ class CreateEnquiriesTable extends Migration
             $table->integer('course_id');
             $table->integer('country_id');
             $table->longText('message');
-            $table->integer('phone');
+            $table->bigInteger('phone');
             $table->integer('status');
             $table->timestamps();
         });

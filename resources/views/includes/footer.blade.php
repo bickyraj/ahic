@@ -42,12 +42,20 @@
           <h4 class="h5 text-white">Quick links</h4>
           <div class="width-3rem bg-primary height-3 mt-3"></div>
           <ul class="list-unstyled marginTop-40">
-            <li class="mb-2"><a href="#">Courses</a></li>
-            <li class="mb-2"><a href="#">Admission</a></li>
-            <li class="mb-2"><a href="#">Student Services</a></li>
-            <li class="mb-2"><a href="#">Download</a></li>
-            <li class="mb-2"><a href="#">Contact</a></li>
-            <!-- <li class="mb-2"><a href="blog-card.html">Latest News</a></li> -->
+            @foreach ($menus as $menu)
+              @if(isset($menu['parent_page']))
+                @php
+                   $route = route($menu['parent_page']['slug']);
+                @endphp
+                @if ($menu['name'] =="home")
+
+                  @else
+                    <li class="mb-2 text-capitalize"><a href="{{$route}}">{{$menu['name']}}</a></li>
+
+                @endif
+              @endif
+
+            @endforeach
           </ul>
         </div>
 
@@ -82,4 +90,3 @@
 <div class="scroll-top">
   <i class="ti-angle-up"></i>
 </div>
-

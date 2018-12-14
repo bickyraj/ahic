@@ -12,14 +12,34 @@ export default {
       }
     },
     {
-      name: 'Roles',
-      url: url + 'roles',
-      icon: 'fas fa-key',
+      name: 'Enquiry Management',
+      url: url + 'enquiries',
+      icon: 'fas fa-book-open',
       badge: {
         variant: 'primary',
         // text: 'NEW'
       }
     },
+    {
+      name: 'Agent Management',
+      url: url + 'agent_information',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+    {
+      name: 'Student Management',
+      url: url + 'students',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },
+
+
     {
       name: 'CMS',
       url: '/cms',
@@ -76,24 +96,53 @@ export default {
         },
         {
          name: 'Contents',
-           url: url + 'contents',
+           url: url + 'cms',
            icon: 'fas fa-book-open',
            badge: {
              variant: 'primary',
            }
         },
-       
+
       ]
     },
     {
-      name: 'Unit Competences',
-      url: url + 'course_unit_competences',
+      name: 'Course Management',
+      url: '/coursemanagement',
       icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
+      children: [
+        {
+          name: 'Unit Competences',
+          url: url + 'course_unit_competences',
+          icon: 'fas fa-book-open',
+          badge: {
+            variant: 'primary',
+            // text: 'NEW'
+          }
+        },
+
+        {
+          name: 'Course & Categories',
+          url: url + 'course_categories',
+          icon: 'fas fa-book-open',
+          badge: {
+            variant: 'primary',
+            // text: 'NEW'
+          }
+        },
+
+      ]
     },
+
+    // {
+    //   name: 'Roles',
+    //   url: url + 'roles',
+    //   icon: 'fas fa-key',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
+
     // {
     //   name: 'Unit Categories',
     //   url: url + 'course_unit_categories',
@@ -112,15 +161,6 @@ export default {
     //     // text: 'NEW'
     //   }
     // },
-    {
-      name: 'Course & Categories',
-      url: url + 'course_categories',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
     // {
     //   name: 'Courses',
     //   url: url + 'courses',
@@ -130,7 +170,7 @@ export default {
     //     // text: 'NEW'
     //   }
     // },
-   
+
     // {
     //   name: 'Module Contents',
     //   url: url + 'module_contents',
@@ -140,62 +180,10 @@ export default {
     //     // text: 'NEW'
     //   }
     // },
-    {
-      name: 'Agent Information',
-      url: url + 'agent_information',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
-    {
-      name: 'Countries',
-      url: url + 'countries',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
-    {
-      name: 'Branch Locations',
-      url: url + 'branch_locations',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
 
-    {
-      name: 'Students',
-      url: url + 'students',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
-    {
-      name: 'Dates Of Intake',
-      url: url + 'date_of_intakes',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
 
-    {
-      name: 'Payment Options',
-      url: url + 'payment_options',
-      icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
+
+
     {
       name: 'Downloads',
       url: url + 'downloads',
@@ -206,14 +194,51 @@ export default {
       }
     },
     {
-      name: 'Enquiries',
-      url: url + 'enquiries',
+      name: 'Settings',
+      url: '/settings',
       icon: 'fas fa-book-open',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
+      children: [
+        {
+          name: 'Countries',
+          url: url + 'countries',
+          icon: 'fas fa-book-open',
+          badge: {
+            variant: 'primary',
+            // text: 'NEW'
+          }
+        },
+        {
+          name: 'Branch Locations',
+          url: url + 'branch_locations',
+          icon: 'fas fa-book-open',
+          badge: {
+            variant: 'primary',
+            // text: 'NEW'
+          }
+        },
+        {
+          name: 'Dates Of Intake',
+          url: url + 'date_of_intakes',
+          icon: 'fas fa-book-open',
+          badge: {
+            variant: 'primary',
+            // text: 'NEW'
+          }
+        },
+
+        {
+          name: 'Payment Options',
+          url: url + 'payment_options',
+          icon: 'fas fa-book-open',
+          badge: {
+            variant: 'primary',
+            // text: 'NEW'
+          }
+        },
+
+      ]
     },
+
     // {
     //   name: 'Page Modules',
     //   url: url + 'page_modules',
@@ -259,15 +284,15 @@ export default {
     //     // text: 'NEW'
     //   }
     // },
-    {
-      name: 'Import / Export',
-      url: url + 'import-export',
-      icon: 'fas fa-cloud-download-alt',
-      badge: {
-        variant: 'primary',
-        // text: 'NEW'
-      }
-    },
+    // {
+    //   name: 'Import / Export',
+    //   url: url + 'import-export',
+    //   icon: 'fas fa-cloud-download-alt',
+    //   badge: {
+    //     variant: 'primary',
+    //     // text: 'NEW'
+    //   }
+    // },
     // {
     //   name: 'Url Shortner',
     //   url: url + 'url-shortner',
@@ -305,7 +330,7 @@ export default {
         }
       ]
     },
-    
+
     {
       name: 'Charts',
       url: '/charts',

@@ -17,7 +17,7 @@
                   </div>
                    <div class="form-group">
                     <label for=""> Image </label>
-                    <input type="file" name="image" class="form-control" placeholder="" required>
+                    <input type="file" name="image" class="form-control" placeholder="" >
                   </div>
                   <div class="form-group">
                     <label for="">Parent Page</label>
@@ -97,20 +97,19 @@
                     <label for="">Image  </label> <br>
                <img :src="'../public/images/pages/'+modalInfo.data.image" class="img-fluid" />
                     <input type="file" name="image" class="form-control">
-
                   </div>
 
         <div class="form-group">
           <label for="">Parent page</label>
-          <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control">
-            <option v-for="page in table_items" :value="page.id" :key="page.id"> {{page.name}}</option>
+          <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control" >
+            <option v-for="page in table_items" :value="page.id" :key="page.id" v-if="modalInfo.data.id != page.id" > {{page.name}}</option>
           </select>
         </div>
 
 
         <div class="form-group">
           <label for="">Sub Title</label>
-          <input type="text" name="sub_title" v-bind:value="modalInfo.data.sub_title" class="form-control" placeholder="" required>
+          <input type="text" name="sub_title" v-bind:value="modalInfo.data.sub_title" class="form-control" placeholder="" >
         </div>
 
 

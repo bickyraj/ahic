@@ -12,4 +12,7 @@ class BranchLocation extends Model
     public function country(){
         return $this->belongsTo('App\Country','country_id','id');
     }
+    public function locations(){
+        return $this->belongsTo('App\BranchLocation');
+    }
 }

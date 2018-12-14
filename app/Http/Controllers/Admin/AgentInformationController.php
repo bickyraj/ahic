@@ -12,7 +12,56 @@ class AgentInformationController extends Controller
 
     public function index()
     {
-       $agents = AgentInformation::all();
+       $agents = AgentInformation::with('documents')->get();
+       foreach ($agents as $agent) {
+         //for each agents as agent
+          if($agent->documents != null){
+            //checking if agent has company
+              foreach ($agent->documents as $shore) {
+                //if agent has more than one company
+                if(count($agent->documents) < 2){
+                  //if has only one check for the shore
+                                  if($shore->country == "Australia"){
+                                    $agent->shore = "on";
+                                  }
+                                  else{
+                                    $agent->shore = "off";
+                                  }
+                                }
+                else{
+                  //if has multiple company
+                  $on = "";
+                  $off="";
+                  $agent->count = count($agent->documents);
+                  for ($i=0; $i < $agent->count ; $i++) {
+                    //checking every document in loop and storing
+                    if($agent->documents[$i]->country == "Australia"){
+                      $on ="1";
+                    }
+                    else{
+                      $off="1";
+                    }
+                  }
+                  //if the agent has company in both on shore and offshore
+                                if($off == "1" && $on =="1"){
+                                  $agent->shore = "all";
+                                }
+                                else{
+                                  // else
+                                  if($shore->country == "Australia"){
+                                    $agent->shore = "on";
+                                  }
+                                  else{
+                                    $agent->shore = "off";
+                                  }
+                                }
+
+                }
+              }
+              unset($agent->documents);
+              //remove documents cause we dont need
+          }
+       }
        return Resource::collection($agents);
     }
     public function create()
@@ -58,11 +107,11 @@ class AgentInformationController extends Controller
     {
         $agent = AgentInformation::findOrFail($id);
         return new Resource($agent);
-    
+
 
     }
 
-  
+
     public function edit(AgentInformation $agentInformation)
     {
         //
@@ -82,6 +131,7 @@ class AgentInformationController extends Controller
      $data['start_date'] = $request->input('start_date');
      $file = $request->file('logo');
         if($file != null){
+          $oldimg = $agent->logo;
             $this->destroyimage($oldimg);
             $ext = $file->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
@@ -93,7 +143,7 @@ class AgentInformationController extends Controller
        return Resource::collection($agents);
     }
 
- 
+
     public function destroy($id)
     {
       $course = AgentInformation::findOrFail($id);
@@ -112,5 +162,5 @@ class AgentInformationController extends Controller
             @unlink($oldimg);
         }
     }
-    
+
 }

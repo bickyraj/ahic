@@ -46,12 +46,12 @@ class CourseController extends Controller
         $course->offshore_fee = $request->input('offshore_fee');
         $file = $request->file('background_image');
         $course->status = 1;
+        $course->order_by = 1;
         if($file != null){
             $ext = $file->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $course->background_image = $filename;
             $file->move($this->destination,$filename);
-
         }
         $create = $course->save();
         if($create){
@@ -81,7 +81,7 @@ class CourseController extends Controller
      else{
         return 'error';
     }
-  
+
     }
 
    public function updateOrder(Request $request)
@@ -119,7 +119,7 @@ class CourseController extends Controller
         $course->description = $request->input('description');
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
-        $course->status = $request->input('status');
+        // $course->status = $request->input('status');
            $file = $request->file('background_image');
         if($file != null){
             $oldimg = $course->background_image;
@@ -155,7 +155,7 @@ class CourseController extends Controller
         $course->description = $request->input('description');
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
-        $course->status = $request->input('status');
+        // $course->status = $request->input('status');
            $file = $request->file('background_image');
         if($file != null){
             $oldimg = $course->background_image;

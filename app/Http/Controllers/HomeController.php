@@ -13,17 +13,24 @@ use App\Country;
 use App\Download;
 use App\News;
 use App\Gallery;
+use App\Slider;
+use App\CMS;
+use App\ApplicationDateOfIntake;
 
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $courses = Course::with('category')->get();
-        $countries = Country::all();
-        $news  = News::where('status','1')->limit(3)->get();
-        $gallery = Gallery::all();
-        return view('front.index',compact('courses','countries','news','gallery'));
+        $courses =    Course::with('category')->get();
+        $countries =  Country::all();
+        $news  =      News::where('status','1')->limit(3)->get();
+        $gallery =    Gallery::all();
+        $sliders =    Slider::all();
+        $header = CMS::where('slug','header')->first();
+        $lc = CMS::where('slug','lc')->first();
+        $rc = CMS::where('slug','rc')->first();
+        return view('front.index',compact('courses','countries','news','gallery','sliders','header','lc','rc'));
     }
     public function courses()
     {
@@ -52,7 +59,9 @@ class HomeController extends Controller
     public function admission(){
       $courses = Course::all();
       $categories = CourseCategory::all();
-      return view('front.admission',compact('courses','categories'));
+      $intakeyear = ApplicationDateOfIntake::groupBy('year')->get();
+      $intakes = ApplicationDateOfIntake::all();
+      return view('front.admission',compact('courses','categories','intakeyear','intakes'));
     }
     public function studentService(){
       $route =  \Request::segment(1);

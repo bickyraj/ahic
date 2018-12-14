@@ -17,7 +17,7 @@ class CreateDownloadsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('file');
-            $table->integer('status');
+            $table->integer('status')->default('1');
             $table->timestamps();
         });
     }

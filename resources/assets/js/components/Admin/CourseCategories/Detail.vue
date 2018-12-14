@@ -50,7 +50,7 @@
                     <label for="">Description</label>
                <editor  name="description" :init="editor"></editor>
                   </div>
-               
+
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Course</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
@@ -153,14 +153,14 @@
                     <label for="">Description</label>
                    <editor  name="description" v-model="modalInfo.data.description" :init="editor"></editor>
                   </div>
-                 
-                      <div class="form-group">
+
+                      <!-- <div class="form-group">
           <label for="">Status</label>
           <select name="status" id="" v-model="modalInfo.data.status" class="form-control">
             <option value="0"> Disable</option>
             <option value="1"> Enable</option>
           </select>
-        </div>
+        </div> -->
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>
@@ -371,7 +371,7 @@
       	axios.post(url, self.table_items)
 		.then(function (response) {
 			if (response.data.status === 1) {
-				self.$toastr.s("Order Updated");  
+				self.$toastr.s("Order Updated");
 			}
     })
             },

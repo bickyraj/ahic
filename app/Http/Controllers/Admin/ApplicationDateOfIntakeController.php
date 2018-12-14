@@ -25,21 +25,28 @@ class ApplicationDateOfIntakeController extends Controller
         return Resource::collection($intakes);
     }
 
- 
+
     public function create()
     {
-   
+
     }
 
- 
+
     public function store(Request $request)
     {
            $intake['year'] = $request->input('year');
         $intake['date'] = $request->input('date');
+        $intake['end_date'] = $request->input('end_date');
+        $intake['mid_term'] = $request->input('mid_term');
+        $intake['duration'] = $request->input('duration');
+        $intake['holiday_start'] = $request->input('holiday_start');
+        $intake['holiday_end'] = $request->input('holiday_end');
+        $intake['holiday_duration'] = $request->input('holiday_duration');
+        $intake['credential_release'] = $request->input('credential_release');
         $create = ApplicationDateOfIntake::create($intake);
         if($create){
          $intakes  = ApplicationDateOfIntake::all();
-        return Resource::collection($intakes);  
+        return Resource::collection($intakes);
         }
     }
 
@@ -67,16 +74,23 @@ class ApplicationDateOfIntakeController extends Controller
         //
     }
 
-  
+
     public function update(Request $request)
     {
         $intake = ApplicationDateOfIntake::findOrFail($request->id);
         $intake->year = $request->input('year');
         $intake->date = $request->input('date');
+        $intake->end_date = $request->input('end_date');
+        $intake->mid_term = $request->input('mid_term');
+        $intake->duration = $request->input('duration');
+        $intake->holiday_start = $request->input('holiday_start');
+        $intake->holiday_end = $request->input('holiday_end');
+        $intake->holiday_duration = $request->input('holiday_duration');
+        $intake->credential_release = $request->input('credential_release');
         $intake->save();
                 $intakes  = ApplicationDateOfIntake::all();
         return Resource::collection($intakes);
-        
+
     }
 
     public function destroy($id)

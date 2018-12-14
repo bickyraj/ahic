@@ -271,6 +271,44 @@ const routes = [
         },
     },
     {
+        path: admin_url + 'sliders',
+        component: require('./components/Admin/Slider/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Sliders',
+                    path: admin_url + 'sliders',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
+        path: admin_url + 'cms',
+        component: require('./components/Admin/CMS/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Contents',
+                    path: admin_url + 'cms',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
         path: admin_url + 'student/:id',
         component: require('./components/Admin/Form/Detail'),
         meta: {

@@ -17,6 +17,14 @@ class CreateApplicationDateOfIntakesTable extends Migration
             $table->increments('id');
             $table->integer('year');
             $table->string('date');
+            $table->string('term');
+            $table->string('mid_term');
+            $table->string('end_date');
+            $table->string('duration');
+            $table->string('holiday_start');
+            $table->string('holiday_end');
+            $table->string('holiday_duration');
+            $table->string('credential_release');
             $table->timestamps();
         });
     }

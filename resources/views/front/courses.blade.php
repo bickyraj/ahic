@@ -112,7 +112,10 @@
             <div class="card-footer media align-items-center justify-content-between">
                 <h4 class="h5 text-right ">
                 <span class="text-primary">
-                  {{ str_limit($course->duration, 8) }}
+                  @php
+                    $string = explode(' ',$course->duration);
+                  @endphp
+                  {{$string[0]}} {{$string[1]}}
                   </span>
               </h4>
             </div>

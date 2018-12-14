@@ -1,7 +1,7 @@
 <template>
   <div class="animated">
     <b-row>
-      <b-col>
+      <b-col cols="6">
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
@@ -36,6 +36,9 @@
               <tr v-for="(role, index) in table_items" :key="role.id">
                 <td>{{ role.title }}</td>
                 <td>
+                  <b-button size="sm" @click.stop="option = role" class="mr-1 btn-primary">
+                    View
+                  </b-button>
                   <b-button size="sm" @click.stop="info(role, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -56,6 +59,21 @@
           </table>
         </b-card>
       </b-col>
+      <b-col cols="6" v-if="option != null">
+        <b-card class="mb-2 trump-card">
+          <div class="card-title">
+            <div class="caption">
+              <h5><i class="fas fa-key"></i> {{option.title}} </h5>
+            </div>
+            <div class="caption card-title-actions">
+
+            </div>
+          </div>
+<div class="" v-html="option.description">
+
+</div>
+        </b-card>
+        </b-col>
     </b-row>
     <!-- Info modal -->
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
@@ -80,6 +98,7 @@
   export default {
     data() {
       return {
+        option:[],
         loading: true,
         table_items: [],
         role_table_fields: ['title', 'description'],
@@ -102,7 +121,7 @@
       },
           image_title:true,
           automatic_uploads: true,
-          file_picker_types: 'image', 
+          file_picker_types: 'image',
           // and here's our custom image picker
           file_picker_callback: function(cb, value, meta) {
             var input = document.createElement('input');
@@ -130,7 +149,7 @@
     created() {
 
       this.fetchRoles();
- 
+
     },
     computed: {
 
@@ -141,6 +160,7 @@
         let url = self.$root.baseUrl + '/api/admin/payment_option/';
         axios.get(url + item.id).then(function(response) {
             if (response.status === 200 || response.status === 201) {
+              self.option = response.data.data
               self.modalInfo.row = index
               self.modalInfo.title = `Edit Role`
               self.modalInfo.data = response.data.data

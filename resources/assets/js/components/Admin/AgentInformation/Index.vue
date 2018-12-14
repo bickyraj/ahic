@@ -8,6 +8,9 @@
               <h5><i class="fas fa-key"></i> Agent Information </h5>
             </div>
             <div class="caption card-title-actions">
+              <!-- <div class="float-left mr-3">
+                 <input type="text" class="form-control" placeholder="Search">
+              </div> -->
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add Agent</b-button>
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add Agent">
                 <form @submit.prevent="addAgent" ref="addAgentForm">
@@ -57,13 +60,14 @@
 
           <div class="col-md-12">
             <div class="col-md-2 offset-md-7 float-left">
-                <select name="" id="" class="form-control" v-model="shore">
+                <select name="" id="" class="form-control" v-model="filtershore" @change="getShore()">
+                      <option value="all" selected > All</option>
                       <option value="on" > Onshore</option>
                       <option value="off"> Offshore</option>
                 </select>
             </div>
             <div class="col-md-3 float-left">
-               <input type="text" class="form-control" placeholder="Search">
+               <input type="text" class="form-control" placeholder="Search" v-model="search">
             </div>
 
           </div>
@@ -72,20 +76,14 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Mobile No</th>
-                <th>Email</th>
                 <th>Address</th>
-                <th>Start Date</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
-              <tr v-for="(agent, index) in table_items" :key="agent.id">
+              <tr v-for="(agent, index) in filteredList" :key="agent.id">
                 <td>{{ agent.first_name}} {{agent.last_name}}  </td>
-                <td>{{ agent.mobile_no || '  --' }}</td>
-                <td>{{ agent.email}}</td>
-                <td>{{ agent.address.substring(0,30) + ".."}}</td>
-                <td>{{ agent.start_date}}</td>
+                <td>{{ agent.address.substring(0,37) + ".."}}</td>
                 <td>
            <router-link :to="'agent/'+agent.id">
                   <b-button size="sm"  class="mr-1 btn-primary">
@@ -176,25 +174,47 @@
   export default {
     data() {
       return {
-        shore:"on",
+        filtershore:"all",
           categories:'',
         loading: true,
         table_items: [],
         pages:[],
-        menu_table_fields: ['id','PAN', 'first_name','last_name','telephone','mobile_no','email','address','start_date'],
+        menu_table_fields: ['id','PAN', 'first_name','last_name','telephone','mobile_no','email','address','start_date','shore'],
         modalInfo: {
           title: '',
           content: '',
           data: []
         },
+        search:'',
       }
     },
     created() {
       this.fetchAgents();
     },
     computed: {
+      filteredList() {
+     return this.table_items.filter(agent => {
+       return agent.first_name.toLowerCase() && agent.last_name.toLowerCase().includes(this.search.toLowerCase())
+     })
+   },
+
     },
     methods: {
+      getShore(){
+        var self = this;
+        if(this.filtershore == "all"){
+console.log("show all");
+        }
+        else{
+          var r =  this.table_items.filter(agent => {
+            if(agent.shore){
+            return agent.shore.toLowerCase().includes(this.store)
+          }
+          })
+          console.log(r);
+        }
+
+      },
       info(menu, index, button) {
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/agent_information/';

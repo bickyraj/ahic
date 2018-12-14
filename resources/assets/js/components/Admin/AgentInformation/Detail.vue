@@ -307,7 +307,7 @@
               </div>
          <div class="form-group">
                 <label for=""> Country </label>
-                <select name="country" id="" class="form-control" @change="changeLocation" :value="document.country">
+                <select name="country" id="" class="form-control" @change="changeLocation" v-model="document.country">
                   <option value=""> Choose A Country</option>
                   <option v-for="(country,index) in countries" :value="country.name" :key="country.name" :index="index"> {{country.name}} </option>
                 </select>
@@ -599,10 +599,14 @@
             axios.get(url +docid).then(function(response) {
                 self.document = response.data.data;
                 let country = (response.data.data.country);
+                let url = self.$root.baseUrl + '/api/admin/branch_locations/getid/';
+                axios.get(url + country).then(function(response) {
+                  country = response.data;
                     let url = self.$root.baseUrl + '/api/admin/branch_locations/';
             axios.get(url + country).then(function(response) {
               console.log(response.data.data);
                 self.locations = response.data.data.locations;
+            })
             })
 
             })

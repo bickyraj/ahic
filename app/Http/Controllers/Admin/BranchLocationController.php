@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Menu as Resource;
 
 use App\BranchLocation;
+use App\Country;
 use Illuminate\Http\Request;
 
 class BranchLocationController extends Controller
@@ -28,7 +29,7 @@ class BranchLocationController extends Controller
      */
     public function create()
     {
-       
+
 
     }
 
@@ -59,10 +60,16 @@ class BranchLocationController extends Controller
         $location  = BranchLocation::findOrFail($id);
         return new Resource($location);
     }
-    public function get($country)
+    public function get($id)
     {
         $location  = BranchLocation::where('id',$id)->with('locations')->get();
         return new Resource($location);
+    }
+
+    public function getid($c){
+      $location  = Country::where('name',$c)->first();
+      return $location->id;
+
     }
 
     /**

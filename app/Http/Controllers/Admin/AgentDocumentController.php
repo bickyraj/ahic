@@ -129,7 +129,7 @@ class AgentDocumentController extends Controller
         $eoi = $request->file('EOI');
           if($eoi != null){
               $old = $doc->EOI;
-            $this->destroyimage($$old);
+            $this->destroyimage($old);
             $ext = $eoi->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $course->EOI = $filename;
@@ -139,7 +139,7 @@ class AgentDocumentController extends Controller
         $abn = $request->file('ABN');
           if($abn != null){
                  $old = $doc->ABN;
-            $this->destroyimage($$old);
+            $this->destroyimage($old);
             $ext = $abn->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $data['ABN'] = $filename;
@@ -149,7 +149,7 @@ class AgentDocumentController extends Controller
         $reference = $request->file('reference');
           if($reference != null){
                  $old = $doc->reference;
-            $this->destroyimage($$old);
+            $this->destroyimage($old);
             $ext = $reference->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $data['reference'] = $filename;
@@ -159,7 +159,7 @@ class AgentDocumentController extends Controller
         $qualification = $request->file('qualification');
           if($qualification != null){
                  $old = $doc->qualification;
-            $this->destroyimage($$old);
+            $this->destroyimage($old);
             $ext = $qualification->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $data['qualification'] = $filename;
@@ -169,7 +169,7 @@ class AgentDocumentController extends Controller
         $profile = $request->file('profile');
           if($profile != null){
                  $old = $doc->profile;
-            $this->destroyimage($$old);
+            $this->destroyimage($old);
             $ext = $profile->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $$data['profile'] = $filename;
@@ -201,7 +201,7 @@ class AgentDocumentController extends Controller
         $eoi = $request->file('EOI');
           if($eoi != null){
               $old = $doc->EOI;
-            $this->destroyimage($$old);
+            $this->destroyimage($old);
             $ext = $eoi->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $course->EOI = $filename;
@@ -211,7 +211,7 @@ class AgentDocumentController extends Controller
         $abn = $request->file('ABN');
           if($abn != null){
                  $old = $doc->ABN;
-            $this->destroyimage($$old);
+            $this->destroyimage($old);
             $ext = $abn->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $data['ABN'] = $filename;
@@ -221,7 +221,7 @@ class AgentDocumentController extends Controller
         $reference = $request->file('reference');
           if($reference != null){
                  $old = $doc->reference;
-            $this->destroyimage($$old);
+            $this->destroyimage($old);
             $ext = $reference->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $data['reference'] = $filename;
@@ -231,7 +231,7 @@ class AgentDocumentController extends Controller
         $qualification = $request->file('qualification');
           if($qualification != null){
                  $old = $doc->qualification;
-            $this->destroyimage($$old);
+            $this->destroyimage($old);
             $ext = $qualification->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $data['qualification'] = $filename;
@@ -241,7 +241,7 @@ class AgentDocumentController extends Controller
         $profile = $request->file('profile');
           if($profile != null){
                  $old = $doc->profile;
-            $this->destroyimage($$old);
+            $this->destroyimage($old);
             $ext = $profile->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $$data['profile'] = $filename;
@@ -253,7 +253,7 @@ class AgentDocumentController extends Controller
       $doc = AgentDocument::all();
         return Resource::collection($doc);
         }
-         
+
     }
 
    public function destroy($id)

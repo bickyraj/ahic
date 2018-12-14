@@ -1,3 +1,9 @@
+<style lang="">
+
+    .form-control:disabled, .form-control[readonly]{
+        background-color: transparent !important;
+    }
+</style>
 <template>
   <div class="animated">
     <b-row>
@@ -11,13 +17,45 @@
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Date</b-button>
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add Intake">
                 <form @submit.prevent="addIntake" ref="addIntakeForm">
+                <div class="form-group">
+                  <label for="">Term</label>
+                  <input type="text" class="form-control" name="term" value="">
+                </div>
                   <div class="form-group">
                     <label for="">Year</label>
-                    <input type="text" name="year" class="form-control" placeholder="" required>
+                    <datepicker format="yyyy" name="year"  bootstrap-styling :minimum-view="'year'" :maximum-view="'year'" :initialView="'year'" ></datepicker>
                   </div>
                   <div class="form-group">
-                    <label for="">Date</label>
-                    <input type="text" name="date" class="form-control" placeholder="" required>
+                    <label for="">Start Date</label>
+                    <datepicker format="MMM dd" name="date"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Mid Term</label>
+                    <datepicker format="MMM dd" name="mid_term"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                  </div>
+                  <div class="form-group">
+                    <label for="">End Date</label>
+                    <datepicker format="MMM dd" name="end_date"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Duration</label>
+                    <input type="text" name="duration" class="form-control" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Holiday Start</label>
+                    <datepicker format="MMM dd" name="holiday_start"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Holiday End</label>
+                    <datepicker format="MMM dd" name="holiday_end"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Holiday Duration</label>
+                    <input type="text" name="holiday_duration" class="form-control" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Credential Release</label>
+                    <datepicker format="MMM dd" name="credential_release"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Date</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -64,14 +102,46 @@
       <form @submit.prevent="editIntake" :row="modalInfo.row" ref="editIntakeForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
         <div class="form-group">
+          <label for="">Term</label>
+          <input type="text" class="form-control" name="term" value="" v-bind:value="modalInfo.data.term">
+        </div>
+        <div class="form-group">
           <label for="">Year</label>
-          <input type="text" name="year" v-bind:value="modalInfo.data.year" class="form-control" placeholder="" required>
+          <datepicker format="yyyy" name="year"  bootstrap-styling :minimum-view="'year'" :maximum-view="'year'" :initialView="'year'" :value="modalInfo.data.year"></datepicker>
         </div>
         <div class="form-group">
           <label for="">Date</label>
-          <input type="text" name="date" v-bind:value="modalInfo.data.date" class="form-control" placeholder="" required>
+          <datepicker format="MMM dd" name="date"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.date" ></datepicker>
         </div>
-       
+        <div class="form-group">
+          <label for="">Mid Term</label>
+          <datepicker format="MMM dd" name="mid_term"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.mid_term" ></datepicker>
+        </div>
+        <div class="form-group">
+          <label for="">End Date</label>
+          <datepicker format="MMM dd" name="end_date"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.end_date" ></datepicker>
+        </div>
+        <div class="form-group">
+          <label for="">Duration</label>
+          <input type="text" name="duration" v-bind:value="modalInfo.data.duration" class="form-control" placeholder="" required>
+        </div>
+        <div class="form-group">
+          <label for="">Holiday Start</label>
+          <datepicker format="MMM dd" name="holiday_start"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.holiday_start" ></datepicker>
+        </div>
+        <div class="form-group">
+          <label for="">Holiday End</label>
+          <datepicker format="MMM dd" name="holiday_end"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.holiday_end" ></datepicker>
+        </div>
+        <div class="form-group">
+          <label for="">Holiday Duration</label>
+          <input type="text" name="holiday_duration" v-bind:value="modalInfo.data.holiday_duration" class="form-control" placeholder="" required>
+        </div>
+        <div class="form-group">
+          <label for="">Credential Release</label>
+          <datepicker format="MMM dd" name="credential_release"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.credential_release" ></datepicker>
+        </div>
+
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideIntakeModal">Cancel</b-btn>
       </form>
@@ -96,6 +166,11 @@
     created() {
       this.fetchIntakes();
     },
+    watch: {
+      modalInfo(){
+        console.log('changed and change date now');
+      }
+    },
     computed: {
     },
     methods: {
@@ -108,6 +183,13 @@
               console.log(response.data.data);
               self.modalInfo.title = `Edit Intake`
               self.modalInfo.data = response.data.data
+              self.modalInfo.data.year = new Date(response.data.data.year,1,1)
+              self.modalInfo.data.date = '0000 ' + response.data.data.date
+              self.modalInfo.data.mid_term = '0000 ' + response.data.data.mid_term
+              self.modalInfo.data.end_date = '0000 ' + response.data.data.end_date
+              self.modalInfo.data.holiday_start = '0000 ' + response.data.data.holiday_start
+              self.modalInfo.data.holiday_end = '0000 ' + response.data.data.holiday_end
+              self.modalInfo.data.credential_release = '0000 ' + response.data.data.credential_release
               self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
               self.$root.$emit('bv::show::modal', 'modalInfo', button)
             }
