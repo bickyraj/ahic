@@ -11,10 +11,12 @@
     vueBaseUrl: '{{ env("VUE_BASE_URL") }}',
      }</script>
 
-    <title>Crm - Admin</title>
+    <title>AHIC - Australian Harbour International College | Admin</title>
 
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="{{{ asset('favicon.ico') }}}">
+    <!-- Favicon and Apple Icons-->
+    <link rel="icon" type="image/x-icon" href="{{asset('/')}}public/ahic/img/favicon/favicon.ico">
+    <link rel="shortcut icon" href="{{asset('/')}}public/ahic/img/favicon/114x114.png">
+    <link rel="apple-touch-icon-precomposed" href="{{asset('/')}}public/ahic/img/favicon/96x96.png">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <!-- <link href="{{ asset('assets/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" /> -->
