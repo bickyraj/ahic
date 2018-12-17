@@ -8,7 +8,7 @@
               <h5><i class="fas fa-key"></i> Contact </h5>
             </div>
             <div class="caption card-title-actions">
-              <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right" v-if="table_items == null">Add Contact Details</b-button>
+              <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right" v-if="table_items.length == 0 ">Add Contact Details</b-button>
               <b-button @click="edit" variant="success" class="btn btn-sm green pull-right" v-else>Edit</b-button>
 
             </div>
@@ -260,6 +260,7 @@
         axios.get(url)
           .then(function(response) {
             vm.table_items = response.data.data;
+            console.log(response.data.data)
             vm.loading = false;
           })
           .catch(function(error) {

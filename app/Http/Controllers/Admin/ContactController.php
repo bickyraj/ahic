@@ -11,8 +11,8 @@ class ContactController extends Controller
 
     public function index()
     {
-        $c = Contact::all()[0];
-        return new Resource($c);
+        $c = Contact::all();
+        return  Resource::collection($c);
     }
 
     public function store(Request $request)
@@ -29,15 +29,17 @@ class ContactController extends Controller
       $data['RTO'] = $request->input('RTO');
       $data['CRICOS'] = $request->input('CRICOS');
       Contact::create($data);
-      $c = Contact::all()[0];
-              return new Resource($c);
+      $c = Contact::all();
+      return  Resource::collection($c);
+
     }
 
     public function show(Contact $contact)
     {
 
-          $c = Contact::all()[0];
-                  return new Resource($c);
+          $c = Contact::all();
+          return  Resource::collection($c);
+
     }
 
 
@@ -56,8 +58,9 @@ class ContactController extends Controller
       $data['RTO'] = $request->input('RTO');
       $data['CRICOS'] = $request->input('CRICOS');
       $c->update($data);
-      $c = Contact::all()[0];
-              return new Resource($c);
+      $c = Contact::all();
+      return  Resource::collection($c);
+
     }
 
 }

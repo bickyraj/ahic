@@ -1,9 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-  <pre>
 
-</pre>
  <div class="site-search">
    <div class="site-search__close bg-black-0_8"></div>
    <form class="form-site-search" action="#" method="POST">
