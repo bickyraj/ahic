@@ -1,7 +1,7 @@
 <template>
   <div class="animated">
     <b-row>
-      <b-col>
+      <b-col :md="cols">
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
@@ -18,9 +18,9 @@
                     <p v-if="error.title" class="text-danger"> {{error.title[0]}}</p>
                     </transition>
                   </div>
-                      <div class="form-group">
+                      <div class="form-group d-none">
                     <label for="">Parent Module</label>
-                   <select  name="module_id" class="form-control">
+                   <select  name="module_id" class="form-control" v-model="id">
                      <option value="" selected> Choose Parent Module </option>
                     <option v-for="menu in modules" :value="menu.id" :key="menu.id"> {{menu.title}}</option>
                   </select>
@@ -33,6 +33,13 @@
                     <input type="file" name="image" class="form-control" >
                              <transition name="fade">
                     <p v-if="error.image" class="text-danger"> {{error.image[0]}}</p>
+                    </transition>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Order By</label>
+                    <input type="text" name="order_by" class="form-control" >
+                             <transition name="fade">
+                    <p v-if="error.image" class="text-danger"> {{error.order_by[0]}}</p>
                     </transition>
                   </div>
                   <div class="form-group">
@@ -54,21 +61,20 @@
                 <!-- <th>Module </th> -->
                 <th>Title</th>
                 <!-- <th class="col-md-2"> Image</th> -->
-                <th>Description</th>
-                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(m, index) in table_items" :key="m.id">
                 <!-- <td>{{ m.module.title}}</td> -->
-                <td>{{ m.title.substring(0,25) + ".."}}</td>
+                <td>{{ m.title.substring(0,165) + ".."}}</td>
                        <!-- <td v-if="m.image"> <img :src="'../public/images/module/'+m.image" class="img-fluid" /></td>
                        <td v-else> - - </td> -->
-                <td >{{ m.description.substring(0,25) + ".."}}</td>
-                <td>{{ m.status}}</td>
                 <td>
-                  
+
+                  <b-button size="sm" @click.stop="module = m" class="mr-1 btn-primary">
+                    View
+                  </b-button>
                   <b-button size="sm" @click.stop="info(m, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -87,6 +93,26 @@
               </tr>
             </tbody>
           </table>
+        </b-card>
+      </b-col>
+
+      <b-col md="6" v-if="module!=''">
+        <b-card class="mb-2 trump-card">
+          <div class="card-title">
+            <div class="caption">
+              <h5><i class="fas fa-key"></i> Glance</h5>
+            </div>
+            <div class="caption card-title-actions">
+            <button type="button" class="btn btn-danger" name="button" @click="module =''"> Close</button>
+            </div>
+            </div>
+
+            <h4>
+              {{module.title}}
+            </h4>
+    <p v-html="module.description">
+    </p>
+
         </b-card>
       </b-col>
     </b-row>
@@ -114,6 +140,10 @@
                     <label for="">Description</label>
                    <editor name="description" v-model="modalInfo.data.description" :init="editor"></editor>
                   </div>
+                  <div class="form-group">
+                    <label for="">Order By</label>
+                    <input type="text" name="order_by" class="form-control"  :value="modalInfo.data.order_by">
+                  </div>
        <div class="form-group">
           <label for="">Status</label>
           <select name="status" id="" v-model="modalInfo.data.status" class="form-control">
@@ -132,6 +162,7 @@
   export default {
     data() {
       return {
+        module:'',
         modules:'',
         loading: true,
         table_items: [],
@@ -184,7 +215,18 @@
       this.fetchModules();
     },
     computed: {
+      id(){
+        return parseInt(this.$route.params.id);
 
+      },
+      cols(){
+        if(this.module !=""){
+          return 6;
+        }
+        else{
+          return 12;
+        }
+      }
     },
     methods: {
       info(m, index, button) {
@@ -212,7 +254,7 @@
         var form = self.$refs.editModuleForm;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
-        let url = self.$root.baseUrl + '/api/admin/module_content/edit';
+        let url = self.$root.baseUrl + '/api/admin/module_content/edit/'+this.id;
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
               $(form)[0].reset();

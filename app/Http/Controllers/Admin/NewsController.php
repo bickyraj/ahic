@@ -22,13 +22,19 @@ class NewsController extends Controller
         $data['title'] = $request->input('title');
         $data['description'] = $request->input('description');
         $data['date'] = $request->input('date');
-        $file = $request->file('image');
-        if($file != null){
-            $ext = $file->getClientOriginalExtension();
-            $filename = md5(rand(0,999999)).'.'.$ext;
-            $data['image'] = $filename;
-            $file->move($this->destination,$filename);
-        }
+        $image = $request->image;
+      $image_array_1 = explode(";", $image);
+      if (array_key_exists("1",$image_array_1)){
+
+        $image_array_2 = explode(",", $image_array_1[1]);
+        $imgdata = base64_decode($image_array_2[1]);
+        $rand = rand(0,99999999);
+        $rand = md5($rand);
+        $imageName = $rand . '.png';
+        $data['image']=$imageName;
+        $dir = $this->destination.$imageName;
+        file_put_contents($dir, $imgdata);
+      }
         $create = News::create($data);
         if($create){
         $n = News::orderBy('order_by','asc')->get();
@@ -36,7 +42,7 @@ class NewsController extends Controller
         }
     }
 
- 
+
     public function show($id)
     {
         $n = News::findOrFail($id);
@@ -52,17 +58,25 @@ class NewsController extends Controller
         $data['description'] = $request->input('description');
         $data['status'] = $request->input('status');
         $data['date'] = $request->input('date');
-        $file = $request->file('image');
-        if($file != null){
-            $oldimg = $news->image;
-            $this->destroyimage($oldimg);
-            $ext = $file->getClientOriginalExtension();
-            $filename = md5(rand(0,999999)).'.'.$ext;
-            $data['image'] = $filename;
-            $file->move($this->destination,$filename);
-        }
+        $image = $request->image;
+      $image_array_1 = explode(";", $image);
+      if (array_key_exists("1",$image_array_1)){
+        $oldimg = $news->image;
+        $this->destroyimage($oldimg);
+        $image_array_2 = explode(",", $image_array_1[1]);
+        $imgdata = base64_decode($image_array_2[1]);
+        $rand = rand(0,99999999);
+        $rand = md5($rand);
+        $imageName = $rand . '.png';
+        $data['image']=$imageName;
+      }
+
         $update = $news->update($data);
         if($update){
+          if(isset($imageName)){
+            $dir = $this->destination.$imageName;
+            file_put_contents($dir, $imgdata);
+          }
              $n = News::orderBy('order_by','asc')->get();
         return Resource::collection($n);
         }

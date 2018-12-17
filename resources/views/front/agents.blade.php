@@ -1,5 +1,14 @@
 @extends('layouts.master')
 
+@section('style')
+<style media="screen">
+  .py-5.bg-cover{
+    background:url('{{asset('/')}}public/images/pages/{{$banner}}') no-repeat;
+    background-position:center;
+    background-size:cover;
+  }
+</style>
+@endsection
 
 @section('content')
 
@@ -19,7 +28,7 @@
 
 
 
-    <div class="py-5 bg-cover text-white" data-dark-overlay="5" style="background:url('{{asset('/')}}public/ahic/img/admission.jpg') no-repeat">
+    <div class="py-5 bg-cover text-white" data-dark-overlay="5" >
       <div class="container">
        <div class="row align-items-center">
          <div class="col-md-6">

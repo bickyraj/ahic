@@ -41,29 +41,25 @@
 <section class="paddingTop-80 pb-5 pb-md-0">
   <div class="container">
     <div class="row align-items-center">
+      @if ($welcome)
       <div class="col-md-6">
-        <img src="assets/img/1_1.png" alt="">
+        <img src="{{asset('/')}}public/images/cms/{{$welcome['image']}}" alt="" class="img-fluid">
       </div>
       <div class="col-md-6 mt-3">
+      @if ($welcome['title'] != null)
         <h2>
+          @php
+            $string = explode(' ',$welcome['title']);
+          @endphp
          <small class="text-primary d-block">
-           Hello, and
+           @if ($string[0] != null)
+           {{$string[0]}}
+         @endif
          </small>
-          welcome to Harbour.
         </h2>
-        <p class="lead">
-          People make a college great, so whether you are a prospective student, current student, professor.
-        </p>
-        <p>
-          Harbour college is conveniently located in the heart of Sydney’s Central Business District (CBD). Harbour College can offer you a range of flexible course delivery options appropriate to your preferred learning style. 
-        </p>
-        <h4 class="mt-2">
-          John Joe
-        </h4>
-        <p>
-          Principal of Australian Harbour <br> International College
-        </p>
-        <img src="assets/img/sign.png" alt="">
+      @endif
+            {!!html_entity_decode($welcome['description'])!!}
+    @endif
       </div>
     </div>
   </div>

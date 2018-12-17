@@ -1,7 +1,16 @@
 @extends('layouts.master')
 
-@section('content')
+@section('style')
+<style media="screen">
+  .bg-cover{
+    background:url('{{asset('/')}}public/images/pages/{{$banner}}') no-repeat;
+    background-position:center;
+    background-size:cover;
+  }
+</style>
+@endsection
 
+@section('content')
   <div class="site-search">
    <div class="site-search__close bg-black-0_8"></div>
    <form class="form-site-search" action="#" method="POST">
@@ -17,8 +26,7 @@
 
 
 
-
-  <div class="py-5 bg-cover text-white" data-dark-overlay="6"  style="background:url('{{asset('/')}}public/ahic/img/admission.jpg') no-repeat">
+  <div class="py-5 bg-cover text-white" data-dark-overlay="6"  >
     <div class="container">
      <div class="row align-items-center">
        <div class="col-md-6 text-white">
@@ -322,7 +330,7 @@
                         <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".1s">
                          <div class="card text-center height-100p border  p-4 p-lg-5 shadow-v2">
                           <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                             {{$intake->term}} Term
+                             {{$intake->term}} <br> Term
                            </span>
                            <div class="table-responsive my-4">
                              <table class="table text-left table-hover">

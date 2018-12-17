@@ -235,6 +235,15 @@ export default {
             // text: 'NEW'
           }
         },
+        {
+          name: 'Contact',
+          url: url + 'contact',
+          icon: 'fas fa-book-open',
+          badge: {
+            variant: 'primary',
+            // text: 'NEW'
+          }
+        },
 
       ]
     },

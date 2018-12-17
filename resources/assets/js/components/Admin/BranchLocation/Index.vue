@@ -32,15 +32,15 @@
                 <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th>Country</th>
                 <th>Location</th>
+                <th>Country</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
-                <td>{{ menu.country.name}}</td>
                 <td>{{ menu.location}}</td>
+                <td>{{ menu.country.name}}</td>
                 <td>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
                     Edit

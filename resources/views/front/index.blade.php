@@ -1,6 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
+  <pre>
+
+</pre>
  <div class="site-search">
    <div class="site-search__close bg-black-0_8"></div>
    <form class="form-site-search" action="#" method="POST">
@@ -75,7 +78,11 @@
                 @php
                 $string = explode(" ",$header['sub_title'],2);
                 @endphp
-               <span class="text-primary">{{$string[0]}}</span> {{$string[1]}}
+               <span class="text-primary">{{$string[0]}}</span>
+               @if (isset($string[1]))
+
+               {{$string[0]}}
+               @endif
              @endif
 
             </h2>
@@ -281,7 +288,7 @@
 
             {{$new->title}}
          </a>
-         <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/news-1.jpg" alt="">
+         <img class="card-img-top" src="{{asset('/')}}public/images/news/{{$new->image}}" alt="">
 
          <p class="paddingTop-10">
                 {!! html_entity_decode(str_limit($new->description, 180)) !!}

@@ -20,13 +20,13 @@
               </tr>
             </thead>
             <tbody v-if="applications.length > 0" v-show="!loading">
-              <tr v-for="(menu, index) in applications" :key="menu.id">
+              <tr v-for="(menu) in applications" :key="menu.id">
                 <td>  {{ menu.firstname}}  </td>
                 <td>{{ menu.gender}}</td>
                 <td>{{ menu.birth_country}}</td>
                 <td>
                 <router-link :to="'student/'+menu.id">
-                  <b-button size="sm"  class="mr-1 btn-parimary">
+                  <b-button size="sm"  class="mr-1 btn-primary">
                     View
                   </b-button>
                   </router-link>
@@ -35,7 +35,7 @@
             </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="3">
+                <td colspan="4">
                   <div v-if="!loading"> No Data.</div>
                   <div v-else> loading...</div>
                 </td>

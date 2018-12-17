@@ -70,6 +70,9 @@ import Datepicker from 'vuejs-datepicker';
 Vue.component('datepicker', Datepicker);
 
   import draggable from 'vuedraggable'
+  import Croppa from 'vue-croppa'
+
+Vue.use(Croppa)       
 
 Vue.component('draggable', draggable)
 Vue.component('editor', Editor)
@@ -165,7 +168,7 @@ Vue.use(VueGoogleMaps, {
 });
 router.beforeEach((to, from, next) => {
     if (to.matched.length) {
-      if (to.matched.some(record => record.meta.middlewareAuth)) {                
+      if (to.matched.some(record => record.meta.middlewareAuth)) {
         if (!auth.check() || to.matched[0].meta.roleId !== auth.roleId) {
           next({name: 'login'})
         } else {
@@ -199,4 +202,3 @@ const app = new Vue({
       App
 	},
 });
-

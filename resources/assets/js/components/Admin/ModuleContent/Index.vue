@@ -42,6 +42,13 @@
                     <p v-if="error.description" class="text-danger"> {{error.description[0]}}</p>
                     </transition>
                   </div>
+                  <div class="form-group">
+              <label for="">Order By</label>
+              <input type="text" name="order_by" class="form-control" placeholder="" >
+              <transition name="fade">
+              <p v-if="error.order_by" class="text-danger"> {{error.order_by[0]}}</p>
+              </transition>
+            </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Module Content</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
@@ -112,7 +119,7 @@
                   <div class="form-group">
                     <label for="">Description</label>
                    <editor name="description" v-model="modalInfo.data.description" :init="editor"></editor>
-                  </div> 
+                  </div>
        <div class="form-group">
           <label for="">Status</label>
           <select name="status" id="" v-model="modalInfo.data.status" class="form-control">
@@ -120,7 +127,7 @@
             <option value="1"> Enable</option>
           </select>
         </div>
-       
+
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModuleModal">Cancel</b-btn>
       </form>
@@ -149,11 +156,11 @@
         editor.on('change', function () {
             editor.save();
         });
-    
+
     },
           image_title:true,
           automatic_uploads: true,
-          file_picker_types: 'image', 
+          file_picker_types: 'image',
           // and here's our custom image picker
           file_picker_callback: function(cb, value, meta) {
             var input = document.createElement('input');
@@ -183,7 +190,7 @@
       this.fetchModules();
     },
     computed: {
-      
+
     },
     methods: {
       info(m, index, button) {
@@ -258,7 +265,7 @@
                   }).then((result) => {
                     if (result.value) {}
                   })
-                }
+                }``
               })
               .catch(function(error) {});
           }

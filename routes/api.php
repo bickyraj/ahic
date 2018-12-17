@@ -76,6 +76,12 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('gallery/update-order', 'GalleryController@updateOrder');
     Route::delete('gallery/{id}', 'GalleryController@destroy');
 
+    // Contact functions.
+    Route::get('contact', 'ContactController@index');
+    Route::get('contact/{id}', 'ContactController@show');
+    Route::post('contact', 'ContactController@store');
+    Route::post('contact/edit', 'ContactController@update');
+
     // Slider functions.
     Route::get('sliders', 'SliderController@index');
     Route::get('slider/{id}', 'SliderController@show');
@@ -186,7 +192,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('module_contents/{id}','ModuleContentController@showByCourse');
     Route::post('module_content', 'ModuleContentController@store');
     Route::get('module_content/{id}/showByParent','ModuleContentController@showByParent');
-    Route::post('module_content/edit', 'ModuleContentController@update');
+    Route::post('module_content/edit/{id}', 'ModuleContentController@update');
     Route::delete('module_content/{id}', 'ModuleContentController@destroy');
 
     //Module Content

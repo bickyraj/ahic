@@ -62,6 +62,7 @@ $modules = ModuleContent::with('module')->get();
       $data['module_id'] = $request->input('module_id');
         $data['title'] = $request->input('title');
         $data['description'] = $request->input('description');
+        $data['order_by'] = $request->input('order_by');
         $data['status'] = 1;
        $file = $request->file('image');
         if($file != null){
@@ -102,6 +103,7 @@ $modules = ModuleContent::with('module')->get();
         $course->title = $request->title;
         $course->description = $request->description;
         $course->status = $request->status;
+        $course->order_by = $request->order_by;
            $file = $request->file('image');
         if($file != null){
             $oldimg = $course->image;
@@ -114,7 +116,7 @@ $modules = ModuleContent::with('module')->get();
         if($course->update()){
      $modules = ModuleContent::with('module')->get();
         return Resource::collection($modules);
-        };
+          };
     }
 
     /**
@@ -124,7 +126,7 @@ $modules = ModuleContent::with('module')->get();
      * @param  \App\ModuleContent  $moduleContent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$mo)
     {
              $status = 0;
         $id = $request->id;
@@ -133,6 +135,7 @@ $modules = ModuleContent::with('module')->get();
         $course->title = $request->input('title');
         $course->description = $request->input('description');
         $course->status = $request->input('status');
+        $course->order_by = $request->input('order_by');
            $file = $request->file('image');
         if($file != null){
             $oldimg = $course->image;
@@ -143,7 +146,7 @@ $modules = ModuleContent::with('module')->get();
             $file->move($this->destination,$filename);
         }
         if($course->update()){
-       $modules = ModuleContent::with('module')->get();
+       $modules = ModuleContent::where('module_id',$mo)->with('module')->get();
         return Resource::collection($modules);
         };
     }

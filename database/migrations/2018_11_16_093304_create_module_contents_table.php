@@ -20,6 +20,7 @@ class CreateModuleContentsTable extends Migration
             $table->longText('description');
             $table->string('image')->nullable();
             $table->integer('status');
+            $table->string('order_by');
             $table->timestamps();
         });
     }

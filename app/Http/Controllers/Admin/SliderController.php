@@ -20,14 +20,18 @@ class SliderController extends Controller
           $data['title'] = $request->input('title');
           $data['sub_title'] = $request->input('sub_title');
           $data['description'] = $request->input('description');
-          $image = $request->file('image');
-      if($image)
-      {
-        $ext = $image->getClientOriginalExtension();
-        $filename = md5(rand(0,999999)).'.'.$ext;
-        $data['image'] = $filename;
-        $image->move($this->destination,$filename);
-      }
+          $image = $request->image;
+        $image_array_1 = explode(";", $image);
+        if (array_key_exists("1",$image_array_1)){
+            $image_array_2 = explode(",", $image_array_1[1]);
+            $imgdata = base64_decode($image_array_2[1]);
+            $rand = rand(0,99999999);
+            $rand = md5($rand);
+            $imageName = $rand . '.png';
+            $data['image']=$imageName;
+            $dir = $this->destination.$imageName;
+            file_put_contents($dir, $imgdata);
+          }
          Slider::create($data);
          $s = Slider::all();
          return Resource::collection($s);
@@ -72,16 +76,23 @@ class SliderController extends Controller
         $data['sub_title'] = $request->input('sub_title');
         $data['description'] = $request->input('description');
         $data['status'] = $request->input('status');
-        $file = $request->file('image');
-     if($file != null){
-         $oldimg = $s->image;
-         $this->destroyimage($oldimg);
-         $ext = $file->getClientOriginalExtension();
-         $filename = md5(rand(0,999999)).'.'.$ext;
-         $data['image']= $filename;
-         $file->move($this->destination,$filename);
-     }
+        $image = $request->image;
+      $image_array_1 = explode(";", $image);
+      if (array_key_exists("1",$image_array_1)){
+        $oldimg = $s->image;
+        $this->destroyimage($oldimg);
+        $image_array_2 = explode(",", $image_array_1[1]);
+        $imgdata = base64_decode($image_array_2[1]);
+        $rand = rand(0,99999999);
+        $rand = md5($rand);
+        $imageName = $rand . '.png';
+        $data['image']=$imageName;
+      }
      if($s->update($data)){
+       if(isset($imageName)){
+         $dir = $this->destination.$imageName;
+         file_put_contents($dir, $imgdata);
+       }
        $s = Slider::all();
        return Resource::collection($s);
      }

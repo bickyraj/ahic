@@ -23,9 +23,9 @@
           </select>
                   </div>
                   <div class="form-group">
-                    <label for="">Parent Page</label>
+                    <label for="">Link Page</label>
                      <select name="page_id" class="form-control">
-                      <option value="" selected> Choose Parent Page </option>
+                      <option value="" selected> Choose A Page </option>
                       <option v-for="page in pages" :value="page.id" :key="page.id"> {{page.name}}</option>
                      </select>
                   </div>
@@ -40,7 +40,7 @@
               <tr>
                 <th >Name</th>
                 <th>Parent Menu</th>
-                <th>Parent Page</th>
+                <th>Linked Page</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -92,9 +92,9 @@
 
 
 
-          <label for="">Parent Page</label>
+          <label for="">Link Page</label>
                      <select v-bind:value="modalInfo.data.page_id" name="page_id" class="form-control">
-                     <option value="" selected> Choose Parent Page </option>
+                     <option value="" selected> Choose A Page </option>
                     <option v-for="page in pages" :value="page.id" :key="page.id"> {{page.name}}</option>
                   </select>
 

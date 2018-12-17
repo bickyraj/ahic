@@ -15,7 +15,7 @@
 <template>
   <div class="animated">
     <b-row>
-      <b-col>
+      <b-col :md="cols">
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
@@ -35,7 +35,16 @@
                   </div>
                   <div class="form-group">
                     <label for="">Image  </label>
-                    <input type="file" name="image" class="form-control">
+                    <croppa v-model="myCroppa"
+             :width="332"
+             :height="126"
+             placeholder="Choose an image"
+             :placeholder-font-size="0"
+             :disabled="false"
+             :quality="5"
+             :prevent-white-space="true"
+          >
+        </croppa>
                   </div>
                   <div class="form-group">
                         <label> Description </label>
@@ -62,11 +71,9 @@
                 <td> {{ slider.title}}  </td>
                 <td> {{ slider.sub_title}}  </td>
                 <td>
-                  <router-link :to="'slider/'+slider.id">
-                  <b-button size="sm"  class="mr-1 btn-parimary">
+                  <b-button size="sm"  class="mr-1 btn-parimary" @click="view = slider ">
                     View
                   </b-button>
-                  </router-link>
                   <b-button size="sm" @click.stop="info(slider, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -89,6 +96,23 @@
 
         </b-card>
       </b-col>
+
+      <b-col md="6" v-if="view != null">
+        <b-card class="mb-2 trump-card">
+          <div class="card-title">
+            <div class="caption">
+              <h5><i class="fas fa-key"></i> Sliders </h5>
+            </div>
+            <div class="caption card-title-actions">
+              <b-button @click="view = null" variant="primary" class="btn btn-sm green pull-right">Close</b-button>
+            </div>
+          </div>
+        <img :src="'../public/images/sliders/'+view.image" class="img-fluid" alt="">
+        <h4>{{view.title}}</h4>
+        <h6>{{view.sub_title}}</h6>
+        <p>{{view.description}}</p>
+      </b-card>
+      </b-col>
     </b-row>
 
 
@@ -104,15 +128,19 @@
                     <label for="">Sub Title </label>
                     <input type="text" name="sub_title" :value="modalInfo.data.sub_title" class="form-control" placeholder="" required>
                   </div>
-                  <div class="form-group" v-if="modalInfo.data.image == null">
+                  <div class="form-group" >
                     <label for="">Image  </label>
-                    <input type="file" name="image" class="form-control">
-                  </div>
-                  <div class="form-group" v-else>
-                    <label for="">Image  </label> <br>
-               <img :src="'../public/images/sliders/'+modalInfo.data.image" class="img-fluid" />
-                    <input type="file" name="image" class="form-control">
-
+                    <croppa v-model="myCroppa"
+             :width="332"
+             :initialimage="cropimage"
+             :height="126"
+             placeholder="Choose an image"
+             :placeholder-font-size="0"
+             :disabled="false"
+             :quality="5"
+             :prevent-white-space="true"
+          >
+        </croppa>
                   </div>
                     <div class="form-group">
                         <label> Description </label>
@@ -138,6 +166,9 @@
     export default{
         data(){
             return{
+              myCroppa:'',
+
+              view:null,
         loading: true,
         table_items: [],
            modalInfo: {
@@ -180,6 +211,21 @@
         },
             }
         },
+        computed :{
+          cols(){
+            if(this.view == null){
+              return 12;
+            }
+            else{
+              return 6;
+            }
+          },cropimage(){
+            if (this.modalInfo.data.image != null) {
+              this.myCroppa.refresh()
+              return '../public/images/sliders/'+this.modalInfo.data.image
+            }
+          }
+        },
         created(){
             this.fetchSlider();
         },
@@ -203,6 +249,7 @@ let vm = this;
         var form = self.$refs.addSliderForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/slider';
+        formData.append('image',this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
               self.table_items = response.data.data;
               $(form)[0].reset();
@@ -242,6 +289,7 @@ let vm = this;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/slider/edit';
+        formData.append('image',this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
            self.table_items = response.data.data;
               self.hideSliderModal();

@@ -46,16 +46,24 @@
                                </li>
 
                               @elseif ($menu['parent_page']['slug'] == 'home')
-                               <li class="nav-item"><a href="{{route('home')}}" class="nav-link text-capitalize <?= ((\Request::segment(1) == $menu['parent_page']['slug'] || ($menu['parent_page']['slug'] == 'home' && \Request::segment(1) == ''))?'active': ''); ?>">
+                               <li class="nav-item"><a href="{{url('/')}}" class="nav-link text-capitalize <?= ((\Request::segment(1) == $menu['parent_page']['slug'] || ($menu['parent_page']['slug'] == 'home' && \Request::segment(1) == ''))?'active': ''); ?>">
                                  {{ $menu['name'] }}</a></li>
                                  @else
                                    @if(isset($menu['parent_page']))
 
                                    @php
-                                     $route = route($menu['parent_page']['slug']);
+                                     // $route = route($menu['parent_page']['slug']);
+                                     $route = $menu['parent_page']['slug'];
                                    @endphp
-                                     <li class="nav-item"><a href="{{$route}}" class="nav-link text-capitalize <?= ((\Request::segment(1) == $menu['parent_page']['slug'] || ($menu['parent_page']['slug'] == 'home' && \Request::segment(1) == ''))?'active': ''); ?>">
+                                   {{-- //issue with route!!!! --}}
+                                   @if (Route::has($route))
+                                     <li class="nav-item"><a href="{{route($route)}}" class="nav-link text-capitalize <?= ((\Request::segment(1) == $menu['parent_page']['slug'] || ($menu['parent_page']['slug'] == 'home' && \Request::segment(1) == ''))?'active': ''); ?>">
                                        {{ $menu['name'] }}</a></li>
+                                     @else
+                                       <li class="nav-item"><a href="{{url('/')}}/{{$route}}" class="nav-link text-capitalize <?= ((\Request::segment(1) == $menu['parent_page']['slug'] || ($menu['parent_page']['slug'] == 'home' && \Request::segment(1) == ''))?'active': ''); ?>">
+                                         {{ $menu['name'] }}</a></li>
+                                   @endif
+
                                      @else
                                      @endif
 

@@ -41,11 +41,26 @@
                 <b-button v-else @click="showModal('header')" variant="primary" class="btn btn-sm green pull-right">Add New Header</b-button>
               </div>
             </div>
+            <b-row  v-if="header">
+              <b-col md="3">
+                <img :src="'../public/images/cms/'+header.image" alt="" class="img-fluid">
+              </b-col>
+              <b-col md="6">
+                      {{header.title}}
+                      <br>
+                      {{header.sub_title}}
+                      <br>
+                      <span :html="header.description">
+                      </span>
+                      <br>
+                      {{header.link}}
+              </b-col>
+            </b-row>
           </b-card>
         </b-col>
       </b-row>
       <b-row>
-        <b-col cols="6">
+        <b-col md="6">
           <b-card class="mb-2 trump-card">
             <div class="card-title">
               <div class="caption">
@@ -55,10 +70,26 @@
                 <b-button v-if="lc" @click="info('lc',$event.target)" variant="success" class="btn btn-sm green pull-right">Edit Content</b-button>
                 <b-button v-else @click="showModal('lc')" variant="primary" class="btn btn-sm green pull-right">Add Content</b-button>
               </div>
+
+              <b-row  v-if="lc">
+                <b-col md="6">
+                  <img :src="'../public/images/cms/'+lc.image" alt="" class="img-fluid">
+                </b-col>
+                <b-col md="6">
+                        {{lc.title}}
+                        <br>
+                        {{lc.sub_title}}
+                        <br>
+                        <span :html="lc.description">
+                        </span>
+                        <br>
+                        {{lc.link}}
+                </b-col>
+              </b-row>
             </div>
           </b-card>
         </b-col>
-        <b-col cols="6">
+        <b-col md="6">
           <b-card class="mb-2 trump-card">
             <div class="card-title">
               <div class="caption">
@@ -69,6 +100,50 @@
                 <b-button v-else @click="showModal('rc')" variant="primary" class="btn btn-sm green pull-right">Add Content</b-button>
               </div>
             </div>
+            <b-row  v-if="rc">
+              <b-col md="6">
+                <img :src="'../public/images/cms/'+rc.image" alt="" class="img-fluid">
+              </b-col>
+              <b-col md="6">
+                      {{rc.title}}
+                      <br>
+                      {{rc.sub_title}}
+                      <br>
+                      <span :html="rc.description">
+                      </span>
+                      <br>
+                      {{rc.link}}
+              </b-col>
+            </b-row>
+          </b-card>
+        </b-col>
+        <b-col md="12">
+          <b-card class="mb-2 trump-card">
+            <div class="card-title">
+              <div class="caption">
+                <h5><i class="fas fa-key"></i> Welcome </h5>
+              </div>
+              <div class="caption card-title-actions">
+                <b-button v-if="welcome" @click="info('welcome',$event.target)" variant="success" class="btn btn-sm green pull-right">Edit Content</b-button>
+                <b-button v-else @click="showModal('welcome')" variant="primary" class="btn btn-sm green pull-right">Add Content</b-button>
+              </div>
+
+            </div>
+            <b-row  v-if="welcome">
+              <b-col md="3">
+                <img :src="'../public/images/cms/'+welcome.image" alt="" class="img-fluid">
+              </b-col>
+              <b-col md="9">
+                      {{welcome.title}}
+                      <br>
+                      {{welcome.sub_title}}
+                      <br>
+                      <span :html="welcome.description">
+                      </span>
+                      <br>
+                      {{welcome.link}}
+              </b-col>
+            </b-row>
           </b-card>
         </b-col>
       </b-row>
@@ -88,7 +163,17 @@
         </div>
         <div class="form-group">
           <label for="">Image  </label>
-          <input type="file" name="image" class="form-control">
+          <croppa v-model="myCroppa"
+   :width="crop.width"
+   :height="crop.height"
+   placeholder="Choose an image"
+   :placeholder-font-size="0"
+   :disabled="false"
+   :quality="crop.scale"
+   
+   :prevent-white-space="true"
+>
+</croppa >
         </div>
         <div class="form-group">
               <label> Description </label>
@@ -122,9 +207,19 @@
                   </div>
                   <div class="form-group" v-else>
                     <label for="">Image  </label> <br>
-               <img :src="'../public/images/cms/'+modalInfo.data.image" class="img-fluid" />
-                    <input type="file" name="image" class="form-control">
+               <croppa v-model="myCroppa"
 
+        :width="crop.width"
+        :height="crop.height"
+        :initial-image="cropimage"
+        placeholder="Choose an image"
+        :placeholder-font-size="0"
+        :disabled="false"
+        :quality="crop.scale"
+        
+        :prevent-white-space="true"
+>
+</croppa >
                   </div>
                     <div class="form-group">
                         <label> Description </label>
@@ -147,10 +242,17 @@
     export default{
         data(){
             return{
+              myCroppa:'',
+              crop:{
+              height:'',
+              width:'',
+              scale:'',
+              },
               slug:'',
               header:'',
               lc:'',
               rc:'',
+              welcome:'',
         loading: true,
         table_items: [],
            modalInfo: {
@@ -196,7 +298,33 @@
         created(){
             this.fetchNews();
         },
+        computed:{
+          cropimage(){
+            if (this.modalInfo.data.image != null) {
+              this.myCroppa.refresh()
+              return '../public/images/cms/'+this.modalInfo.data.image
+            }
+          }
+        },
         watch:{
+          slug(){
+              if(this.slug == "lc" || this.slug=="rc"){
+                this.crop.height = 224;
+                this.crop.width = 384;
+                this.crop.scale = 2.5;
+              }
+              else if(this.slug="welcome"){
+                this.crop.height = 400;
+                this.crop.width = 400;
+                this.crop.scale = 2.5;
+
+              }
+              else if(this.slug="header"){
+                this.crop.height = 400;
+                this.crop.width = 400;
+                this.crop.scale = 2.5;
+              }
+          },
             table_items(){
               var self = this;
               let data  = this.table_items;
@@ -223,13 +351,20 @@
               else{
                 self.rc = '';
               }
+              var result = self.find(data, { slug: "welcome" });
+              if(result.length > 0 ){
+                  self.welcome = result[0];
+              }
+              else{
+                self.welcome = '';
+              }
 
 
             }
         },
         methods:{
            capitalizeString(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+            return string.charAt(0).toUpperCase() + string.slice(1);
 },
 
           info(slug,button) {
@@ -275,11 +410,12 @@ let vm = this;
         var form = self.$refs.addNewsForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/cms';
+                formData.append('image',this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
               self.table_items = response.data.data;
               $(form)[0].reset();
               self.hideModal();
-              self.$toastr.s("A cms has been added.");
+              self.$toastr.s("Content has been added.");
           })
           .catch(function(error) {
             if (error.response.status === 422) {
@@ -297,6 +433,7 @@ let vm = this;
         var form = self.$refs.editNewsForm;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
+        formData.append('image',this.myCroppa.generateDataUrl())
         let url = self.$root.baseUrl + '/api/admin/cms/edit';
         axios.post(url, formData).then(function(response) {
            self.table_items = response.data.data;
@@ -304,7 +441,7 @@ let vm = this;
               self.$swal({
                 // position: 'top-end',
                 type: 'success',
-                title: 'News updated successfully.',
+                title: 'Content updated successfully.',
                 showConfirmButton: true,
                 // timer: 1500,
                 customClass: 'crm-swal',

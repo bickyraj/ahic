@@ -15,9 +15,9 @@
                     <label for="">Name </label>
                     <input type="text" name="name" class="form-control" placeholder="" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group d-none">
                     <label for=""> Course Category</label>
-                      <select name="course_category_id" class="form-control">
+                      <select name="course_category_id" class="form-control" v-model="id">
                           <option value="">Select A Category</option>
                           <option v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
                       </select>
@@ -225,6 +225,9 @@
       this.fetchCategories();
     },
     computed: {
+      id(){
+        return  parseInt(this.$route.params.id);
+      }
     },
     methods: {
       info(menu, index, button) {

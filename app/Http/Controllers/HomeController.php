@@ -40,7 +40,8 @@ class HomeController extends Controller
     }
 
     public function readMore(){
-      return view('front.readmore');
+      $welcome = CMS::where('slug','welcome')->first();
+      return view('front.readmore',compact('welcome'));
     }
     public function course($course){
       $name = str_replace('_', ' ', $course);

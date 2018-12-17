@@ -11,7 +11,7 @@ class PageController extends Controller
 {
     public $destination = 'public/images/pages/';
 
-
+//create dir
 
 
     public function index(){
@@ -34,31 +34,34 @@ class PageController extends Controller
         }
     }
     public function store(Request $request){
-        $status = 0;
         $data['name'] = $request->input('name');
         $data['parent_id'] = $request->input('parent_id');
         $data['sub_title'] = $request->input('sub_title');
         $data['sub_title'] = $request->input('sub_title');
         $data['description'] = $request->input('description');
         $data['status']=1;
-         $file = $request->file('image');
-        if($file != null){
-            $ext = $file->getClientOriginalExtension();
-            $filename = md5(rand(0,999999)).'.'.$ext;
-            $data['image'] = $filename;
-            $file->move($this->destination,$filename);
-        }
+         $image = $request->image;
+       $image_array_1 = explode(";", $image);
+       if (array_key_exists("1",$image_array_1)){
 
+         $image_array_2 = explode(",", $image_array_1[1]);
+         $imgdata = base64_decode($image_array_2[1]);
+         $rand = rand(0,99999999);
+         $rand = md5($rand);
+         $imageName = $rand . '.png';
+         $data['image']=$imageName;
+       }
         $data['slug'] = $this->create_slug_title($request->input('name'));
-	$create = Page::create($data);
 
+	         $create = Page::create($data);
     	if ($create) {
-    		$status = 1;
+      if(isset($imageName)){
+        $dir = $this->destination.$imageName;
+        file_put_contents($dir, $imgdata);
+      }
     	}
        $page = Page::with('parent_page')->get();
         return PageResource::collection($page);
-
-
     }
 
       public function create_slug_title($title)
@@ -75,17 +78,26 @@ class PageController extends Controller
         $page->parent_id = $request->input('parent_id');
         $page->description=$request->input('description');
         $page->sub_title=$request->input('sub_title');
-                   $file = $request->file('image');
-        if($file != null){
-            $oldimg = $page->image;
-            $this->destroyimage($oldimg);
-            $ext = $file->getClientOriginalExtension();
-            $filename = md5(rand(0,999999)).'.'.$ext;
-            $page->image = $filename;
-            $file->move($this->destination,$filename);
-        }
+
+        $image = $request->image;
+      $image_array_1 = explode(";", $image);
+      if (array_key_exists("1",$image_array_1)){
+        $oldimg = $page->image;
+        $this->destroyimage($oldimg);
+        $image_array_2 = explode(",", $image_array_1[1]);
+        $imgdata = base64_decode($image_array_2[1]);
+        $rand = rand(0,99999999);
+        $rand = md5($rand);
+        $imageName = $rand . '.png';
+        $page->image=$imageName;
+      }
+
 
         if ($page->save()) {
+          if(isset($imageName)){
+            $dir = $this->destination.$imageName;
+            file_put_contents($dir, $imgdata);
+          }
             $status = 1;
         }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="animated">
     <b-row>
-      <b-col cols="6" >
+      <b-col :cols="cols" >
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
@@ -33,7 +33,7 @@
             </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="2">
+                <td colspan="4">
                   <div v-if="!loading"> No Data.</div>
                   <div v-else> loading...</div>
                 </td>
@@ -110,7 +110,7 @@
   export default {
     data() {
       return {
-        enquiry:'',
+        enquiry:null,
         loading: true,
         table_items: [],
         role_table_fields: ['name', 'action'],
@@ -123,6 +123,16 @@
     },
     created() {
       this.fetchEnquirys();
+    },
+    computed:{
+      cols(){
+        if(this.enquiry == null){
+          return 12;
+        }
+        else{
+          return 6;
+        }
+      }
     },
     methods: {
       view(e,i){

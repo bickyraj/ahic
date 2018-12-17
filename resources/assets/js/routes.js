@@ -157,6 +157,25 @@ const routes = [
         },
     },
     {
+        path: admin_url + 'contact',
+        component: require('./components/Admin/Contact/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Contact',
+                    path: admin_url + 'contact',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
         path: admin_url + 'downloads',
         component: require('./components/Admin/Download/Index'),
         meta: {

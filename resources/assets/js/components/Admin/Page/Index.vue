@@ -17,7 +17,18 @@
                   </div>
                    <div class="form-group">
                     <label for=""> Image </label>
-                    <input type="file" name="image" class="form-control" placeholder="" >
+                    <croppa v-model="myCroppa"
+             :width="384"
+             :height="54"
+             placeholder="Choose an image"
+             :placeholder-font-size="0"
+             :disabled="false"
+             :quality="5"
+             :show-remove-button="false"
+             :prevent-white-space="true"
+     >
+     </croppa >
+                    <!-- <input type="file" name="image" class="form-control" placeholder="" > -->
                   </div>
                   <div class="form-group">
                     <label for="">Parent Page</label>
@@ -95,13 +106,26 @@
 
                <div class="form-group" v-else>
                     <label for="">Image  </label> <br>
-               <img :src="'../public/images/pages/'+modalInfo.data.image" class="img-fluid" />
-                    <input type="file" name="image" class="form-control">
+               <!-- <img :src="'../public/images/pages/'+modalInfo.data.image" class="img-fluid" /> -->
+               <croppa v-model="myCroppa"
+               :initial-image="img"
+        :width="384"
+        :height="54"
+        placeholder="Choose an image"
+        :placeholder-font-size="0"
+        :disabled="false"
+        :quality="5"
+        :show-remove-button="false"
+        :prevent-white-space="true"
+>
+</croppa >
+<button type="button" class="btn btn-danger" @click="myCroppa.remove()"> Remove</button>
                   </div>
 
         <div class="form-group">
           <label for="">Parent page</label>
           <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control" >
+            <option value="" selected> Choose Parent</option>
             <option v-for="page in table_items" :value="page.id" :key="page.id" v-if="modalInfo.data.id != page.id" > {{page.name}}</option>
           </select>
         </div>
@@ -128,6 +152,8 @@
   export default {
     data() {
       return {
+        myCroppa:'',
+        dataUrl:'',
         loading: true,
         table_items: [],
         menu_table_fields: ['name', 'parent_id','sub_title','image','description','parent_menu'],
@@ -141,7 +167,13 @@
     created() {
       this.fetchMenus();
     },
-    computed: {
+    computed:{
+      img(){
+        if (this.modalInfo.data.image != null) {
+          this.myCroppa.refresh()
+          return '../public/images/pages/'+this.modalInfo.data.image
+        }
+      }
     },
     methods: {
       info(page, index, button) {
@@ -170,6 +202,7 @@
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/edit-page';
+        formData.append('image',this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
           console.log(response);
             if (response.status === 200) {
@@ -227,6 +260,7 @@
         var form = self.$refs.addMenuForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/page';
+        formData.append('image',this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
               self.table_items  = response.data.data;
               $(form)[0].reset();

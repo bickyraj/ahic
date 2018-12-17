@@ -25,7 +25,7 @@
                 </h5>
 
                 <p class="pt-3" v-html="page.description"></p>
-                
+
               </div>
 
             </b-card>
@@ -86,7 +86,7 @@
 
         <div class="form-group">
           <label for="">Sub Title</label>
-          <input type="text" name="sub_title" v-bind:value="page.sub_title" class="form-control" placeholder="" required>
+          <input type="text" name="sub_title" v-bind:value="page.sub_title" class="form-control" placeholder="" >
         </div>
 
 

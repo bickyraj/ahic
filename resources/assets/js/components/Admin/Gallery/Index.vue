@@ -23,13 +23,13 @@
             </div>
             <div class="caption card-title-actions">
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Image</b-button>
-              <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add New News">
-                <form @submit.prevent="addNews" ref="addNewsForm" enctype="multipart/form-data">
+              <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add New Images">
+                <form @submit.prevent="addImages" ref="addImagesForm" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="">Image  </label>
                     <input type="file" name="image[]" class="form-control" multiple>
                   </div>
-                  <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create News</b-btn>
+                  <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Images</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
               </b-modal>
@@ -39,22 +39,19 @@
                 <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th>Image</th>
+                <th class="col-md-3">Image</th>
                 <th>Action</th>
               </tr>
             </thead>
            <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" >
 
-              <tr v-for="(news, index) in table_items" :key="news.id">
-                <td> {{ news.image}}  </td>
+              <tr v-for="(images, index) in table_items" :key="images.id">
                 <td>
-                  <!-- <router-link :to="'ga/'+news.id">
-                  <b-button size="sm"  class="mr-1 btn-parimary">
-                    View
-                  </b-button>
-                  </router-link>
-              -->
-                  <b-button size="sm" @click="deleteNews(news, index, $event.target)" class="mr-1 btn-danger">
+                  <img :src="'../public/images/gallery/'+images.image" class="img-fluid" alt="">
+                  </td>
+                <td>
+                
+                  <b-button size="sm" @click="deleteImages(images, index, $event.target)" class="mr-1 btn-danger">
                     Delete
                   </b-button>
                 </td>
@@ -78,7 +75,7 @@
 
 
   </div>
-    
+
 </template>
 
 <script>
@@ -95,10 +92,10 @@
             }
         },
         created(){
-            this.fetchNews();
+            this.fetchImages();
         },
         methods:{
-            fetchNews(){
+            fetchImages(){
 let vm = this;
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/gallery';
@@ -112,9 +109,9 @@ let vm = this;
             vm.loading = false;
           });
             },
-          addNews() {
+          addImages() {
         var self = this;
-        var form = self.$refs.addNewsForm;
+        var form = self.$refs.addImagesForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/gallery';
         axios.post(url, formData).then(function(response) {
@@ -130,11 +127,11 @@ let vm = this;
           });
       },
             resetModal() {
-        this.modalInfo.title = 'Edit News'
+        this.modalInfo.title = 'Edit Images'
         this.modalInfo.content = ''
       },
 
-      deleteNews: function(news, row, event) {
+      deleteImages: function(images, row, event) {
         var self = this;
         self.$swal({
           // position: 'top-end',
@@ -148,7 +145,7 @@ let vm = this;
         }).then((result) => {
           if (result.value) {
             let url = self.$root.baseUrl + '/api/admin/gallery/';
-            axios.delete(url + news.id).then(function(response) {
+            axios.delete(url + images.id).then(function(response) {
                 if (response.status === 200) {
                   self.table_items.splice(row, 1);
                   self.$swal({
@@ -178,11 +175,11 @@ let vm = this;
 
                updateCourseOrder() {
         var self = this;
-        let url = self.$root.baseUrl + '/api/admin/news/update-order';
+        let url = self.$root.baseUrl + '/api/admin/images/update-order';
       	axios.post(url, self.table_items)
 		.then(function (response) {
 			if (response.data.status === 1) {
-				self.$toastr.s("Order Updated");  
+				self.$toastr.s("Order Updated");
 			}
     })
             },
@@ -193,7 +190,7 @@ let vm = this;
       hideModal() {
         this.$refs.myModalRef.hide()
       },
-      hideNewsModal() {
+      hideImagesModal() {
         this.$refs.editModal.hide();
       },
         },

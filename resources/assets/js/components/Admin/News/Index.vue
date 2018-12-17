@@ -15,7 +15,7 @@
 <template>
   <div class="animated">
     <b-row>
-      <b-col>
+      <b-col :md="cols">
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
@@ -32,7 +32,16 @@
                   </div>
                   <div class="form-group">
                     <label for="">Image  </label>
-                    <input type="file" name="image" class="form-control">
+                    <croppa v-model="myCroppa"
+             :width="384"
+             :height="256"
+             placeholder="Choose an image"
+             :placeholder-font-size="0"
+             :disabled="false"
+             :quality="2.5"
+             :prevent-white-space="true"
+          >
+          </croppa >
                   </div>
                   <div class="form-group">
                         <label> Description </label>
@@ -58,17 +67,15 @@
                 <th>Action</th>
               </tr>
             </thead>
-           <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" @update="updateNewsOrder">
+           <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading">
 
               <tr v-for="(news, index) in table_items" :key="news.id">
                 <td> {{ news.title}}  </td>
                 <td> {{ news.date}}  </td>
                 <td>
-                  <router-link :to="'news/'+news.id">
-                  <b-button size="sm"  class="mr-1 btn-parimary">
+                  <b-button size="sm"  @click="view = news" class="mr-1 btn-primary">
                     View
                   </b-button>
-                  </router-link>
                   <b-button size="sm" @click.stop="info(news, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -91,6 +98,23 @@
 
         </b-card>
       </b-col>
+      <b-col md="4" v-if="view != null">
+        <b-card class="mb-2 trump-card">
+          <div class="card-title">
+            <div class="caption">
+              <h5><i class="fas fa-key"></i> Glance </h5>
+            </div>
+            <div class="caption card-title-actions">
+              <b-button @click="view = null" variant="danger" class="btn btn-sm green pull-right">Close</b-button>
+            </div>
+          </div>
+        <img :src="'../public/images/news/'+view.image" class="col-md-12" alt="">
+        <h4>{{view.title}}</h4>
+        <h4>{{view.title}}</h4>
+        <h6>{{view.sub_title}}</h6>
+        <p v-html="view.description"></p>
+      </b-card>
+      </b-col>
     </b-row>
 
 
@@ -108,9 +132,18 @@
                   </div>
                   <div class="form-group" v-else>
                     <label for="">Image  </label> <br>
-               <img :src="'../public/images/news/'+modalInfo.data.image" class="img-fluid" />
-                    <input type="file" name="image" class="form-control">
+                    <croppa v-model="myCroppa"
+             :width="384"
+             :initialimage="cropimage"
+             :height="256"
+             placeholder="Choose an image"
+             :placeholder-font-size="0"
+             :disabled="false"
+             :quality="2.5"
 
+             :prevent-white-space="true"
+          >
+        </croppa>
                   </div>
                     <div class="form-group">
                         <label> Description </label>
@@ -133,13 +166,15 @@
     </b-modal>
 
   </div>
-    
+
 </template>
 
 <script>
     export default{
         data(){
             return{
+              myCroppa:'',
+              view:null,
         loading: true,
         table_items: [],
            modalInfo: {
@@ -182,6 +217,22 @@
         },
             }
         },
+        computed :{
+          cols(){
+            if(this.view == null){
+              return 12;
+            }
+            else{
+              return 8;
+            }
+          },
+          cropimage(){
+            if (this.modalInfo.data.image != null) {
+              this.myCroppa.refresh()
+              return '../public/images/news/'+this.modalInfo.data.image
+            }
+          }
+        },
         created(){
             this.fetchNews();
         },
@@ -205,6 +256,8 @@ let vm = this;
         var form = self.$refs.addNewsForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/news';
+        formData.append('image',this.myCroppa.generateDataUrl())
+
         axios.post(url, formData).then(function(response) {
               self.table_items = response.data.data;
               $(form)[0].reset();
@@ -244,6 +297,8 @@ let vm = this;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/news/edit';
+        formData.append('image',this.myCroppa.generateDataUrl())
+
         axios.post(url, formData).then(function(response) {
            self.table_items = response.data.data;
               self.hideNewsModal();
@@ -259,7 +314,7 @@ let vm = this;
           })
           .catch(function(error) {});
       },
-      
+
 
 
 
@@ -312,7 +367,7 @@ let vm = this;
       	axios.post(url, self.table_items)
 		.then(function (response) {
 			if (response.data.status === 1) {
-				self.$toastr.s("Order Updated");  
+				self.$toastr.s("Order Updated");
 			}
     })
             },

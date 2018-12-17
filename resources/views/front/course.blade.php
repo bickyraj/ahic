@@ -1,6 +1,16 @@
 @extends('layouts.master')
 
+@section('style')
+<style media="screen">
+  .bg-cover{
+    background:url('{{asset('/')}}public/images/pages/{{$banner}}') no-repeat;
+    background-position:center;
+    background-size:cover;
+  }
+</style>
+@endsection
 @section('content')
+
     <div class="site-search">
      <div class="site-search__close bg-black-0_8"></div>
      <form class="form-site-search" action="#" method="POST">
@@ -15,7 +25,7 @@
 
 
 
-  <div class="padding-y-60 bg-cover" data-dark-overlay="6" style="background:url('{{asset('/')}}public/ahic/img/courses-bg.jpg') no-repeat">
+  <div class="padding-y-60 bg-cover" data-dark-overlay="6" >
     <div class="container">
      <div class="row align-items-center">
        <div class="col-lg-6 my-2 text-white">

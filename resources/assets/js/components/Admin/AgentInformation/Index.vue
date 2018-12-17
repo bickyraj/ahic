@@ -60,7 +60,7 @@
 
           <div class="col-md-12">
             <div class="col-md-2 offset-md-7 float-left">
-                <select name="" id="" class="form-control" v-model="filtershore" @change="getShore()">
+                <select name="" id="" class="form-control" v-model="filtershore" >
                       <option value="all" selected > All</option>
                       <option value="on" > Onshore</option>
                       <option value="off"> Offshore</option>
@@ -108,8 +108,6 @@
               </tr>
             </tbody>
           </table>
-
-
         </b-card>
       </b-col>
     </b-row>
@@ -131,9 +129,7 @@
                     <label for="">Logo </label> <br>
                <img :src="'../public/images/agents/'+modalInfo.data.logo" class="img-fluid" />
                     <input type="file" name="logo" class="form-control">
-
                   </div>
-
                   <div class="form-group">
                     <label for="">First Name </label>
                     <input type="text" name="first_name" class="form-control"  :value="modalInfo.data.first_name" placeholder="" required>
@@ -193,28 +189,30 @@
     },
     computed: {
       filteredList() {
-     return this.table_items.filter(agent => {
-       return agent.first_name.toLowerCase() && agent.last_name.toLowerCase().includes(this.search.toLowerCase())
+        var a,b;
+     var res =  this.table_items.filter(agent => {
+       var a,b,r;
+       var self = this;
+       var s = self.filtershore;
+      if(s =="all"){
+        r =  agent;
+      }
+      else if(s =="on" || s =="off"){
+    if(agent.shore !=null){
+      //check both get both
+       a = agent.shore.includes(s);
+       // b =agent.shore.includes('all')
+      }
+      }
+    return r;
+     })
+     return res.filter(r => {
+      r.a = r.first_name + r.last_name;
+       return r.a.toLowerCase().includes(this.search.toLowerCase())
      })
    },
-
     },
     methods: {
-      getShore(){
-        var self = this;
-        if(this.filtershore == "all"){
-console.log("show all");
-        }
-        else{
-          var r =  this.table_items.filter(agent => {
-            if(agent.shore){
-            return agent.shore.toLowerCase().includes(this.store)
-          }
-          })
-          console.log(r);
-        }
-
-      },
       info(menu, index, button) {
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/agent_information/';

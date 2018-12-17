@@ -1,14 +1,14 @@
 <template>
   <div class="animated">
     <b-row>
-      <b-col cols="6">
+      <b-col :md="cols" v-if="cols">
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
               <h5><i class="fas fa-key"></i> Payment Options</h5>
             </div>
             <div class="caption card-title-actions">
-              <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Payment Option</b-button>
+              <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Option</b-button>
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add Role">
                 <form @submit.prevent="addRole" ref="addRoleForm">
                   <div class="form-group">
@@ -59,14 +59,15 @@
           </table>
         </b-card>
       </b-col>
-      <b-col cols="6" v-if="option != null">
+     <transition name="slideDown">
+        <b-col md="6" v-if="option != null">
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
               <h5><i class="fas fa-key"></i> {{option.title}} </h5>
             </div>
             <div class="caption card-title-actions">
-
+              <b-button @click="option = null" variant="danger" class="btn btn-sm green pull-right">Close</b-button>
             </div>
           </div>
 <div class="" v-html="option.description">
@@ -74,6 +75,7 @@
 </div>
         </b-card>
         </b-col>
+     </transition>
     </b-row>
     <!-- Info modal -->
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
@@ -98,7 +100,7 @@
   export default {
     data() {
       return {
-        option:[],
+        option:null,
         loading: true,
         table_items: [],
         role_table_fields: ['title', 'description'],
@@ -152,7 +154,15 @@
 
     },
     computed: {
+      cols(){
+        if(this.option == null){
 
+          return 12;
+        }
+        else{
+          return 6;
+        }
+      }
     },
     methods: {
       info(item, index, button) {
