@@ -95,8 +95,9 @@
 
           <div class="col-md-12" v-for="company in companies" :key="company.id">
             <b-card class="col-md-12 mb-2 trump-card ">
-              <div class="col-md-12">
+              <div class="row">
 
+                <div class="col-md-10">
                   <table class="table table-borderless col-md-10">
                       <tr>
                           <th class="col-md-1"> Company Name <span class="float-right">:</span> </th>
@@ -107,7 +108,13 @@
                           <td class="col-md-8">  {{company.location}}</td>
                       </tr>
                   </table>
+                </div>
+                <div class="col-md-2">
+                  <img :src="'../../public/images/agents/'+agent.logo" alt="" class="img-fluid">
+                </div>
+
                   <hr>
+                </div>
 
            <div class="row">
                <div class="col-md-6 float-left">
@@ -189,7 +196,7 @@
                </div>
            </div>
 
-              </div>
+              <!-- </div> -->
 
             </b-card>
 
@@ -215,6 +222,20 @@
                 <label for=""> Last Name </label>
                 <input type="text" name="last_name" class="form-control" :value="agent.last_name">
               </div>
+              <div class="form-group" >
+          <label for="">Logo </label>
+          <croppa v-model="myCroppa"
+   :width="200"
+   :height="200"
+   :initial-image="cropimage"
+   placeholder="Choose an image"
+   :placeholder-font-size="0"
+   :disabled="false"
+   :quality="1"
+   :prevent-white-space="true"
+>
+</croppa>
+        </div>
               <div class="form-group">
                 <label for=""> Telephone </label>
                 <input type="text" name="telephone" class="form-control" :value="agent.telephone">
@@ -406,6 +427,7 @@
       export default {
         data() {
           return {
+            myCroppa:'',
            agent:'',
            process:'',
            companies:'',
@@ -421,7 +443,14 @@
           this.fetchDocuments();
           this.fetchCountries();
         },
-        computed: {},
+        computed: {
+          cropimage(){
+            if (this.agent.logo != null) {
+              this.myCroppa.refresh()
+              return this.$root.baseUrl+'/public/images/agents/'+this.modalInfo.data.logo
+            }
+          },
+        },
         methods: {
           changeLocation(event){
             var self =this;
@@ -551,6 +580,7 @@
             var form = self.$refs.editAgentForm;
             var formData = new FormData(form);
             let url = self.$root.baseUrl + '/api/admin/agent_information/edit';
+            formData.append('logo',self.myCroppa.generateDataUrl())
             axios.post(url, formData).then(function(response) {
               self.fetchDocuments();
               $(form)[0].reset();

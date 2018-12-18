@@ -324,8 +324,7 @@
     <div class="row marginTop-60">
       <div class="owl-carousel arrow-edge arrow-black" data-items="4" data-arrow="true" data-tablet-items="2" data-mobile-items="1">
         @foreach($gallery as $image)
-        <div class="hover:parent">
-          <img class="w-100 transition-0_3 hover:zoomin" src="{{asset('/')}}public/images/gallery/{{$image->image}}" alt="">
+        <div class="hover:parent  bg" style="background:url('{{asset('/')}}public/images/gallery/{{$image->image}}')">
           <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
             <a href="{{asset('/')}}public/images/gallery/{{$image->image}}" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
           </div>
@@ -341,7 +340,14 @@
 
 @section('style')
 <style media="screen">
-
+.owl-carousel{
+}
+.bg{
+  height:300px;
+  width:100%;
+  background-size: cover !important;
+  background-position: center !important;
+}
   .error.text-danger{
       font-size:15px !important;
   }

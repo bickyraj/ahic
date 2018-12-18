@@ -15,6 +15,15 @@ class ModuleContentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct(){
+       if(is_dir($this->destination)){
+
+       }else{
+         mkdir($this->destination);
+       }
+     }
+     
     public function index()
     {
 $modules = ModuleContent::with('module')->get();

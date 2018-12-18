@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 class CourseController extends Controller
 {
     public $destination = 'public/images/courses/';
+
+    public function __construct(){
+      if(is_dir($this->destination)){
+
+      }else{
+        mkdir($this->destination);
+      }
+    }
+    
     public function index()
     {
          $course = Course::with('category')->get();

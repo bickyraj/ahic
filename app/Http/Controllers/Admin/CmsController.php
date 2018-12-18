@@ -9,6 +9,13 @@ class CmsController extends Controller
 {
   public $destination = 'public/images/cms/';
 
+  public function __construct(){
+    if(is_dir($this->destination)){
+
+    }else{
+      mkdir($this->destination);
+    }
+  }
   public function index()
   {
     $a = Cms::all();

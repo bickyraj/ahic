@@ -9,6 +9,14 @@ class SliderController extends Controller
 {
   public $destination = 'public/images/sliders/';
 
+  public function __construct(){
+    if(is_dir($this->destination)){
+
+    }else{
+      mkdir($this->destination);
+    }
+  }
+
     public function index()
     {
         $s = Slider::all();

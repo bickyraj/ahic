@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 class NewsController extends Controller
 {
     public $destination = 'public/images/news/';
+    public function __construct(){
+      if(is_dir($this->destination)){
+
+      }else{
+        mkdir($this->destination);
+      }
+    }
 
     public function index()
     {
