@@ -1,3 +1,16 @@
+<style lang="">
+    .vdp-datepicker__calendar{
+        background-color: black !important;
+        color:white;
+    }
+    .day__month_btn:hover ,.month__year_btn:hover{
+        background-color: black !important;
+
+    }
+    .form-control:disabled, .form-control[readonly]{
+        background-color: transparent !important;
+    }
+</style>
 <template>
   <div class="animated">
     <b-row>
@@ -20,7 +33,16 @@
                   </div>
                   <div class="form-group">
                     <label for="">Logo</label>
-                    <input type="file" name="logo" class="form-control" placeholder="">
+                    <croppa v-model="myCroppa"
+             :width="200"
+             :height="200"
+             placeholder="Choose an image"
+             :placeholder-font-size="0"
+             :disabled="false"
+             :quality="1"
+             :prevent-white-space="true"
+          >
+          </croppa >
                   </div>
                   <div class="form-group">
                     <label for="">First Name </label>
@@ -48,7 +70,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Start Date</label>
-                    <input type="text" name="start_date" class="form-control" placeholder="" required>
+                    <datepicker format="yyyy-MM-dd" name="start_date"  bootstrap-styling :initialView="'year'" ></datepicker>
                   </div>
 
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Agent</b-btn>
@@ -121,14 +143,19 @@
                     <label for="">ABN / Registration No / PAN </label>
                     <input type="text" name="pan" class="form-control" placeholder="" :value="modalInfo.data.pan" required>
                   </div>
-                        <div class="form-group" v-if="modalInfo.data.logo == null">
+                        <div class="form-group" >
                     <label for="">Logo </label>
-                    <input type="file" name="logo" class="form-control">
-                  </div>
-                  <div class="form-group" v-else>
-                    <label for="">Logo </label> <br>
-               <img :src="'../public/images/agents/'+modalInfo.data.logo" class="img-fluid" />
-                    <input type="file" name="logo" class="form-control">
+                    <croppa v-model="myCroppa"
+             :width="200"
+             :height="200"
+             :initial-image="cropimage"
+             placeholder="Choose an image"
+             :placeholder-font-size="0"
+             :disabled="false"
+             :quality="1"
+             :prevent-white-space="true"
+          >
+        </croppa>
                   </div>
                   <div class="form-group">
                     <label for="">First Name </label>
@@ -156,7 +183,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Start Date</label>
-                    <input type="text" name="start_date" class="form-control" :value="modalInfo.data.start_date" placeholder="" required>
+                    <datepicker format="yyyy-MM-dd" name="start_date"  bootstrap-styling :initialView="'year'" :value="modalInfo.data.start_date"  ></datepicker>
                   </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
@@ -170,6 +197,7 @@
   export default {
     data() {
       return {
+        myCroppa:'',
         filtershore:"all",
           categories:'',
         loading: true,
@@ -211,6 +239,12 @@
        return r.a.toLowerCase().includes(this.search.toLowerCase())
      })
    },
+   cropimage(){
+     if (this.modalInfo.data.logo != null) {
+       this.myCroppa.refresh()
+       return '../public/images/agents/'+this.modalInfo.data.logo
+     }
+   },
     },
     methods: {
       info(menu, index, button) {
@@ -239,6 +273,7 @@
         var form = self.$refs.editMenuForm;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
+        formData.append('logo',this.myCroppa.generateDataUrl())
         let url = self.$root.baseUrl + '/api/admin/agent_information/edit';
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
@@ -296,6 +331,7 @@
         var form = self.$refs.addAgentForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/agent_information';
+        formData.append('logo',this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
               self.table_items = response.data.data;
               $(form)[0].reset();

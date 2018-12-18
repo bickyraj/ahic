@@ -54,6 +54,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
+
            <ul class="nav tab-line tab-line tab-line--3x border-bottom mb-4" role="tablist">
              <li class="nav-item">
               <a class="nav-link active" data-toggle="tab" href="#Tabs_4-1" role="tab" aria-selected="true">
@@ -78,8 +79,14 @@
                 @foreach ($agents as $agent)
                   @foreach ($agent->documents as $company)
                     @if ($company->country != 'Australia')
-                      <div class="col-lg-4 col-md-6 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
+                      <div class="col-lg-4 col-md-6 marginTop-35 wow fadeInUp" data-wow-delay=".1s">
+
                         <div class="card height-100p shadow-v1 text-center">
+                          @if($agent->logo != null)
+                          <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
+                              <img src="{{asset('/')}}public/images/agents/{{$agent->logo}}" alt="" class="img-fluid">
+                           </span>
+                         @endif
                           <div class="card-body">
                             <h4>
                             {{$agent->first_name}} {{$agent->last_name}}
@@ -127,6 +134,11 @@
                       @if ($company->country == 'Australia')
                         <div class="col-lg-4 col-md-6 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
                           <div class="card height-100p shadow-v1 text-center">
+                            @if($agent->logo != null)
+                            <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
+                                <img src="{{asset('/')}}public/images/agents/{{$agent->logo}}" alt="" class="img-fluid">
+                             </span>
+                           @endif
                             <div class="card-body">
                               <h4>
                               {{$agent->first_name}} {{$agent->last_name}}

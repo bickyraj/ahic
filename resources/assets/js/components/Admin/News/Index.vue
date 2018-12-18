@@ -134,7 +134,7 @@
                     <label for="">Image  </label> <br>
                     <croppa v-model="myCroppa"
              :width="384"
-             :initialimage="cropimage"
+             :initial-image="cropimage"
              :height="256"
              placeholder="Choose an image"
              :placeholder-font-size="0"

@@ -10,6 +10,14 @@ class AgentInformationController extends Controller
 {
     public $destination = 'public/images/agents/';
 
+    public function __construct(){
+      if(is_dir($this->destination)){
+
+      }else{
+        mkdir($this->destination);
+      }
+    }
+
     public function index()
     {
        $agents = AgentInformation::with('documents')->get();
@@ -79,13 +87,18 @@ class AgentInformationController extends Controller
      $data['email'] = $request->input('email');
      $data['address'] = $request->input('address');
      $data['start_date'] = $request->input('start_date');
-     $file = $request->file('logo');
-        if($file != null){
-            $ext = $file->getClientOriginalExtension();
-            $filename = md5(rand(0,999999)).'.'.$ext;
-            $data['logo'] = $filename;
-            $file->move($this->destination,$filename);
-        }
+     $image = $request->logo;
+   $image_array_1 = explode(";", $image);
+   if (array_key_exists("1",$image_array_1)){
+     $image_array_2 = explode(",", $image_array_1[1]);
+     $imgdata = base64_decode($image_array_2[1]);
+     $rand = rand(0,99999999);
+     $rand = md5($rand);
+     $imageName = $rand . '.png';
+     $data['logo']=$imageName;
+     $dir = $this->destination.$imageName;
+     file_put_contents($dir, $imgdata);
+   }
      $create = AgentInformation::create($data);
        $agents = AgentInformation::all();
        return Resource::collection($agents);
@@ -129,15 +142,20 @@ class AgentInformationController extends Controller
      $data['email'] = $request->input('email');
      $data['address'] = $request->input('address');
      $data['start_date'] = $request->input('start_date');
-     $file = $request->file('logo');
-        if($file != null){
-          $oldimg = $agent->logo;
-            $this->destroyimage($oldimg);
-            $ext = $file->getClientOriginalExtension();
-            $filename = md5(rand(0,999999)).'.'.$ext;
-            $data['logo'] = $filename;
-            $file->move($this->destination,$filename);
-        }
+     $image = $request->logo;
+   $image_array_1 = explode(";", $image);
+   if (array_key_exists("1",$image_array_1)){
+     $oldimg = $agent->logo;
+     $this->destroyimage($oldimg);
+     $image_array_2 = explode(",", $image_array_1[1]);
+     $imgdata = base64_decode($image_array_2[1]);
+     $rand = rand(0,99999999);
+     $rand = md5($rand);
+     $imageName = $rand . '.png';
+     $data['logo']=$imageName;
+     $dir = $this->destination.$imageName;
+     file_put_contents($dir, $imgdata);
+   }
      $updater = $agent->update($data);
        $agents = AgentInformation::all();
        return Resource::collection($agents);

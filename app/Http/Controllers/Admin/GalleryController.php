@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 class GalleryController extends Controller
 {
     public $destination = 'public/images/gallery/';
+    public function __construct(){
+      if(is_dir($this->destination)){
+
+      }else{
+        mkdir($this->destination);
+      }
+    }
 
     public function index()
     {
@@ -16,8 +23,8 @@ class GalleryController extends Controller
         return Resource::collection($g);
     }
 
-  
-   
+
+
     public function store(Request $request)
     {
              $file = $request->file('image');
@@ -30,10 +37,10 @@ class GalleryController extends Controller
              }
                    $g = Gallery::all();
         return Resource::collection($g);
-         
+
     }
 
- 
+
     public function show(Gallery $gallery)
     {
     }

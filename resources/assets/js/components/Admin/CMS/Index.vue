@@ -170,7 +170,6 @@
    :placeholder-font-size="0"
    :disabled="false"
    :quality="crop.scale"
-   
    :prevent-white-space="true"
 >
 </croppa >
@@ -216,7 +215,7 @@
         :placeholder-font-size="0"
         :disabled="false"
         :quality="crop.scale"
-        
+
         :prevent-white-space="true"
 >
 </croppa >
@@ -244,9 +243,9 @@
             return{
               myCroppa:'',
               crop:{
-              height:'',
-              width:'',
-              scale:'',
+              height:null,
+              width:null,
+              scale:null,
               },
               slug:'',
               header:'',
