@@ -121,13 +121,9 @@
           <label for="">Sub Title </label>
           <input type="text" name="sub_title" :value="modalInfo.data.sub_title" class="form-control" placeholder="" required>
         </div>
-        <div class="form-group" v-if="modalInfo.data.image == null">
+        <div class="form-group">
           <label for="">Image </label>
-          <input type="file" name="image" class="form-control">
-        </div>
-        <div class="form-group" v-else>
-          <label for="">Image </label>
-          <croppa v-model="myCroppa" :width="332" :initial-image="img" :height="126" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :prevent-white-space="true">
+          <croppa v-model="myCroppa" :width="332" :initial-image="cropimage" :height="126" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :prevent-white-space="true">
           </croppa>
         </div>
         <div class="form-group">
@@ -204,18 +200,12 @@
           return 6;
         }
       },
-      img(){
-        // if (this.modalInfo.data.image != null) {
-        //   this.myCroppa.refresh()
-        //   return '../public/images/pages/'+this.modalInfo.data.image
-        // }
-      },
-      // cropimage() {
-      //   if (this.modalInfo.data.image != null) {
-      //     this.myCroppa.refresh()
-      //     return '../public/images/sliders/' + this.modalInfo.data.image
-      //   }
-      // }
+      cropimage() {
+        if (this.modalInfo.data.image != null) {
+          this.myCroppa.refresh()
+          return '../public/images/sliders/' + this.modalInfo.data.image
+        }
+      }
     },
     created() {
       this.fetchSlider();

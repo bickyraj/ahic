@@ -4,15 +4,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Menu as Resource;
 use App\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SliderController extends Controller
 {
   public $destination = 'public/images/sliders/';
+  public $images_dir = 'public/images/';
 
   public function __construct(){
-    if(is_dir($this->destination)){
+    if (!is_dir($this->images_dir)) {
+      mkdir($this->images_dir);
+    }
 
-    }else{
+    if(!is_dir($this->destination)){
       mkdir($this->destination);
     }
   }
@@ -28,6 +32,7 @@ class SliderController extends Controller
           $data['title'] = $request->input('title');
           $data['sub_title'] = $request->input('sub_title');
           $data['description'] = $request->input('description');
+          $data['status'] = 1;
           $image = $request->image;
         $image_array_1 = explode(";", $image);
         if (array_key_exists("1",$image_array_1)){
