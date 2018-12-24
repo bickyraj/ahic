@@ -14,7 +14,7 @@ use App\Download;
 use App\News;
 use App\Gallery;
 use App\Slider;
-use App\CMS;
+use App\Cms as CMS;
 use App\ApplicationDateOfIntake;
 
 

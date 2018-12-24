@@ -15,35 +15,26 @@
                     <label for="">Name</label>
                     <input type="text" name="name" class="form-control" placeholder="" required>
                   </div>
-                   <div class="form-group">
+                  <div class="form-group">
                     <label for=""> Image </label>
-                    <croppa v-model="myCroppa"
-             :width="384"
-             :height="54"
-             placeholder="Choose an image"
-             :placeholder-font-size="0"
-             :disabled="false"
-             :quality="5"
-             :show-remove-button="false"
-             :prevent-white-space="true"
-     >
-     </croppa >
+                    <croppa v-model="myCroppa" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="false" :prevent-white-space="true">
+                    </croppa>
                     <!-- <input type="file" name="image" class="form-control" placeholder="" > -->
                   </div>
                   <div class="form-group">
                     <label for="">Parent Page</label>
-                   <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control">
-                     <option selected value=""> No Parent Selected</option>
-                    <option v-for="page in table_items" :value="page.id" :key="page.id"> {{page.name}}</option>
-                  </select>
+                    <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control">
+                      <option selected value=""> No Parent Selected</option>
+                      <option v-for="page in table_items" :value="page.id" :key="page.id"> {{page.name}}</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="">Sub Title</label>
-                    <input type="text" name="sub_title" class="form-control" placeholder="" >
+                    <input type="text" name="sub_title" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-               <editor id="description" name="description"></editor>
+                    <editor id="description" name="description"></editor>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create page</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -54,22 +45,22 @@
           <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th>  Name </th>
+                <th> Name </th>
                 <th>Parent Page</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(page, index) in table_items" :key="page.id">
-                <td>  {{ page.name}}  </td>
-                  <td v-if="page.parent_page">{{page.parent_page.name}} </td>
-                  <td v-else> -- </td>
+                <td> {{ page.name}} </td>
+                <td v-if="page.parent_page">{{page.parent_page.name}} </td>
+                <td v-else> -- </td>
                 <td>
                   <router-link :to="'page/'+page.id">
-                         <b-button size="sm"  class="mr-1 btn-primary">
-                           View
-                         </b-button>
-                       </router-link>
+                    <b-button size="sm" class="mr-1 btn-primary">
+                      View
+                    </b-button>
+                  </router-link>
                   <b-button size="sm" @click.stop="info(page, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -99,49 +90,32 @@
           <label for="">Name</label>
           <input type="text" name="name" v-bind:value="modalInfo.data.name" class="form-control" placeholder="" required>
         </div>
-          <div class="form-group" v-if="modalInfo.data.image == null">
-                    <label for="">Image  </label>
-                    <input type="file" name="image" class="form-control">
-                  </div>
-
-               <div class="form-group" v-else>
-                    <label for="">Image  </label> <br>
-               <!-- <img :src="'../public/images/pages/'+modalInfo.data.image" class="img-fluid" /> -->
-               <croppa v-model="myCroppa"
-               :initial-image="img"
-        :width="384"
-        :height="54"
-        placeholder="Choose an image"
-        :placeholder-font-size="0"
-        :disabled="false"
-        :quality="5"
-        :show-remove-button="false"
-        :prevent-white-space="true"
->
-</croppa >
-<button type="button" class="btn btn-danger" @click="myCroppa.remove()"> Remove</button>
-                  </div>
-
+        <div class="form-group" v-if="modalInfo.data.image == null">
+          <label for="">Image </label>
+          <input type="file" name="image" class="form-control">
+        </div>
+        <div class="form-group" v-else>
+          <label for="">Image </label> <br>
+          <!-- <img :src="'../public/images/pages/'+modalInfo.data.image" class="img-fluid" /> -->
+          <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="false" :prevent-white-space="true">
+          </croppa>
+          <button type="button" class="btn btn-danger" @click="myCroppa.remove()"> Remove</button>
+        </div>
         <div class="form-group">
           <label for="">Parent page</label>
-          <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control" >
+          <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control">
             <option value="" selected> Choose Parent</option>
-            <option v-for="page in table_items" :value="page.id" :key="page.id" v-if="modalInfo.data.id != page.id" > {{page.name}}</option>
+            <option v-for="page in table_items" :value="page.id" :key="page.id" v-if="modalInfo.data.id != page.id"> {{page.name}}</option>
           </select>
         </div>
-
-
         <div class="form-group">
           <label for="">Sub Title</label>
-          <input type="text" name="sub_title" v-bind:value="modalInfo.data.sub_title" class="form-control" placeholder="" >
+          <input type="text" name="sub_title" v-bind:value="modalInfo.data.sub_title" class="form-control" placeholder="">
         </div>
-
-
         <div class="form-group">
           <label for="">Description</label>
-                   <editor  name="description" v-model="modalInfo.data.description"></editor>
+          <editor name="description" v-model="modalInfo.data.description"></editor>
         </div>
-
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>
@@ -152,11 +126,11 @@
   export default {
     data() {
       return {
-        myCroppa:'',
-        dataUrl:'',
+        myCroppa: null,
+        dataUrl: '',
         loading: true,
         table_items: [],
-        menu_table_fields: ['name', 'parent_id','sub_title','image','description','parent_menu'],
+        menu_table_fields: ['name', 'parent_id', 'sub_title', 'image', 'description', 'parent_menu'],
         modalInfo: {
           title: '',
           content: '',
@@ -167,11 +141,11 @@
     created() {
       this.fetchMenus();
     },
-    computed:{
-      img(){
+    computed: {
+      img() {
         if (this.modalInfo.data.image != null) {
           this.myCroppa.refresh()
-          return '../public/images/pages/'+this.modalInfo.data.image
+          return '../public/images/pages/' + this.modalInfo.data.image
         }
       }
     },
@@ -202,9 +176,9 @@
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/edit-page';
-        formData.append('image',this.myCroppa.generateDataUrl())
+        formData.append('image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
-          console.log(response);
+            console.log(response);
             if (response.status === 200) {
               self.table_items = response.data.data;
               self.hideMenuModal();
@@ -260,12 +234,12 @@
         var form = self.$refs.addMenuForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/page';
-        formData.append('image',this.myCroppa.generateDataUrl())
+        formData.append('image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
-              self.table_items  = response.data.data;
-              $(form)[0].reset();
-              self.hideModal();
-              self.$toastr.s("A Page has been added.");
+            self.table_items = response.data.data;
+            $(form)[0].reset();
+            self.hideModal();
+            self.$toastr.s("A Page has been added.");
           })
           .catch(function(error) {
             if (error.response.status === 422) {
@@ -297,7 +271,6 @@
             console.log(error);
             vm.loading = false;
           });
-
       },
       showModal() {
         this.$refs.myModalRef.show()
