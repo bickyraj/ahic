@@ -1,3 +1,15 @@
+<style media="screen">
+html,body{
+  height:100% !important;
+}
+.animated{
+}
+
+  .side-detail{
+    height:400px !important;
+    overflow:scroll;
+  }
+</style>
 <template>
   <div class="animated">
     <b-row>
@@ -96,7 +108,7 @@
         </b-card>
       </b-col>
 
-      <b-col md="6" v-if="module!=''">
+      <b-col md="6" v-if="module!=''" class="side-detail">
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">

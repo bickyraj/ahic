@@ -18,7 +18,7 @@
               <div class="col-md-12">
               </div>
 
-              <div class="col-md-12">
+                <div class="col-md-12">
                 <h5> {{page.sub_title}}</h5>
                 <!-- <img :src="'../../public/images/pages/'+page.image" class="img-fluid" /> -->
                 <h5>
@@ -65,13 +65,13 @@
         </div>
         <div class="form-group" v-if="page.image == null">
           <label for="">Image  </label>
+          <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
           <input type="file" name="image" class="form-control">
         </div>
 
         <div class="form-group" v-else>
           <label for="">Image  </label> <br>
-          <img :src="'../../public/images/pages/'+page.image" class="img-fluid" />
-          <input type="file" name="image" class="form-control">
+          <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
         </div>
 
         <div class="form-group">
@@ -138,7 +138,8 @@
 <script>
 export default {
   data() {
-    return {
+    return{
+    myCroppa:null,
       module:'',
       allModules:'',
       page:'',
@@ -153,6 +154,12 @@ export default {
     this.fetchModules();
   },
   computed: {
+      img() {
+        if (this.page.image != null) {
+          this.myCroppa.refresh()
+          return '../../public/images/pages/' + this.page.image
+        }
+      }
   },
   methods: {
     addModule(){
@@ -180,7 +187,6 @@ export default {
       let vm = this;
       let self = this;
       let url = self.$root.baseUrl + '/api/admin/'+type+'/';
-      console.log(url);
       axios.delete(url + id).then(function(response) {
         vm.fetchModule();
         self.$toastr.s("A module has been removed.");

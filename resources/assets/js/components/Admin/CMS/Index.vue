@@ -150,7 +150,7 @@
 
     </div>
 
-    <b-modal class="ess-modal" ref="myModalRef" hide-footer :title="'Add New ' + slug">
+    <b-modal class="ess-modal" ref="myModalRef" hide-footer :title="'Add New Content'">
       <form @submit.prevent="addNews" ref="addNewsForm" enctype="multipart/form-data">
         <input type="hidden" name="slug" v-model="slug">
         <div class="form-group">
@@ -182,7 +182,7 @@
           <label for="">Link </label>
           <input type="text" name="link" class="form-control" placeholder="" >
         </div>
-        <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create News</b-btn>
+        <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Content</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
       </form>
     </b-modal>
@@ -228,7 +228,7 @@
                     <label for="">Link </label>
                     <input type="text" name="sub_title" :value="modalInfo.data.link" class="form-control" placeholder="" >
                   </div>
-        <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
+        <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update Content</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideNewsModal">Cancel</b-btn>
       </form>
     </b-modal>
@@ -373,7 +373,7 @@
             let url = self.$root.baseUrl + '/api/admin/cms/'+slug;
             axios.get(url).then(function(response) {
                   self.modalInfo.row = response.data.data.id
-                  self.modalInfo.title = 'Edit' + s + 'Content'
+                  self.modalInfo.title = 'Edit Content'
                   self.modalInfo.data = response.data.data
                   self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
                   self.$root.$emit('bv::show::modal', 'modalInfo', button)

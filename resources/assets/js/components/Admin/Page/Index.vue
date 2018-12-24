@@ -97,9 +97,7 @@
         <div class="form-group" v-else>
           <label for="">Image </label> <br>
           <!-- <img :src="'../public/images/pages/'+modalInfo.data.image" class="img-fluid" /> -->
-          <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="false" :prevent-white-space="true">
-          </croppa>
-          <button type="button" class="btn btn-danger" @click="myCroppa.remove()"> Remove</button>
+          <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
         </div>
         <div class="form-group">
           <label for="">Parent page</label>

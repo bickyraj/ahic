@@ -14,14 +14,16 @@
                 <th class="col-md-3">Name</th>
                 <th class="col-md-2">Phone</th>
                 <th class="col-md-3"> Email</th>
-                <th class="col-md-4">Status</th>
+                <th class="col-md-2">Status</th>
+                <th class="col-md-2">Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
-              <tr v-for="(enquiry, index) in table_items" :key="enquiry.id" @click="view(enquiry,index)">
+              <tr v-for="(enquiry, index) in table_items" :key="enquiry.id" >
                 <td>{{ enquiry.name }}</td>
                 <td>{{ enquiry.phone }}</td>
                 <td>{{ enquiry.email }}</td>
+                <td><button class="btn btn-success" @click="view(enquiry,index)"> View </button></td>
                 <td>
                   <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,enquiry.i,$event.target)">
                     <option value="1">Pending</option>
@@ -33,7 +35,7 @@
             </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="4">
+                <td colspan="5">
                   <div v-if="!loading"> No Data.</div>
                   <div v-else> loading...</div>
                 </td>
