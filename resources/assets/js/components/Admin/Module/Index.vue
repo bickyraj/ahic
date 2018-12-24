@@ -40,7 +40,7 @@
                 <td>{{ module.display_type}}</td>
                 <td>{{ module.status}}</td>
                 <td>
-                  <router-link :to="'module/'+module.id"> 
+                  <router-link :to="'module/'+module.id">
                   <b-button size="sm"  class="mr-1 btn-primary">
                     View
                   </b-button>
