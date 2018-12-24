@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 class SliderController extends Controller
 {
   public $destination = 'public/images/sliders/';
+  public $images_dir = 'public/images/';
 
   public function __construct(){
-    if(is_dir($this->destination)){
-
-    }else{
+    if(!is_dir($this->images_dir)){
+      mkdir($this->images_dir);
+    }
+    if(!is_dir($this->destination)){
       mkdir($this->destination);
     }
   }

@@ -254,7 +254,8 @@
         var form = self.$refs.editModuleForm;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
-        let url = self.$root.baseUrl + '/api/admin/module_content/edit/'+this.id;
+        let id = parseInt(this.$route.params.id);
+        let url = self.$root.baseUrl + '/api/admin/module_content/edit/'+id;
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
               $(form)[0].reset();
@@ -311,7 +312,8 @@
         var self = this;
         var form = self.$refs.addModuleForm;
         var formData = new FormData(form);
-        let url = self.$root.baseUrl + '/api/admin/module_content';
+        let id = parseInt(this.$route.params.id);
+        let url = self.$root.baseUrl + '/api/admin/module_content/'+id;
         axios.post(url, formData).then(function(response) {
        self.table_items = response.data.data;
               $(form)[0].reset();

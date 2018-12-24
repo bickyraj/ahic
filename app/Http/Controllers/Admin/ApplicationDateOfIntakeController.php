@@ -35,6 +35,7 @@ class ApplicationDateOfIntakeController extends Controller
     public function store(Request $request)
     {
            $intake['year'] = $request->input('year');
+        $intake['term'] = $request->input('term');
         $intake['date'] = $request->input('date');
         $intake['end_date'] = $request->input('end_date');
         $intake['mid_term'] = $request->input('mid_term');
@@ -78,6 +79,7 @@ class ApplicationDateOfIntakeController extends Controller
     public function update(Request $request)
     {
         $intake = ApplicationDateOfIntake::findOrFail($request->id);
+        $intake->term = $request->input('term');
         $intake->year = $request->input('year');
         $intake->date = $request->input('date');
         $intake->end_date = $request->input('end_date');

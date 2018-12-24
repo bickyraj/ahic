@@ -17,7 +17,7 @@ class MenuTableSeeder extends Seeder
         ['name'=>'admission','slug'=>'admission','status'=>'1'],
         ['name'=>'student-service','slug'=>'student-service','status'=>'1'],
         ['name'=>'agents','slug'=>'agents','status'=>'1'],
-        ['name'=>'download','slug'=>'download','status'=>'1'],
+        // ['name'=>'download','slug'=>'download','status'=>'1'],
         ['name'=>'contact','slug'=>'contact','status'=>'1'],
       ];
 

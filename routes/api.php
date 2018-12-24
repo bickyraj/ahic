@@ -190,7 +190,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('module_contents','ModuleContentController@index');
     Route::get('module_content/{id}','ModuleContentController@show');
     Route::get('module_contents/{id}','ModuleContentController@showByCourse');
-    Route::post('module_content', 'ModuleContentController@store');
+    Route::post('module_content/{id}', 'ModuleContentController@store');
     Route::get('module_content/{id}/showByParent','ModuleContentController@showByParent');
     Route::post('module_content/edit/{id}', 'ModuleContentController@update');
     Route::delete('module_content/{id}', 'ModuleContentController@destroy');
@@ -212,6 +212,7 @@ Route::post('/form/submit', 'FormController@store');
 
       //Agent Information
     Route::get('agent_informations','AgentInformationController@index');
+    Route::get('agent_information/students', 'AgentInformationController@students');
     Route::get('agent_information/{id}','AgentInformationController@show');
     Route::get('agent_informations/{id}','AgentInformationController@get');
     Route::post('agent_information', 'AgentInformationController@store');

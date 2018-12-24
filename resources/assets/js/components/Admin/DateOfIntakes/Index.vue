@@ -268,7 +268,7 @@
        self.table_items = response.data.data;
               $(form)[0].reset();
               self.hideModal();
-              self.$toastr.s("A module has been added.");
+              self.$toastr.s("A date has been added.");
           })
           .catch(function(error) {
             if (error.response.status === 422) {

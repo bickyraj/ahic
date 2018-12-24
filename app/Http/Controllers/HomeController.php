@@ -46,9 +46,13 @@ class HomeController extends Controller
     public function course($course){
       $name = str_replace('_', ' ', $course);
       $course = Course::where('name',$name)->with('category','requirements','outcomes','assessment','rpl','relation.competence','relation.category')->first();
+      if($course){
       $payment = PaymentOption::all();
       $categories = CourseCategory::all();
       return view('front.course',compact('course','payment','categories'));
+    }
+
+
     }
     public function courseCategory($category){
       $name = str_replace('_', ' ', $category);
@@ -58,15 +62,25 @@ class HomeController extends Controller
     }
 
     public function admission(){
+      $route =  \Request::segment(1);
+      $page = Page::where('slug',$route)->get();
+      if($page){
+        $page = Page::where('slug',$route)->first()->id;
+        $modules = PageModule::where('page_id',$page)->with('module','module.content')->get();
+      }
       $courses = Course::all();
       $categories = CourseCategory::all();
       $intakeyear = ApplicationDateOfIntake::groupBy('year')->get();
       $intakes = ApplicationDateOfIntake::all();
-      return view('front.admission',compact('courses','categories','intakeyear','intakes'));
+      // $this->debug($modules);
+      return view('front.admission',compact('courses','categories','intakeyear','intakes','modules'));
     }
     public function studentService(){
       $route =  \Request::segment(1);
-      $page = Page::where('slug',$route)->first()->id;
+      $page = Page::where('slug',$route)->get();
+      if($page){
+        $page = Page::where('slug',$route)->first()->id;
+      }
       $modules = PageModule::where('page_id',$page)->with('module','module.content')->get();
 
       $courses = Course::all();

@@ -207,114 +207,71 @@
           <div class="tab-pane fade" id="Tabs_4-2" role="tabpanel">
             <div class="col-12">
               <ul class="ec-timeline-portlet list-unstyled bullet-line-list">
-                <li class="ec-timeline-portlet__item">
-                    <h6>1st</h6>
-                    <p class="mb-0">FILLING OUT FORMS</p>
-                    <p class="text-muted marginTop-30">
-                        <!-- <i class="mdi mdi-clock"></i> -->
+                @php
+                  $count = 1;
+                @endphp
+                @foreach ($modules as $mod)
+                  @if($mod['module']['display_type'] == 2)
+                    @foreach ($mod['module']['content'] as $module)
+                      @php
+                      $num ='';
+                      if($count > 10){
+                        $c = $count % 10;
+                      }
+                      else{
+                        $c = $count;
+                      }
 
-                        International students applying from overseas*
-                        must fill out: Streamline Student Visa Framework
-                        (SSVF) Questionnaire, AHIC Enrolment Form.
-                        SSVF Assessment Form, Statutory Declaration
-                        Form Statement of Purpose of studying at AHIC
-                        must be forwarded to AHIC Admission department
-                        together with the above filled out forms.<br><br>
-                        *Please contact AHIC Marketing or Admission Department
-                    </p>
-                </li>
-                <li class="ec-timeline-portlet__item">
-                    <h6>2nd</h6>
-                    <p class="mb-0">APPLICATION ASSESSMENT</p>
-                    <p class="text-muted">
-                        <i class="mdi mdi-clock"></i>
-                        Once we receive your application we will assess
-                        whether you meet the English Language and
-                        academic entry requirements for your chosen
-                        programme.
-                    </p>
-                </li>
-                <li class="ec-timeline-portlet__item">
-                    <h6>3rd</h6>
-                    <p class="mb-0">LETTER OF OFFER</p>
-                    <p class="text-muted">
-                        <i class="mdi mdi-clock"></i>
-                        If your application is approved, we will send you
-                        a letter of Offer. This will include payment details,
-                        airport arrival and accommodation information.
-                    </p>
-                </li>
-                <li class="ec-timeline-portlet__item">
-                    <h6>4th</h6>
-                    <p class="mb-0">FEE PAYMENT</p>
-                    <p class="text-muted">
-                        <i class="mdi mdi-clock"></i>
-                        Fee payment details are included in your letter of
-                        Offer. Ensure you have read and understood the
-                        AHIC refund policy before you make payment to
-                        AHIC.
-                    </p>
-                </li>
-                <li class="ec-timeline-portlet__item">
-                    <h6>5th</h6>
-                    <p class="mb-0">APPLY FOR A STUDENT VISA</p>
-                    <p class="text-muted">
-                        <i class="mdi mdi-clock"></i>
-                        Once we receive your fee payment, we will issue
-                        you with a fee receipt to support your student visa
-                        application. <br>
-                        Visit: http://www.border.gov.au/Trav/Stud
-                        for visa requirements and processes.
-                    </p>
-                </li>
-                <li class="ec-timeline-portlet__item">
-                    <h6>6th</h6>
-                    <p class="mb-0">PLANNING FOR ARRIVAL</p>
-                    <p class="text-muted">
-                        <i class="mdi mdi-clock"></i>
-                        Plan to arrive at AHIC in time to attend the
-                        International Student Orientation. Once you have
-                        booked your flights, organise your airport pick
-                        up and accommodation at least 10 working days
-                        before you arrive.
-                    </p>
-                </li>
-                <li class="ec-timeline-portlet__item">
-                    <h6>7th</h6>
-                    <p class="mb-0">AHIC ORIENTATION Program</p>
-                    <p class="text-muted">
-                        <i class="mdi mdi-clock"></i>
-                        Join other international students for the AHIC
-                        Orientation program, finalise your enrolment, and
-                        commence your studies.
-                    </p>
-                </li>
+                      if ($c === 1) {
+                        $num = $count.  "st";
+                      }
+                      elseif ($c === 2) {
+                        $num = $count. "nd";
+                      }
+                      elseif ($c === 3) {
+                        $num = $count. "nd";
+                      }
+                      else{
+                        $num = $count.  "th";
+                      }
+
+                      @endphp
+                      <li class="ec-timeline-portlet__item">
+                          <h6>{!!html_entity_decode($num)!!}</h6>
+                          <p class="mb-0 text-uppercase">{{$module['title']}}</p>
+                          <p class="text-muted marginTop-30">
+                              {!!html_entity_decode($module['description'])!!}
+                          </p>
+                      </li>
+
+                      @php
+                        $count++;
+                      @endphp
+                    @endforeach
+                  @endif
+                @endforeach
+
               </ul>
             </div>
-            <div class="col-md-12 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
-              <div class="media border rounded p-4">
-                <!-- <span class="iconbox">
-                  <i class="ti-magnet font-size-40"></i>
-                </span> -->
-                <div class="media-body ml-4">
-                  <h5 class="border-bottom mb-4">
-                    Contact our Admission Department
-                  </h5>
-                  <p>
-                    AHIC ensures that all students who gain access into a Nationally Accredited Program have the appropriate skills and abilities they require to be successful in their studies.
-                  </p>
-                  <p>
-                    Each course has specific entry requirements as listed in the course information sheet for the particular course. You can obtain a copy of course information sheet under courses section of our website.
-                  </p>
-                  <p>
-                    We will assist you with Admissions into your chosen program and will guide you through the admissions process.
-                  </p>
-                  <p>
-                    If you have any questions with regards to Admissions, please speak to the Marketing and Admissions Team or see the Institute’s Student Entry Requirements, Selection, Enrolment and Orientation Policy.
-                  </p>
-                </div>
-              </div>
-            </div>
+
+            @foreach ($modules as $mod)
+@if($mod['module']['display_type'] != 2)
+                @foreach ($mod['module']['content'] as $module)
+                  <div class="col-md-12 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
+                    <div class="media border rounded p-4">
+
+                      <div class="media-body ml-4">
+                        <h5 class="border-bottom mb-4">
+                            {{$module['title']}}
+                        </h5>
+                        {!!html_entity_decode($module['description'])!!}
+                      </div>
+                    </div>
+                  </div>
+                @endforeach
+              @endif
+            @endforeach
+
           </div>
           <div class="tab-pane fade" id="Tabs_4-3" role="tabpanel">
 
@@ -325,12 +282,37 @@
                     <div class="col-12 text-center mb-4">
                       <h4>Year - <span class="text-primary">{{$year->year}}</span></h4>
                     </div>
+
                     @foreach ($intakes as $intake)
+
+                      @php
+                      $num ='';
+                    if($intake->term > 0){
+                      if($intake->term > 10){
+                        $c = $intake->term % 10;
+                      }
+                      else{
+                        $c = $intake->term;
+                      }
+                      if ($c == 1) {
+                        $num = $intake->term.  "st";
+                      }
+                      elseif ($c == 2) {
+                        $num = $intake->term. "nd";
+                      }
+                      elseif ($c == 3) {
+                        $num = $intake->term. "nd";
+                      }
+                      else{
+                        $num = $intake->term.  "th";
+                      }
+                    }
+                      @endphp
                       @if($intake->year == $year->year)
                         <div class="col-md-6 mt-5 wow fadeInUp" data-wow-delay=".1s">
                          <div class="card text-center height-100p border  p-4 p-lg-5 shadow-v2">
                           <span class="iconbox iconbox-lg rounded bg-primary mx-auto" data-offset-top-md="-75">
-                             {{$intake->term}} <br> Term
+                             {{$num}} <br> Term
                            </span>
                            <div class="table-responsive my-4">
                              <table class="table text-left table-hover">
@@ -378,6 +360,7 @@
                         </div>
 
                       @endif
+
                     @endforeach
 
                   </div>

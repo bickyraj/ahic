@@ -16,4 +16,7 @@ class AgentDocument extends Model
     public function shore(){
         return $this->belongsTo('App\Country','country');
     }
+    public function students(){
+      return $this->hasMany('App\ApplicationAgent','company_id','id');
+    }
 }

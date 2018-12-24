@@ -52,4 +52,5 @@ class ApplicationForm extends Model
     public function application_agent(){
         return $this->hasOne('App\ApplicationAgent','application_form_id','id');
     }
+
 }

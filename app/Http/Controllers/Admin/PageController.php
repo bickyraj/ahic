@@ -10,15 +10,16 @@ use App\Http\Resources\Page as PageResource;
 class PageController extends Controller
 {
     public $destination = 'public/images/pages/';
+    public $images_dir = 'public/images/';
 
-//create dir
-public function __construct(){
-  if(is_dir($this->destination)){
-
-  }else{
-    mkdir($this->destination);
-  }
-}
+    public function __construct(){
+      if(!is_dir($this->images_dir)){
+        mkdir($this->images_dir);
+      }
+      if(!is_dir($this->destination)){
+        mkdir($this->destination);
+      }
+    }
 
 
     public function index(){

@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             CourseTableSeeder::class,
             AgentTableSeeder::class,
             MenuTableSeeder::class,
-            UsersTableSeeder::class,
+             UsersTableSeeder::class,
         ]);
 
 

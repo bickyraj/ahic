@@ -8,6 +8,15 @@
 .caption {
   width: 100%;
 }
+.table tbody + tbody {
+    border-top: 1px solid #a4b7c1;
+}
+
+.admin-right .card{
+  max-height:418px;
+/* height:418px !important; */
+overflow-y:scroll;
+}
 
 </style>
 
@@ -70,15 +79,26 @@
               <div class="col-md-12">
                 <div class="card-title">
                   <div class="caption">
-                    <h5><i class="fas fa-key"></i> Student Report<small class="float-right"> <select name="" id="" class="form-control"> <option selected> Year </option></select> </small></h5>
+                    <h5><i class="fas fa-key"></i> Student Report<small class="float-right">
+                      <!-- <select name="" id="" class="form-control"> <option selected> Year </option></select>  -->
+                    </small></h5>
                   </div>
 
                 </div>
-                <b-collapse id="collapse1">
-                  <div class="col-md-12">
+                <table class="table trump-table">
+                  <tr>
+<th> Name </th>
+                  </tr>
+                  <tbody v-for="doc in agent.documents">
+                    <tr v-for="student in doc.students">
+                      <td>{{student.details.firstname}} </td>
+                    </tr>
+                  </tbody>
 
-                  </div>
-                </b-collapse>
+
+                </table>
+
+
               </div>
             </b-card>
                 </div>
@@ -110,7 +130,7 @@
                   </table>
                 </div>
                 <div class="col-md-2">
-                  <img :src="'../../public/images/agents/'+agent.logo" alt="" class="img-fluid">
+                  <img :src="$root.baseUrl+'/public/images/agents/'+agent.logo" alt="" class="img-fluid">
                 </div>
 
                   <hr>
@@ -224,17 +244,17 @@
               </div>
               <div class="form-group" >
           <label for="">Logo </label>
-          <croppa v-model="myCroppa"
-   :width="200"
-   :height="200"
-   :initial-image="cropimage"
-   placeholder="Choose an image"
-   :placeholder-font-size="0"
-   :disabled="false"
-   :quality="1"
-   :prevent-white-space="true"
->
-</croppa>
+                      <croppa v-model="myCroppa"
+               :width="200"
+               :height="200"
+               :initial-image="cropimage"
+               placeholder="Choose an image"
+               :placeholder-font-size="0"
+               :disabled="false"
+               :quality="1"
+               :prevent-white-space="true"
+            >
+            </croppa>
         </div>
               <div class="form-group">
                 <label for=""> Telephone </label>
@@ -416,9 +436,7 @@
               <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditProcessModal">Cancel</b-btn>
             </form>
           </b-modal>
-
-
-        </div>
+      </div>
 
       </template>
 
@@ -447,11 +465,15 @@
           cropimage(){
             if (this.agent.logo != null) {
               this.myCroppa.refresh()
-              return this.$root.baseUrl+'/public/images/agents/'+this.modalInfo.data.logo
+              return this.$root.baseUrl+'/public/images/agents/'+this.agent.logo
+            }
+            else{
+              return " "
             }
           },
         },
         methods: {
+
           changeLocation(event){
             var self =this;
             let index = (event.target.selectedOptions[0].index);
@@ -460,9 +482,6 @@
             if(loc){
             self.locations = self.countries[index].locations;
             }
-
-
-
           },
             fetchCountries() {
         let vm = this;
@@ -515,6 +534,7 @@
             });
             },
             editDocument(){
+              this.myCroppa.refresh()
                       var self = this;
             var form = self.$refs.editDocumentForm;
             var formData = new FormData(form);

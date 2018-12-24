@@ -96,6 +96,10 @@
 <section class="padding-y-60 bg-light-v2">
   <div class="container">
     <div class="row">
+    <pre>
+
+        @if($catgs != null)
+
       @foreach ($catgs->courses as $course)
         @php
           $stripped = str_replace(' ', '_', $course->name);
@@ -129,6 +133,11 @@
           </div>
         </div>
       @endforeach
+    @else
+      <script>
+      window.location.href= "{{route('courses')}}"
+      </script>
+    @endif
 
     </div> <!-- END row-->
   </div> <!-- END container-->

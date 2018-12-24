@@ -619,7 +619,7 @@ const routes = [
                 },
                 {
                     name: 'Module',
-                    path: admin_url + 'modules',
+                    path: admin_url + 'module/:id',
                 }
             ],
             middlewareAuth: true,

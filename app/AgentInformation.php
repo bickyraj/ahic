@@ -14,5 +14,4 @@ public function documents(){
   return $this->hasMany('App\AgentDocument','agent_id');
 }
 
-
 }

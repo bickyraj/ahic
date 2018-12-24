@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Menu as Resource;
 use App\AgentInformation;
+use App\ApplicationAgent;
 use Illuminate\Http\Request;
 
 class AgentInformationController extends Controller
 {
     public $destination = 'public/images/agents/';
+    public $images_dir = 'public/images/';
 
     public function __construct(){
-      if(is_dir($this->destination)){
-
-      }else{
+      if(!is_dir($this->images_dir)){
+        mkdir($this->images_dir);
+      }
+      if(!is_dir($this->destination)){
         mkdir($this->destination);
       }
     }
@@ -108,6 +111,7 @@ class AgentInformationController extends Controller
     {
         $agent = AgentInformation::where('id',$id);
             if(count($agent->get())>0){
+              $agent = $agent->with('documents.students.details');
         $agent = $agent->first();
         return new Resource($agent);
     }
@@ -160,6 +164,7 @@ class AgentInformationController extends Controller
        $agents = AgentInformation::all();
        return Resource::collection($agents);
     }
+
 
 
     public function destroy($id)

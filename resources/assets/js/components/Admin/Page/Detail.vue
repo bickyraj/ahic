@@ -72,7 +72,6 @@
           <label for="">Image  </label> <br>
           <img :src="'../../public/images/pages/'+page.image" class="img-fluid" />
           <input type="file" name="image" class="form-control">
-
         </div>
 
         <div class="form-group">

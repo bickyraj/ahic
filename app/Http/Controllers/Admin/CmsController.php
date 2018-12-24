@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 class CmsController extends Controller
 {
   public $destination = 'public/images/cms/';
+  public $images_dir = 'public/images/';
 
   public function __construct(){
-    if(is_dir($this->destination)){
-
-    }else{
+    if(!is_dir($this->images_dir)){
+      mkdir($this->images_dir);
+    }
+    if(!is_dir($this->destination)){
       mkdir($this->destination);
     }
   }
@@ -37,8 +39,6 @@ public function slug($slug){
     $image = $request->image;
   $image_array_1 = explode(";", $image);
   if (array_key_exists("1",$image_array_1)){
-    $oldimg = $page->image;
-    $this->destroyimage($oldimg);
     $image_array_2 = explode(",", $image_array_1[1]);
     $imgdata = base64_decode($image_array_2[1]);
     $rand = rand(0,99999999);
