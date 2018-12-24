@@ -274,7 +274,8 @@ overflow-y:scroll;
               </div>
               <div class="form-group">
                 <label for=""> Start Date </label>
-                <input type="text" name="start_date" class="form-control" :value="agent.start_date">
+                <datepicker format="yyyy-MM-dd" name="start_date"  bootstrap-styling :initialView="'year'" :value="agent.start_date"  ></datepicker>
+
               </div>
 
               <b-btn class="mt-3 pull-right" variant="primary" type="submit">Save Agent</b-btn>
@@ -390,11 +391,11 @@ overflow-y:scroll;
 
                  <b-modal class="ess-modal" ref="addProcessModal" hide-footer title="Add Agreement Process">
             <form @submit.prevent="addProcess" ref="addProcessForm">
-              <input type="" name="agent_id" :value="agent.id">
-              <input type="" name="agent_document_id" :value="companyid">
+              <input type="hidden" name="agent_id" :value="agent.id">
+              <input type="hidden" name="agent_document_id" :value="companyid">
               <div class="form-group">
                 <label for=""> Sent Date</label>
-                <input type="text" name="sent_date" class="form-control">
+                <datepicker format="yyyy-MM-dd" name="sent_date"  bootstrap-styling :initialView="'year'"></datepicker>
               </div>
                   <div class="form-group">
                 <label for=""> Agreement </label>
@@ -402,7 +403,7 @@ overflow-y:scroll;
               </div>
               <div class="form-group">
                 <label for=""> Recieved Date </label>
-                <input type="text" name="received_date" class="form-control">
+                <datepicker format="yyyy-MM-dd" name="recieved_date"  bootstrap-styling :initialView="'year'"></datepicker>
               </div>
               <div class="form-group">
                 <label for=""> Signed </label>
@@ -418,7 +419,7 @@ overflow-y:scroll;
               <input type="hidden" name="id" :value="process.id">
               <div class="form-group">
                 <label for=""> Sent Date</label>
-                <input type="text" name="sent_date" class="form-control" :value="process.sent_date" >
+                <datepicker format="yyyy-MM-dd" name="sent_date"  bootstrap-styling :initialView="'year'" :value="process.sent_date" ></datepicker>
               </div>
                   <div class="form-group">
                 <label for=""> Agreement </label>
@@ -426,7 +427,7 @@ overflow-y:scroll;
               </div>
               <div class="form-group">
                 <label for=""> Recieved Date </label>
-                <input type="text" name="received_date" class="form-control" :value="process.received_date">
+                <datepicker format="yyyy-MM-dd" name="received_date"  bootstrap-styling :initialView="'year'" :value="process.received_date" ></datepicker>
               </div>
               <div class="form-group">
                 <label for=""> Signed </label>
