@@ -24,14 +24,13 @@
               <div class="row">
                 <div class="col-lg-10 mx-auto  text-white">
                   <h1 class="display-lg-4 font-weight-bold text-primary animated slideInUp">
-                    Study In Australia
                     {{$slider->title}}
                   </h1>
                   <h4 class="display-lg-4 font-weight-bold animated slideInUp">
                     {{$slider->sub_title}}
                   </h4>
                   <p class="lead animated fadeInUp">
-                    {!!html_entity_decode($slider->description)!!}
+                    {{ strip_tags($slider->description) }}
                   </p>
                   <!-- <a href="#" class="btn btn-primary mt-3 mx-2 animated slideInUp">Learn More</a> -->
                 </div>
@@ -102,15 +101,15 @@
           <div class="p-4 border-bottom wow fadeInUp">
 <form id="enquiry_form">
 
-  @if ($errors->any())
-      <div class="alert alert-danger">
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-      </div>
-  @endif
+          @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
                 <div class="form-group">
                  <input type="text" class="form-control name" placeholder="Name" name="name" >
                  <span class="error text-danger"></span>
@@ -126,7 +125,7 @@
                 <div class="form-group">
                 <div class="input-group">
                   <select data-placeholder="Select Course" class="chosen-select ec-select my_select_box course_id" tabindex="5" name="course_id" >
-                    <option value=""></option>
+                    <option value="" selected="selected"></option>
                     @foreach ($courses as $course)
                       <option value="{{$course->id}}">{{$course->name}}</option>
                     @endforeach
@@ -137,7 +136,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <select data-placeholder="Your Country" class="select ec-select country_id" tabindex="3" name="country_id" >
-              <option value=""></option>
+              <option value="" selected="selected"></option>
               @foreach ($countries as $country)
                 <option value="{{$country->id}}">{{$country->name}}</option>
               @endforeach
@@ -180,7 +179,13 @@
        <div class="owl-carousel arrow-on-hover" data-state-outer-class="py-3" data-space="30" data-arrow="true" data-loop="true">
          @foreach ($courses as $course)
            <div class="card shadow-v3 hover:parent">
-            <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/business-1.jpg" alt="">
+             @if ($course->background_image)
+               <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
+
+             @else
+               <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+
+             @endif
             <div class="card-body">
               <h4>
                 {{$course->category->name}}
@@ -368,7 +373,6 @@
     .done(function(data){
       if(data == 'true'){
         form.trigger('reset');
-
         $.notify({
         	// options
         	icon: 'glyphicon glyphicon-warning-sign',

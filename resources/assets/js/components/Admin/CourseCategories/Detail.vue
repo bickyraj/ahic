@@ -5,7 +5,8 @@
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
-              <h5><i class="fas fa-key"></i> Courses </h5>
+              <h5><i class="fas fa-key"></i>
+              {{category}} </h5>
             </div>
             <div class="caption card-title-actions">
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Course</b-button>
@@ -13,7 +14,10 @@
                 <form @submit.prevent="addCourse" ref="addCourseForm">
                   <div class="form-group">
                     <label for="">Name </label>
-                    <input type="text" name="name" class="form-control" placeholder="" required>
+                    <input type="text" name="name" class="form-control" placeholder="">
+                    <transition name="fade">
+                    <p v-if="error.name" class="text-danger"> {{error.name[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group d-none">
                     <label for=""> Course Category</label>
@@ -21,34 +25,59 @@
                           <option value="">Select A Category</option>
                           <option v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
                       </select>
+                      <transition name="fade">
+                      <p v-if="error.course_category_id" class="text-danger"> {{error.course_category_id[0]}}</p>
+                      </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Background Image </label>
-                    <input type="file" name="background_image" class="form-control" placeholder="" required>
+                    <croppa v-model="myCroppa" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="false" :prevent-white-space="true">
+                    </croppa>
+                    <transition name="fade">
+                    <p v-if="error.background_image" class="text-danger"> {{error.background_image[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Video Link </label>
-                    <input type="text" name="video_link" class="form-control" placeholder="" required>
+                    <input type="text" name="video_link" class="form-control" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.video_link" class="text-danger"> {{error.video_link[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Duration </label>
-                    <input type="text" name="duration" class="form-control" placeholder="" required>
+                    <input type="text" name="duration" class="form-control" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.duration" class="text-danger"> {{error.duration[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Study Method </label>
-                    <input type="text" name="study_method" class="form-control" placeholder="" required>
+                    <input type="text" name="study_method" class="form-control" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.study_method" class="text-danger"> {{error.study_method[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Onshore Fee </label>
-                    <input type="text" name="onshore_fee" class="form-control" placeholder="" required>
+                    <input type="text" name="onshore_fee" class="form-control" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.onshore_fee" class="text-danger"> {{error.onshore_fee[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Offshore Fee </label>
-                    <input type="text" name="offshore_fee" class="form-control" placeholder="" required>
+                    <input type="text" name="offshore_fee" class="form-control" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.offshore_fee" class="text-danger"> {{error.offshore_fee[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
                <editor  name="description" :init="editor"></editor>
+               <transition name="fade">
+               <p v-if="error.description" class="text-danger"> {{error.description[0]}}</p>
+               </transition>
                   </div>
 
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Course</b-btn>
@@ -62,19 +91,14 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Duration</th>
-                <th>Study Method</th>
-                <th class="col-md-2">Action</th>
+                <th>Action</th>
               </tr>
             </thead>
            <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" @update="updateCourseOrder">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
                 <td>  {{ menu.name}}  </td>
-                <!-- <td>{{ menu.video_link}}</td> -->
-                <td>{{ menu.duration}}</td>
-                <td>{{ menu.study_method}}</td>
                 <td>
-                  <router-link :to="'../course/'+menu.id">
+                  <router-link :to="menu.course_category_id+'/course/'+menu.id">
                   <b-button size="sm"  class="mr-1 btn-primary">
                     View
                   </b-button>
@@ -119,15 +143,13 @@
                           <option  v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
                       </select>
                   </div>
-                    <div class="form-group" v-if="modalInfo.data.background_image == null">
-                    <label for="">Image Background </label>
-                    <input type="file" name="background_image" class="form-control">
+                  <div class="form-group" v-if="modalInfo.data.background_image == null">
+                    <label for="">Image </label>
+                    <croppa v-model="myCroppa" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
                   </div>
                   <div class="form-group" v-else>
-                    <label for="">Image Background </label> <br>
-               <img :src="'../../public/images/courses/'+modalInfo.data.background_image" class="img-fluid" />
-                    <input type="file" name="background_image" class="form-control">
-
+                    <label for="">Image </label> <br>
+                    <croppa v-model="myCroppa" :initial-image="img" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
                   </div>
                   <div class="form-group">
                     <label for="">Video Link </label>
@@ -173,7 +195,10 @@
   export default {
     data() {
       return {
+        error:'',
+        myCroppa: null,
           categories:'',
+          category:'',
         loading: true,
         table_items: [],
         pages:[],
@@ -222,14 +247,36 @@
     },
     created() {
       this.fetchCourses();
+      this.categoryName();
       this.fetchCategories();
     },
     computed: {
       id(){
         return  parseInt(this.$route.params.id);
+      },
+
+      img() {
+        if (this.modalInfo.data.background_image != null) {
+          this.myCroppa.refresh()
+          return '../public/images/courses/' + this.modalInfo.data.background_image
+        }
       }
+
     },
     methods: {
+      categoryName(){
+        let self = this;
+        var c;
+        let cid =   parseInt(this.$route.params.id);
+        let url = this.$root.baseUrl + '/api/admin/course_category/get/'+cid;
+        axios.get(url).then(function(response) {
+           self.category =  response.data.data.name
+          })
+          .catch(function(error) {
+            self.$toastr.e('Something went wrong please try again.');
+          });
+
+    },
       info(menu, index, button) {
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/course/';
@@ -255,6 +302,7 @@
         var form = self.$refs.editCourseForm;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
+        formData.append('background_image', this.myCroppa.generateDataUrl())
                     let id = parseInt(this.$route.params.id);
         let url = self.$root.baseUrl + '/api/admin/course/edit/'+id;
         axios.post(url, formData).then(function(response) {
@@ -313,6 +361,7 @@
         var form = self.$refs.addCourseForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course';
+        formData.append('background_image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
               var menu = response.data.data;
               var menu_data = {
@@ -332,6 +381,8 @@
               self.$toastr.s("A course has been added.");
           })
           .catch(function(error) {
+            self.error = '';
+            self.error = error.response.data.errors;
             if (error.response.status === 422) {
               self.$toastr.e(error.response.data.errors.name);
             }

@@ -140,7 +140,9 @@ Route::post('/form/submit', 'FormController@store');
 
     //Courses Category
     Route::get('course_categories','CourseCategoryController@index');
+    Route::get('course_categories/{course_id}','CourseCategoryController@getCategory');
     Route::get('course_category/{id}','CourseCategoryController@show');
+    Route::get('course_category/get/{id}','CourseCategoryController@getName');
     Route::post('course_category', 'CourseCategoryController@store');
     Route::post('course_category/update-order', 'CourseCategoryController@updateOrder');
     Route::post('course_category/edit', 'CourseCategoryController@update');

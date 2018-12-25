@@ -32,11 +32,6 @@
       <h2 class="text-white">
         Contact
       </h2>
-      <ol class="breadcrumb breadcrumb-double-angle text-white bg-transparent p-0">
-        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Page</a></li>
-        <li class="breadcrumb-item">Contact</li>
-      </ol>
     </div>
   </div>
 
@@ -50,7 +45,7 @@
              <div class="media">
                <span class="iconbox iconbox-md bg-primary text-white"><i class="ti-mobile"></i></span>
                <div class="media-body ml-3">
-                <h5 class="mb-0">+61 2 9268 0085</h5>
+                <h5 class="mb-0">{{$contact->phone}}</h5>
                 <p>Call Us (8AM-10PM)</p>
                </div>
              </div>
@@ -60,7 +55,7 @@
              <div class="media">
                <span class="iconbox iconbox-md bg-primary text-white"><i class="ti-email"></i></span>
                <div class="media-body ml-3">
-                <a href="mailto:admission@ahic.edu.au" class="h5">admission@ahic.edu.au</a>
+                <a href="mailto:{{$contact->email}}" class="h5">{{$contact->email}}</a>
                 <p>Call Us (8AM-10PM)</p>
                </div>
              </div>
@@ -70,7 +65,8 @@
              <div class="media">
                <span class="iconbox iconbox-md bg-primary text-white"><i class="ti-location-pin"></i></span>
                <div class="media-body ml-3">
-                <h5 class="mb-0">Sydney NSW 2000, Australia</h5>
+                <h5 class="mb-0">
+                  Sydney NSW 2000, Australia</h5>
                 <p>114-120 Castlereagh Street</p>
                </div>
              </div>

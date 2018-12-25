@@ -1,16 +1,4 @@
-<style lang="">
-.vdp-datepicker__calendar{
-  background-color: black !important;
-  color:white;
-}
-.day__month_btn:hover ,.month__year_btn:hover{
-  background-color: black !important;
 
-}
-.form-control:disabled, .form-control[readonly]{
-  background-color: transparent !important;
-}
-</style>
 
 <template>
   <div class="animated">
@@ -28,12 +16,18 @@
 
                   <div class="form-group">
                     <label for="">Title </label>
-                    <input type="text" name="title" class="form-control" placeholder="" required>
+                    <input type="text" name="title" class="form-control" placeholder="">
+                    <transition name="fade">
+                    <p v-if="error.title" class="text-danger"> {{error.title[0]}}</p>
+                    </transition>
                   </div>
 
                   <div class="form-group">
                     <label> Date </label>
                     <datepicker format="yyyy-MM-dd" name="date"  bootstrap-styling  :initialView="'year'" ></datepicker>
+                    <transition name="fade">
+                    <p v-if="error.date" class="text-danger"> {{error.date[0]}}</p>
+                    </transition>
                   </div>
 
                   <div class="form-group">
@@ -52,6 +46,9 @@
                 <div class="form-group">
                   <label> Description </label>
                   <editor name="description"  :init="editor"></editor>
+                  <transition name="fade">
+                  <p v-if="error.description" class="text-danger"> {{error.description[0]}}</p>
+                  </transition>
                 </div>
 
 
@@ -113,7 +110,6 @@
         </div>
         <img :src="'../public/images/news/'+view.image" class="col-md-12" alt="">
         <h4>{{view.title}}</h4>
-        <h4>{{view.title}}</h4>
         <h6>{{view.sub_title}}</h6>
         <p v-html="view.description"></p>
       </b-card>
@@ -156,13 +152,13 @@
       <editor name="description"  :init="editor" :value="modalInfo.data.description"></editor>
     </div>
 
-    <!-- <div class="form-group">
+    <div class="form-group">
       <label for="">Status </label>
       <select name="status" :value="modalInfo.data.status" id="" class="form-control">
         <option value="0">Disable</option>
         <option value="1">Enable</option>
       </select>
-    </div> -->
+    </div>
     <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
     <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideNewsModal">Cancel</b-btn>
   </form>
@@ -176,6 +172,7 @@
 export default{
   data(){
     return{
+      error:'',
       myCroppa:'',
       view:null,
       loading: true,
@@ -268,6 +265,8 @@ export default{
         self.$toastr.s("A news has been added.");
       })
       .catch(function(error) {
+        self.error = '';
+        self.error = error.response.data.errors;
         if (error.response.status === 422) {
           self.$toastr.e(error.response.data.errors.name);
         }

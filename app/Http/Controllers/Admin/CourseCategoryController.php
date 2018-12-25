@@ -9,18 +9,33 @@ use App\Http\Resources\Menu as Resource;
 class CourseCategoryController extends Controller
 {
     public $destination = 'public/images/course_category/';
-  
+
     public function index()
     {
         $categories = CourseCategory::orderBy('order_by','asc')->get();
         return Resource::collection($categories);
     }
+    public function getCategory($id)
+    {
+        $categories = CourseCategory::where('id',$id)->orderBy('order_by','asc')->get();
+        return Resource::collection($categories);
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function validator($request){
+      $this->validate($request,[
+        'name'=>'required',
+        'order_by'=>'required',
+      ],
+      [
+        'name.required' => 'Course category title is required',
+        'order_by.required' => 'Course order by is required',
+      ]);
+    }
+
+public function getName($id){
+    $category = CourseCategory::findOrFail($id);
+    return new Resource($category) ;
+}
     public function create()
     {
         //
@@ -34,6 +49,8 @@ class CourseCategoryController extends Controller
      */
     public function store(Request $request)
     {
+      $this->validator($request);
+      
         $category = new CourseCategory;
         $category->name = $request->input('name');
         $category->order_by = $request->input('order_by');

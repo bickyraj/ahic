@@ -29,13 +29,13 @@
                     <p v-if="error.module_id" class="text-danger"> {{error.module_id[0]}}</p>
                     </transition>
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="">Image</label>
                     <input type="file" name="image" class="form-control" >
                              <transition name="fade">
                     <p v-if="error.image" class="text-danger"> {{error.image[0]}}</p>
                     </transition>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <label for="">Order By</label>
                     <input type="text" name="order_by" class="form-control" >
@@ -132,11 +132,11 @@
             <option v-for="menu in modules" :value="menu.id" :key="menu.id"> {{menu.title}}</option>
           </select>
                   </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                     <label for="">Image</label>
                         <img :src="'../public/images/module/'+modalInfo.data.image" class="img-fluid" />
                     <input type="file" name="image" class="form-control"  >
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <label for="">Description</label>
                    <editor name="description" v-model="modalInfo.data.description" :init="editor"></editor>
@@ -168,7 +168,7 @@
         loading: true,
         table_items: [],
         pages:[],
-        module_table_fields: ['module_id', 'title','description','image','status'],
+        module_table_fields: ['module_id', 'title','description','status'],
         modalInfo: {
           title: '',
           content: '',

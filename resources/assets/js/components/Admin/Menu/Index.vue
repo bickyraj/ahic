@@ -13,7 +13,10 @@
                 <form @submit.prevent="addMenu" ref="addMenuForm">
                   <div class="form-group">
                     <label for="">Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="" required>
+                    <input type="text" name="name" class="form-control" placeholder="">
+                    <transition name="fade">
+                    <p v-if="error.name" class="text-danger"> {{error.name[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Parent Menu</label>
@@ -108,6 +111,7 @@
   export default {
     data() {
       return {
+        error:'',
           menus:[],
         loading: true,
         table_items: [],
@@ -155,11 +159,17 @@
         let url = self.$root.baseUrl + '/api/admin/edit-menu';
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
-              self.table_items[row_index]['name'] = response.data.data.name;
-              self.table_items[row_index]['page_id'] = response.data.data.page_id;
-              self.table_items[row_index]['parent_id'] = response.data.data.parent_id;
-              self.table_items[row_index]['parent_menu'] = response.data.data.parent_menu;
-              self.table_items[row_index]['parent_page'] = response.data.data.parent_page;
+              var menu_items = response.data.data;
+              vm.table_items = menu_items.map(obj => {
+                var rObj = {};
+                rObj['id'] = obj.id;
+                rObj['name'] = obj.name;
+                rObj['page_id'] = obj.page_id;
+                rObj['parent_id'] = obj.parent_id;
+                rObj['parent_menu'] = obj.parent_menu;
+                rObj['parent_page'] = obj.parent_page;
+                return rObj;
+              });
               self.hideMenuModal();
               self.$swal({
                 // position: 'top-end',
@@ -217,20 +227,25 @@
         let url = self.$root.baseUrl + '/api/admin/menu';
         axios.post(url, formData).then(function(response) {
             if (response.status === 201) {
-              var menu = response.data.data;
-              var menu_data = {
-                id: menu.id,
-                name: menu.name,
-                parent_id: menu.parent_id,
-                page_id: menu.page_id,
-              }
-              self.table_items.push(menu_data);
+              var menu_items = response.data.data;
+              vm.table_items = menu_items.map(obj => {
+                var rObj = {};
+                rObj['id'] = obj.id;
+                rObj['name'] = obj.name;
+                rObj['page_id'] = obj.page_id;
+                rObj['parent_id'] = obj.parent_id;
+                rObj['parent_menu'] = obj.parent_menu;
+                rObj['parent_page'] = obj.parent_page;
+                return rObj;
+              });
               $(form)[0].reset();
               self.hideModal();
               self.$toastr.s("A menu has been added.");
             }
           })
           .catch(function(error) {
+            self.error = '';
+            self.error = error.response.data.errors;
             if (error.response.status === 422) {
               self.$toastr.e(error.response.data.errors.name);
             }

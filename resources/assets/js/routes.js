@@ -422,6 +422,7 @@ const routes = [
             roleId: 1
         },
     },
+
     {
         path: admin_url + 'course_category/:id',
         component: require('./components/Admin/CourseCategories/Detail'),
@@ -485,7 +486,7 @@ const routes = [
         },
     },
     {
-        path: admin_url + 'course/:id',
+        path: admin_url + 'course_category/:course_id/course/:id',
         component: require('./components/Admin/Course/Detail'),
         meta: {
             layout: 'admin',
@@ -498,7 +499,7 @@ const routes = [
                     path: admin_url + 'course_categories',
                 }, {
                     name: 'Courses',
-                    path: admin_url + 'course_category/:id',
+                    path: admin_url + 'course_category/:course_id',
                 }, {
                     name: 'Course',
                     path: admin_url + 'courses',

@@ -1,16 +1,4 @@
-<style lang="">
-    .vdp-datepicker__calendar{
-        background-color: black !important;
-        color:white;
-    }
-    .day__month_btn:hover ,.month__year_btn:hover{
-        background-color: black !important;
 
-    }
-    .form-control:disabled, .form-control[readonly]{
-        background-color: transparent !important;
-    }
-</style>
 <template>
   <div class="animated">
     <b-row>
@@ -146,7 +134,7 @@
                             <datepicker format="yyyy-MM-dd" name="v_exp_date"  bootstrap-styling  :initialView="'year'" ></datepicker>
                          </div>
                             <div class="form-group col-md-3">
-                            <label for="">At which office are you going to aplly for your visa</label>
+                            <label for="">At which office are you going to apply for your visa</label>
                                     <input type="text" name="v_office" class="form-control" value="office">
                          </div>
                             <div class="form-group col-md-9">

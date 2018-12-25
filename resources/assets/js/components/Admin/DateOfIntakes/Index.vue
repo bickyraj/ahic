@@ -1,9 +1,4 @@
-<style lang="">
 
-    .form-control:disabled, .form-control[readonly]{
-        background-color: transparent !important;
-    }
-</style>
 <template>
   <div class="animated">
     <b-row>

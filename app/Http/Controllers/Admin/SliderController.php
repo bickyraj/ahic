@@ -15,6 +15,7 @@ class SliderController extends Controller
     if (!is_dir($this->images_dir)) {
       mkdir($this->images_dir);
     }
+    }
 
     public function index()
     {
@@ -22,8 +23,25 @@ class SliderController extends Controller
         return Resource::collection($s);
     }
 
+    public function validator($request){
+      $this->validate($request,
+      [
+        'title' =>'required',
+        'sub_title' =>'required',
+        'description' =>'required',
+        'image' =>'required',
+      ],
+      [
+        'title.required' =>'Slider title is required',
+        'sub_title.required' =>'Slider sub title is required',
+        'description.required' =>'Slider description is required',
+        'image.required' =>'Slider image is required',
+      ]);
+    }
+
     public function store(Request $request)
     {
+      $this->validator($request);
           $data['title'] = $request->input('title');
           $data['sub_title'] = $request->input('sub_title');
           $data['description'] = $request->input('description');

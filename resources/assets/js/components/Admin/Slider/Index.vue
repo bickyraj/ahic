@@ -1,16 +1,4 @@
-<style lang="">
-  .vdp-datepicker__calendar{
-        background-color: black !important;
-        color:white;
-    }
-    .day__month_btn:hover ,.month__year_btn:hover{
-        background-color: black !important;
 
-    }
-    .form-control:disabled, .form-control[readonly]{
-        background-color: transparent !important;
-    }
-</style>
 <template>
   <div class="animated">
     <b-row>
@@ -26,29 +14,41 @@
                 <form @submit.prevent="addSlider" ref="addSliderForm" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="">Title </label>
-                    <input type="text" name="title" class="form-control" placeholder="" required>
+                    <input type="text" name="title" class="form-control" placeholder="">
+                    <transition name="fade">
+                    <p v-if="error.title" class="text-danger"> {{error.title[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Sub Title </label>
-                    <input type="text" name="sub_title" class="form-control" placeholder="" required>
+                    <input type="text" name="sub_title" class="form-control" placeholder="">
+                    <transition name="fade">
+                    <p v-if="error.sub_title" class="text-danger"> {{error.sub_title[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Image </label>
-                    <croppa 
-                    v-model="myCroppa" 
-                    :width="332" 
-                    :height="126" 
-                    placeholder="Choose an image" 
-                    :placeholder-font-size="0" 
-                    :disabled="false" 
-                    :quality="5" 
-                    :show-remove-button="false" 
+                    <croppa
+                    v-model="myCroppa"
+                    :width="332"
+                    :height="126"
+                    placeholder="Choose an image"
+                    :placeholder-font-size="0"
+                    :disabled="false"
+                    :quality="5"
+                    :show-remove-button="false"
                     :prevent-white-space="true">
                     </croppa>
                   </div>
+                  <transition name="fade">
+                  <p v-if="error.image" class="text-danger"> {{error.image[0]}}</p>
+                  </transition>
                   <div class="form-group">
                     <label> Description </label>
                     <editor name="description" :init="editor"></editor>
+                    <transition name="fade">
+                    <p v-if="error.description" class="text-danger"> {{error.description[0]}}</p>
+                    </transition>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Slider</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -105,7 +105,7 @@
           <img :src="'../public/images/sliders/'+view.image" class="img-fluid" alt="">
           <h4>{{view.title}}</h4>
           <h6>{{view.sub_title}}</h6>
-          <p>{{view.description}}</p>
+          <p :html="view.description"></p>
         </b-card>
       </b-col>
     </b-row>
@@ -151,6 +151,7 @@
   export default {
     data() {
       return {
+        error:'',
         myCroppa: null,
         view: null,
         loading: true,
@@ -247,6 +248,8 @@
             self.$toastr.s("A slider has been added.");
           })
           .catch(function(error) {
+            self.error = '';
+            self.error = error.response.data.errors;
             if (error.response.status === 422) {
               self.$toastr.e(error.response.data.errors.name);
             }

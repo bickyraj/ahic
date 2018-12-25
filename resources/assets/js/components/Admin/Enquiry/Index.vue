@@ -11,26 +11,14 @@
           <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th class="col-md-3">Name</th>
-                <th class="col-md-2">Phone</th>
-                <th class="col-md-3"> Email</th>
-                <th class="col-md-2">Status</th>
+                <th class="col-md-3">Enquiry Date</th>
                 <th class="col-md-2">Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(enquiry, index) in table_items" :key="enquiry.id" >
-                <td>{{ enquiry.name }}</td>
-                <td>{{ enquiry.phone }}</td>
-                <td>{{ enquiry.email }}</td>
+                <td>{{ enquiry.created_at }}</td>
                 <td><button class="btn btn-success" @click="view(enquiry,index)"> View </button></td>
-                <td>
-                  <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,enquiry.i,$event.target)">
-                    <option value="1">Pending</option>
-                    <option value="2">Verified</option>
-                    <option value="3">Applied</option>
-                  </select>
-                </td>
               </tr>
             </tbody>
             <tbody v-else>
@@ -52,8 +40,8 @@
               <h5><i class="fas fa-key"></i> Enquiry</h5>
             </div>
             <div class="caption card-title-actions">
-              <b-button size="sm" @click="deleteEnquiry(enquiry, index, $event.target)" class="mr-1 btn-danger">
-                Delete
+              <b-button size="sm" @click="close" class="mr-1 btn-danger">
+                Close
               </b-button>
             </div>
           </div>
@@ -72,24 +60,22 @@
                   </tr>
                   <tr>
                     <th> Course </th>
-                    <td>{{ enquiry.course_id }}</td>
+                    <td>{{ enquiry.course.name }}</td>
                   </tr>
                   <tr>
                     <th> Country </th>
-                    <td>{{ enquiry.country_id }}</td>
+                    <td>{{ enquiry.country.name }}</td>
                   </tr>
                   <tr>
                     <th> Message </th>
                     <td>{{ enquiry.message }}</td>
                   </tr>
               </table>
-
-                  <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id)">
+                  <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,$event.target)">
                     <option value="1">Pending</option>
                     <option value="2">Verified</option>
                     <option value="3">Applied</option>
                   </select>
-
         </b-card>
       </b-col>
     </b-row>
@@ -127,9 +113,10 @@
       this.fetchEnquirys();
     },
     computed:{
+
       cols(){
         if(this.enquiry == null){
-          return 12;
+          return 6;
         }
         else{
           return 6;
@@ -137,11 +124,14 @@
       }
     },
     methods: {
+      close(){
+        this.enquiry = null
+      },
       view(e,i){
         this.enquiry = e;
         this.enquiry.index = i;
       },
-      updateEnq(item,index,el){
+      updateEnq(item,el){
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/enquiry/edit/'+item;
         var val = el.value;

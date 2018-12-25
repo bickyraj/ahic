@@ -190,7 +190,7 @@
                     </b-collapse>
                   </div>
                 </b-card>
-      
+
 
                 </div>
 
@@ -213,16 +213,16 @@
                 </select>
               </div>
               <div class="form-group" v-if="course.background_image == null">
-                <label for="">Image Background </label>
-                <input type="file" name="background_image" class="form-control">
+                <label for="">Image  </label>
+                <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
+                <input type="file" name="image" class="form-control">
               </div>
-              <div class="form-group" v-else>
-                <label for="">Image Background </label>
-                <br>
-                <img :src="'../../public/images/courses/'+course.background_image" class="img-fluid" />
-                <input type="file" name="background_image" class="form-control">
 
+              <div class="form-group" v-else>
+                <label for="">Image  </label> <br>
+                <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
               </div>
+
               <div class="form-group">
                 <label for="">Video Link </label>
                 <input type="text" name="video_link" class="form-control" v-model="course.video_link" placeholder="" required>
@@ -370,6 +370,7 @@
       export default {
         data() {
           return {
+            myCroppa:null,
             ucategories: '',
             categories: '',
             acompetences: '',
@@ -425,7 +426,14 @@
           this.fetchUCategories();
           this.fetchCompetences();
         },
-        computed: {},
+        computed: {
+            img() {
+              if (this.course.background_image != null) {
+                this.myCroppa.refresh()
+                return '../../public/images/courses/' + this.course.background_image
+              }
+            }
+        },
         methods: {
           remove(event, id) {
             console.log(id);
@@ -529,6 +537,7 @@
             console.log(form);
             var formData = new FormData(form);
             let url = self.$root.baseUrl + '/api/admin/course/update';
+            formData.append('image', this.myCroppa.generateDataUrl())
             axios.post(url, formData).then(function(response) {
               console.log(response);
               self.fetchCourse();

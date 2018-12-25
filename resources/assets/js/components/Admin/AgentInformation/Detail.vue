@@ -233,14 +233,23 @@ overflow-y:scroll;
               <div class="form-group">
                 <label for=""> PAN</label>
                 <input type="text" name="pan" class="form-control" :value="agent.pan">
+                <transition name="fade">
+                <p v-if="error.pan" class="text-danger"> {{error.pan[0]}}</p>
+                </transition>
               </div>
               <div class="form-group">
                 <label for=""> First Name </label>
                 <input type="text" name="first_name" class="form-control" :value="agent.first_name">
+                <transition name="fade">
+                <p v-if="error.first_name" class="text-danger"> {{error.first_name[0]}}</p>
+                </transition>
               </div>
               <div class="form-group">
                 <label for=""> Last Name </label>
                 <input type="text" name="last_name" class="form-control" :value="agent.last_name">
+                <transition name="fade">
+                <p v-if="error.last_name" class="text-danger"> {{error.last_name[0]}}</p>
+                </transition>
               </div>
               <div class="form-group" >
           <label for="">Logo </label>
@@ -259,22 +268,37 @@ overflow-y:scroll;
               <div class="form-group">
                 <label for=""> Telephone </label>
                 <input type="text" name="telephone" class="form-control" :value="agent.telephone">
+                <transition name="fade">
+                <p v-if="error.telephone" class="text-danger"> {{error.telephone[0]}}</p>
+                </transition>
               </div>
               <div class="form-group">
                 <label for=""> Mobile Number </label>
                 <input type="text" name="mobile_no" class="form-control" :value="agent.mobile_no">
+                <transition name="fade">
+                <p v-if="error.mobile_no" class="text-danger"> {{error.mobile_no[0]}}</p>
+                </transition>
               </div>
               <div class="form-group">
                 <label for=""> Email </label>
                 <input type="text" name="email" class="form-control" :value="agent.email">
+                <transition name="fade">
+                <p v-if="error.email" class="text-danger"> {{error.email[0]}}</p>
+                </transition>
               </div>
               <div class="form-group">
                 <label for=""> Address </label>
                 <input type="text" name="address" class="form-control" :value="agent.address">
+                <transition name="fade">
+                <p v-if="error.address" class="text-danger"> {{error.address[0]}}</p>
+                </transition>
               </div>
               <div class="form-group">
                 <label for=""> Start Date </label>
                 <datepicker format="yyyy-MM-dd" name="start_date"  bootstrap-styling :initialView="'year'" :value="agent.start_date"  ></datepicker>
+                <transition name="fade">
+                <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
+                </transition>
 
               </div>
 
@@ -447,6 +471,7 @@ overflow-y:scroll;
         data() {
           return {
             myCroppa:'',
+            error:'',
            agent:'',
            process:'',
            companies:'',
@@ -609,6 +634,8 @@ overflow-y:scroll;
               self.$toastr.s("A agent has been edited.");
             })
             .catch(function(error) {
+              self.error = '';
+              self.error = error.response.data.errors;
               if (error.response.status === 422) {
                 self.$toastr.e(error.response.data.errors.name);
               }

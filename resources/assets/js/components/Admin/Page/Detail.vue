@@ -261,9 +261,9 @@ export default {
     editPage(){
       var self = this;
       var form = self.$refs.editPageForm;
-      console.log(form);
       var formData = new FormData(form);
       let url = self.$root.baseUrl + '/api/admin/edit-page';
+      formData.append('image', this.myCroppa.generateDataUrl())
       axios.post(url, formData).then(function(response) {
         console.log(response);
         self.fetchPage();

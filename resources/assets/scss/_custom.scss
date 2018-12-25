@@ -1,1 +1,10 @@
 // Here you can add other styles
+
+    .vdp-datepicker__calendar{
+        background-color: white !important;
+        color:black !important;
+    }
+
+    .form-control:disabled, .form-control[readonly]{
+        background-color: transparent !important;
+    }

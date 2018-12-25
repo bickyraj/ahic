@@ -1,16 +1,4 @@
-<style lang="">
-    .vdp-datepicker__calendar{
-        background-color: black !important;
-        color:white;
-    }
-    .day__month_btn:hover ,.month__year_btn:hover{
-        background-color: black !important;
 
-    }
-    .form-control:disabled, .form-control[readonly]{
-        background-color: transparent !important;
-    }
-</style>
 <template>
   <div class="animated">
     <b-row>
@@ -50,7 +38,7 @@
                                 <option  v-for="course in courses" :key="course.id" :value="course.id"> {{course.name}} </option>
                             </select>
                         </div>
-                        
+
 
                         <div class="form-group col-md-12">
                             <label for=""> Choose Agent </label>
@@ -58,7 +46,7 @@
                                 <option  v-for="course in agents" :key="course.id" :value="course.id"> {{course.company_name}} </option>
                             </select>
                         </div>
-                        
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -70,28 +58,28 @@
                             <label for="">Title And Family Name</label>
                                     <input type="text" class="form-control" name="familyname" value="Family Name">
                             </div>
-                      
+
                         <div class="form-group col-md-3">
                             <label for="">First Name</label>
                                     <input type="text" name="firstname" class="form-control" value="First">
                          </div>
-                      
+
                         <div class="form-group col-md-3">
                             <label for="">Middle Name</label>
                                     <input type="text" name="middlename" class="form-control" value="Middle">
                          </div>
-                         
-                      
+
+
                         <div class="form-group col-md-3">
                             <label for="">DOB</label>
                                     <input type="text" name="dob" class="form-control" value="2018-11-07">
                          </div>
-                      
+
                         <div class="form-group col-md-3">
                             <label for="">Gender</label>
                                     <input type="text" name="gender" class="form-control" value="male">
                          </div>
-                      
+
                         <div class="form-group col-md-3">
                             <label for="">Place Of Birth City </label>
                                     <input type="text" name="birth_city" class="form-control" value="ktm">
@@ -153,7 +141,7 @@
                             </div>
 
                          </div>
-                      
+
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
                             <h5 class="">Address In Australia</h5>
@@ -171,27 +159,27 @@
                             <label for=""> Province/State</label>
                                 <input type="text" class="form-control" name="aus_province">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Post Code </label>
                                 <input type="text" class="form-control" name="aus_postcode">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Email </label>
                                 <input type="text" class="form-control" name="aus_email">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Country </label>
                                 <input type="text" class="form-control" value="Australia" disabled>
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Telephone</label>
                                 <input type="text" class="form-control" name="aus_telephone">
                         </div>
-                        
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -210,29 +198,29 @@
                             <label for=""> Province/State</label>
                                 <input type="text" class="form-control" name="home_province">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Email</label>
                                 <input type="text" class="form-control" name="home_email">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Post Code </label>
                                 <input type="text" class="form-control" name="home_postcode">
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Country </label>
                                 <input type="text" class="form-control" value="" name="home_country" >
                         </div>
-                        
+
                         <div class="form-group col-md-3">
                             <label for=""> Telephone</label>
                                 <input type="text" class="form-control" name="home_telephone">
                         </div>
-                        
+
                        </div>
-                
+
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
                             <h5 class="">Emergency Contact</h5>
@@ -262,7 +250,7 @@
                             <label for=""> Email</label>
                                 <input type="text" class="form-control" name="e_email">
                         </div>
-                        
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -300,8 +288,8 @@
                         </div>
 
     </div>
-                    
-                        
+
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -349,7 +337,7 @@
                             <label for=""> Total Score</label>
                                 <input type="text" class="form-control" name="total_score">
                         </div>
-                        
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -362,7 +350,7 @@
                                 <input type="radio" name="rpl" > No <br>
                                 <i> If yes, pleaserefer to CT and RPL in the International Student Handbook on oir website.</i>
                         </div>
-                      
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -387,7 +375,7 @@
                             <label for=""> Airport Pickup Fee (Optional)  </label> <br>
                                <input type="text"  value="$200" class="form-control" name="airport_fee">
                         </div>
-                      
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -399,7 +387,7 @@
                                <input type="radio" name="pickup" > No
                                <input type="radio"  name="pickup"> Yes
                                     <i> If yes, please fill a seperate form</i>
-                        </div> 
+                        </div>
 
                         <div class="form-group col-md-3">
                             <label for=""> Do you require assistance with accomodation? </label> <br>
@@ -408,7 +396,7 @@
                                <label for=""> Length Of Stay(week)</label>
                                <input type="text" class="form-control" name="acco_if_yes">
                                     <i> If yes, please fill a seperate form</i>
-                        </div> 
+                        </div>
 
                         <div class="form-group col-md-3">
                             <label for=""> Accommodation Start Date </label> <br>
@@ -418,10 +406,10 @@
                             <label for=""> Do you consider yourself to have a disablity, impairment or a long-term health condition?</label> <br>
                                <input type="radio" name="disability"> Yes
                                <input type="radio" name="disability"> No
-                               <labeL> IF YES</labeL> 
-                               <input type="text" class="form-control" name="if_disability">   
+                               <labeL> IF YES</labeL>
+                               <input type="text" class="form-control" name="if_disability">
                         </div>
-                      
+
                        </div>
                        <div class="row">
                             <div class="col-md-12 bg-primary p-3 mb-1">
@@ -431,27 +419,27 @@
                         <div class="form-group col-md-6">
                             <label for=""> Completed all sections of this application form?</label> <br>
                                <input type="radio" name="form_complete" > Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Attached/enclosed certificed copied of your passport visa ?</label> <br>
                                <input type="radio" name="pv_compete" > Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Attached/enclosed certificed copies of your qualifications ?</label> <br>
                                <input type="radio" name="qualifications_complete" > Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Attached/enclosed certificed copies of English languafe proficiency ?</label> <br>
                                <input type="radio" name="language_complete" > Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Attached/enclosed any other certified documents requested in this application forn ?</label> <br>
                                <input type="radio" name="documents_complete" > Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Read and ticked/signed the declaration ?</label> <br>
                                <input type="radio" name="all_complete" > Yes
-                        </div> 
+                        </div>
 
                        </div>
                        <div class="row">
@@ -462,15 +450,15 @@
                         <div class="form-group col-md-6">
                             <label for=""> Parent Name</label> <br>
                                <input type="text" name="parent_name" > Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Contact Detail</label> <br>
                                <input type="text" name="contact_detail" > Yes
-                        </div> 
+                        </div>
                         <div class="form-group col-md-6">
                             <label for=""> Date</label> <br>
                                <input type="text" name="date" > Yes
-                        </div> 
+                        </div>
 
                        </div>
                        <hr>
@@ -481,12 +469,12 @@
                     </form>
                 </div>
             </div>
-        </div>                
-          
+        </div>
 
-                
 
-         
+
+
+
         </b-card>
       </b-col>
     </b-row>
@@ -505,8 +493,8 @@
           return{
                 q:['1'],
                 n:'',
-               agents:'', 
-               courses:'', 
+               agents:'',
+               courses:'',
          }
       },
       created(){
@@ -539,9 +527,9 @@ console.log(els);
             });
           },
           removeQ(a){
-                        for( var i = 0; i < this.q.length; i++){ 
+                        for( var i = 0; i < this.q.length; i++){
             if ( this.q[i] === a) {
-                this.q.splice(i, 1); 
+                this.q.splice(i, 1);
             }
             }
           },

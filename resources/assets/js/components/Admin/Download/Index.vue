@@ -19,7 +19,7 @@
                     <label for="">File</label>
                     <input type="file" name="file" class="form-control"  >
                   </div>
-                  <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Enquiry</b-btn>
+                  <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add Download</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
               </b-modal>
@@ -100,7 +100,7 @@
 
     },
     computed: {
-  
+
     },
     methods: {
       updateDownload(item,index,el){
@@ -126,7 +126,7 @@
         axios.get(url + item.id).then(function(response) {
             if (response.status === 200 || response.status === 201) {
               self.modalInfo.row = index
-              self.modalInfo.title = `Edit Enquiry`
+              self.modalInfo.title = `Edit Download`
               self.modalInfo.data = response.data.data
               self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
               self.$root.$emit('bv::show::modal', 'modalInfo', button)

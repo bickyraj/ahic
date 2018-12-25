@@ -5,7 +5,8 @@
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
-              <h5><i class="fas fa-key"></i> Courses </h5>
+              <h5><i class="fas fa-key"></i>
+                Courses </h5>
             </div>
             <div class="caption card-title-actions">
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Course</b-button>
@@ -23,8 +24,10 @@
                       </select>
                   </div>
                   <div class="form-group">
-                    <label for="">Background Image </label>
-                    <input type="file" name="background_image" class="form-control" placeholder="" required>
+                    <label for=""> Image </label>
+                    <croppa v-model="myCroppa" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="false" :prevent-white-space="true">
+                    </croppa>
+                    <!-- <input type="file" name="image" class="form-control" placeholder="" > -->
                   </div>
                   <div class="form-group">
                     <label for="">Video Link </label>
@@ -121,15 +124,13 @@
                           <option  v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
                       </select>
                   </div>
-                    <div class="form-group" v-if="modalInfo.data.background_image == null">
-                    <label for="">Image Background </label>
-                    <input type="file" name="background_image" class="form-control">
+                  <div class="form-group" v-if="modalInfo.data.background_image == null">
+                    <label for="">Image </label>
+                    <input type="file" name="image" class="form-control">
                   </div>
                   <div class="form-group" v-else>
-                    <label for="">Image Background </label> <br>
-               <img :src="'../public/images/courses/'+modalInfo.data.background_image" class="img-fluid" />
-                    <input type="file" name="background_image" class="form-control">
-
+                    <label for="">Image </label> <br>
+                    <croppa v-model="myCroppa" :initial-image="img" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
                   </div>
                   <div class="form-group">
                     <label for="">Video Link </label>
@@ -178,7 +179,9 @@
   export default {
     data() {
       return {
+        myCroppa: null,
           categories:'',
+          category:'',
         loading: true,
         table_items: [],
         pages:[],
@@ -230,6 +233,12 @@
       this.fetchCategories();
     },
     computed: {
+      img() {
+        if (this.modalInfo.data.background_image != null) {
+          this.myCroppa.refresh()
+          return '../public/images/courses/' + this.modalInfo.data.background_image
+        }
+      }
     },
     methods: {
       info(menu, index, button) {
@@ -259,6 +268,7 @@
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course/edit';
+        formData.append('image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
            self.table_items = response.data.data;
@@ -315,6 +325,7 @@
         var form = self.$refs.addCourseForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course';
+        formData.append('image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
               var menu = response.data.data;
               var menu_data = {
@@ -375,7 +386,7 @@
       	axios.post(url, self.table_items)
 		.then(function (response) {
 			if (response.data.status === 1) {
-				self.$toastr.s("Order Updated");  
+				self.$toastr.s("Order Updated");
 			}
     })
             },

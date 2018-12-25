@@ -11,7 +11,7 @@ class EnquiryController extends Controller
 {
    public function index()
     {
-        $enqs = Enquiry::all();
+        $enqs = Enquiry::with('country','course')->get();
         return Resource::collection($enqs);
     }
 
@@ -45,7 +45,6 @@ class EnquiryController extends Controller
     public function show($id)
     {
         $role = Enquiry::findOrFail($id);
-
         return new Resource($role);
     }
 

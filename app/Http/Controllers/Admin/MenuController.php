@@ -19,7 +19,18 @@ class MenuController extends Controller
         return new MenuResource($menu);
     }
 
+    public function validator($request){
+      $this->validate($request,[
+        'name'=>'required',
+      ],
+      [
+        'name.required'=>'Menu name is required',
+      ]
+    );
+    }
+
     public function store(Request $request){
+      $this->validator($request);
     	$status = 0;
     	$data['name'] = $request->input('name');
     	$data['parent_id'] = $request->input('parent_id');
@@ -31,7 +42,8 @@ class MenuController extends Controller
     	if ($create) {
     		$status = 1;
     	}
-        return new MenuResource($create);
+      $menu = Menu::with('parent_menu','parent_page')->orderBy('menu_order','asc')->get();
+        return MenuResource::collection($menu);
 
     }
 
@@ -47,7 +59,8 @@ class MenuController extends Controller
         if ($user->save()) {
             $status = 1;
         }
-        return new MenuResource($user);
+        $menu = Menu::with('parent_menu','parent_page')->orderBy('menu_order','asc')->get();
+          return MenuResource::collection($menu);
 
     }
 

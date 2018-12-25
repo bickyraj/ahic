@@ -21,6 +21,29 @@ class CourseController extends Controller
       }
     }
 
+    public function validator($request){
+      $this->validate($request,[
+        'name' =>' required',
+        'video_link' =>' required',
+        'duration' =>' required',
+        'study_method' =>' required',
+        'description' =>' required',
+        'order_by' =>' required',
+        'onshore_fee' =>' required',
+        'offshore_fee' =>' required',
+      ],
+      [
+        'name.required' =>'Course name is required',
+        'video_link.required' =>' Course video link is required',
+        'duration.required' =>' Course duration required',
+        'study_method.required' =>'Course study method required',
+        'description.required' =>'Course description required',
+        'order_by.required' =>'Course order by required',
+        'onshore_fee.required' =>'Course onshore fee required',
+        'offshore_fee.required' =>'Course offshore fee required',
+      ]);
+    }
+
     public function index()
     {
          $course = Course::with('category')->get();
@@ -45,6 +68,8 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+      $this->validator($request);
+      
      $course = new Course;
         $course->name = $request->input('name');
         $course->course_category_id = $request->input('course_category_id');
@@ -55,17 +80,24 @@ class CourseController extends Controller
         $course->order_by = $request->input('order_by');
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
-        $file = $request->file('background_image');
         $course->status = 1;
         $course->order_by = 1;
-        if($file != null){
-            $ext = $file->getClientOriginalExtension();
-            $filename = md5(rand(0,999999)).'.'.$ext;
-            $course->background_image = $filename;
-            $file->move($this->destination,$filename);
-        }
+        $image = $request->background_image;
+       $image_array_1 = explode(";", $image);
+       if (array_key_exists("1",$image_array_1)){
+        $image_array_2 = explode(",", $image_array_1[1]);
+        $imgdata = base64_decode($image_array_2[1]);
+        $rand = rand(0,99999999);
+        $rand = md5($rand);
+        $imageName = $rand . '.png';
+          $course->background_image=$imageName;
+       }
         $create = $course->save();
         if($create){
+          if(isset($imageName)){
+            $dir = $this->destination.$imageName;
+            file_put_contents($dir, $imgdata);
+          }
         return new Resource($course);
         }
 
@@ -131,16 +163,23 @@ class CourseController extends Controller
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
         // $course->status = $request->input('status');
-           $file = $request->file('background_image');
-        if($file != null){
-            $oldimg = $course->background_image;
-            $this->destroyimage($oldimg);
-            $ext = $file->getClientOriginalExtension();
-            $filename = md5(rand(0,999999)).'.'.$ext;
-            $course->background_image = $filename;
-            $file->move($this->destination,$filename);
-        }
+        $image = $request->background_image;
+      $image_array_1 = explode(";", $image);
+      if (array_key_exists("1",$image_array_1)){
+        $oldimg = $course->background_image;
+        $this->destroyimage($oldimg);
+        $image_array_2 = explode(",", $image_array_1[1]);
+        $imgdata = base64_decode($image_array_2[1]);
+        $rand = rand(0,99999999);
+        $rand = md5($rand);
+        $imageName = $rand . '.png';
+        $page->background_image=$imageName;
+      }
         if($course->save()){
+          if(isset($imageName)){
+            $dir = $this->destination.$imageName;
+            file_put_contents($dir, $imgdata);
+          }
          $courses = Course::with('category')->get();
         return Resource::collection($courses);
         };
@@ -167,16 +206,24 @@ class CourseController extends Controller
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
         // $course->status = $request->input('status');
-           $file = $request->file('background_image');
-        if($file != null){
-            $oldimg = $course->background_image;
-            $this->destroyimage($oldimg);
-            $ext = $file->getClientOriginalExtension();
-            $filename = md5(rand(0,999999)).'.'.$ext;
-            $course->background_image = $filename;
-            $file->move($this->destination,$filename);
-        }
+        $image = $request->background_image;
+      $image_array_1 = explode(";", $image);
+      if (array_key_exists("1",$image_array_1)){
+        $oldimg = $course->background_image;
+        $this->destroyimage($oldimg);
+        $image_array_2 = explode(",", $image_array_1[1]);
+        $imgdata = base64_decode($image_array_2[1]);
+        $rand = rand(0,99999999);
+        $rand = md5($rand);
+        $imageName = $rand . '.png';
+        $course->background_image=$imageName;
+      }
+
         if($course->save()){
+          if(isset($imageName)){
+            $dir = $this->destination.$imageName;
+            file_put_contents($dir, $imgdata);
+          }
         $courses = Course::where('course_category_id',$category)->with('category')->get();
         return Resource::collection($courses);
         };
