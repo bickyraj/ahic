@@ -16,10 +16,7 @@
 
 
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
-
-
     <div class="carousel-inner">
-
       @foreach ($sliders as $slider)
         <div class="carousel-item padding-y-80 height-80vh @if($sliders[0] == $slider) active @endif">
          <div class="bg-absolute" data-dark-overlay="5" style="background:url('{{asset('/')}}public/images/sliders/{{$slider->image}}') no-repeat"></div>
@@ -77,8 +74,7 @@
                 $string = explode(" ",$header['sub_title'],2);
                 @endphp
                <span class="text-primary">{{$string[0]}}</span>
-               @if (isset($string[1]))
-
+               @if (isset($string[0]))
                {{$string[0]}}
                @endif
              @endif
@@ -191,8 +187,6 @@
               </h4>
               <p class="text-primary">
                 {{ str_limit($course->name, 28) }}
-
-
               </p>
               <p class="mb-0">
                 {{ str_limit(strip_tags($course->description), 180) }}
@@ -204,15 +198,18 @@
                  $string = explode(' ',$course->duration);
                  $slug = str_replace(' ', '_', $course->name);
                @endphp
-               {{$string[0]}} {{$string[1]}}
+               @if (isset($string[0]))
+               {{$string[0]}}
+               @endif
+               @if (isset($string[1]))
+               {{$string[1]}}
+               @endif
              </span>
-
               <a href="{{route('course',$slug)}}" class="position-absolute btn btn-primary btn-m left-20 hover:show">
                 View Details
               </a>
             </div>
           </div>
-
          @endforeach
        </div>
       </div>
