@@ -64,7 +64,7 @@
                 <th>Name</th>
                 <th>Duration</th>
                 <th>Study Method</th>
-                <th class="col-md-2">Action</th>
+                <th>Action</th>
               </tr>
             </thead>
            <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" @update="updateCourseOrder">
