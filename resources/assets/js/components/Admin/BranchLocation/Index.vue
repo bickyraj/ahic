@@ -72,14 +72,14 @@
       <form @submit.prevent="editLocation" :row="modalInfo.row" ref="editLocationForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
          <div class="form-group">
-           <label for=""> Course</label>
+           <label for=""> Country</label>
                       <select name="country_id"  v-bind:value="modalInfo.data.country_id" class="form-control">
-                          <option value="">Select A Course</option>
+                          <option value="">Select A Country</option>
                           <option  v-for="country in countries" :value="country.id" :key="country.id">{{country.name}}</option>
                       </select>
                   </div>
                   <div class="form-group">
-                    <label for="">Description</label>
+                    <label for="">Location</label>
                       <input type="text" class="form-control" name="location" :value="modalInfo.data.location">
                   </div>
                   <div class="form-group">
@@ -124,7 +124,7 @@
             console.log(response.data.data);
             if (response.status === 200 || response.status === 201) {
               self.modalInfo.row = index
-              self.modalInfo.title = `Edit Career Outcome`
+              self.modalInfo.title = `Edit Branch Location`
               self.modalInfo.data = response.data.data
               self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
               self.$root.$emit('bv::show::modal', 'modalInfo', button)

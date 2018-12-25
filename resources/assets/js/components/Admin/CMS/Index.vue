@@ -151,8 +151,8 @@
     </div>
 
     <b-modal class="ess-modal" ref="myModalRef" hide-footer :title="'Add New Content'">
-      <form @submit.prevent="addNews" ref="addNewsForm" enctype="multipart/form-data">
-        <input type="hidden" name="slug" v-model="slug">
+      <form @submit.prevent="addData" ref="addNewsForm" enctype="multipart/form-data">
+        <input type="" name="slug"  ref="slug">
         <div class="form-group">
           <label for="">Title </label>
           <input type="text" name="title" class="form-control" placeholder="" required>
@@ -191,7 +191,7 @@
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
       <form @submit.prevent="editNews" :row="modalInfo.row" ref="editNewsForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
-        <input type="hidden" name="slug" v-model="slug">
+        <input type="" name="slug" v-model="slug">
                   <div class="form-group">
                     <label for="">Title </label>
                     <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="" required>
@@ -295,7 +295,7 @@
             }
         },
         created(){
-            this.fetchNews();
+            this.fetchData();
         },
         computed:{
           cropimage(){
@@ -383,7 +383,7 @@
                 self.$toastr.e('Something went wrong please try again.');
               });
           },
-            fetchNews(){
+            fetchData(){
 let vm = this;
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/cms';
@@ -404,7 +404,7 @@ let vm = this;
         });
     });
 },
-          addNews() {
+          addData() {
         var self = this;
         var form = self.$refs.addNewsForm;
         var formData = new FormData(form);
@@ -490,8 +490,9 @@ let vm = this;
       },
 
       showModal(slug) {
-        this.slug = slug;
-        this.$refs.myModalRef.show()
+        var self  = this
+        self.$refs.slug.value=slug
+        self.$refs.myModalRef.show()
       },
       hideModal() {
         this.$refs.myModalRef.hide()

@@ -89,7 +89,12 @@
                   @php
                     $string = explode(' ',$course->duration);
                   @endphp
-                  {{$string[0]}} {{$string[1]}}
+@if(isset($string[0]))
+  {{$string[0]}}
+@endif
+@if(isset($string[1]))
+  {{$string[1]}}
+@endif
                 </h2>
                 <a class="btn btn-primary" href="#">Apply Now</a>
               </div>
@@ -167,7 +172,8 @@
                   Course Description
                 </h4>
                 <p>
-                  {{ $course->description}}
+                  {{ strip_tags($course->description) }}
+
                 </p>
                 <div class="row mt-5">
 
@@ -208,7 +214,7 @@
                      Assessments Methods
                    </h4>
                     <p>
-                        {{$course->assessment->description}}
+                      {{ strip_tags($course->assessment->description) }}
                     </p>
                   </div>
                   <div class="col-md-6 my-2">
@@ -216,7 +222,7 @@
                      Recognition of Prior Learning (RPL)
                    </h4>
                    <p>
-                     {{$course->rpl->description}}
+                     {{ strip_tags($course->rpl->description) }}
                    </p>
 
                   </div>
