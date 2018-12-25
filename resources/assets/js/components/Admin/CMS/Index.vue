@@ -1,16 +1,3 @@
-<style lang="">
-    .vdp-datepicker__calendar{
-        background-color: black !important;
-        color:white;
-    }
-    .day__month_btn:hover ,.month__year_btn:hover{
-        background-color: black !important;
-
-    }
-    .form-control:disabled, .form-control[readonly]{
-        background-color: transparent !important;
-    }
-</style>
 
 <template>
   <div class="animated">

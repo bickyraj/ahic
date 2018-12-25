@@ -20,6 +20,20 @@ class NewsController extends Controller
       }
     }
 
+    public function validator($request){
+          $this->validate($request,[
+            'title'=>'required',
+            'description'=>'required',
+            'date'=>'required',
+          ],
+          [
+            'title.required' => 'News title is required',
+            'description.required' => 'News description is required',
+            'date.required' => 'News date is required',
+          ]
+        );
+    }
+
     public function index()
     {
         $n = News::orderBy('order_by','asc')->get();
@@ -29,6 +43,7 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
+      $this->validator($request);
         $data['title'] = $request->input('title');
         $data['description'] = $request->input('description');
         $data['date'] = $request->input('date');

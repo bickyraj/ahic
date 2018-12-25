@@ -14,7 +14,10 @@
 
                   <div class="form-group">
                     <label for="">Name </label>
-                    <input type="text" name="name" class="form-control" placeholder="" required>
+                    <input type="text" name="name" class="form-control" placeholder="">
+                    <transition name="fade">
+                    <p v-if="error.name" class="text-danger"> {{error.name[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Image Background </label>
@@ -22,7 +25,10 @@
                   </div>
                   <div class="form-group">
                     <label for="">Order By </label>
-                    <input type="text" name="order_by" class="form-control" placeholder="" required>
+                    <input type="text" name="order_by" class="form-control" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.order_by" class="text-danger"> {{error.order_by[0]}}</p>
+                    </transition>
                   </div>
 
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Course Category</b-btn>
@@ -112,6 +118,7 @@
   export default {
     data() {
       return {
+        error:'',
           categories:'',
         loading: true,
         table_items: [],
@@ -229,6 +236,8 @@
               self.$toastr.s("A course category has been added.");
           })
           .catch(function(error) {
+            self.error = '';
+            self.error = error.response.data.errors;
             if (error.response.status === 422) {
               self.$toastr.e(error.response.data.errors.name);
             }

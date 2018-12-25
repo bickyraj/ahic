@@ -21,24 +21,22 @@ class ModuleController extends Controller
         return Resource::collection($modules);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
- 
-    }
+public function validator($request){
+  $this->validate($request,[
+    'title' => 'required',
+    'display_type' =>'required',
+  ],
+  [
+    'title.required' => 'Module title is required',
+    'display_type.required' => 'Display type is required',
+  ]
+);
+}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+      $this->validator($request);
+
         $data['title'] = $request->input('title');
             $data['display_type'] = $request->input('display_type');
             $data['status'] = 1;
@@ -60,7 +58,7 @@ class ModuleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editinmg the specified resource.
      *
      * @param  \App\Module  $module
      * @return \Illuminate\Http\Response

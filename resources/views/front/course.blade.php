@@ -102,7 +102,7 @@
           </div> <!-- END row-->
 
           <div class="ec-video-container my-4">
-            <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/business-1.jpg" alt="">
+            <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="" class="img-fluid">
             <!-- <iframe src="https://www.youtube.com/embed/nrJtHemSPW4?rel=0"></iframe> -->
           </div>
 
@@ -214,7 +214,9 @@
                      Assessments Methods
                    </h4>
                     <p>
-                      {{ strip_tags($course->assessment->description) }}
+                      @if ($course->assessment)
+                        {{ strip_tags($course->assessment->description) }}
+                      @endif
                     </p>
                   </div>
                   <div class="col-md-6 my-2">
@@ -222,7 +224,9 @@
                      Recognition of Prior Learning (RPL)
                    </h4>
                    <p>
-                     {{ strip_tags($course->rpl->description) }}
+                     @if ($course->rpl)
+                       {{ strip_tags($course->rpl->description) }}
+                     @endif
                    </p>
 
                   </div>

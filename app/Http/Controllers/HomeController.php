@@ -23,10 +23,10 @@ class HomeController extends Controller
     public function index()
     {
         $courses =    Course::with('category')->get();
-        $countries =  Country::all();
+        $countries =  Country::where('status','1')->get();
         $news  =      News::where('status','1')->limit(3)->get();
         $gallery =    Gallery::all();
-        $sliders =    Slider::all();
+        $sliders =    Slider::where('status','1')->get();
         $header = CMS::where('slug','header')->first();
         $lc = CMS::where('slug','lc')->first();
         $rc = CMS::where('slug','rc')->first();

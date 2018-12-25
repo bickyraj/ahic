@@ -57,13 +57,13 @@ class ModuleContentController extends Controller
     $data['description'] = $request->input('description');
     $data['order_by'] = $request->input('order_by');
     $data['status'] = 1;
-    $file = $request->file('image');
-    if($file != null){
-      $ext = $file->getClientOriginalExtension();
-      $filename = md5(rand(0,999999)).'.'.$ext;
-      $data['image'] = $filename;
-      $file->move($this->destination,$filename);
-    }
+    // $file = $request->file('image');
+    // if($file != null){
+    //   $ext = $file->getClientOriginalExtension();
+    //   $filename = md5(rand(0,999999)).'.'.$ext;
+    //   $data['image'] = $filename;
+    //   $file->move($this->destination,$filename);
+    // }
     $create = ModuleContent::create($data);
     $modules = ModuleContent::where('module_id',$id)->with('module')->get();
     return Resource::collection($modules);
@@ -87,15 +87,15 @@ class ModuleContentController extends Controller
     $module_content->description = $request->description;
     $module_content->status = $request->status;
     $module_content->order_by = $request->order_by;
-    $file = $request->file('image');
-    if($file != null){
-      $oldimg = $module_content->image;
-      $this->destroyimage($oldimg);
-      $ext = $file->getClientOriginalExtension();
-      $filename = md5(rand(0,999999)).'.'.$ext;
-      $module_content->image = $filename;
-      $file->move($this->destination,$filename);
-    }
+    // $file = $request->file('image');
+    // if($file != null){
+    //   $oldimg = $module_content->image;
+    //   $this->destroyimage($oldimg);
+    //   $ext = $file->getClientOriginalExtension();
+    //   $filename = md5(rand(0,999999)).'.'.$ext;
+    //   $module_content->image = $filename;
+    //   $file->move($this->destination,$filename);
+    // }
     if($module_content->update()){
       $module = ModuleContent::where('module_id',$modid);
       $module=  $module->with('module')->get();
@@ -114,15 +114,15 @@ class ModuleContentController extends Controller
     $module_content->description = $request->input('description');
     $module_content->status = $request->input('status');
     $module_content->order_by = $request->input('order_by');
-    $file = $request->file('image');
-    if($file != null){
-      $oldimg = $module_content->image;
-      $this->destroyimage($oldimg);
-      $ext = $file->getClientOriginalExtension();
-      $filename = md5(rand(0,999999)).'.'.$ext;
-      $module_content->image = $filename;
-      $file->move($this->destination,$filename);
-    }
+    // $file = $request->file('image');
+    // if($file != null){
+    //   $oldimg = $module_content->image;
+    //   $this->destroyimage($oldimg);
+    //   $ext = $file->getClientOriginalExtension();
+    //   $filename = md5(rand(0,999999)).'.'.$ext;
+    //   $module_content->image = $filename;
+    //   $file->move($this->destination,$filename);
+    // }
     if($module_content->update()){
       $modules = ModuleContent::where('module_id',$mo)->with('module')->get();
       return Resource::collection($modules);

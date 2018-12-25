@@ -13,11 +13,17 @@
                 <form @submit.prevent="addModule" ref="addModuleForm">
                   <div class="form-group">
                     <label for="">Title</label>
-                    <input type="text" name="title" class="form-control" placeholder="" required>
+                    <input type="text" name="title" class="form-control" placeholder="">
+                    <transition name="fade">
+                    <p v-if="error.title" class="text-danger"> {{error.title[0]}}</p>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Display Type</label>
-                    <input type="text" name="display_type" class="form-control" placeholder="" required>
+                    <input type="text" name="display_type" class="form-control" placeholder="">
+                    <transition name="fade">
+                    <p v-if="error.display_type" class="text-danger"> {{error.display_type[0]}}</p>
+                    </transition>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Module</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -93,6 +99,7 @@
   export default {
     data() {
       return {
+        error:'',
         loading: true,
         table_items: [],
         pages:[],
@@ -200,6 +207,8 @@
               self.$toastr.s("A module has been added.");
           })
           .catch(function(error) {
+            self.error = '';
+            self.error = error.response.data.errors;
             if (error.response.status === 422) {
               self.$toastr.e(error.response.data.errors.name);
             }

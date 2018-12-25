@@ -29,13 +29,6 @@
                     </transition>
                   </div>
                   <div class="form-group">
-                    <label for="">Image</label>
-                    <input type="file" name="image" class="form-control" >
-                             <transition name="fade">
-                    <p v-if="error.image" class="text-danger"> {{error.image[0]}}</p>
-                    </transition>
-                  </div>
-                  <div class="form-group">
                     <label for="">Description</label>
                    <editor  name="description" :init="editor"></editor>
                             <transition name="fade">
@@ -111,11 +104,7 @@
             <option v-for="menu in modules" :value="menu.id" :key="menu.id"> {{menu.title}}</option>
           </select>
                   </div>
-              <div class="form-group">
-                    <label for="">Image</label>
-                        <img :src="'../public/images/module/'+modalInfo.data.image" class="img-fluid" />
-                    <input type="file" name="image" class="form-control"  >
-                  </div>
+
                   <div class="form-group">
                     <label for="">Description</label>
                    <editor name="description" v-model="modalInfo.data.description" :init="editor"></editor>
@@ -142,7 +131,7 @@
         loading: true,
         table_items: [],
         pages:[],
-        module_table_fields: ['module_id', 'title','description','image','status'],
+        module_table_fields: ['module_id', 'title','description','status'],
         modalInfo: {
           title: '',
           content: '',

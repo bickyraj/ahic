@@ -63,8 +63,14 @@
 
             </div>
             <div class="card-footer border-top">
-            <a href="{{asset('/')}}public/files/{{ $download->file }}"> <button class="btn btn-primary mr-3 mb-3">Download Now</button> </a>
-            </div>
+              @if($download->file)
+                <a href="{{asset('/')}}public/files/{{ $download->file }}"> <button class="btn btn-primary mr-3 mb-3">Download Now</button> </a>
+              @else
+                <button class="btn btn-primary mr-3 mb-3 btn-disabled" disabled>
+                  No File
+                </button>
+
+@endif            </div>
           </div>
         </div> <!-- END col-lg-3 col-md-6-->
         @endforeach

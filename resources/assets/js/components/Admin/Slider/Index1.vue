@@ -1,16 +1,4 @@
-<style lang="">
-  .vdp-datepicker__calendar{
-        background-color: black !important;
-        color:white;
-    }
-    .day__month_btn:hover ,.month__year_btn:hover{
-        background-color: black !important;
 
-    }
-    .form-control:disabled, .form-control[readonly]{
-        background-color: transparent !important;
-    }
-</style>
 <template>
   <div class="animated">
     <b-row>
@@ -34,15 +22,15 @@
                   </div>
                   <div class="form-group">
                     <label for="">Image </label>
-                    <croppa 
-                    v-model="myCroppa" 
-                    :width="332" 
-                    :height="126" 
-                    placeholder="Choose an image" 
-                    :placeholder-font-size="0" 
-                    :disabled="false" 
-                    :quality="5" 
-                    :show-remove-button="false" 
+                    <croppa
+                    v-model="myCroppa"
+                    :width="332"
+                    :height="126"
+                    placeholder="Choose an image"
+                    :placeholder-font-size="0"
+                    :disabled="false"
+                    :quality="5"
+                    :show-remove-button="false"
                     :prevent-white-space="true">
                     </croppa>
                   </div>

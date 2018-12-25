@@ -124,8 +124,13 @@
                   @php
                     $string = explode(' ',$course->duration);
                   @endphp
-                  // if isset check 
-                  {{$string[0]}} {{$string[1]}}
+                    @if(isset($string[0])
+                  {{$string[0]}}
+                  @endif
+                    @if(isset($string[1])
+                  {{$string[1]}}
+                  @endif
+
                   </span>
               </h4>
             </div>

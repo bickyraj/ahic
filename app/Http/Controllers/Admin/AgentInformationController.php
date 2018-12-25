@@ -79,9 +79,35 @@ class AgentInformationController extends Controller
     {
         //
     }
+    public function validator($request){
+
+            $this->validate($request,[
+              'pan'=>'required',
+              'first_name'=>'required',
+              'last_name'=>'required',
+              'telephone'=>'required',
+              'mobile_no'=>'required',
+              'email'=>'required',
+              'address'=>'required',
+              'start_date'=>'required',
+              // 'image'=>'required',
+            ],
+            [
+              'pan.required'=>'Registration Number is required.',
+              'title.required'=>'Content Title is required.',
+              'first_name.required'=>'First Name is required.',
+              'last_name.required'=>'Last Name is required.',
+              'telephone.required'=>'Telephone is required.',
+              'mobile_no.required'=>'Mobile Number is required.',
+              'email.required'=>'Email is required.',
+              'address.required'=>'Address is required.',
+              'start_date.required'=>'Start Date is required.',
+            ]);
+    }
 
     public function store(Request $request)
     {
+$this->validator($request);
      $data['pan'] = $request->input('pan');
      $data['first_name'] = $request->input('first_name');
      $data['last_name'] = $request->input('last_name');
@@ -137,6 +163,8 @@ class AgentInformationController extends Controller
 
     public function update(Request $request)
     {
+      $this->validator($request);
+      
         $agent = AgentInformation::findOrFail($request->id);
         $data['pan'] = $request->input('pan');
      $data['first_name'] = $request->input('first_name');

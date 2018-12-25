@@ -103,7 +103,7 @@
         @endphp
         <div class="col-lg-4 col-md-6 marginTop-30">
           <div href="{{route('courseCategory',$course->name)}}" class="card height-100p text-gray shadow-v1">
-            <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/business-1.jpg" alt="">
+            <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
             <div class="card-body">
 
               <a href="{{route('course',$stripped)}}" class="h5">
@@ -113,7 +113,7 @@
                 {{$course->category->name}}
               </p>
               <p class="mb-0">
-                {{ str_limit($course->description, 130) }}
+                {{ str_limit(strip_tags($course->description), 180) }}
               </p>
 
             </div>
@@ -123,7 +123,12 @@
                     @php
                       $string = explode(' ',$course->duration);
                     @endphp
-                    {{$string[0]}} {{$string[1]}}
+                    @if (isset($string[0]))
+                      {{$string[0]}}
+                    @endif
+                    @if (isset($string[1]))
+                      {{$string[1]}}
+                    @endif
                     </span>
               </h4>
             </div>
