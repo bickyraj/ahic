@@ -195,7 +195,7 @@
 
               </p>
               <p class="mb-0">
-                <?= str_limit($course->description,180) ?>
+                {{ str_limit(strip_tags($course->description), 180) }}
               </p>
             </div>
             <div class="d-flex justify-content-between align-items-center border-top position-relative p-4">

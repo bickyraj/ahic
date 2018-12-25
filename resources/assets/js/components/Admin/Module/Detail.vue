@@ -1,15 +1,4 @@
-<style media="screen">
-html,body{
-  height:100% !important;
-}
-.animated{
-}
 
-  .side-detail{
-    height:400px !important;
-    overflow:scroll;
-  }
-</style>
 <template>
   <div class="animated">
     <b-row>

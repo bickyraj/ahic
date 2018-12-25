@@ -412,11 +412,11 @@
                             <label for=""> Do you require assistance with accomodation? </label> <br>
                                <input type="radio" name="acco_assistance" value="0" v-model="acco"> No
                                <input type="radio" name="acco_assistance" value="1" checked v-model="acco"> Yes
-                               <transistion name="fade">
+                               <transition name="fade">
                                    <br>
                                <label for="" v-if="acco == 1 "> Length Of Stay(week)</label>
                                <input type="text" class="form-control" name="acco_if_yes" v-if="acco == 1">
-                               </transistion>
+                               </transition>
 
                         </div>
 
@@ -428,11 +428,11 @@
                             <label for=""> Do you consider yourself to have a disablity, impairment or a long-term health condition?</label> <br>
                                <input type="radio" name="disability" value="0" checked v-model="disable"> No
                                <input type="radio" name="disability" value="1" v-model="disable"> Yes
-                                    <transistion name="fade">
+                                    <transition name="fade">
                                    <br>
                                <label for="" v-if="disable == 1 ">If Yes </label>
                                <input type="text" class="form-control" name="if_disability" v-if="disable == 1">
-                               </transistion>
+                               </transition>
 
                         </div>
 

@@ -21,7 +21,7 @@ margin-bottom:20px;
             <div class="caption">
               <h5><i class="fas fa-key"></i> Application</h5>
             </div>
-         
+
           </div>
           <div class="card-body">
             <div class="container-fluid">
@@ -35,7 +35,7 @@ margin-bottom:20px;
                  <p> Inake Date : {{application.date_of_intake.date}} </p>
                 </div>
               </div>
-              
+
 
               <div class="row">
                 <div class="col-md-12  data-head">
@@ -45,9 +45,9 @@ margin-bottom:20px;
                   <p>Course :  {{application.application_course.course.name}}</p>
                 </div>
               </div>
-              
+
               <div class="row">
-             
+
                 <div class="col-md-12 data-content">
                   <p> Title And Familly Name :  {{application.familyname}}</p>
                   <p> First Name :  {{application.firstname}}</p>
@@ -56,7 +56,7 @@ margin-bottom:20px;
                   <p> Gender:  {{application.gender}}</p>
                   <p> City Of Birth :  {{application.birth_city}}</p>
                   <p> Country Of Birth:  {{application.birth_country}}</p>
-                  <p> In Australia: 
+                  <p> In Australia:
                       <span v-if="application.in_australia == '1'"> Yes </span>
                       <span v-if="application.in_australia == '0'"> No </span>
                   </p>
@@ -64,7 +64,7 @@ margin-bottom:20px;
                   <p> Visa Category:  {{application.visa_category}}</p>
                   <p> Visa Expired Date:  {{application.visa_expired_date}}</p>
                   <p> Visa Office Applying For:  {{application.visa_office_applying_for}}</p>
-                  <p> Origin:  
+                  <p> Origin:
                     <span v-if="application.islander_origin =='0'"> No </span>
                     <span v-if="application.islander_origin =='1'"> Yes, Aboriginal</span>
                     <span v-if="application.islander_origin =='2'">Yes, Torres Strait Islander</span>
@@ -72,7 +72,7 @@ margin-bottom:20px;
                     </p>
                 </div>
               </div>
-              
+
               <div class="row">
                   <div class="col-md-12  data-head">
                   <h4> C. Passport </h4>
@@ -85,7 +85,7 @@ margin-bottom:20px;
                   <p> Place Of Issue:  {{application.passport.place_of_issue}}</p>
                 </div>
               </div>
-              
+
               <div class="row">
                 <div class="col-md-12  data-head">
                   <h4> D. Address In AUS </h4>
@@ -100,7 +100,7 @@ margin-bottom:20px;
                   <p>Post Code :  {{application.aus.postcode}}</p>
                 </div>
               </div>
-              
+
               <div class="row">
                 <div class="col-md-12  data-head">
                   <h4> E. Address In Home </h4>
@@ -115,7 +115,7 @@ margin-bottom:20px;
                   <p>Post Code :  {{application.home.postcode}}</p>
                 </div>
               </div>
-              
+
               <div class="row">
                 <div class="col-md-12  data-head">
                   <h4> F. Emergency Contact </h4>
@@ -129,7 +129,7 @@ margin-bottom:20px;
                   <p>Email:  {{application.econtact.email}}</p>
                 </div>
               </div>
-              
+
               <div class="row">
                 <div class="col-md-12  data-head">
                   <h4> G. Educational Qualification </h4>
@@ -143,7 +143,7 @@ margin-bottom:20px;
                     <p> Completed Year: {{edu.completed_year}}</p>
                     <p> Completed Month : {{edu.completed_month}}</p>
                     <hr>
-                   
+
                 </div>
                 </div>
               </div>
@@ -153,7 +153,7 @@ margin-bottom:20px;
                 </div>
                 <div class="col-md-12 data-content">
                   <p> English First Language : {{application.english.english_first_lang}}</p>
-                  <p> English Language Test : 
+                  <p> English Language Test :
                           <span v-if="application.english.english_lang_test =='0'"> IELTS</span>
                           <span v-if="application.english.english_lang_test =='1'"> TOEFL</span>
                           <span v-if="application.english.english_lang_test =='2'"> PTE</span>
@@ -174,7 +174,7 @@ margin-bottom:20px;
                   <h4> I. Recognition of Prior Learning </h4>
                 </div>
                 <div class="col-md-12 data-content">
-                  <p>Status : 
+                  <p>Status :
                       <span v-if="application.rpl.status == '1'"> Yes</span>
                       <span v-if="application.rpl.status == '0'"> No</span>
                     </p>
@@ -188,7 +188,7 @@ margin-bottom:20px;
                   <p>Airport Pickup :  {{application.services.airport_pickup}}</p>
                   <p>Assistance With Accomodation :  {{application.services.assistance_with_accomodation}}</p>
                   <p>Accommodation Start Date :  {{application.services.accomodation_start_date}}</p>
-                  <p>Disability : 
+                  <p>Disability :
                     <span v-if="application.services.disability == '1'"> Yes</span>
                       <span v-if="application.services.disability == '0'"> No</span>
                   </p>
@@ -229,17 +229,17 @@ margin-bottom:20px;
                   <p>Date :  {{application.underage.date}}</p>
                 </div>
               </div>
-              
+
 
 
             </div>
 
           </div>
-          
+
         </b-card>
       </b-col>
     </b-row>
-   
+
   </div>
 </template>
 <script>
@@ -264,7 +264,7 @@ margin-bottom:20px;
     computed: {
     },
     methods: {
-  
+
       fetchAdmission() {
     let vm = this;
             let self = this;

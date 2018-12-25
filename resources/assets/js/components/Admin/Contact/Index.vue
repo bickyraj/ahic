@@ -216,7 +216,7 @@
         let url = self.$root.baseUrl + '/api/admin/contact/edit';
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
-              self.table_items = response.data.data;
+              self.table_items = response.data.data[0];
               self.hideContactModal();
               self.$swal({
                 // position: 'top-end',
@@ -242,7 +242,7 @@
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/contact';
         axios.post(url, formData).then(function(response) {
-              self.table_items= response.data.data;
+              self.table_items= response.data.data[0];
               $(form)[0].reset();
               self.hideModal();
               self.$toastr.s("Contact data has been added.");
@@ -259,8 +259,7 @@
         let url = self.$root.baseUrl + '/api/admin/contact';
         axios.get(url)
           .then(function(response) {
-            vm.table_items = response.data.data;
-            console.log(response.data.data)
+            vm.table_items = response.data.data[0];
             vm.loading = false;
           })
           .catch(function(error) {

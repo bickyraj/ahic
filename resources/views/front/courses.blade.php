@@ -124,6 +124,7 @@
                   @php
                     $string = explode(' ',$course->duration);
                   @endphp
+                  // if isset check 
                   {{$string[0]}} {{$string[1]}}
                   </span>
               </h4>

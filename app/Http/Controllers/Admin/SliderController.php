@@ -12,20 +12,9 @@ class SliderController extends Controller
   public $images_dir = 'public/images/';
 
   public function __construct(){
-<<<<<<< HEAD
-    if(!is_dir($this->images_dir)){
-      mkdir($this->images_dir);
-    }
-=======
     if (!is_dir($this->images_dir)) {
       mkdir($this->images_dir);
     }
-
->>>>>>> 64b1b0ad5548049ae337f5860083af730fe1dcc5
-    if(!is_dir($this->destination)){
-      mkdir($this->destination);
-    }
-  }
 
     public function index()
     {
