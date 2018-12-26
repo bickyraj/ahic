@@ -233,11 +233,7 @@
   export default {
     data() {
       return {
-<<<<<<< HEAD
         myCroppa:{},
-=======
-        myCroppa: null,
->>>>>>> fdb7ae57d4830bf463507dc6decc2911b8e0a084
         error:'',
         filtershore:"all",
         categories:'',

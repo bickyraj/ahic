@@ -8,6 +8,13 @@
 </script>
 @yield('script')
 
-
+<script>
+  $(document).ready(function() {
+    $('.course_dropdown').click(function(){
+          window.location.replace('courses');
+    })
+  });
+</script>
+</script>
   </body>
 </html>

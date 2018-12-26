@@ -227,7 +227,7 @@
     export default{
         data(){
             return{
-              myCroppa:'',
+              myCroppa:{},
               crop:{
               height:200,
               width:300,

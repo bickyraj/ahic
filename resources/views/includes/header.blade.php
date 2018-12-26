@@ -23,18 +23,27 @@
             </li>
           </ul>
           <ul class="list-inline mb-0">
-            <li class="list-inline-item mr-0 p-3 border-right border-left border-white-0_1">
-              <a href="{{$contact['facebook']}}"><i class="ti-facebook"></i></a>
-            </li>
-            <li class="list-inline-item mr-0 p-3 border-right border-white-0_1">
-              <a href="{{$contact['twitter']}}"><i class="ti-twitter"></i></a>
-            </li>
-            <li class="list-inline-item mr-0 p-3 border-right border-white-0_1">
-              <a href="{{$contact['in']}}"><i class="ti-vimeo"></i></a>
-            </li>
-            <li class="list-inline-item mr-0 p-3 border-right border-white-0_1">
-              <a href="{{$contact['pin']}}"><i class="ti-linkedin"></i></a>
-            </li>
+            @if (isset($contact['fb']))
+              <li class="list-inline-item mr-0 p-3 border-right border-left border-white-0_1">
+                <a href="{{$contact['fb']}}"><i class="ti-facebook"></i></a>
+              </li>
+            @endif
+            @if (isset($contact['tw']))
+              <li class="list-inline-item mr-0 p-3 border-right border-left border-white-0_1">
+                <a href="{{$contact['tw']}}"><i class="ti-twitter"></i></a>
+              </li>
+            @endif
+            @if (isset($contact['in']))
+              <li class="list-inline-item mr-0 p-3 border-right border-left border-white-0_1">
+                <a href="{{$contact['in']}}"><i class="ti-instagram"></i></a>
+              </li>
+            @endif
+            @if (isset($contact['yt']))
+              <li class="list-inline-item mr-0 p-3 border-right border-left border-white-0_1">
+                <a href="{{$contact['yt']}}"><i class="ti-youtube"></i></a>
+              </li>
+            @endif
+
           </ul>
           <ul class="list-inline mb-0">
             <li class="list-inline-item mr-0 p-md-3 p-2 border-right border-left border-white-0_1">

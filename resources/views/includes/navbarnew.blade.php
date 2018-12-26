@@ -30,7 +30,7 @@
           <?php foreach ($menus as $menu): ?>
                              @if ($menu['parent_page']['slug'] =='courses')
                                <li class="nav-item nav-item__has-dropdown">
-                                 <a href="{{$menu['parent_page']['slug']}}"  class="nav-link text-capitalize dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                 <a href="{{url('/')}}/{{$menu['parent_page']['slug']}}"  class="nav-link text-capitalize dropdown-toggle course_dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                    {{$menu['name']}}
                                     <span class="caret"></span></a>
                                  <ul class="dropdown-menu ">
@@ -79,3 +79,9 @@
     </div>
   </div> <!-- END container-->
   </nav> <!-- END ec-nav -->
+
+
+@section('script')
+
+
+@endsection

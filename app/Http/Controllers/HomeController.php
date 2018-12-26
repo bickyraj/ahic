@@ -20,6 +20,13 @@ use App\ApplicationDateOfIntake;
 
 class HomeController extends Controller
 {
+
+  public function searchCourse(Request $request){
+      $search =  $request->input('search_term');
+      $results = Course::where('name','LIKE',"%$search%")->get();
+      $categories = CourseCategory::all();
+      return view('front.courses',compact('categories'))->with('courses',$results);
+  }
     public function index()
     {
         $courses =    Course::with('category')->get();
@@ -68,10 +75,12 @@ class HomeController extends Controller
         $page = Page::where('slug',$route)->first()->id;
         $modules = PageModule::where('page_id',$page)->with('module','module.content')->get();
       }
-      $courses = Course::all();
-      $categories = CourseCategory::all();
+      // $courses = Course::all();
+      // $categories = CourseCategory::all();
       $intakeyear = ApplicationDateOfIntake::groupBy('year')->get();
       $intakes = ApplicationDateOfIntake::all();
+
+      $courses = CourseCategory::with('courses')->get();
       // $this->debug($modules);
       return view('front.admission',compact('courses','categories','intakeyear','intakes','modules'));
     }

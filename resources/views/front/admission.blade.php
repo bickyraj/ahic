@@ -98,90 +98,99 @@
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="Tabs_8-1" role="tabpanel">
                   <div class="row">
-                    @foreach ($categories as $category)
-                      <div class="col-lg-6 col-md-6 marginTop-30 wow fadeInUp " data-wow-delay=".1s">
-                        <div class=" p-1 text-center bg-light bg-primary border-bottom">
-                          <h5 class="my-4 text-white">
-                            {{$category->name}}
-                          </h5>
-                        </div>
-                        @foreach ($courses as $course)
-                          @if ($course->course_category_id == $category->id)
-                            <div class="p-4 bg-light border-bottom">
-                              <div class="media justify-content-between">
-                                <ul class="list-unstyled mb-0">
-                                  <li class="mb-1">
-                                    <h5 class="my-4">
-                                      {{$course->name}}
-                                    </h5>
-                                  </li>
-                                  <li class="mb-1">
-                                    {{$course->code}}
-                                  </li>
-                                </ul>
-                                <ul class="list-unstyled mb-0  text-right">
-                                  <li class="mb-1">
-                                    <h5 class="my-4 d-block text-primary">{{$course->onshore_fee}}</h5>
-                                  </li>
-                                  <li class="mb-1">
-                                    {{$course->duration}}
-                                  </li>
-                                </ul>
+
+                      @foreach ($courses as $category)
+@if (count($category->courses) > 0)
+
+                        <div class="col-lg-6 col-md-6 marginTop-30 wow fadeInUp " data-wow-delay=".1s">
+                          <div class=" p-1 text-center bg-light bg-primary border-bottom">
+                            <h5 class="my-4 text-white">
+                              {{$category->name}}
+                            </h5>
+                          </div>
+                          @foreach ($category->courses as $course)
+                            @if ($course->course_category_id == $category->id)
+                              <div class="p-4 bg-light border-bottom">
+                                <div class="media justify-content-between">
+                                  <ul class="list-unstyled mb-0">
+                                    <li class="mb-1">
+                                      <h5 class="my-4">
+                                        {{$course->name}}
+                                      </h5>
+                                    </li>
+                                    <li class="mb-1">
+                                      {{$course->code}}
+                                    </li>
+                                  </ul>
+                                  <ul class="list-unstyled mb-0  text-right">
+                                    <li class="mb-1">
+                                      <h5 class="my-4 d-block text-primary">{{$course->onshore_fee}}</h5>
+                                    </li>
+                                    <li class="mb-1">
+                                      {{$course->duration}}
+                                    </li>
+                                  </ul>
+
+                                </div>
 
                               </div>
+                            @endif
+                          @endforeach
 
-                            </div>
-                          @endif
-                        @endforeach
+                        </div>
+                      @endif
 
-                      </div>
-                    @endforeach
+                      @endforeach
+
 
                   </div>
                 </div>
                 <div class="tab-pane fade show fade" id="Tabs_8-2" role="tabpanel">
                   <div class="row">
-                    @foreach ($categories as $category)
-                      <div class="col-lg-6 col-md-6 marginTop-30 wow fadeInUp " data-wow-delay=".1s">
-                        <div class=" p-1 text-center bg-light bg-primary border-bottom">
-                          <h5 class="my-4 text-white">
-                            {{$category->name}}
-                          </h5>
-                        </div>
-                        @foreach ($courses as $course)
-                          @if ($course->course_category_id == $category->id)
-                            <div class="p-4 bg-light border-bottom">
-                              <div class="media justify-content-between">
-                                <ul class="list-unstyled mb-0">
-                                  <li class="mb-1">
 
-                                    <h5 class="my-4">
-                                      {{$course->name}}
-                                    </h5>
-                                  </li>
-                                  <li class="mb-1">
-                                    {{-- BSB40215 --}}
-                                  </li>
-                                </ul>
-                                <ul class="list-unstyled mb-0  text-right">
-                                  <li class="mb-1">
-                                    <h5 class="my-4 d-block text-primary">{{$course->offshore_fee}}</h5>
+                      @foreach ($courses as $category)
+    @if (count($category->courses) > 0)
 
-                                  </li>
-                                  <li class="mb-1">
-                                    {{$course->duration}}
-                                  </li>
-                                </ul>
+                        <div class="col-lg-6 col-md-6 marginTop-30 wow fadeInUp " data-wow-delay=".1s">
+                          <div class=" p-1 text-center bg-light bg-primary border-bottom">
+                            <h5 class="my-4 text-white">
+                              {{$category->name}}
+                            </h5>
+                          </div>
+                          @foreach ($category->courses as $course)
+                            @if ($course->course_category_id == $category->id)
+                              <div class="p-4 bg-light border-bottom">
+                                <div class="media justify-content-between">
+                                  <ul class="list-unstyled mb-0">
+                                    <li class="mb-1">
+                                      <h5 class="my-4">
+                                        {{$course->name}}
+                                      </h5>
+                                    </li>
+                                    <li class="mb-1">
+                                      {{$course->code}}
+                                    </li>
+                                  </ul>
+                                  <ul class="list-unstyled mb-0  text-right">
+                                    <li class="mb-1">
+                                      <h5 class="my-4 d-block text-primary">{{$course->offshore_fee}}</h5>
+                                    </li>
+                                    <li class="mb-1">
+                                      {{$course->duration}}
+                                    </li>
+                                  </ul>
+
+                                </div>
 
                               </div>
+                            @endif
+                          @endforeach
 
-                            </div>
-                          @endif
-                        @endforeach
+                        </div>
+                      @endif
 
-                      </div>
-                    @endforeach
-                  </div>
+                      @endforeach
+                    </div>
                 </div>
 
               </div> <!-- END tab-content-->

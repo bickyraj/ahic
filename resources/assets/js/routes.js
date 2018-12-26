@@ -680,7 +680,7 @@ const routes = [
                     path: admin_url,
                 },
                 {
-                    name: 'Agent Information',
+                    name: 'Agents',
                     path: admin_url + 'agent_information',
                 }
             ],
@@ -699,12 +699,13 @@ const routes = [
                     path: admin_url,
                 },
                 {
-                    name: 'Agent Information',
+                    name: 'Agents',
                     path: admin_url + 'agent_information',
                 },
                 {
-                    name: 'Detail'
-                }
+                    name: 'Agent Detail',
+                },
+
             ],
             middlewareAuth: true,
             roleId: 1

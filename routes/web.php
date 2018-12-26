@@ -25,6 +25,7 @@ Route::get('/agents', 'HomeController@agents')->name('agents');
 Route::get('/download', 'HomeController@download')->name('download');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/welcome', 'HomeController@readMore')->name('welcome');
+Route::post('/search', 'HomeController@searchCourse')->name('search');
 
 // News
 Route::get('/news', 'NewsController@news')->name('news');
