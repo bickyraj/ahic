@@ -199,7 +199,7 @@
               self.$swal({
                 // position: 'top-end',
                 type: 'success',
-                title: 'Role updated successfully.',
+                title: 'Payment option successfully.',
                 showConfirmButton: true,
                 // timer: 1500,
                 customClass: 'crm-swal',

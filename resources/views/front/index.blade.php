@@ -379,7 +379,6 @@
         event.preventDefault();
         var form = $('#enquiry_form');
         var formData = form.serializeArray();
-        // console.log(formData);
         var url = "{{route('enquiry')}}";
 
         $.post(url, formData)

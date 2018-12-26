@@ -97,22 +97,9 @@
 
           <div class="col-md-6  mt-5 text-right">
            <div class="animated-share">
-             <a href="" class="animated-share__trigger btn btn-outline-primary iconbox iconbox-sm">
-               <i class="ti-share"></i>
+             <a href="#" class="btn btn-outline-facebook iconbox iconbox-sm">
+               <i class="ti-facebook"></i>
              </a>
-             <div class="animated-share__media">
-               <a href="#" class="btn btn-outline-facebook iconbox iconbox-sm">
-                 <i class="ti-facebook"></i>
-               </a>
-               <a href="#" class="btn btn-outline-twitter iconbox iconbox-sm">
-                 <i class="ti-twitter"></i>
-               </a>
-               <a href="#" class="btn btn-outline-google-plus iconbox iconbox-sm">
-                 <i class="ti-google"></i>
-               </a>
-               <a href="#" class="btn btn-outline-linkedin iconbox iconbox-sm">
-                 <i class="ti-linkedin"></i>
-               </a>
              </div>
            </div>
           </div>
@@ -120,11 +107,6 @@
 
        </div> <!-- END card-body-->
       </div> <!-- END card-->
-
-
-
-
-
       </div> <!-- END col-lg-9 -->
 
       <aside class="col-lg-3 mt-4">
