@@ -14,7 +14,7 @@ export default {
     {
       name: 'Enquiry Management',
       url: url + 'enquiries',
-      icon: 'fas fa-book-open',
+      icon: 'far fa-hand-paper',
       badge: {
         variant: 'primary',
         // text: 'NEW'
@@ -23,7 +23,7 @@ export default {
     {
       name: 'Agent Management',
       url: url + 'agent_information',
-      icon: 'fas fa-book-open',
+      icon: 'fas fa-user-tie',
       badge: {
         variant: 'primary',
         // text: 'NEW'
@@ -32,7 +32,7 @@ export default {
     {
       name: 'Student Management',
       url: url + 'students',
-      icon: 'fas fa-book-open',
+      icon: 'fas fa-users',
       badge: {
         variant: 'primary',
         // text: 'NEW'
@@ -43,11 +43,11 @@ export default {
     {
       name: 'CMS',
       url: '/cms',
-      icon: 'fas fa-book-open',
+      icon: 'fab fa-microsoft',
       children: [{
          name: 'Menus',
            url: url + 'menus',
-           icon: 'fas fa-book-open',
+           icon: 'fas fa-list',
            badge: {
              variant: 'primary',
            }
@@ -55,7 +55,7 @@ export default {
         {
          name: 'Pages',
            url: url + 'pages',
-           icon: 'fas fa-book-open',
+           icon: 'fas fa-file',
            badge: {
              variant: 'primary',
              // text: 'NEW'
@@ -64,7 +64,7 @@ export default {
          {
            name: 'Module & Contents',
            url: url + 'modules',
-           icon: 'fas fa-book-open',
+           icon: 'fas fa-file-code',
            badge: {
              variant: 'primary',
              // text: 'NEW'
@@ -73,7 +73,7 @@ export default {
         {
          name: 'News',
            url: url + 'news',
-           icon: 'fas fa-book-open',
+           icon: 'fas fa-newspaper',
            badge: {
              variant: 'primary',
            }
@@ -81,7 +81,7 @@ export default {
         {
          name: 'Gallery',
            url: url + 'gallery',
-           icon: 'fas fa-book-open',
+           icon: 'fas fa-images',
            badge: {
              variant: 'primary',
            }
@@ -108,7 +108,7 @@ export default {
     {
       name: 'Course Management',
       url: '/coursemanagement',
-      icon: 'fas fa-book-open',
+      icon: 'fas fa-book',
       children: [
         {
           name: 'Unit Competences',
@@ -187,7 +187,7 @@ export default {
     {
       name: 'Downloads',
       url: url + 'downloads',
-      icon: 'fas fa-book-open',
+      icon: 'fas fa-cloud-download-alt',
       badge: {
         variant: 'primary',
         // text: 'NEW'
@@ -196,7 +196,7 @@ export default {
     {
       name: 'Settings',
       url: '/settings',
-      icon: 'fas fa-book-open',
+      icon: 'fas fa-cog',
       children: [
         {
           name: 'Countries',

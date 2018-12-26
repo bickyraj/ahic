@@ -527,3 +527,15 @@ button:focus {
 .gym-navbar-brand::first-letter {
   color: #4487ce;
 }
+
+.croppa-container {
+  /*margin-bottom: 15px;*/
+  background-color: #ececec;
+  border: 1px solid #d0d0d0;
+}
+
+.croppa-container:hover {
+  opacity: 1;
+  background-color: #e6e6e6;
+  cursor: pointer;
+}

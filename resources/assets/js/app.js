@@ -70,6 +70,7 @@ import Datepicker from 'vuejs-datepicker';
 Vue.component('datepicker', Datepicker);
 
   import draggable from 'vuedraggable'
+  import 'vue-croppa/dist/vue-croppa.css'
   import Croppa from 'vue-croppa'
 
 Vue.use(Croppa)       

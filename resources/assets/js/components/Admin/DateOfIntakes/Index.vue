@@ -1,4 +1,3 @@
-
 <template>
   <div class="animated">
     <b-row>
@@ -12,25 +11,25 @@
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Date</b-button>
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add Intake">
                 <form @submit.prevent="addIntake" ref="addIntakeForm">
-                <div class="form-group">
-                  <label for="">Term</label>
-                  <input type="text" class="form-control" name="term" value="">
-                </div>
+                  <div class="form-group">
+                    <label for="">Term</label>
+                    <input type="text" class="form-control" name="term" value="">
+                  </div>
                   <div class="form-group">
                     <label for="">Year</label>
-                    <datepicker format="yyyy" name="year"  bootstrap-styling :minimum-view="'year'" :maximum-view="'year'" :initialView="'year'" ></datepicker>
+                    <datepicker format="yyyy" name="year" bootstrap-styling :minimum-view="'year'" :maximum-view="'year'" :initialView="'year'"></datepicker>
                   </div>
                   <div class="form-group">
                     <label for="">Start Date</label>
-                    <datepicker format="MMM dd" name="date"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                    <datepicker format="MMM dd" name="date" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'"></datepicker>
                   </div>
                   <div class="form-group">
                     <label for="">Mid Term</label>
-                    <datepicker format="MMM dd" name="mid_term"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                    <datepicker format="MMM dd" name="mid_term" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'"></datepicker>
                   </div>
                   <div class="form-group">
                     <label for="">End Date</label>
-                    <datepicker format="MMM dd" name="end_date"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                    <datepicker format="MMM dd" name="end_date" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'"></datepicker>
                   </div>
                   <div class="form-group">
                     <label for="">Duration</label>
@@ -38,11 +37,11 @@
                   </div>
                   <div class="form-group">
                     <label for="">Holiday Start</label>
-                    <datepicker format="MMM dd" name="holiday_start"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                    <datepicker format="MMM dd" name="holiday_start" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'"></datepicker>
                   </div>
                   <div class="form-group">
                     <label for="">Holiday End</label>
-                    <datepicker format="MMM dd" name="holiday_end"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                    <datepicker format="MMM dd" name="holiday_end" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'"></datepicker>
                   </div>
                   <div class="form-group">
                     <label for="">Holiday Duration</label>
@@ -50,7 +49,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Credential Release</label>
-                    <datepicker format="MMM dd" name="credential_release"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" ></datepicker>
+                    <datepicker format="MMM dd" name="credential_release" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'"></datepicker>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Date</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -82,7 +81,7 @@
             </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="2">
+                <td colspan="3">
                   <div v-if="!loading"> No Data.</div>
                   <div v-else> loading...</div>
                 </td>
@@ -102,19 +101,19 @@
         </div>
         <div class="form-group">
           <label for="">Year</label>
-          <datepicker format="yyyy" name="year"  bootstrap-styling :minimum-view="'year'" :maximum-view="'year'" :initialView="'year'" :value="modalInfo.data.year"></datepicker>
+          <datepicker format="yyyy" name="year" bootstrap-styling :minimum-view="'year'" :maximum-view="'year'" :initialView="'year'" :value="modalInfo.data.year"></datepicker>
         </div>
         <div class="form-group">
           <label for="">Date</label>
-          <datepicker format="MMM dd" name="date"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.date" ></datepicker>
+          <datepicker format="MMM dd" name="date" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.date"></datepicker>
         </div>
         <div class="form-group">
           <label for="">Mid Term</label>
-          <datepicker format="MMM dd" name="mid_term"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.mid_term" ></datepicker>
+          <datepicker format="MMM dd" name="mid_term" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.mid_term"></datepicker>
         </div>
         <div class="form-group">
           <label for="">End Date</label>
-          <datepicker format="MMM dd" name="end_date"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.end_date" ></datepicker>
+          <datepicker format="MMM dd" name="end_date" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.end_date"></datepicker>
         </div>
         <div class="form-group">
           <label for="">Duration</label>
@@ -122,11 +121,11 @@
         </div>
         <div class="form-group">
           <label for="">Holiday Start</label>
-          <datepicker format="MMM dd" name="holiday_start"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.holiday_start" ></datepicker>
+          <datepicker format="MMM dd" name="holiday_start" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.holiday_start"></datepicker>
         </div>
         <div class="form-group">
           <label for="">Holiday End</label>
-          <datepicker format="MMM dd" name="holiday_end"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.holiday_end" ></datepicker>
+          <datepicker format="MMM dd" name="holiday_end" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.holiday_end"></datepicker>
         </div>
         <div class="form-group">
           <label for="">Holiday Duration</label>
@@ -134,9 +133,8 @@
         </div>
         <div class="form-group">
           <label for="">Credential Release</label>
-          <datepicker format="MMM dd" name="credential_release"  bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.credential_release" ></datepicker>
+          <datepicker format="MMM dd" name="credential_release" bootstrap-styling :minimum-view="'day'" :maximum-view="'month'" :initialView="'month'" :value="modalInfo.data.credential_release"></datepicker>
         </div>
-
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideIntakeModal">Cancel</b-btn>
       </form>
@@ -149,8 +147,8 @@
       return {
         loading: true,
         table_items: [],
-        pages:[],
-        module_table_fields: ['name', 'title','display_type','status'],
+        pages: [],
+        module_table_fields: ['name', 'title', 'display_type', 'status'],
         modalInfo: {
           title: '',
           content: '',
@@ -162,12 +160,11 @@
       this.fetchIntakes();
     },
     watch: {
-      modalInfo(){
+      modalInfo() {
         console.log('changed and change date now');
       }
     },
-    computed: {
-    },
+    computed: {},
     methods: {
       info(module, index, button) {
         let self = this;
@@ -178,7 +175,7 @@
               console.log(response.data.data);
               self.modalInfo.title = `Edit Intake`
               self.modalInfo.data = response.data.data
-              self.modalInfo.data.year = new Date(response.data.data.year,1,1)
+              self.modalInfo.data.year = new Date(response.data.data.year, 1, 1)
               self.modalInfo.data.date = '0000 ' + response.data.data.date
               self.modalInfo.data.mid_term = '0000 ' + response.data.data.mid_term
               self.modalInfo.data.end_date = '0000 ' + response.data.data.end_date
@@ -205,7 +202,7 @@
         let url = self.$root.baseUrl + '/api/admin/intake/edit';
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
-            self.table_items = response.data.data;
+              self.table_items = response.data.data;
               self.hideIntakeModal();
               self.$swal({
                 // position: 'top-end',
@@ -260,10 +257,10 @@
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/intake';
         axios.post(url, formData).then(function(response) {
-       self.table_items = response.data.data;
-              $(form)[0].reset();
-              self.hideModal();
-              self.$toastr.s("A date has been added.");
+            self.table_items = response.data.data;
+            $(form)[0].reset();
+            self.hideModal();
+            self.$toastr.s("A date has been added.");
           })
           .catch(function(error) {
             if (error.response.status === 422) {
@@ -271,14 +268,13 @@
             }
           });
       },
-
       fetchIntakes() {
         let vm = this;
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/intakes';
         axios.get(url)
           .then(function(response) {
-              console.log(response.data.data);
+            console.log(response.data.data);
             vm.table_items = response.data.data;
             vm.loading = false;
           })
@@ -286,7 +282,6 @@
             console.log(error);
             vm.loading = false;
           });
-
       },
       showModal() {
         this.$refs.myModalRef.show()
