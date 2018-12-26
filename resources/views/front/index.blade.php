@@ -99,7 +99,7 @@
           </div>
 
           <div class="p-4 border-bottom wow fadeInUp">
-<form id="enquiry_form">
+<form id="enquiry_form" name="enquiry_form">
 
           @if ($errors->any())
               <div class="alert alert-danger">
@@ -124,7 +124,7 @@
                 </div>
                 <div class="form-group">
                 <div class="input-group">
-                  <select data-placeholder="Select Course" class="chosen-select ec-select my_select_box course_id" tabindex="5" name="course_id" >
+                  <select data-placeholder="Select Course" class="chosen-select ec-select my_select_box course_id" id="course_id" tabindex="5" name="course_id" >
                     <option value="" selected="selected"></option>
                     @foreach ($courses as $course)
                       <option value="{{$course->id}}">{{$course->name}}</option>
@@ -135,7 +135,7 @@
               </div>
               <div class="form-group">
                 <div class="input-group">
-                  <select data-placeholder="Your Country" class="select ec-select country_id" tabindex="3" name="country_id" >
+                  <select data-placeholder="Your Country" class="select ec-select country_id" tabindex="3" id="country_id" name="country_id" >
               <option value="" selected="selected"></option>
               @foreach ($countries as $country)
                 <option value="{{$country->id}}">{{$country->name}}</option>
@@ -358,6 +358,16 @@
 
 @section('script')
   <script type="text/javascript">
+      // reset handler that clears the form
+      function reseter(){
+          $('form[name="enquiry_form"]')
+              .find(':radio, :checkbox').removeAttr('checked').end()
+              .find('textarea, :text, select').val('')
+
+            }
+
+
+
   $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
       $('.enquiry_btn').click(function(event){
         $(this).parent().parent().find('.error').each(function(){
@@ -371,82 +381,7 @@
 
         $.post(url, formData)
     .done(function(data){
-      if(data == 'true'){
-        form.trigger('reset');
-        $.notify({
-        	// options
-        	icon: 'glyphicon glyphicon-warning-sign',
-        	message: 'Thank You For Enquiry',
-        	target: '_blank'
-        },{
-        	// settings
-        	element: 'body',
-        	position: null,
-        	type: "success",
-        	allow_dismiss: true,
-        	newest_on_top: false,
-        	showProgressbar: false,
-        	placement: {
-        		from: "top",
-        		align: "center"
-        	},
-        	offset: 120,
-        	spacing: 10,
-        	z_index: 1031,
-        	delay: 5000,
-        	timer: 1000,
-        	url_target: '_blank',
-        	mouse_over: null,
-        	animate: {
-        		enter: 'animated fadeInDown',
-        		exit: 'animated fadeOutUp'
-        	},
-        	onShow: null,
-        	onShown: null,
-        	onClose: null,
-        	onClosed: null,
-        	icon_type: 'class',
-        });
-      }
-      else if(data == 'false'){
-
-
-        $.notify({
-        	// options
-        	icon: 'glyphicon glyphicon-warning-sign',
-        	message: 'Enquiry Failed',
-        	target: '_blank'
-        },{
-        	// settings
-        	element: 'body',
-        	position: null,
-        	type: "danger",
-        	allow_dismiss: true,
-        	newest_on_top: false,
-        	showProgressbar: false,
-        	placement: {
-        		from: "top",
-        		align: "center"
-        	},
-        	offset: 120,
-        	spacing: 10,
-        	z_index: 1031,
-        	delay: 5000,
-        	timer: 1000,
-        	url_target: '_blank',
-        	mouse_over: null,
-        	animate: {
-        		enter: 'animated fadeInDown',
-        		exit: 'animated fadeOutUp'
-        	},
-        	onShow: null,
-        	onShown: null,
-        	onClose: null,
-        	onClosed: null,
-        	icon_type: 'class',
-        });
-
-      }
+location.reload(); 
     })
     .fail(function(xhr, status, error) {
         jQuery.each(xhr.responseJSON.errors, function(key, value){

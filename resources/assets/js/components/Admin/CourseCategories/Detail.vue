@@ -91,8 +91,6 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Duration</th>
-                <th>Study Method</th>
                 <th>Action</th>
               </tr>
             </thead>

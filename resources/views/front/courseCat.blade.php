@@ -36,7 +36,7 @@
         <li class="breadcrumb-item"> {{ str_replace('_', ' ', \Request::segment(2)) }}</li>
       </ol>
       <h2 class="h1">
-        All AHIC Courses
+      {{ str_replace('_', ' ', \Request::segment(2)) }}
       </h2>
       <!-- <p class="lead">
         <span class="text-primary">13</span> courses found
@@ -103,7 +103,12 @@
         @endphp
         <div class="col-lg-4 col-md-6 marginTop-30">
           <div href="{{route('courseCategory',$course->name)}}" class="card height-100p text-gray shadow-v1">
-            <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
+            @if($course->background_image)
+              <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
+@else
+  <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+
+            @endif
             <div class="card-body">
 
               <a href="{{route('course',$stripped)}}" class="h5">

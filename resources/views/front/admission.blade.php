@@ -111,19 +111,17 @@
                               <div class="media justify-content-between">
                                 <ul class="list-unstyled mb-0">
                                   <li class="mb-1">
-
                                     <h5 class="my-4">
                                       {{$course->name}}
                                     </h5>
                                   </li>
                                   <li class="mb-1">
-                                    {{-- BSB40215 --}}
+                                    {{$course->code}}
                                   </li>
                                 </ul>
                                 <ul class="list-unstyled mb-0  text-right">
                                   <li class="mb-1">
                                     <h5 class="my-4 d-block text-primary">{{$course->onshore_fee}}</h5>
-
                                   </li>
                                   <li class="mb-1">
                                     {{$course->duration}}

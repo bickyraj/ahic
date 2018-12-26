@@ -254,6 +254,7 @@ const routes = [
     {
         path: admin_url + 'students',
         component: require('./components/Admin/Form/Home'),
+        name:'allStudents',
         meta: {
             layout: 'admin',
             breadcrumb: [

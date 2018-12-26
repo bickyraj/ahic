@@ -32,6 +32,7 @@
         <ol class="breadcrumb breadcrumb-double-angle bg-transparent p-0">
           <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
           <li class="breadcrumb-item"><a href="{{route('courses')}}">Courses</a></li>
+          <li class="breadcrumb-item"><a href="{{route('course', \Request::segment(2))}}">  {{ str_replace('_', ' ', \Request::segment(2)) }} </a></li>
           <li class="breadcrumb-item">Details</li>
         </ol>
         <h2 class="h1">
@@ -353,7 +354,7 @@
                   <div class="accordion-item list-group mb-3">
 
                     <div class="list-group-item bg-light">
-                     <a class="row" href="#accordionPaymentOption_1" data-toggle="collapse" aria-expanded="true">
+                     <a class="row" href="#accordionPaymentOption_{{$option->id}}" data-toggle="collapse" aria-expanded="true">
                        <span class="col-9 col-md-8">
                          <span class="accordion__icon text-primary mr-2">
                           <i class="ti-plus"></i>
@@ -370,7 +371,7 @@
                      </a>
                     </div>
 
-                    <div id="accordionPaymentOption_1" class="collapse show" data-parent="#accordionPaymentOption">
+                    <div id="accordionPaymentOption_{{$option->id}}" class="collapse show" data-parent="#accordionPaymentOption">
 
                       <div class="list-group-item text-primary text-left">
                         {!!html_entity_decode($option->description)!!}

@@ -233,7 +233,7 @@
   export default {
     data() {
       return {
-        myCroppa:'',
+        myCroppa:{},
         error:'',
         filtershore:"all",
           categories:'',
@@ -381,9 +381,6 @@
           .catch(function(error) {
             self.error = '';
             self.error = error.response.data.errors;
-            if (error.response.status === 422) {
-              self.$toastr.e(error.response.data.errors.name);
-            }
           });
       },
       fetchAgents() {
@@ -396,12 +393,10 @@
             vm.loading = false;
           })
           .catch(function(error) {
-            console.log(error);
+            // console.log(error);
             vm.loading = false;
           });
-
       },
-
 
       showModal() {
         this.$refs.myModalRef.show()

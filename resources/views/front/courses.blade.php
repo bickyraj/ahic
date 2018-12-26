@@ -12,14 +12,14 @@
 @section('content')
   <div class="site-search">
    <div class="site-search__close bg-black-0_8"></div>
-   <form class="form-site-search" action="#" method="POST">
+   {{-- <form class="form-site-search" action="#" method="POST"> --}}
     <div class="input-group">
-      <input type="text" placeholder="Search" class="form-control py-3 border-white" required="">
+      <input type="text" placeholder="Search" class="form-control py-3 border-white course_search_input" required="">
       <div class="input-group-append">
-        <button class="btn btn-primary" type="submit"><i class="ti-search"></i></button>
+        <button class="btn btn-primary course_search_btn" ><i class="ti-search"></i></button>
       </div>
     </div>
-   </form>
+   {{-- </form> --}}
   </div> <!-- END site-search-->
 
 
@@ -46,7 +46,7 @@
      </div>
       <form class="col-lg-5 my-2 ml-auto">
         <div class="input-group bg-white rounded p-1">
-          <input type="text" class="form-control border-white" placeholder="What do you want to learn?" required="">
+          <input type="text" class="form-control border-white" placeholder="What do you want to learn?" >
           <div class="input-group-append">
             <button class="btn btn-info rounded" type="submit">
               Search
@@ -124,10 +124,10 @@
                   @php
                     $string = explode(' ',$course->duration);
                   @endphp
-                    @if(isset($string[0])
+                    @if(isset($string[0]))
                   {{$string[0]}}
                   @endif
-                    @if(isset($string[1])
+                    @if(isset($string[1]))
                   {{$string[1]}}
                   @endif
 
@@ -146,7 +146,11 @@
 @section('script')
 <script type="text/javascript">
   $(document).ready(function() {
-
+    $('.course_search_btn').click(function(e){
+      e.preventDefault();
+      var search = $('.course_search_input').val();
+      alert(search);
+    })
   });
   function changeCategory(el){
     var v = el.value;
@@ -155,6 +159,8 @@
     window.location.replace(v);
 
   }
+
+
 
 </script>
 @endsection

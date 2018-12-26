@@ -142,27 +142,9 @@
               </b-collapse>
             </div>
           </b-card>
+
           <b-card class="trump-card ">
-            <div>
-              <div class="card-title">
-                <div class="caption">
-                  <h5> <i class="fas fa-key"></i>  Course RPL
-                      <small class="float-right">
-                        <button class="btn btn-primary" v-if="course.assessment" @click="showEditAssessmentModal"> Edit </button>
-                        <button class="btn btn-success" v-else @click="showAssessmentModal"> Add </button>
-                          <button class="btn " v-b-toggle.collapse3>
-                          <i class="far fa-eye" ></i>
-                               </button>
-                      </small></h5>
-                </div>
-              </div>
-              <b-collapse visible id="collapse3">
-                <div class="col-md-12" v-if="course.assessment" v-html="course.assessment.description"> </div>
-              </b-collapse>
-            </div>
-          </b-card>
-          <b-card class="col-md-12 trump-card ">
-            <div class="col-md-12">
+            <div >
               <div class="card-title">
                 <div class="caption">
                   <h5> <i class="fas fa-key"></i>  Course RPL

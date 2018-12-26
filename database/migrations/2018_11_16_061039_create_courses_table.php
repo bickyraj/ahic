@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->integer('course_category_id');
             $table->string('name');
+            $table->string('code');
             $table->longText('description');
             $table->string('background_image')->nullable();
             $table->string('video_link');

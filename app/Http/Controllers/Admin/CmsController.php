@@ -52,6 +52,7 @@ public function slug($slug){
   //   $dir = $this->destination .'/' .$imageName;
   //   file_put_contents($dir, $imgdata);
   // }
+  return $data;
     Cms::create($data);
 
     $a = Cms::all();
