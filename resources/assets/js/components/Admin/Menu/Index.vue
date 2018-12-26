@@ -15,22 +15,22 @@
                     <label for="">Name</label>
                     <input type="text" name="name" class="form-control" placeholder="">
                     <transition name="fade">
-                    <p v-if="error.name" class="text-danger"> {{error.name[0]}}</p>
+                      <p v-if="error.name" class="text-danger"> {{error.name[0]}}</p>
                     </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Parent Menu</label>
-                   <select  name="parent_id" class="form-control">
-                     <option value="" selected> Choose Parent Menu </option>
-            <option v-for="menu in table_items" :value="menu.id" :key="menu.id"> {{menu.name}}</option>
-          </select>
+                    <select name="parent_id" class="form-control">
+                      <option value="" selected> Choose Parent Menu </option>
+                      <option v-for="menu in table_items" :value="menu.id" :key="menu.id"> {{menu.name}}</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="">Link Page</label>
-                     <select name="page_id" class="form-control">
+                    <select name="page_id" class="form-control">
                       <option value="" selected> Choose A Page </option>
                       <option v-for="page in pages" :value="page.id" :key="page.id"> {{page.name}}</option>
-                     </select>
+                    </select>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Menu</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -41,14 +41,14 @@
           <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th >Name</th>
+                <th>Name</th>
                 <th>Parent Menu</th>
                 <th>Linked Page</th>
                 <th>Action</th>
               </tr>
             </thead>
-           <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" @update="updateMenuOrder">
-                <tr v-for="(menu, index) in table_items" :key="menu.id">
+            <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" @update="updateMenuOrder">
+              <tr v-for="(menu, index) in table_items" :key="menu.id">
                 <td>{{ menu.name}}</td>
                 <td v-if="menu.parent_menu">{{ menu.parent_menu.name }}</td>
                 <td v-else>--</td>
@@ -63,10 +63,10 @@
                   </b-button>
                 </td>
               </tr>
-           </draggable>
+            </draggable>
             <tbody v-else>
               <tr>
-                <td colspan="2">
+                <td colspan="4">
                   <div v-if="!loading"> No Data.</div>
                   <div v-else> loading...</div>
                 </td>
@@ -84,23 +84,18 @@
           <label for="">Name</label>
           <input type="text" name="name" v-bind:value="modalInfo.data.name" class="form-control" placeholder="" required>
         </div>
-
         <div class="form-group">
           <label for="">Parent Menu</label>
           <select v-bind:value="modalInfo.data.parent_id" name="parent_id" class="form-control">
             <option value="" selected> Choose Parent Menu </option>
-            <option v-for="menu in table_items" :value="menu.id" :key="menu.id"  v-if="menu.id != modalInfo.data.id"> {{menu.name}}</option>
+            <option v-for="menu in table_items" :value="menu.id" :key="menu.id" v-if="menu.id != modalInfo.data.id"> {{menu.name}}</option>
           </select>
         </div>
-
-
-
-          <label for="">Link Page</label>
-                     <select v-bind:value="modalInfo.data.page_id" name="page_id" class="form-control">
-                     <option value="" selected> Choose A Page </option>
-                    <option v-for="page in pages" :value="page.id" :key="page.id"> {{page.name}}</option>
-                  </select>
-
+        <label for="">Link Page</label>
+        <select v-bind:value="modalInfo.data.page_id" name="page_id" class="form-control">
+          <option value="" selected> Choose A Page </option>
+          <option v-for="page in pages" :value="page.id" :key="page.id"> {{page.name}}</option>
+        </select>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>
@@ -111,12 +106,12 @@
   export default {
     data() {
       return {
-        error:'',
-          menus:[],
+        error: '',
+        menus: [],
         loading: true,
         table_items: [],
-        pages:[],
-        menu_table_fields: ['name', 'parent_id','page_id','parent_menu'],
+        pages: [],
+        menu_table_fields: ['name', 'parent_id', 'page_id', 'parent_menu'],
         modalInfo: {
           title: '',
           content: '',
@@ -128,8 +123,7 @@
       this.fetchMenus();
       this.fetchPages();
     },
-    computed: {
-    },
+    computed: {},
     methods: {
       info(menu, index, button) {
         let self = this;
@@ -160,7 +154,7 @@
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
               var menu_items = response.data.data;
-              vm.table_items = menu_items.map(obj => {
+              self.table_items = menu_items.map(obj => {
                 var rObj = {};
                 rObj['id'] = obj.id;
                 rObj['name'] = obj.name;
@@ -222,13 +216,11 @@
         var self = this;
         var form = self.$refs.addMenuForm;
         var formData = new FormData(form);
-        var des = this.getAddMenuContent;
-        formData.append('description', des);
         let url = self.$root.baseUrl + '/api/admin/menu';
         axios.post(url, formData).then(function(response) {
-            if (response.status === 201) {
+            if ((response.status === 201) || (response.status === 200)) {
               var menu_items = response.data.data;
-              vm.table_items = menu_items.map(obj => {
+              self.table_items = menu_items.map(obj => {
                 var rObj = {};
                 rObj['id'] = obj.id;
                 rObj['name'] = obj.name;
@@ -251,13 +243,13 @@
             }
           });
       },
-      fetchPages(){
+      fetchPages() {
         let vm = this;
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/pages';
-      axios.get(url).then(function(response){
-        vm.pages = response.data.data;
-      })
+        axios.get(url).then(function(response) {
+          vm.pages = response.data.data;
+        })
       },
       fetchMenus() {
         let vm = this;
@@ -282,18 +274,17 @@
             console.log(error);
             vm.loading = false;
           });
-
       },
-            updateMenuOrder() {
+      updateMenuOrder() {
         var self = this;
         let url = self.$root.baseUrl + '/api/admin/menus/update-order';
-      	axios.post(url, self.table_items)
-		.then(function (response) {
-			if (response.data.status === 1) {
-				self.$toastr.s("Updated");
-			}
-    })
-            },
+        axios.post(url, self.table_items)
+          .then(function(response) {
+            if (response.data.status === 1) {
+              self.$toastr.s("Updated");
+            }
+          })
+      },
       showModal() {
         this.$refs.myModalRef.show()
       },

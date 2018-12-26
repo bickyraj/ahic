@@ -226,6 +226,9 @@ const routes = [
                 {
                     name: 'Page',
                     path: admin_url + 'pages',
+                },
+                {
+                    name: 'Detail'
                 }
             ],
             middlewareAuth: true,
@@ -697,6 +700,9 @@ const routes = [
                 {
                     name: 'Agent Information',
                     path: admin_url + 'agent_information',
+                },
+                {
+                    name: 'Detail'
                 }
             ],
             middlewareAuth: true,

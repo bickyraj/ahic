@@ -12,13 +12,16 @@
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add page">
                 <form @submit.prevent="addMenu" ref="addMenuForm">
                   <div class="form-group">
-                    <label for="">Name</label>
+                    <label for="">Title</label>
                     <input type="text" name="name" class="form-control" placeholder="" required>
                   </div>
                   <div class="form-group">
-                    <label for=""> Image </label>
-                    <croppa v-model="myCroppa" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="false" :prevent-white-space="true">
-                    </croppa>
+                    <label for=""> Page Banner </label>
+                    <div>
+                      <croppa v-model="myCroppa" :width="384" :height="54" placeholder="click to choose image" :placeholder-font-size="14" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true">
+                      </croppa>
+                    </div>
+                    <!-- <button @click="croppa.chooseFile()">CHOOSE FILE...</button> -->
                     <!-- <input type="file" name="image" class="form-control" placeholder="" > -->
                   </div>
                   <div class="form-group">
@@ -97,7 +100,9 @@
         <div class="form-group" v-else>
           <label for="">Image </label> <br>
           <!-- <img :src="'../public/images/pages/'+modalInfo.data.image" class="img-fluid" /> -->
-          <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
+          <div>
+            <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="click to choose image" :placeholder-font-size="14" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
+          </div>
         </div>
         <div class="form-group">
           <label for="">Parent page</label>

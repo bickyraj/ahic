@@ -11,7 +11,7 @@
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Competence</b-button>
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add Competence">
                 <form @submit.prevent="addCompetence" ref="addCompetenceForm">
-                   <div class="form-group">
+                  <div class="form-group">
                     <label for="">Title</label>
                     <textarea name="description" id="" class="form-control" rows="5"></textarea>
                   </div>
@@ -19,15 +19,13 @@
                     <label for="">Unit Code </label>
                     <input type="text" name="unit_code" class="form-control" placeholder="" required>
                   </div>
-                 
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Competence</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
               </b-modal>
             </div>
           </div>
-
-                <table class="table trump-table table-hover">
+          <table class="table trump-table table-hover">
             <thead>
               <tr>
                 <th>Title</th>
@@ -48,52 +46,45 @@
                   </b-button>
                 </td>
               </tr>
-              </tbody>
+            </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="2">
+                <td colspan="3">
                   <div v-if="!loading"> No Data.</div>
                   <div v-else> loading...</div>
                 </td>
               </tr>
             </tbody>
           </table>
-
-         
         </b-card>
       </b-col>
     </b-row>
-
-
-     <!-- Info modal -->
+    <!-- Info modal -->
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
       <form @submit.prevent="editMenu" :row="modalInfo.row" ref="editMenuForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
-          <div class="form-group">
-                    <label for="">Title</label>
-                    <textarea name="description" id="" class="form-control" rows="5" :value="modalInfo.data.description"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Unit Code </label>
-                    <input type="text" name="unit_code" class="form-control" :value="modalInfo.data.unit_code" placeholder="" required>
-                  </div>
-                
+        <div class="form-group">
+          <label for="">Title</label>
+          <textarea name="description" id="" class="form-control" rows="5" :value="modalInfo.data.description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="">Unit Code </label>
+          <input type="text" name="unit_code" class="form-control" :value="modalInfo.data.unit_code" placeholder="" required>
+        </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>
     </b-modal>
-
   </div>
 </template>
-
 <script>
   export default {
     data() {
       return {
         loading: true,
         table_items: [],
-        pages:[],
-        menu_table_fields: ['id','unit_code','description','category'],
+        pages: [],
+        menu_table_fields: ['id', 'unit_code', 'description', 'category'],
         modalInfo: {
           title: '',
           content: '',
@@ -104,8 +95,7 @@
     created() {
       this.fetchCompetences();
     },
-    computed: {
-    },
+    computed: {},
     methods: {
       info(menu, index, button) {
         let self = this;
@@ -136,7 +126,7 @@
         let url = self.$root.baseUrl + '/api/admin/course_unit_competence/edit';
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
-           self.table_items = response.data.data
+              self.table_items = response.data.data
               self.hideMenuModal();
               self.$swal({
                 // position: 'top-end',
@@ -191,10 +181,10 @@
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course_unit_competence';
         axios.post(url, formData).then(function(response) {
-                  self.table_items = response.data.data;
-              $(form)[0].reset();
-              self.hideModal();
-              self.$toastr.s("A unit competence has been added.");
+            self.table_items = response.data.data;
+            $(form)[0].reset();
+            self.hideModal();
+            self.$toastr.s("A unit competence has been added.");
           })
           .catch(function(error) {
             if (error.response.status === 422) {
@@ -215,7 +205,6 @@
             console.log(error);
             vm.loading = false;
           });
-
       },
       showModal() {
         this.$refs.myModalRef.show()

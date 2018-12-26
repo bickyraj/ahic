@@ -233,10 +233,10 @@
   export default {
     data() {
       return {
-        myCroppa:'',
+        myCroppa: null,
         error:'',
         filtershore:"all",
-          categories:'',
+        categories:'',
         loading: true,
         table_items: [],
         pages:[],
