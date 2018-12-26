@@ -50,6 +50,7 @@ class ContactController extends Controller
       $data['address'] = $request->input('address');
       $data['street_name'] = $request->input('street_name');
       $data['message'] = $request->input('message');
+      $data['call_time'] = $request->input('call_time');
       $data['fb'] = $request->input('fb');
       $data['tw'] = $request->input('tw');
       $data['in'] = $request->input('in');
