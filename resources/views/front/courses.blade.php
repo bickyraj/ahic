@@ -84,6 +84,11 @@
 <section class="padding-y-60 bg-light-v2">
   <div class="container">
     <div class="row">
+      @if (count($courses) > 0 )
+
+        @else
+          <p> No matcing courses were found. </p>
+      @endif
       @foreach ($courses as $course)
         @php
           $stripped = str_replace(' ', '_', $course->name);

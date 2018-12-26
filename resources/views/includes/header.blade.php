@@ -24,17 +24,17 @@
           </ul>
           <ul class="list-inline mb-0">
             @if (isset($contact['fb']))
-              <li class="list-inline-item mr-0 p-3 border-right border-left border-white-0_1">
+              <li class="list-inline-item mr-0 p-3  border-left border-white-0_1">
                 <a href="{{$contact['fb']}}"><i class="ti-facebook"></i></a>
               </li>
             @endif
             @if (isset($contact['tw']))
-              <li class="list-inline-item mr-0 p-3 border-right border-left border-white-0_1">
+              <li class="list-inline-item mr-0 p-3 border-left  border-white-0_1">
                 <a href="{{$contact['tw']}}"><i class="ti-twitter"></i></a>
               </li>
             @endif
             @if (isset($contact['in']))
-              <li class="list-inline-item mr-0 p-3 border-right border-left border-white-0_1">
+              <li class="list-inline-item mr-0 p-3 border-left border-white-0_1">
                 <a href="{{$contact['in']}}"><i class="ti-instagram"></i></a>
               </li>
             @endif
