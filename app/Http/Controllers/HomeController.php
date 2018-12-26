@@ -34,7 +34,7 @@ class HomeController extends Controller
         $news  =      News::where('status','1')->limit(3)->get();
         $gallery =    Gallery::all();
         $sliders =    Slider::where('status','1')->get();
-        $header = CMS::where('slug','header')->first();
+        $header = CMS::where('slug','welcome')->first();
         $lc = CMS::where('slug','lc')->first();
         $rc = CMS::where('slug','rc')->first();
         return view('front.index',compact('courses','countries','news','gallery','sliders','header','lc','rc'));

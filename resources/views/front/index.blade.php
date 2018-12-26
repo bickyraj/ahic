@@ -2,17 +2,8 @@
 
 @section('content')
 
- <div class="site-search">
-   <div class="site-search__close bg-black-0_8"></div>
-   <form class="form-site-search" action="#" method="POST">
-    <div class="input-group">
-      <input type="text" placeholder="Search" class="form-control py-3 border-white" required="">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="submit"><i class="ti-search"></i></button>
-      </div>
-    </div>
-   </form>
-  </div> <!-- END site-search-->
+  @if (isset($sliders) && count($sliders) > 0 )
+
 
 
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
@@ -48,7 +39,10 @@
     </a>
   </div>
 
+@endif
 
+
+@if (isset($header))
 <section class="padding-y-100">
   <div class="container">
     <div class="row">
@@ -165,7 +159,8 @@
   </div> <!-- END container-->
 </section>
 
-
+@endif
+@if (isset($courses) && count($courses) > 0 )
 <section class="padding-y-100 bg-light">
   <div class="container">
     <div class="row">
@@ -227,6 +222,8 @@
   </div> <!-- END container-->
 </section>
 
+@endif
+
 
 @if (isset($lc) && isset($rc))
   <section>
@@ -259,6 +256,9 @@
   </section>
 @endif
 
+
+
+@if (isset($news) && count($news) > 0 )
 <section class="padding-y-100 bg-light-v2">
   <div class="container">
     <div class="row">
@@ -308,10 +308,12 @@
   </div> <!-- END container-->
 </section>
 
+@endif
 
 
 
 
+@if (isset($gallery) && count($gallery) > 0 )
 <section class="paddingTop-100">
   <div class="container-fluid">
     <div class="row">
@@ -337,6 +339,7 @@
 
   </div> <!-- END container-->
 </section>
+@endif
 
 @endsection
 
@@ -381,7 +384,7 @@
 
         $.post(url, formData)
     .done(function(data){
-location.reload(); 
+location.reload();
     })
     .fail(function(xhr, status, error) {
         jQuery.each(xhr.responseJSON.errors, function(key, value){

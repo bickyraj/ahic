@@ -11,17 +11,6 @@
 @endsection
 @section('content')
 
-  <div class="site-search">
-   <div class="site-search__close bg-black-0_8"></div>
-   <form class="form-site-search" action="#" method="POST">
-    <div class="input-group">
-      <input type="text" placeholder="Search" class="form-control py-3 border-white" required="">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="submit"><i class="ti-search"></i></button>
-      </div>
-    </div>
-   </form>
-  </div> <!-- END site-search-->
 
 
 
@@ -30,7 +19,7 @@
     <div class="container">
      <div class="row align-items-center">
        <div class="col-md-6">
-         <h2>News Listing</h2>
+         <h2>AHIC News</h2>
        </div>
        <div class="col-md-6">
         <ol class="breadcrumb justify-content-md-end bg-transparent">
@@ -38,7 +27,7 @@
             <a href="{{url('/')}}">Home</a>
           </li>
           <li class="breadcrumb-item">
-            News Listing
+            AHIC News
           </li>
         </ol>
        </div>
@@ -53,7 +42,7 @@
    <section class="pt-5 paddingBottom-100 bg-light-v2">
      <div class="container">
        <div class="row">
-           @foreach($news as $new)
+           @forelse($news as $new)
                @php
               $date = date_create($new->date);
               $newdate = date_format($date,'M d, Y');
@@ -83,7 +72,11 @@
              </div>
            </div>
          </div>
-         @endforeach
+@empty
+
+  <h3> No News Available At The Moment</h3>
+
+       @endforelse
          <!-- <div class="col-12 marginTop-70">
            <ul class="pagination pagination-primary align-items-center justify-content-center">
             <li class="page-item mx-2">

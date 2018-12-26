@@ -127,7 +127,15 @@
                                       <h5 class="my-4 d-block text-primary">{{$course->onshore_fee}}</h5>
                                     </li>
                                     <li class="mb-1">
-                                      {{$course->duration}}
+                                      @php
+                                        $string = explode(' ',$course->duration);
+                                      @endphp
+                                      @if (isset($string[0]))
+                                      {{$string[0]}}
+                                      @endif
+                                      @if (isset($string[1]))
+                                      {{$string[1]}}
+                                      @endif
                                     </li>
                                   </ul>
 
@@ -176,7 +184,15 @@
                                       <h5 class="my-4 d-block text-primary">{{$course->offshore_fee}}</h5>
                                     </li>
                                     <li class="mb-1">
-                                      {{$course->duration}}
+                                      @php
+                                        $string = explode(' ',$course->duration);
+                                      @endphp
+                                      @if (isset($string[0]))
+                                      {{$string[0]}}
+                                      @endif
+                                      @if (isset($string[1]))
+                                      {{$string[1]}}
+                                      @endif
                                     </li>
                                   </ul>
 

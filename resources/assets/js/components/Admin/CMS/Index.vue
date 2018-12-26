@@ -179,7 +179,7 @@
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
       <form @submit.prevent="editNews" :row="modalInfo.row" ref="editNewsForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
-        <input type="" name="slug" v-model="slug">
+        <input type="hidden" name="slug" v-model="slug">
                   <div class="form-group">
                     <label for="">Title </label>
                     <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="" required>
@@ -194,17 +194,17 @@
                   </div>
                   <div class="form-group" v-else>
                     <label for="">Image  </label> <br>
-               <croppa v-model="myCroppa"
-        :width="crop.width"
-        :height="crop.height"
-        :initial-image="cropimage"
-        placeholder="Choose an image"
-        :placeholder-font-size="0"
-        :disabled="false"
-        :quality="crop.scale"
-        :prevent-white-space="true"
->
-</croppa >
+                         <croppa v-model="myCroppa"
+                            :width="crop.width"
+                            :height="crop.height"
+                            :initial-image="cropimage"
+                            placeholder="Choose an image"
+                            :placeholder-font-size="0"
+                            :disabled="false"
+                            :quality="crop.scale"
+                            :prevent-white-space="true"
+                          >
+                          </croppa >
                   </div>
                     <div class="form-group">
                         <label> Description </label>
@@ -398,8 +398,6 @@ let vm = this;
         let url = self.$root.baseUrl + '/api/admin/cms';
                 formData.append('image',this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
-              // self.table_items = response.data.data;
-              console.log(response.data.data)
               $(form)[0].reset();
               self.hideModal();
               self.$toastr.s("Content has been added.");
@@ -424,6 +422,7 @@ let vm = this;
         let url = self.$root.baseUrl + '/api/admin/cms/edit';
         axios.post(url, formData).then(function(response) {
            self.table_items = response.data.data;
+           $(form)[0].reset();
               self.hideNewsModal();
               self.$swal({
                 // position: 'top-end',

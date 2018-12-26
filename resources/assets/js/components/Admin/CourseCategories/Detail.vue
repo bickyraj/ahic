@@ -19,6 +19,13 @@
                     <p v-if="error.name" class="text-danger"> {{error.name[0]}}</p>
                     </transition>
                   </div>
+                  <div class="form-group">
+                    <label for="">Course Code </label>
+                    <input type="text" name="code" class="form-control" placeholder="">
+                    <transition name="fade">
+                    <p v-if="error.code" class="text-danger"> {{error.code[0]}}</p>
+                    </transition>
+                  </div>
                   <div class="form-group d-none">
                     <label for=""> Course Category</label>
                       <select name="course_category_id" class="form-control" v-model="id">
@@ -135,6 +142,10 @@
             <div class="form-group">
                     <label for="">Name </label>
                     <input type="text" name="name" class="form-control" ref="modalname" v-model="modalInfo.data.name" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Course Code </label>
+                    <input type="text" name="code" class="form-control" placeholder=""  v-model="modalInfo.data.code">
                   </div>
             <div class="form-group">
                     <label for=""> Course Category</label>
@@ -372,6 +383,7 @@
                 duration: menu.duration,
                 order_by: menu.order_by,
                 status: menu.status,
+                code: menu.code,
                 description: menu.description,
                 study_method: menu.study_method,
               }

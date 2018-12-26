@@ -174,6 +174,10 @@
           <input type="text" name="name" class="form-control" v-model="course.name" placeholder="" required>
         </div>
         <div class="form-group">
+          <label for="">Course code </label>
+          <input type="text" name="code" class="form-control" v-model="course.code" placeholder="" required>
+        </div>
+        <div class="form-group">
           <label for=""> Course Category</label>
           <select name="course_category_id" class="form-control" v-model="course.course_category_id">
             <option value="">Select A Category</option>
@@ -181,14 +185,12 @@
           </select>
         </div>
         <div class="form-group" v-if="course.background_image == null">
-          <label for="">Image Background </label>
-          <input type="file" name="background_image" class="form-control">
+          <label for="">Image </label>
+          <croppa v-model="myCroppa" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
         </div>
         <div class="form-group" v-else>
-          <label for="">Image Background </label>
-          <br>
-          <img :src="'../../public/images/courses/'+course.background_image" class="img-fluid" />
-          <input type="file" name="background_image" class="form-control">
+          <label for="">Image </label> <br>
+          <croppa v-model="myCroppa" :initial-image="img" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
         </div>
         <div class="form-group">
           <label for="">Video Link </label>
@@ -214,10 +216,7 @@
           <label for="">Description</label>
           <editor name="description" v-model="course.description" :init="editor"></editor>
         </div>
-        <div class="form-group">
-          <label for="">Order By </label>
-          <input type="text" name="order_by" class="form-control" v-model="course.order_by" placeholder="" required>
-        </div>
+
         <div class="form-group">
           <label for="">Status</label>
           <select name="status" id="" v-model="course.status" class="form-control">

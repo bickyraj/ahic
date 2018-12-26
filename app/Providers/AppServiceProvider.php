@@ -60,9 +60,12 @@ class AppServiceProvider extends ServiceProvider
       else{
         $route = explode('/',$route);
         $route= $route[0];
-        // echo $route;
          if($route =='news')
         {
+        }
+        else if($route =='courses')
+        {
+          $route = 'courses';
         }
         else if($route =='course')
         {

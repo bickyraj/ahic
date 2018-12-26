@@ -19,18 +19,6 @@
                     <p v-if="error.name" class="text-danger"> {{error.name[0]}}</p>
                     </transition>
                   </div>
-                  <div class="form-group">
-                    <label for="">Image Background </label>
-                    <input type="file" name="image_background" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="">Order By </label>
-                    <input type="text" name="order_by" class="form-control" placeholder="" >
-                    <transition name="fade">
-                    <p v-if="error.order_by" class="text-danger"> {{error.order_by[0]}}</p>
-                    </transition>
-                  </div>
-
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Course Category</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
@@ -99,13 +87,6 @@
 
                   </div>
 
-                  <!-- <div class="form-group">
-                    <label for="">Status </label>
-                    <select name="status" :value="modalInfo.data.status" id="" class="form-control">
-                      <option value="0">Disable</option>
-                      <option value="1">Enable</option>
-                    </select>
-                  </div> -->
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>
