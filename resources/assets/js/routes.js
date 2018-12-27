@@ -214,6 +214,44 @@ const routes = [
         },
     },
     {
+        path: admin_url + 'newsletters',
+        component: require('./components/Admin/Newsletter/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Newsletter',
+                    path: admin_url + 'newsletters',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
+        path: admin_url + 'messages',
+        component: require('./components/Admin/Message/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Message',
+                    path: admin_url + 'messages',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
         path: admin_url + 'page/:id',
         component: require('./components/Admin/Page/Detail'),
         meta: {

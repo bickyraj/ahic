@@ -107,7 +107,7 @@
           <div class="width-4rem height-4 bg-primary my-2 mx-auto rounded"></div>
         </div>
         <div class="col-12 text-center">
-          <form action="" method="POST" class="card p-4 p-md-5 shadow-v1">
+          <form class="card p-4 p-md-5 shadow-v1 message_form">
             <p class="lead mt-2">
               @if (isset($contact->message))
                 {{$contact->message}}
@@ -115,17 +115,17 @@
             </p>
             <div class="row mt-5 mx-0">
               <div class="col-md-4 mb-4">
-                <input type="text" class="form-control" placeholder="Name" required>
+                <input type="text" class="form-control" name="name"placeholder="Name" required>
               </div>
               <div class="col-md-4 mb-4">
-                <input type="email" class="form-control" placeholder="Email" required>
+                <input type="email" class="form-control" name="email" placeholder="Email" required>
               </div>
               <div class="col-md-4 mb-4">
-                <input type="email" class="form-control" placeholder="Phone number">
+                <input type="text" class="form-control" name="contact" placeholder="Phone number">
               </div>
               <div class="col-12">
-                <textarea type="email" class="form-control" placeholder="Message" rows="7"></textarea>
-                <button type="submit" class="btn btn-primary mt-4">Send Message</button>
+                <textarea class="form-control" name="message" placeholder="Message" rows="7"></textarea>
+                <button type="button" class="btn btn-primary mt-4 message_submit_btn" >Send Message</button>
               </div>
             </div>
           </form>
@@ -142,4 +142,27 @@
      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13250.883453278017!2d151.209776!3d-33.871084!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae3fd16bca1d%3A0x257a681863c74dc2!2sLevel+4%2F114-120+Castlereagh+St%2C+Sydney+NSW+2000%2C+Australia!5e0!3m2!1sen!2snp!4v1542365664750" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 
+@endsection
+
+
+@section('script')
+  <script>
+    $('.message_submit_btn').click(function(event) {
+      event.preventDefault();
+      var formData = $('.message_form').serializeArray();
+
+      $.post('{{route('message')}}',formData,function(data){
+        $('.message_form').trigger('reset');
+        if(data =="true"){
+          //trigger message
+          alert('done');
+        }
+        else{
+          alert('not done');
+        }
+      }
+    )
+
+    });
+  </script>
 @endsection

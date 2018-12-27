@@ -391,7 +391,9 @@
                         </div>
     <div class="row" v-for="(n,qs) in q" :key="n" :ref="'Q'+n" :use="qs">
     <div class="col-md-12">
-        <label for="">Qualification </label> <small> <button class="btn-danger" @click.prevent="removeQ(n)"> Remove </button> </small>
+       <small class="float-right"> <button class="btn btn-danger" @click.prevent="removeQ(n)">
+         <i class="fa fa-minus-circle" aria-hidden="true"></i>
+ </button> </small>
         <!-- <input type="text" :value="n"> -->
     </div>
 
@@ -727,7 +729,7 @@
           this.fetchAgents();
           this.fetchCourses();
           this.fetchIntakes();
-              this.n = this.q.length;
+          this.n = this.q.length;
 
       },
       watch:{

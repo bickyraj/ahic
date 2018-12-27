@@ -22,8 +22,18 @@
                     <p v-if="error.pan" class="text-danger"> {{error.pan[0]}}</p>
                     </transition>
                   </div>
+
+                  <div class="form-group">
+                    <label for="">Start Date</label>
+                    <datepicker format="yyyy-MM-dd" name="start_date"  bootstrap-styling :initialView="'year'" ></datepicker>
+                    <transition name="fade">
+                    <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
+                    </transition>
+                  </div>
+
                   <div class="form-group">
                     <label for="">Logo</label>
+                    <br>
                     <croppa v-model="myCroppa"
              :width="200"
              :height="200"
@@ -72,18 +82,13 @@
                   </div>
                   <div class="form-group">
                     <label for="">Address</label>
-                    <input type="text" name="address" class="form-control" placeholder="" >
+                    <gmap-autocomplete class="form-control" name="address" placeholder=""></gmap-autocomplete>
+                    <!-- <input type="text" name="address" class="form-control" placeholder="" > -->
                     <transition name="fade">
                     <p v-if="error.address" class="text-danger"> {{error.address[0]}}</p>
                     </transition>
                   </div>
-                  <div class="form-group">
-                    <label for="">Start Date</label>
-                    <datepicker format="yyyy-MM-dd" name="start_date"  bootstrap-styling :initialView="'year'" ></datepicker>
-                    <transition name="fade">
-                    <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
-                    </transition>
-                  </div>
+
 
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Agent</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -158,8 +163,16 @@
                     <p v-if="error.pan" class="text-danger"> {{error.pan[0]}}</p>
                     </transition>
                   </div>
+                  <div class="form-group">
+                    <label for="">Start Date</label>
+                    <datepicker format="yyyy-MM-dd" name="start_date"  bootstrap-styling :initialView="'year'" :value="modalInfo.data.start_date"  ></datepicker>
+                    <transition name="fade">
+                    <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
+                    </transition>
+                  </div>
                         <div class="form-group" >
                     <label for="">Logo </label>
+                    <br>
                     <croppa v-model="myCroppa"
              :width="200"
              :height="200"
@@ -209,18 +222,12 @@
                   </div>
                   <div class="form-group">
                     <label for="">Address</label>
-                    <input type="text" name="address" class="form-control" :value="modalInfo.data.address" placeholder="" >
+                    <gmap-autocomplete class="form-control" name="address" :value="modalInfo.data.address" ></gmap-autocomplete>
                     <transition name="fade">
                     <p v-if="error.address" class="text-danger"> {{error.address[0]}}</p>
                     </transition>
                   </div>
-                  <div class="form-group">
-                    <label for="">Start Date</label>
-                    <datepicker format="yyyy-MM-dd" name="start_date"  bootstrap-styling :initialView="'year'" :value="modalInfo.data.start_date"  ></datepicker>
-                    <transition name="fade">
-                    <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
-                    </transition>
-                  </div>
+
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>

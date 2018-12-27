@@ -28,6 +28,7 @@ overflow-y:scroll;
           </div>
           <div class="col-md-6 float-left">
             <b-card class="col-md-12 mb-2 trump-card ">
+
               <div class="col-md-12">
                 <div class="card-title">
                   <div class="caption">
@@ -241,7 +242,9 @@ overflow-y:scroll;
           </div>
           <div class="form-group">
             <label for=""> Address </label>
-            <input type="text" name="address" class="form-control" :value="agent.address">
+            <gmap-autocomplete class="form-control" :value="agent.address" name="address"></gmap-autocomplete>
+
+            <!-- <input type="text" name="address" class="form-control" :value="agent.address"> -->
             <transition name="fade">
               <p v-if="error.address" class="text-danger"> {{error.address[0]}}</p>
             </transition>
@@ -319,7 +322,7 @@ overflow-y:scroll;
           </div>
           <div class="form-group">
             <label for=""> Country </label>
-            <select name="country" id="" class="form-control" @change="changeLocation" v-model="document.country">
+            <select name="country" id="" class="form-control" @change="changeLocation"  @load="changeLocation" v-model="document.country">
               <option value=""> Choose A Country</option>
               <option v-for="(country,index) in countries" :value="country.name" :key="country.name" :index="index"> {{country.name}} </option>
             </select>
@@ -351,8 +354,8 @@ overflow-y:scroll;
             <label for=""> Profile </label>
             <input type="file" name="profile" class="form-control">
           </div>
-          <b-btn class="mt-3 pull-right" variant="danger" @click="hideEditDocumentModal">Delete</b-btn>
           <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="primary" type="submit">Edit Document</b-btn>
+          <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="danger" @click="hideEditDocumentModal">Delete</b-btn>
           <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditDocumentModal">Cancel</b-btn>
         </form>
       </b-modal>
@@ -426,6 +429,9 @@ overflow-y:scroll;
       this.fetchAgent();
       this.fetchDocuments();
       this.fetchCountries();
+    },
+    watch:{
+
     },
     computed: {
       cropimage() {
@@ -565,6 +571,7 @@ overflow-y:scroll;
         formData.append('logo', self.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
             self.fetchDocuments();
+            self.fetchAgent();
             $(form)[0].reset();
             self.hideEditAgentModal();
             self.$toastr.s("A agent has been edited.");

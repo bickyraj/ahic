@@ -247,6 +247,23 @@ export default {
 
       ]
     },
+    {
+      name: 'Newsletters',
+      url: url + 'newsletters',
+      icon: 'fas fa-book-open',
+      badge: {
+        variant: 'primary',
+        // text: 'NEW'
+      }
+    },  {
+        name: 'Messages',
+        url: url + 'messages',
+        icon: 'fas fa-book-open',
+        badge: {
+          variant: 'primary',
+          // text: 'NEW'
+        }
+      },
 
     // {
     //   name: 'Page Modules',

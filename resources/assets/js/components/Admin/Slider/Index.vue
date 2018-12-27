@@ -28,6 +28,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Image </label>
+                    <br>
                     <croppa
                     v-model="myCroppa"
                     :width="332"
@@ -127,6 +128,7 @@
         </div>
         <div class="form-group" v-else>
           <label for="">Image </label>
+          <br>
           <croppa v-model="myCroppa" :width="332" :initial-image="img" :height="126" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :prevent-white-space="true">
           </croppa>
         </div>

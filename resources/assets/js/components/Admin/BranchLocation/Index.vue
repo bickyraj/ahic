@@ -20,7 +20,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Location</label>
-                    <input type="text" class="form-control" name="location" >
+                    <gmap-autocomplete class="form-control" name="location"></gmap-autocomplete>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Branch Location</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -80,12 +80,16 @@
                   </div>
                   <div class="form-group">
                     <label for="">Location</label>
-                      <input type="text" class="form-control" name="location" :value="modalInfo.data.location">
+                    <gmap-autocomplete class="form-control" name="location" :value="modalInfo.data.location"></gmap-autocomplete>
                   </div>
                   <div class="form-group">
                     <label for="">Status</label>
-                      <input type="text" class="form-control" name="status" :value="modalInfo.data.status">
+                    <select class="form-control" name="status" v-model="modalInfo.data.status" >
+                      <option value="0">Disable</option>
+                      <option value="1">Enable</option>
+                    </select>
                   </div>
+
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideLocationModal">Cancel</b-btn>
       </form>
@@ -124,7 +128,7 @@
             console.log(response.data.data);
             if (response.status === 200 || response.status === 201) {
               self.modalInfo.row = index
-              self.modalInfo.title = `Edit Branch Location`
+              self.modalInfo.title = `EDIT BRANCH LOCATION`
               self.modalInfo.data = response.data.data
               self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
               self.$root.$emit('bv::show::modal', 'modalInfo', button)
@@ -152,7 +156,7 @@
               self.$swal({
                 // position: 'top-end',
                 type: 'success',
-                title: 'Course Outcome updated successfully.',
+                title: 'Branch location updated successfully.',
                 showConfirmButton: true,
                 // timer: 1500,
                 customClass: 'crm-swal',
