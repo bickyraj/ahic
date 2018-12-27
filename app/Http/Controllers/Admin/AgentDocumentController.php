@@ -22,14 +22,20 @@ class AgentDocumentController extends Controller
         return Resource::collection($doc);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function validator($request){
+
+            $this->validate($request,[
+              'company_name'=>'required',
+              'location'=>'required',
+              'address'=>'required',
+              'country'=>'required',
+            ],
+            [
+              'company_name.required'=>'Company Name is required.',
+              'location.required'=>'Location is required.',
+              'address.required'=>'Address is required.',
+              'country.required'=>'Country is required.',
+            ]);
     }
 
     /**
@@ -40,6 +46,8 @@ class AgentDocumentController extends Controller
      */
     public function store(Request $request)
     {
+      $this->validator($request);
+      
         $data['agent_id']  = $request->agent_id;
         $data['company_name'] = $request->company_name;
         $data['location'] = $request->location;

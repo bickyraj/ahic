@@ -279,6 +279,9 @@ overflow-y:scroll;
           <div class="form-group">
             <label for=""> Company Name</label>
             <input type="text" name="company_name" class="form-control">
+            <transition name="fade">
+            <p v-if="error.company_name" class="text-danger"> {{error.company_name[0]}}</p>
+            </transition>
           </div>
           <div class="form-group">
             <label for=""> EOI </label>
@@ -303,6 +306,9 @@ overflow-y:scroll;
           <div class="form-group">
             <label for=""> Address </label>
             <gmap-autocomplete class="form-control" name="address"></gmap-autocomplete>
+            <transition name="fade">
+            <p v-if="error.address" class="text-danger"> {{error.address[0]}}</p>
+            </transition>
           </div>
           <div class="form-group">
             <label for=""> Country </label>
@@ -310,6 +316,9 @@ overflow-y:scroll;
               <option value=""> Choose A Country</option>
               <option v-for="(country,index) in countries" :value="country.name" :key="country.id" :index="index"> {{country.name}} </option>
             </select>
+            <transition name="fade">
+            <p v-if="error.country" class="text-danger"> {{error.country[0]}}</p>
+            </transition>
           </div>
           <div class="form-group">
             <label for=""> Location </label>
@@ -317,6 +326,9 @@ overflow-y:scroll;
               <option value=""> Choose A Location</option>
               <option v-for="country in locations" :value="country.location" :key="country.id"> {{country.location}} </option>
             </select>
+            <transition name="fade">
+            <p v-if="error.location" class="text-danger"> {{error.location[0]}}</p>
+            </transition>
           </div>
           <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add Company</b-btn>
           <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideAddCompanyModal">Cancel</b-btn>
@@ -328,6 +340,7 @@ overflow-y:scroll;
           <div class="form-group">
             <label for=""> Company Name</label>
             <input type="text" name="company_name" class="form-control" :value="document.company_name">
+
           </div>
           <div class="form-group">
             <label for=""> Address</label>
@@ -379,18 +392,30 @@ overflow-y:scroll;
           <div class="form-group">
             <label for=""> Sent Date</label>
             <datepicker format="yyyy-MM-dd" name="sent_date" bootstrap-styling :initialView="'year'"></datepicker>
+            <transition name="fade">
+            <p v-if="error.sent_date" class="text-danger"> {{error.sent_date[0]}}</p>
+            </transition>
           </div>
           <div class="form-group">
             <label for=""> Agreement </label>
             <input type="file" name="agreement" class="form-control">
+            <transition name="fade">
+            <p v-if="error.agreement" class="text-danger"> {{error.agreement[0]}}</p>
+            </transition>
           </div>
           <div class="form-group">
             <label for=""> Recieved Date </label>
             <datepicker format="yyyy-MM-dd" name="received_date" bootstrap-styling :initialView="'year'"></datepicker>
+            <transition name="fade">
+            <p v-if="error.received_date" class="text-danger"> {{error.received_date[0]}}</p>
+            </transition>
           </div>
           <div class="form-group">
             <label for=""> Signed </label>
             <input type="text" name="signed" class="form-control">
+            <transition name="fade">
+            <p v-if="error.signed" class="text-danger"> {{error.signed[0]}}</p>
+            </transition>
           </div>
           <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add Process</b-btn>
           <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideAddProcessModal">Cancel</b-btn>
@@ -510,9 +535,8 @@ overflow-y:scroll;
             self.$toastr.s("A agent agreement process has been added.");
           })
           .catch(function(error) {
-            if (error.response.status === 422) {
-              self.$toastr.e(error.response.data.errors.name);
-            }
+            self.error = '';
+            self.error = error.response.data.errors;
           });
       },
       editProcess() {
@@ -628,9 +652,9 @@ overflow-y:scroll;
             self.$toastr.s("A company has been added.");
           })
           .catch(function(error) {
-            if (error.response.status === 422) {
-              self.$toastr.e(error.response.data.errors.name);
-            }
+            self.error = '';
+            self.error = error.response.data.errors;
+
           });
       },
       showEditAgentModal() {

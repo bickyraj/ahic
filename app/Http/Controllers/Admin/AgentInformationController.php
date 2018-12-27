@@ -87,10 +87,9 @@ class AgentInformationController extends Controller
               'last_name'=>'required',
               'telephone'=>'required',
               'mobile_no'=>'required',
-              'email'=>'required',
+              'email'=>'required|email',
               'address'=>'required',
               'start_date'=>'required',
-              // 'image'=>'required',
             ],
             [
               'pan.required'=>'Registration Number is required.',
@@ -100,6 +99,7 @@ class AgentInformationController extends Controller
               'telephone.required'=>'Telephone is required.',
               'mobile_no.required'=>'Mobile Number is required.',
               'email.required'=>'Email is required.',
+              'email.email'=>'Valid email is required.',
               'address.required'=>'Address is required.',
               'start_date.required'=>'Start Date is required.',
             ]);
@@ -164,7 +164,7 @@ $this->validator($request);
     public function update(Request $request)
     {
       $this->validator($request);
-      
+
         $agent = AgentInformation::findOrFail($request->id);
         $data['pan'] = $request->input('pan');
      $data['first_name'] = $request->input('first_name');

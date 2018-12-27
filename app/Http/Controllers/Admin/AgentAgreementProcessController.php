@@ -9,34 +9,22 @@ class AgentAgreementProcessController extends Controller
 {
     public $destination = 'public/images/processes/';
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    public function validator($request){
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+            $this->validate($request,[
+              'sent_date'=>'required',
+              'signed'=>'required',
+              'received_date'=>'required',
+            ],
+            [
+              'sent_date.required'=>'Sent date is required.',
+              'signed.required'=>'Signed is required.',
+              'received_date.required'=>'Received date is required.',
+            ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+      $this->validator($request);
             $data['agent_id'] = $request->input('agent_id');
             $data['agent_document_id'] = $request->input('agent_document_id');
             $data['sent_date'] = $request->input('sent_date');
@@ -105,7 +93,7 @@ class AgentAgreementProcessController extends Controller
             $agreement->move($this->destination,$filename);
         }
         $updater = $process->update($data);
-        
+
     }
 
    public function destroy($id)
