@@ -111,7 +111,10 @@ overflow-y:scroll;
                   </table>
                 </div>
                 <div class="col-md-2">
-                  <img :src="$root.baseUrl+'/public/images/agents/'+agent.logo" alt="" class="img-fluid">
+
+                  <img  v-if="agent.logo" :src="$root.baseUrl+'/public/images/agents/'+agent.logo" alt="" class="img-fluid">
+                  <img  v-else :src="$root.baseUrl+'/public/ahic/img/logo-black.png'" alt="" class="img-fluid">
+
                   </div>
                   <hr>
                 </div>
@@ -289,7 +292,7 @@ overflow-y:scroll;
           </div>
           <div class="form-group">
             <label for=""> Address </label>
-            <input type="text" name="address" class="form-control">
+            <gmap-autocomplete class="form-control" name="address"></gmap-autocomplete>
           </div>
           <div class="form-group">
             <label for=""> Country </label>
@@ -318,7 +321,7 @@ overflow-y:scroll;
           </div>
           <div class="form-group">
             <label for=""> Address</label>
-            <input type="text" name="address" class="form-control" :value="document.address">
+                <gmap-autocomplete class="form-control" name="address" :value="document.address"></gmap-autocomplete>
           </div>
           <div class="form-group">
             <label for=""> Country </label>

@@ -153,11 +153,11 @@
         <input type="hidden" name="slug" v-model="slug">
                   <div class="form-group">
                     <label for="">Title </label>
-                    <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="" required>
+                    <input type="text" name="title" v-model="modalInfo.data.title" class="form-control" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="">Sub Title </label>
-                    <input type="text" name="sub_title" :value="modalInfo.data.sub_title" class="form-control" placeholder="" required>
+                    <input type="text" name="sub_title" v-model="modalInfo.data.sub_title" class="form-control" placeholder="" required>
                   </div>
                   <div class="form-group" v-if="modalInfo.data.image == null">
                     <label for="">Image  </label>
@@ -183,7 +183,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Link </label>
-                    <input type="text" name="sub_title" :value="modalInfo.data.link" class="form-control" placeholder="" >
+                    <input type="text" name="sub_title" v-model="modalInfo.data.link" class="form-control" placeholder="" >
                   </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update Content</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideNewsModal">Cancel</b-btn>
