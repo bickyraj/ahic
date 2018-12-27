@@ -15,11 +15,7 @@ class SliderController extends Controller
     if (!is_dir($this->images_dir)) {
       mkdir($this->images_dir);
     }
-<<<<<<< HEAD
-    }
-=======
   }
->>>>>>> 48c2b068a20b2e514b17ded8ce740375ead90efc
 
     public function index()
     {

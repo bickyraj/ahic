@@ -1,5 +1,5 @@
 <style lang="">
-    .vdp-datepicker__calendar{
+  .vdp-datepicker__calendar{
         background-color: black !important;
         color:white;
     }
@@ -11,7 +11,6 @@
         background-color: transparent !important;
     }
 </style>
-
 <template>
   <div class="animated">
     <b-row>
@@ -26,7 +25,7 @@
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add New Images">
                 <form @submit.prevent="addImages" ref="addImagesForm" enctype="multipart/form-data">
                   <div class="form-group">
-                    <label for="">Image  </label>
+                    <label for="">Image </label>
                     <input type="file" name="image[]" class="form-control" multiple>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Images</b-btn>
@@ -35,28 +34,27 @@
               </b-modal>
             </div>
           </div>
-
-                <table class="table trump-table table-hover">
+          <table class="table trump-table table-hover">
             <thead>
               <tr>
                 <th class="col-md-3">Image</th>
                 <th>Action</th>
               </tr>
             </thead>
-           <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" >
-
+            <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(images, index) in table_items" :key="images.id">
                 <td>
-                  <img :src="'../public/images/gallery/'+images.image" class="img-fluid" alt="">
-                  </td>
+                  <div style="width:200px;">
+                    <img :src="'../public/images/gallery/'+images.image" class="img-fluid" alt="">
+                  </div>
+                </td>
                 <td>
-                
                   <b-button size="sm" @click="deleteImages(images, index, $event.target)" class="mr-1 btn-danger">
                     Delete
                   </b-button>
                 </td>
               </tr>
-   </draggable>
+            </draggable>
             <tbody v-else>
               <tr>
                 <td colspan="4">
@@ -66,37 +64,30 @@
               </tr>
             </tbody>
           </table>
-
-
         </b-card>
       </b-col>
     </b-row>
-
-
-
   </div>
-
 </template>
-
 <script>
-    export default{
-        data(){
-            return{
+  export default {
+    data() {
+      return {
         loading: true,
         table_items: [],
-           modalInfo: {
+        modalInfo: {
           title: '',
           content: '',
           data: []
         },
-            }
-        },
-        created(){
-            this.fetchImages();
-        },
-        methods:{
-            fetchImages(){
-let vm = this;
+      }
+    },
+    created() {
+      this.fetchImages();
+    },
+    methods: {
+      fetchImages() {
+        let vm = this;
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/gallery';
         axios.get(url)
@@ -108,17 +99,17 @@ let vm = this;
             console.log(error);
             vm.loading = false;
           });
-            },
-          addImages() {
+      },
+      addImages() {
         var self = this;
         var form = self.$refs.addImagesForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/gallery';
         axios.post(url, formData).then(function(response) {
-              self.table_items = response.data.data;
-              $(form)[0].reset();
-              self.hideModal();
-              self.$toastr.s("Image/s has been added.");
+            self.table_items = response.data.data;
+            $(form)[0].reset();
+            self.hideModal();
+            self.$toastr.s("Image/s has been added.");
           })
           .catch(function(error) {
             if (error.response.status === 422) {
@@ -126,11 +117,10 @@ let vm = this;
             }
           });
       },
-            resetModal() {
+      resetModal() {
         this.modalInfo.title = 'Edit Images'
         this.modalInfo.content = ''
       },
-
       deleteImages: function(images, row, event) {
         var self = this;
         self.$swal({
@@ -165,25 +155,16 @@ let vm = this;
           }
         })
       },
-
-
-
-
-
-
-
-
-               updateCourseOrder() {
+      updateCourseOrder() {
         var self = this;
         let url = self.$root.baseUrl + '/api/admin/images/update-order';
-      	axios.post(url, self.table_items)
-		.then(function (response) {
-			if (response.data.status === 1) {
-				self.$toastr.s("Order Updated");
-			}
-    })
-            },
-
+        axios.post(url, self.table_items)
+          .then(function(response) {
+            if (response.data.status === 1) {
+              self.$toastr.s("Order Updated");
+            }
+          })
+      },
       showModal() {
         this.$refs.myModalRef.show()
       },
@@ -193,6 +174,6 @@ let vm = this;
       hideImagesModal() {
         this.$refs.editModal.hide();
       },
-        },
-    }
+    },
+  }
 </script>

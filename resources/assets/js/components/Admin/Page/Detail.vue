@@ -59,12 +59,12 @@
         </div>
         <div class="form-group" v-else>
           <label for="">Image </label> <br>
-          <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
+          <croppa v-model="myCroppa" :initial-image="img" :width="384" :height="54" placeholder="Click to choose an image" :placeholder-font-size="14" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
         </div>
         <div class="form-group">
           <label for="">Parent page</label>
           <select v-bind:value="page.parent_id" name="parent_id" class="form-control">
-            <option value=""> Select PArent Page </option>
+            <option value=""> Select Parent Page </option>
             <option v-for="page in pages" :value="page.id" :key="page.id"> {{page.name}}</option>
           </select>
         </div>
