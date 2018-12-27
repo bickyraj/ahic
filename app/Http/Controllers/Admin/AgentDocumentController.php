@@ -204,8 +204,8 @@ class AgentDocumentController extends Controller
             $this->destroyimage($old);
             $ext = $eoi->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
-            $course->EOI = $filename;
-            $file->move($this->destination,$filename);
+            $data['EOI'] = $filename;
+            $eoi->move($this->destination,$filename);
 
         }
         $abn = $request->file('ABN');
@@ -215,7 +215,7 @@ class AgentDocumentController extends Controller
             $ext = $abn->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $data['ABN'] = $filename;
-            $file->move($this->destination,$filename);
+            $abn->move($this->destination,$filename);
 
         }
         $reference = $request->file('reference');
@@ -225,7 +225,7 @@ class AgentDocumentController extends Controller
             $ext = $reference->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $data['reference'] = $filename;
-            $file->move($this->destination,$filename);
+            $reference->move($this->destination,$filename);
 
         }
         $qualification = $request->file('qualification');
@@ -235,7 +235,7 @@ class AgentDocumentController extends Controller
             $ext = $qualification->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
             $data['qualification'] = $filename;
-            $file->move($this->destination,$filename);
+            $qualification->move($this->destination,$filename);
 
         }
         $profile = $request->file('profile');
@@ -244,8 +244,8 @@ class AgentDocumentController extends Controller
             $this->destroyimage($old);
             $ext = $profile->getClientOriginalExtension();
             $filename = md5(rand(0,999999)).'.'.$ext;
-            $$data['profile'] = $filename;
-            $file->move($this->destination,$filename);
+            $data['profile'] = $filename;
+            $profile->move($this->destination,$filename);
 
         }
         $updater = $doc->update($data);

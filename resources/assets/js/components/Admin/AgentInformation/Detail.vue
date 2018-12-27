@@ -113,7 +113,7 @@ overflow-y:scroll;
                 <div class="col-md-2">
 
                   <img  v-if="agent.logo" :src="$root.baseUrl+'/public/images/agents/'+agent.logo" alt="" class="img-fluid">
-                  <img  v-else :src="$root.baseUrl+'/public/ahic/img/logo-black.png'" alt="" class="img-fluid">
+                  <img  v-else :src="$root.baseUrl+'/public/ahic/img/logo-black.png'" alt="" style="max-height:100px">
 
                   </div>
                   <hr>
@@ -130,23 +130,33 @@ overflow-y:scroll;
                         <table class="table table-borderless">
                           <tr>
                             <th class="col-md-1"> EOI <span class="float-right">:</span> </th>
-                            <td class="col-md-8"> {{company.EOI}} </td>
+                            <a :href="$root.baseUrl+'/public/images/documents/'+company.EOI" download>
+                              <td class="col-md-8"> {{company.EOI}} </td>
+                            </a>
                           </tr>
                           <tr>
                             <th class="col-md-2"> ABN <span class="float-right">:</span> </th>
+                            <a :href="$root.baseUrl+'/public/images/documents/'+company.ABN" download>
                             <td class="col-md-8"> {{company.ABN}}</td>
+                          </a>
                           </tr>
                           <tr>
                             <th class="col-md-2"> Reference <span class="float-right">:</span> </th>
+                            <a :href="$root.baseUrl+'/public/images/documents/'+company.reference" download>
                             <td class="col-md-8"> {{company.reference}}</td>
+                          </a>
                           </tr>
                           <tr>
-                            <th class="col-md-2"> Qualification <span class="float-right">:</span> </th>
+                            <th class="col-md-3"> Qualification <span class="float-right">:</span> </th>
+                            <a :href="$root.baseUrl+'/public/images/documents/'+company.qualification" download>
                             <td class="col-md-8"> {{company.qualification}}</td>
+                          </a>
                           </tr>
                           <tr>
                             <th class="col-md-2"> Profile <span class="float-right">:</span> </th>
+                            <a :href="$root.baseUrl+'/public/images/documents/'+company.profile" download>
                             <td class="col-md-8"> {{company.profile}}</td>
+                          </a>
                           </tr>
                         </table>
                         <p class="pt-3" v-html="agent.description"></p>
@@ -166,19 +176,19 @@ overflow-y:scroll;
                         <div v-if="company.process">
                           <table class="table table-borderless">
                             <tr>
-                              <th class="col-md-6"> Sent Date <span class="float-right">:</span> </th>
+                              <th class="col-md-4"> Sent Date <span class="float-right">:</span> </th>
                               <td class="col-md-8"> {{company.process.sent_date}} </td>
                             </tr>
                             <tr>
-                              <th class="col-md-6"> Agreement <span class="float-right">:</span> </th>
+                              <th class="col-md-4"> Agreement <span class="float-right">:</span> </th>
                               <td class="col-md-8"> {{company.process.agreement}} </td>
                             </tr>
                             <tr>
-                              <th class="col-md-6"> Recieve Date <span class="float-right">:</span> </th>
+                              <th class="col-md-4"> Recieve Date <span class="float-right">:</span> </th>
                               <td class="col-md-8"> {{company.process.received_date}} </td>
                             </tr>
                             <tr>
-                              <th class="col-md-6"> Signed <span class="float-right">:</span> </th>
+                              <th class="col-md-4"> Signed <span class="float-right">:</span> </th>
                               <td class="col-md-8"> {{company.process.signed}} </td>
                             </tr>
                           </table>
@@ -358,7 +368,7 @@ overflow-y:scroll;
             <input type="file" name="profile" class="form-control">
           </div>
           <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="primary" type="submit">Edit Document</b-btn>
-          <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="danger" @click="hideEditDocumentModal">Delete</b-btn>
+          <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="danger" @click.stop="deleter(document.id)">Delete</b-btn>
           <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditDocumentModal">Cancel</b-btn>
         </form>
       </b-modal>
@@ -376,7 +386,7 @@ overflow-y:scroll;
           </div>
           <div class="form-group">
             <label for=""> Recieved Date </label>
-            <datepicker format="yyyy-MM-dd" name="recieved_date" bootstrap-styling :initialView="'year'"></datepicker>
+            <datepicker format="yyyy-MM-dd" name="received_date" bootstrap-styling :initialView="'year'"></datepicker>
           </div>
           <div class="form-group">
             <label for=""> Signed </label>
@@ -447,6 +457,24 @@ overflow-y:scroll;
       },
     },
     methods: {
+      deleter(id){
+        let vm = this;
+        let self = this;
+        let url = self.$root.baseUrl + '/api/admin/agent_document/'+id;
+        axios.delete(url)
+          .then(function(response) {
+            self.hideEditDocumentModal();
+
+            self.fetchAgent();
+            self.fetchDocuments();
+            self.fetchCountries();
+            vm.loading = false;
+          })
+          .catch(function(error) {
+            console.log(error);
+            vm.loading = false;
+          });
+      },
       changeLocation(event) {
         var self = this;
         let index = (event.target.selectedOptions[0].index);
@@ -628,7 +656,6 @@ overflow-y:scroll;
               country = response.data;
               let url = self.$root.baseUrl + '/api/admin/branch_locations/';
               axios.get(url + country).then(function(response) {
-                console.log(response.data.data);
                 self.locations = response.data.data.locations;
               })
             })
