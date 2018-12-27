@@ -123,7 +123,7 @@
         </div>
         <div class="form-group">
           <label> Description </label>
-          <editor name="description" :init="editor" :value="modalInfo.data.description"></editor>
+          <editor name="description" :init="editor" v-model="modalInfo.data.description"></editor>
         </div>
         <div class="form-group">
           <label for="">Status </label>
@@ -158,6 +158,10 @@
           setup: function(editor) {
             editor.on('change', function() {
               editor.save();
+            });
+            editor.on('load', function () {
+              console.log('loaded');
+                editor.save();
             });
           },
           image_title: true,

@@ -24,7 +24,7 @@
                 <h5><i class="fas fa-key"></i> Header </h5>
               </div>
               <div class="caption card-title-actions">
-                <b-button v-if="header" @click.stop="info('header',$event.target)" variant="success" class="btn btn-sm green pull-right">Edit Header</b-button>
+                <b-button v-if="header" @click="info('header',$event.target)" variant="success" class="btn btn-sm green pull-right">Edit Header</b-button>
                 <b-button v-else @click="showModal('header')" variant="primary" class="btn btn-sm green pull-right">Add New Header</b-button>
               </div>
             </div>
@@ -139,25 +139,26 @@
 
     <b-modal class="ess-modal" ref="myModalRef" hide-footer :title="'Add New Content'">
       <form @submit.prevent="addData" ref="addNewsForm" enctype="multipart/form-data">
-        <input type="" name="slug"  ref="slug">
+        <input type="hidden" name="slug"  ref="slug">
         <div class="form-group">
           <label for="">Title </label>
           <input type="text" name="title" class="form-control" placeholder="" required>
         </div>
         <div class="form-group">
           <label for="">Sub Title </label>
-          <input type="text" name="sub_title" class="form-control" placeholder="" required>
+          <input type="text" name="sub_title" class="form-control" placeholder="" >
         </div>
         <div class="form-group">
           <label for="">Image  </label>
-          <croppa v-model="myCroppa"
-   :width="crop.width"
-   :height="crop.height"
-   placeholder="Choose an image"
-   :placeholder-font-size="0"
-   :disabled="false"
-   :quality="crop.scale"
-   :prevent-white-space="true"
+          <croppa
+           v-model="myCroppa"
+           :width="crop.width"
+           :height="crop.height"
+           placeholder="Choose an image"
+           :placeholder-font-size="0"
+           :disabled="false"
+           :quality="crop.scale"
+           :prevent-white-space="true"
 >
 </croppa >
         </div>
@@ -178,7 +179,7 @@
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
       <form @submit.prevent="editNews" :row="modalInfo.row" ref="editNewsForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
-        <input type="" name="slug" v-model="slug">
+        <input type="hidden" name="slug" v-model="slug">
                   <div class="form-group">
                     <label for="">Title </label>
                     <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="" required>
@@ -193,23 +194,21 @@
                   </div>
                   <div class="form-group" v-else>
                     <label for="">Image  </label> <br>
-               <croppa v-model="myCroppa"
-
-        :width="crop.width"
-        :height="crop.height"
-        :initial-image="cropimage"
-        placeholder="Choose an image"
-        :placeholder-font-size="0"
-        :disabled="false"
-        :quality="crop.scale"
-
-        :prevent-white-space="true"
->
-</croppa >
+                         <croppa v-model="myCroppa"
+                            :width="crop.width"
+                            :height="crop.height"
+                            :initial-image="cropimage"
+                            placeholder="Choose an image"
+                            :placeholder-font-size="0"
+                            :disabled="false"
+                            :quality="crop.scale"
+                            :prevent-white-space="true"
+                          >
+                          </croppa >
                   </div>
                     <div class="form-group">
                         <label> Description </label>
-                   <editor name="description"  :init="editor" :value="modalInfo.data.description"></editor>
+                   <editor name="description"  :init="editor" v-model="modalInfo.data.description"></editor>
                   </div>
                   <div class="form-group">
                     <label for="">Link </label>
@@ -228,33 +227,33 @@
     export default{
         data(){
             return{
-              myCroppa:'',
+              myCroppa:{},
               crop:{
-              height:null,
-              width:null,
-              scale:null,
+              height:200,
+              width:300,
+              scale:1.2,
               },
               slug:'',
               header:'',
               lc:'',
               rc:'',
               welcome:'',
-        loading: true,
-        table_items: [],
-           modalInfo: {
-          title: '',
-          content: '',
-          data: []
-        },
-           editor:{
-          plugins:['table','link','image code'],
-          toolbar:['undo redo | link image |code'],
-           setup: function (editor) {
-        editor.on('change', function () {
-            editor.save();
-        });
+                loading: true,
+                table_items: [],
+                   modalInfo: {
+                  title: '',
+                  content: '',
+                  data: []
+                },
+                   editor:{
+                  plugins:['table','link','image code'],
+                  toolbar:['undo redo | link image |code'],
+                   setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save();
+                });
 
-    },
+            },
           image_title:true,
           automatic_uploads: true,
           file_picker_types: 'image',
@@ -294,21 +293,22 @@
         },
         watch:{
           slug(){
-              if(this.slug == "lc" || this.slug=="rc"){
-                this.crop.height = 224;
-                this.crop.width = 384;
-                this.crop.scale = 2.5;
+            var self = this;
+              if(self.slug == "lc" || self.slug=="rc"){
+                self.crop.height = 224;
+                self.crop.width = 384;
+                self.crop.scale = 2.5;
               }
-              else if(this.slug="welcome"){
-                this.crop.height = 400;
-                this.crop.width = 400;
-                this.crop.scale = 2.5;
+              else if(self.slug="welcome"){
+                self.crop.height = 400;
+                self.crop.width = 400;
+                self.crop.scale = 2.5;
 
               }
-              else if(this.slug="header"){
-                this.crop.height = 400;
-                this.crop.width = 400;
-                this.crop.scale = 2.5;
+              else if(self.slug="header"){
+                self.crop.height = 400;
+                self.crop.width = 400;
+                self.crop.scale = 2.5;
               }
           },
             table_items(){
@@ -351,7 +351,7 @@
         methods:{
            capitalizeString(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
-},
+          },
 
           info(slug,button) {
              let self = this;
@@ -398,7 +398,6 @@ let vm = this;
         let url = self.$root.baseUrl + '/api/admin/cms';
                 formData.append('image',this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
-              self.table_items = response.data.data;
               $(form)[0].reset();
               self.hideModal();
               self.$toastr.s("Content has been added.");
@@ -423,6 +422,7 @@ let vm = this;
         let url = self.$root.baseUrl + '/api/admin/cms/edit';
         axios.post(url, formData).then(function(response) {
            self.table_items = response.data.data;
+           $(form)[0].reset();
               self.hideNewsModal();
               self.$swal({
                 // position: 'top-end',
@@ -478,6 +478,7 @@ let vm = this;
 
       showModal(slug) {
         var self  = this
+        self.slug = slug
         self.$refs.slug.value=slug
         self.$refs.myModalRef.show()
       },

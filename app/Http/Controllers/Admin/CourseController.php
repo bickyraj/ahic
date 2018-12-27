@@ -28,9 +28,9 @@ class CourseController extends Controller
         'duration' =>' required',
         'study_method' =>' required',
         'description' =>' required',
-        'order_by' =>' required',
         'onshore_fee' =>' required',
         'offshore_fee' =>' required',
+        'code' =>' required',
       ],
       [
         'name.required' =>'Course name is required',
@@ -38,9 +38,9 @@ class CourseController extends Controller
         'duration.required' =>' Course duration required',
         'study_method.required' =>'Course study method required',
         'description.required' =>'Course description required',
-        'order_by.required' =>'Course order by required',
         'onshore_fee.required' =>'Course onshore fee required',
         'offshore_fee.required' =>'Course offshore fee required',
+        'code.required' =>'Course code is required',
       ]);
     }
 
@@ -69,7 +69,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
       $this->validator($request);
-      
+
      $course = new Course;
         $course->name = $request->input('name');
         $course->course_category_id = $request->input('course_category_id');
@@ -80,6 +80,7 @@ class CourseController extends Controller
         $course->order_by = $request->input('order_by');
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
+        $course->code = $request->input('code');
         $course->status = 1;
         $course->order_by = 1;
         $image = $request->background_image;
@@ -162,6 +163,7 @@ class CourseController extends Controller
         $course->description = $request->input('description');
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
+        $course->code = $request->input('code');
         // $course->status = $request->input('status');
         $image = $request->background_image;
       $image_array_1 = explode(";", $image);
@@ -203,6 +205,7 @@ class CourseController extends Controller
         $course->duration = $request->input('duration');
         $course->study_method = $request->input('study_method');
         $course->description = $request->input('description');
+        $course->code = $request->input('code');
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
         // $course->status = $request->input('status');

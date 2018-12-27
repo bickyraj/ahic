@@ -12,10 +12,10 @@
             </p>
            </div>
             <ul class="list-inline">
-              <li class="list-inline-item"><a class="iconbox bg-white-0_2 hover:primary" href="{{$contact['facebopk']}}"><i class="ti-facebook"> </i></a></li>
-              <li class="list-inline-item"><a class="iconbox bg-white-0_2 hover:primary" href="{{$contact['twitter']}}"><i class="ti-twitter"> </i></a></li>
-              <li class="list-inline-item"><a class="iconbox bg-white-0_2 hover:primary" href="{{$contact['in']}}"><i class="ti-linkedin"> </i></a></li>
-              <li class="list-inline-item"><a class="iconbox bg-white-0_2 hover:primary" href="{{$contact['pin']}}"><i class="ti-pinterest"></i></a></li>
+              <li class="list-inline-item"><a class="iconbox bg-white-0_2 hover:primary" href="{{$contact['fb']}}"><i class="ti-facebook"> </i></a></li>
+              <li class="list-inline-item"><a class="iconbox bg-white-0_2 hover:primary" href="{{$contact['tw']}}"><i class="ti-twitter"> </i></a></li>
+              <li class="list-inline-item"><a class="iconbox bg-white-0_2 hover:primary" href="{{$contact['in']}}"><i class="ti-instagram"> </i></a></li>
+              <li class="list-inline-item"><a class="iconbox bg-white-0_2 hover:primary" href="{{$contact['yt']}}"><i class="ti-youtube"></i></a></li>
             </ul>
           </div>
 
@@ -29,7 +29,7 @@
                <div class="media">
                 <i class="ti-location-pin mt-2 mr-3"></i>
                 <div class="media-body">
-                  <span>{{$contact['address']}}</span>
+                  <span>{{$contact['address']}} {{$contact['street_name']}}</span>
                 </div>
                </div>
               </li>

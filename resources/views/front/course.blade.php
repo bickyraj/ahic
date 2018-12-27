@@ -11,19 +11,6 @@
 @endsection
 @section('content')
 
-    <div class="site-search">
-     <div class="site-search__close bg-black-0_8"></div>
-     <form class="form-site-search" action="#" method="POST">
-      <div class="input-group">
-        <input type="text" placeholder="Search" class="form-control py-3 border-white" required="">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit"><i class="ti-search"></i></button>
-        </div>
-      </div>
-     </form>
-    </div> <!-- END site-search-->
-
-
 
   <div class="padding-y-60 bg-cover" data-dark-overlay="6" >
     <div class="container">
@@ -32,15 +19,17 @@
         <ol class="breadcrumb breadcrumb-double-angle bg-transparent p-0">
           <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
           <li class="breadcrumb-item"><a href="{{route('courses')}}">Courses</a></li>
+          <li class="breadcrumb-item"><a href="{{route('course', \Request::segment(2))}}">  {{ str_replace('_', ' ', \Request::segment(2)) }} </a></li>
           <li class="breadcrumb-item">Details</li>
         </ol>
         <h2 class="h1">
           Courses Details
         </h2>
        </div>
-        <form class="col-lg-5 my-2 ml-auto">
+        <form class="col-lg-5 my-2 ml-auto" action="{{route('search')}}" method="POST">
+          {{csrf_field()}}
           <div class="input-group bg-white rounded p-1">
-            <input type="text" class="form-control border-white" placeholder="What do you want to learn?" required="">
+            <input type="text" class="form-control border-white" placeholder="What do you want to learn?" required="" name="search_term">
             <div class="input-group-append">
               <button class="btn btn-info rounded" type="submit">
                 Search
@@ -102,7 +91,12 @@
           </div> <!-- END row-->
 
           <div class="ec-video-container my-4">
+            @if($course->background_image)
+
             <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="" class="img-fluid">
+          @else
+            <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+          @endif
             <!-- <iframe src="https://www.youtube.com/embed/nrJtHemSPW4?rel=0"></iframe> -->
           </div>
 
@@ -353,7 +347,7 @@
                   <div class="accordion-item list-group mb-3">
 
                     <div class="list-group-item bg-light">
-                     <a class="row" href="#accordionPaymentOption_1" data-toggle="collapse" aria-expanded="true">
+                     <a class="row" href="#accordionPaymentOption_{{$option->id}}" data-toggle="collapse" aria-expanded="true">
                        <span class="col-9 col-md-8">
                          <span class="accordion__icon text-primary mr-2">
                           <i class="ti-plus"></i>
@@ -370,7 +364,7 @@
                      </a>
                     </div>
 
-                    <div id="accordionPaymentOption_1" class="collapse show" data-parent="#accordionPaymentOption">
+                    <div id="accordionPaymentOption_{{$option->id}}" class="collapse show" data-parent="#accordionPaymentOption">
 
                       <div class="list-group-item text-primary text-left">
                         {!!html_entity_decode($option->description)!!}

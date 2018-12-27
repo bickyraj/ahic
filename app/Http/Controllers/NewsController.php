@@ -18,9 +18,16 @@ class NewsController extends Controller
     {
         $slug = str_replace('_', ' ', $news);
         $news = News::where('title',$slug)->first();
-        $latest = News::orderBy('date','desc')->limit(3)->get();
-        return view('front.singleNews',compact('news','latest'));
+        if($news){
+          $news = News::where('title',$slug)->first();
+          $latest = News::orderBy('date','desc')->limit(3)->get();
+          return view('front.singleNews',compact('news','latest'));
+        }
+        else{
+          return redirect()->route('news');
+        }
+
     }
 
-  
+
 }

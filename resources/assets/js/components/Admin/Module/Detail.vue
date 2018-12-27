@@ -68,7 +68,7 @@
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(m, index) in table_items" :key="m.id">
                 <!-- <td>{{ m.module.title}}</td> -->
-                <td>{{ m.title.substring(0,165) + ".."}}</td>
+                <td>{{ m.title}}</td>
                        <!-- <td v-if="m.image"> <img :src="'../public/images/module/'+m.image" class="img-fluid" /></td>
                        <td v-else> - - </td> -->
                 <td>

@@ -14,13 +14,16 @@ class CreateContactsTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('address');
-            $table->string('facebook')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('in')->nullable();
-            $table->string('pin')->nullable();
             $table->string('ABN')->nullable();
             $table->string('RTO')->nullable();
             $table->string('CRICOS')->nullable();
+            $table->string('street_name');
+            $table->string('call_time');
+            $table->string('fb')->nullable();
+            $table->string('in')->nullable();
+            $table->string('tw')->nullable();
+            $table->string('yt')->nullable();
+            $table->string('message');
             $table->timestamps();
         });
     }

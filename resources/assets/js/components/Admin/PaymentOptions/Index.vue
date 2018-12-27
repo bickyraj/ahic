@@ -84,7 +84,7 @@
         <input type="hidden" name="id" :value="modalInfo.data.id">
         <div class="form-group">
           <label for="exampleFormControlInput1">Title</label>
-          <input type="text" name="title" v-bind:value="modalInfo.data.title" class="form-control" placeholder="" required>
+          <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="" required>
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1">Description</label>
@@ -172,7 +172,7 @@
             if (response.status === 200 || response.status === 201) {
               self.option = response.data.data
               self.modalInfo.row = index
-              self.modalInfo.title = `Edit Role`
+              self.modalInfo.title = `Edit Payment Option`
               self.modalInfo.data = response.data.data
               self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
               self.$root.$emit('bv::show::modal', 'modalInfo', button)
@@ -199,7 +199,7 @@
               self.$swal({
                 // position: 'top-end',
                 type: 'success',
-                title: 'Role updated successfully.',
+                title: 'Payment option successfully.',
                 showConfirmButton: true,
                 // timer: 1500,
                 customClass: 'crm-swal',
@@ -256,7 +256,7 @@
          self.table_items = response.data.data;
               $(form)[0].reset();
               self.hideModal();
-              self.$toastr.s("A role has been added.");
+              self.$toastr.s("A payment option has been added.");
           })
           .catch(function(error) {
             if (error.response.status === 422) {

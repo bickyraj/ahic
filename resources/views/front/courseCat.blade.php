@@ -10,18 +10,6 @@
 </style>
 @endsection
 @section('content')
-  <div class="site-search">
-   <div class="site-search__close bg-black-0_8"></div>
-   <form class="form-site-search" action="#" method="POST">
-    <div class="input-group">
-      <input type="text" placeholder="Search" class="form-control py-3 border-white" required="">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="submit"><i class="ti-search"></i></button>
-      </div>
-    </div>
-   </form>
-  </div> <!-- END site-search-->
-
 
 
 
@@ -36,23 +24,24 @@
         <li class="breadcrumb-item"> {{ str_replace('_', ' ', \Request::segment(2)) }}</li>
       </ol>
       <h2 class="h1">
-        All AHIC Courses
+      {{ str_replace('_', ' ', \Request::segment(2)) }}
       </h2>
       <!-- <p class="lead">
         <span class="text-primary">13</span> courses found
       </p> -->
      </div>
-      <form class="col-lg-5 my-2 ml-auto">
-        <div class="input-group bg-white rounded p-1">
-          <input type="text" class="form-control border-white" placeholder="What do you want to learn?" required="">
-          <div class="input-group-append">
-            <button class="btn btn-info rounded" type="submit">
-              Search
-              <i class="ti-angle-right small"></i>
-            </button>
-          </div>
-        </div>
-      </form>
+     <form class="col-lg-5 my-2 ml-auto" action="{{route('search')}}" method="POST">
+       {{csrf_field()}}
+       <div class="input-group bg-white rounded p-1">
+         <input type="text" class="form-control border-white" placeholder="What do you want to learn?" required="" name="search_term">
+         <div class="input-group-append">
+           <button class="btn btn-info rounded" type="submit">
+             Search
+             <i class="ti-angle-right small"></i>
+           </button>
+         </div>
+       </div>
+     </form>
    </div>
   </div>
 </div>
@@ -103,7 +92,12 @@
         @endphp
         <div class="col-lg-4 col-md-6 marginTop-30">
           <div href="{{route('courseCategory',$course->name)}}" class="card height-100p text-gray shadow-v1">
-            <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
+            @if($course->background_image)
+              <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
+@else
+  <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+
+            @endif
             <div class="card-body">
 
               <a href="{{route('course',$stripped)}}" class="h5">

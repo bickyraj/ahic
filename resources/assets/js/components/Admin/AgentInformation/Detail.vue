@@ -404,7 +404,7 @@ overflow-y:scroll;
   export default {
     data() {
       return {
-        myCroppa: '',
+        myCroppa:{},
         error: '',
         agent: '',
         process: '',

@@ -10,21 +10,6 @@
 </style>
 @endsection
 @section('content')
-  <div class="site-search">
-   <div class="site-search__close bg-black-0_8"></div>
-   <form class="form-site-search" action="#" method="POST">
-    <div class="input-group">
-      <input type="text" placeholder="Search" class="form-control py-3 border-white" required="">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="submit"><i class="ti-search"></i></button>
-      </div>
-    </div>
-   </form>
-  </div> <!-- END site-search-->
-
-
-
-
 
 <div class="padding-y-60 bg-cover" data-dark-overlay="6" >
   <div class="container">
@@ -44,17 +29,18 @@
         <span class="text-primary">13</span> courses found
       </p> -->
      </div>
-      <form class="col-lg-5 my-2 ml-auto">
-        <div class="input-group bg-white rounded p-1">
-          <input type="text" class="form-control border-white" placeholder="What do you want to learn?" required="">
-          <div class="input-group-append">
-            <button class="btn btn-info rounded" type="submit">
-              Search
-              <i class="ti-angle-right small"></i>
-            </button>
-          </div>
-        </div>
-      </form>
+     <form class="col-lg-5 my-2 ml-auto" action="{{route('search')}}" method="POST">
+       {{csrf_field()}}
+       <div class="input-group bg-white rounded p-1">
+         <input type="text" class="form-control border-white" placeholder="What do you want to learn?" required="" name="search_term">
+         <div class="input-group-append">
+           <button class="btn btn-info rounded" type="submit">
+             Search
+             <i class="ti-angle-right small"></i>
+           </button>
+         </div>
+       </div>
+     </form>
    </div>
   </div>
 </div>
@@ -98,6 +84,11 @@
 <section class="padding-y-60 bg-light-v2">
   <div class="container">
     <div class="row">
+      @if (count($courses) > 0 )
+
+        @else
+          <p> No matcing courses were found. </p>
+      @endif
       @foreach ($courses as $course)
         @php
           $stripped = str_replace(' ', '_', $course->name);
@@ -113,9 +104,9 @@
               <p class="my-3">
                 {{$course->category->name}}
               </p>
-              <p class="mb-0">
+              {{-- <p class="mb-0">
                 {{ str_limit($course->description, 130) }}
-              </p>
+              </p> --}}
 
             </div>
             <div class="card-footer media align-items-center justify-content-between">
@@ -124,10 +115,10 @@
                   @php
                     $string = explode(' ',$course->duration);
                   @endphp
-                    @if(isset($string[0])
+                    @if(isset($string[0]))
                   {{$string[0]}}
                   @endif
-                    @if(isset($string[1])
+                    @if(isset($string[1]))
                   {{$string[1]}}
                   @endif
 
@@ -145,9 +136,6 @@
 
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function() {
-
-  });
   function changeCategory(el){
     var v = el.value;
     v = 'courses/' +v;
@@ -155,6 +143,8 @@
     window.location.replace(v);
 
   }
+
+
 
 </script>
 @endsection

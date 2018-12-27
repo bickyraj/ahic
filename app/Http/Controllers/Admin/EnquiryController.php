@@ -11,7 +11,7 @@ class EnquiryController extends Controller
 {
    public function index()
     {
-        $enqs = Enquiry::with('country','course')->get();
+        $enqs = Enquiry::with('country','course')->latest()->get();
         return Resource::collection($enqs);
     }
 
@@ -59,7 +59,7 @@ class EnquiryController extends Controller
          $e = Enquiry::findOrFail($id);
          $e->status = $request->val;
          $e->save();
-         $enqs = Enquiry::all();
+         $enqs = Enquiry::with('country','course')->get();
          return Resource::collection($enqs);
      }
 

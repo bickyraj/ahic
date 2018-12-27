@@ -45,8 +45,14 @@
              <div class="media">
                <span class="iconbox iconbox-md bg-primary text-white"><i class="ti-mobile"></i></span>
                <div class="media-body ml-3">
-                <h5 class="mb-0">{{$contact->phone}}</h5>
-                <p>Call Us (8AM-10PM)</p>
+                <h5 class="mb-0">
+@if (isset($contact->phone))
+  {{$contact->phone}}
+@endif
+                </h5>
+                @if (isset($contact->call_time))
+                  <p> Call Us ({{$contact->call_time}}) </p>
+                @endif
                </div>
              </div>
            </div>
@@ -55,8 +61,13 @@
              <div class="media">
                <span class="iconbox iconbox-md bg-primary text-white"><i class="ti-email"></i></span>
                <div class="media-body ml-3">
-                <a href="mailto:{{$contact->email}}" class="h5">{{$contact->email}}</a>
-                <p>Call Us (8AM-10PM)</p>
+                 @if (isset($contact->email))
+                   <a href="mailto:{{$contact->email}}" class="h5">{{$contact->email}}</a>
+                 @endif
+
+                 @if (isset($contact->call_time))
+                   <p> Call Us ({{$contact->call_time}}) </p>
+                 @endif
                </div>
              </div>
            </div>
@@ -66,8 +77,15 @@
                <span class="iconbox iconbox-md bg-primary text-white"><i class="ti-location-pin"></i></span>
                <div class="media-body ml-3">
                 <h5 class="mb-0">
-                  Sydney NSW 2000, Australia</h5>
-                <p>114-120 Castlereagh Street</p>
+                  @if (isset($contact->address))
+                    {{$contact->address}}
+                  @endif
+                  </h5>
+                <p>
+                  @if (isset($contact->street_name))
+                    {{$contact->street_name}}
+                  @endif
+                </p>
                </div>
              </div>
            </div>
@@ -91,7 +109,9 @@
         <div class="col-12 text-center">
           <form action="" method="POST" class="card p-4 p-md-5 shadow-v1">
             <p class="lead mt-2">
-              Investig tiones demons travge wunt ectores legere lkurus quod legunt saepiu clear <br> tasest consectetur adipi sicing elitsed eusmod tempor cididunt.
+              @if (isset($contact->message))
+                {{$contact->message}}
+              @endif
             </p>
             <div class="row mt-5 mx-0">
               <div class="col-md-4 mb-4">

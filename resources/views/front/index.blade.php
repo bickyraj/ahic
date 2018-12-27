@@ -1,17 +1,7 @@
 @extends('layouts.master')
 @section('content')
-<div class="site-search">
-    <div class="site-search__close bg-black-0_8"></div>
-    <form class="form-site-search" action="#" method="POST">
-        <div class="input-group">
-            <input type="text" placeholder="Search" class="form-control py-3 border-white" required="">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit"><i class="ti-search"></i></button>
-            </div>
-        </div>
-    </form>
-</div> <!-- END site-search-->
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  @if (isset($sliders) && count($sliders) > 0 )
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
     <div class="carousel-inner">
         @foreach ($sliders as $slider)
         <div class="carousel-item padding-y-80 height-80vh @if($sliders[0] == $slider) active @endif">
@@ -41,7 +31,12 @@
     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
       <i class="ti-angle-right iconbox bg-black-0_5 hover:primary"></i>
     </a>
-</div>
+  </div>
+
+@endif
+
+
+@if (isset($header))
 <section class="padding-y-100">
     <div class="container">
         <div class="row">
@@ -89,66 +84,77 @@
                             <span class="lead font-semiBold text-uppercase">
               Enquiry Form
             </span>
-                        </div>
-                        <div class="p-4 border-bottom wow fadeInUp">
-                            <form id="enquiry_form">
-                                @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif
-                                <div class="form-group">
-                                    <input type="text" class="form-control name" placeholder="Name" name="name">
-                                    <span class="error text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control email" placeholder="Email" name="email">
-                                    <span class="error text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control phone" placeholder="Phone" name="phone">
-                                    <span class="error text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select data-placeholder="Select Course" class="chosen-select ec-select my_select_box course_id" tabindex="5" name="course_id">
-                                            <option value="" selected="selected"></option>
-                                            @foreach ($courses as $course)
-                                            <option value="{{$course->id}}">{{$course->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="error text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select data-placeholder="Your Country" class="select ec-select country_id" tabindex="3" name="country_id">
-                                            <option value="" selected="selected"></option>
-                                            @foreach ($countries as $country)
-                                            <option value="{{$country->id}}">{{$country->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="error text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control message" placeholder="Message" name="message"></textarea>
-                                    <span class="error text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary mr-3 mb-3 enquiry_btn" type="button" style="float:right;">Submit</button>
-                                </div>
-                        </div>
-                        </form>
-                    </div>
+          </div>
+
+          <div class="p-4 border-bottom wow fadeInUp">
+<form id="enquiry_form" name="enquiry_form">
+
+          @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
+                <div class="form-group">
+                 <input type="text" class="form-control name" placeholder="Name" name="name" >
+                 <span class="error text-danger"></span>
                 </div>
-            </div> <!-- END row-->
-        </div> <!-- END container-->
+                <div class="form-group">
+                 <input type="text" class="form-control email" placeholder="Email" name="email" >
+                 <span class="error text-danger"></span>
+                </div>
+                <div class="form-group">
+                 <input type="text" class="form-control phone" placeholder="Phone" name="phone" >
+                 <span class="error text-danger"></span>
+                </div>
+                <div class="form-group">
+                <div class="input-group">
+                  <select data-placeholder="Select Course" class="chosen-select ec-select my_select_box course_id" id="course_id" tabindex="5" name="course_id" >
+                    <option value="" selected="selected"></option>
+                    @foreach ($courses as $course)
+                      <option value="{{$course->id}}">{{$course->name}}</option>
+                    @endforeach
+                  </select>
+                  <span class="error text-danger"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <select data-placeholder="Your Country" class="select ec-select country_id" tabindex="3" id="country_id" name="country_id" >
+              <option value="" selected="selected"></option>
+              @foreach ($countries as $country)
+                <option value="{{$country->id}}">{{$country->name}}</option>
+              @endforeach
+
+            </select>
+            <span class="error text-danger"></span>
+
+
+                </div>
+              </div>
+                <div class="form-group">
+                   <textarea class="form-control message" placeholder="Message" name="message" ></textarea>
+                   <span class="error text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary mr-3 mb-3 enquiry_btn" type="button" style="float:right;"  >Submit</button>
+                </div>
+            </div>
+
+</form>
+
+        </div>
+      </div>
+    </div> <!-- END row-->
+  </div> <!-- END container-->
 </section>
+
+@endif
+@if (isset($courses) && count($courses) > 0 )
 <section class="padding-y-100 bg-light">
     <div class="container">
         <div class="row">
@@ -209,6 +215,7 @@
         </div> <!-- END row-->
     </div> <!-- END container-->
 </section>
+@endif
 @if (isset($lc) && isset($rc))
 <section>
     <div class="container-fluid">
@@ -239,6 +246,7 @@
     </div> <!-- END container-->
 </section>
 @endif
+@if (isset($news) && count($news) > 0 )
 <section class="padding-y-100 bg-light-v2">
     <div class="container">
         <div class="row">
@@ -283,6 +291,9 @@
         </div> <!-- END row-->
     </div> <!-- END container-->
 </section>
+@endif
+
+@if (isset($gallery) && count($gallery) > 0 )
 <section class="paddingTop-100">
     <div class="container-fluid">
         <div class="row">
@@ -306,6 +317,7 @@
         </div> <!-- END row-->
     </div> <!-- END container-->
 </section>
+@endif
 @endsection
 @section('style')
 <style media="screen">
@@ -323,103 +335,38 @@
 </style>
 @endsection
 @section('script')
-<script type="text/javascript">
-$.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-$('.enquiry_btn').click(function(event) {
-    $(this).parent().parent().find('.error').each(function() {
-        $(this).text(' ');
-    })
-    event.preventDefault();
-    var form = $('#enquiry_form');
-    var formData = form.serializeArray();
-    // console.log(formData);
-    var url = "{{route('enquiry')}}";
-
-    $.post(url, formData)
-        .done(function(data) {
-            if (data == 'true') {
-                form.trigger('reset');
-                $.notify({
-                    // options
-                    icon: 'glyphicon glyphicon-warning-sign',
-                    message: 'Thank You For Enquiry',
-                    target: '_blank'
-                }, {
-                    // settings
-                    element: 'body',
-                    position: null,
-                    type: "success",
-                    allow_dismiss: true,
-                    newest_on_top: false,
-                    showProgressbar: false,
-                    placement: {
-                        from: "top",
-                        align: "center"
-                    },
-                    offset: 120,
-                    spacing: 10,
-                    z_index: 1031,
-                    delay: 5000,
-                    timer: 1000,
-                    url_target: '_blank',
-                    mouse_over: null,
-                    animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
-                    },
-                    onShow: null,
-                    onShown: null,
-                    onClose: null,
-                    onClosed: null,
-                    icon_type: 'class',
-                });
-            } else if (data == 'false') {
-
-
-                $.notify({
-                    // options
-                    icon: 'glyphicon glyphicon-warning-sign',
-                    message: 'Enquiry Failed',
-                    target: '_blank'
-                }, {
-                    // settings
-                    element: 'body',
-                    position: null,
-                    type: "danger",
-                    allow_dismiss: true,
-                    newest_on_top: false,
-                    showProgressbar: false,
-                    placement: {
-                        from: "top",
-                        align: "center"
-                    },
-                    offset: 120,
-                    spacing: 10,
-                    z_index: 1031,
-                    delay: 5000,
-                    timer: 1000,
-                    url_target: '_blank',
-                    mouse_over: null,
-                    animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
-                    },
-                    onShow: null,
-                    onShown: null,
-                    onClose: null,
-                    onClosed: null,
-                    icon_type: 'class',
-                });
+  <script type="text/javascript">
+      // reset handler that clears the form
+      function reseter(){
+          $('form[name="enquiry_form"]')
+              .find(':radio, :checkbox').removeAttr('checked').end()
+              .find('textarea, :text, select').val('')
 
             }
-        })
-        .fail(function(xhr, status, error) {
-            jQuery.each(xhr.responseJSON.errors, function(key, value) {
-                $("." + key).parent().find('.error').text(value);
-            });
 
-            // alert('lets fo it');
-        });
-});
-</script>
+
+
+  $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+      $('.enquiry_btn').click(function(event){
+        $(this).parent().parent().find('.error').each(function(){
+          $(this).text(' ');
+        })
+        event.preventDefault();
+        var form = $('#enquiry_form');
+        var formData = form.serializeArray();
+        var url = "{{route('enquiry')}}";
+
+        $.post(url, formData)
+    .done(function(data){
+location.reload();
+    })
+    .fail(function(xhr, status, error) {
+        jQuery.each(xhr.responseJSON.errors, function(key, value){
+          $("."+key).parent().find('.error').text(value);
+    });
+
+          // alert('lets fo it');
+      });
+      });
+  </script>
 @endsection

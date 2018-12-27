@@ -24,11 +24,9 @@ class CourseCategoryController extends Controller
     public function validator($request){
       $this->validate($request,[
         'name'=>'required',
-        'order_by'=>'required',
       ],
       [
         'name.required' => 'Course category title is required',
-        'order_by.required' => 'Course order by is required',
       ]);
     }
 
@@ -50,10 +48,10 @@ public function getName($id){
     public function store(Request $request)
     {
       $this->validator($request);
-      
+
         $category = new CourseCategory;
         $category->name = $request->input('name');
-        $category->order_by = $request->input('order_by');
+        $category->order_by =1;
         $file = $request->file('image_background');
         $category->status = 1;
         if($file != null){
@@ -88,7 +86,6 @@ public function getName($id){
         $id = $request->id;
         $category = CourseCategory::findOrFail($id);
         $category->name = $request->name;
-        $category->order_by = $request->order_by;
            $file = $request->file('image_background');
         if($file != null){
             $oldimg = $category->image_background;

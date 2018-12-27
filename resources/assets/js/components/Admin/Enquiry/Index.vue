@@ -12,12 +12,21 @@
             <thead>
               <tr>
                 <th class="col-md-3">Enquiry Date</th>
+                <th class="col-md-3">Name</th>
+                <th class="col-md-3">Status</th>
                 <th class="col-md-2">Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(enquiry, index) in table_items" :key="enquiry.id" >
-                <td>{{ enquiry.created_at }}</td>
+                <td>{{ format(enquiry.created_at) }}</td>
+                <td>{{ enquiry.name }}</td>
+        <td>
+          <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,$event.target)">
+            <option value="1">Pending</option>
+            <option value="2">Verified</option>
+            <option value="3">Applied</option>
+          </select></td>
                 <td><button class="btn btn-success" @click="view(enquiry,index)"> View </button></td>
               </tr>
             </tbody>
@@ -95,6 +104,7 @@
   </div>
 </template>
 <script>
+   import moment from 'moment'
   export default {
     data() {
       return {
@@ -124,6 +134,9 @@
       }
     },
     methods: {
+      format(date){
+          return moment(String(date)).format('MMM DD, YYYY')
+      },
       close(){
         this.enquiry = null
       },
