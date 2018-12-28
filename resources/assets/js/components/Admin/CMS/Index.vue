@@ -37,7 +37,7 @@
                         <br>
                         {{lc.sub_title}}
                         <br>
-                        <span :html="lc.description">
+                        <span v-html="lc.description">
                         </span>
                         <br>
                         {{lc.link}}
@@ -66,7 +66,7 @@
                       <br>
                       {{rc.sub_title}}
                       <br>
-                      <span :html="rc.description">
+                      <span v-html="rc.description">
                       </span>
                       <br>
                       {{rc.link}}
@@ -95,7 +95,7 @@
                       <br>
                       {{welcome.sub_title}}
                       <br>
-                      <span :html="welcome.description">
+                      <span v-html="welcome.description">
                       </span>
                       <br>
                       {{welcome.link}}
