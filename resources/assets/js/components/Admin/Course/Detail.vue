@@ -26,7 +26,7 @@
             </div>
             <div>
               <h5> Course Description </h5>
-              <img v-if="course.background_image" :src="'../../public/images/courses/'+course.background_image" class="img-fluid" />
+              <img v-if="course.background_image" :src="$root.baseUrl+'/public/images/courses/'+course.background_image" class="img-fluid col-md-6" />
               <h5>
                 <small v-if="course.category">
                   Category : {{course.category.name}}
@@ -75,7 +75,11 @@
             <div class="col-md-12" v-for="category in ucategories" :key="category.id">
               <h5> {{category.name}} </h5>
               <ul class="">
-                <li v-for="c in competences" :key="c.id" v-if="c.course_unit_category_id == category.id"> {{c.competence.description}}<span class="ml-5">  {{c.competence.unit_code}} </span> <i class="fas fa-times-circle text-danger float-right " @click="remove($event,c.id)" type="course_unit_relation"></i> </li>
+                <li v-for="c in competences" :key="c.id" v-if="c.course_unit_category_id == category.id">
+                   {{c.competence.description}}
+                    <i class="fas fa-times-circle text-danger float-right " @click="remove($event,c.id)" type="course_unit_relation"></i>
+                    <span class="ml-5 float-right mr-5">  {{c.competence.unit_code}} </span>
+                  </li>
               </ul>
             </div>
           </b-card>
@@ -91,7 +95,10 @@
               <b-collapse visible id="collapse1">
                 <div class="col-md-12">
                   <ul class="no-m-p">
-                    <li v-for="require in course.requirements" :key="require.id"> {{require.description}} <i class="fas fa-times-circle text-danger float-right " @click="remove($event,require.id)" type="course_entry_requirement"></i> </li>
+                    <li v-for="require in course.requirements" :key="require.id">
+                       {{require.description}}
+                      <i class="fas fa-times-circle text-danger float-right " @click="remove($event,require.id)" type="course_entry_requirement"></i>
+                     </li>
                   </ul>
                 </div>
               </b-collapse>
@@ -115,7 +122,10 @@
                 <b-collapse visible id="collapse2">
                   <div class="col-md-12">
                     <ul class="no-m-p">
-                      <li v-for="outcome in course.outcomes" :key="outcome.id"> {{outcome.description}}<i class="fas fa-times-circle text-danger float-right " @click="remove($event,outcome.id)" type="career_outcome"></i> </li>
+                      <li v-for="outcome in course.outcomes" :key="outcome.id">
+                        {{outcome.description}}
+                        <i class="fas fa-times-circle text-danger float-right " @click="remove($event,outcome.id)" type="career_outcome"></i>
+                      </li>
                     </ul>
                   </div>
                 </b-collapse>
@@ -310,7 +320,7 @@
         <div class="form-group">
           <label for=""> Competence</label>
           <select name="course_unit_competence_id" id="" class="form-control">
-            <option v-for="c in acompetences" :value="c.id" :key="c.id"> {{c.description}} </option>
+            <option v-for="c in acompetences" :value="c.id" :key="c.id"> {{c.unit_code}} </option>
           </select>
         </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add Competence</b-btn>
@@ -323,6 +333,7 @@
   export default {
     data() {
       return {
+        myCroppa:{},
         ucategories: '',
         categories: '',
         acompetences: '',
@@ -339,7 +350,6 @@
               editor.save();
             });
             editor.on('load', function() {
-              console.log('loaded');
               editor.save();
             });
           },
@@ -354,7 +364,14 @@
       this.fetchUCategories();
       this.fetchCompetences();
     },
-    computed: {},
+    computed: {
+      img() {
+        if (this.course.background_image != null) {
+          this.myCroppa.refresh()
+          return this.$root.baseUrl+'/public/images/courses/' + this.course.background_image
+        }
+      }
+    },
     methods: {
       remove(event, id) {
         console.log(id);
@@ -362,7 +379,6 @@
         let vm = this;
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/' + type + '/';
-        console.log(url);
         axios.delete(url + id).then(function(response) {
             if (type == 'course_unit_relation') {
               self.$toastr.s("A course unit relation has been removed.");
@@ -451,11 +467,10 @@
       editCourse() {
         var self = this;
         var form = self.$refs.editCourseForm;
-        console.log(form);
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course/update';
+        formData.append('image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
-            console.log(response);
             self.fetchCourse();
             $(form)[0].reset();
             self.hideEditCourseModal();
@@ -470,7 +485,6 @@
       addCareer() {
         var self = this;
         var form = self.$refs.addCareerForm;
-        console.log(form);
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/career_outcome';
         axios.post(url, formData).then(function(response) {
@@ -488,7 +502,6 @@
       addRequirement() {
         var self = this;
         var form = self.$refs.addReqForm;
-        console.log(form);
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course_entry_requirement';
         axios.post(url, formData).then(function(response) {
@@ -506,13 +519,12 @@
       addAssessment() {
         var self = this;
         var form = self.$refs.addAssessmentForm;
-        console.log(form);
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course_assessment';
         axios.post(url, formData).then(function(response) {
             self.fetchCourse();
             $(form)[0].reset();
-            self.hideReqModal();
+            self.hideAssessmentModal();
             self.$toastr.s("A course assessment has been added.");
           })
           .catch(function(error) {
@@ -547,7 +559,7 @@
         axios.post(url, formData).then(function(response) {
             self.fetchCourse();
             $(form)[0].reset();
-            self.hideReqModal();
+            self.hideRPLModal();
             self.$toastr.s("A course RPL has been added.");
           })
           .catch(function(error) {

@@ -1,11 +1,8 @@
 <script src="{{asset('/')}}public/ahic/js/vendors.bundle.js"></script>
 <script src="{{asset('/')}}public/ahic/js/scripts.js"></script>
 <script src="{{asset('/')}}public/ahic/js/bootstrap-notify.min.js"></script>
-<script type="text/javascript">
+<script src="{{asset('/')}}public/modal/jquery.modal.min.js"> </script>
 
-
-
-</script>
 @yield('script')
 
 
@@ -33,7 +30,9 @@ $('.subscribe_btn').click(function(event) {
     $.post('{{route('newsletter')}}',{email:email},function(data){
       if(data =="true"){
         $('#subscribe_email').val('');
-        alert('subscribed');
+            $('#ex1').modal({
+              fadeDuration: 250
+            });
         //thanks for subscribing
       }
 

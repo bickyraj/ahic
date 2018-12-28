@@ -35,6 +35,14 @@
 
 @endif
 
+<div id="ex1" class="modal">
+  <h2> Thank You for subscribing.</h2>
+  <p> That felt good.</p>
+</div>
+<div id="ex2" class="modal">
+  <h2> Thank You for enquiry.</h2>
+  <p> We will be back to you soon.</p>
+</div>
 
 @if (isset($header))
 <section class="padding-y-100">
@@ -67,12 +75,12 @@
              @endif
 
             </h2>
-                            <p class="my-4">
-                                @if ($header['description'])
-                                {!!html_entity_decode($header['description'])!!}
-                                @endif
-                            </p>
-                            <a href="{{route('welcome')}}" class="btn btn-outline-primary">
+            <p class="my-4">
+              @if ($header['description'])
+                {{ str_limit(strip_tags($header['description']), 75) }}
+            @endif
+            </p>
+            <a href="{{route('welcome')}}" class="btn btn-outline-primary">
               Read More
             </a>
                         </div>
@@ -321,7 +329,12 @@
 @endsection
 @section('style')
 <style media="screen">
-    .owl-carousel{
+.z-index-5 {
+
+    z-index: 1;
+
+}
+.owl-carousel{
 }
 .bg{
   height:300px;
@@ -332,9 +345,11 @@
   .error.text-danger{
       font-size:15px !important;
   }
+
 </style>
 @endsection
 @section('script')
+
   <script type="text/javascript">
       // reset handler that clears the form
       function reseter(){
@@ -358,7 +373,13 @@
 
         $.post(url, formData)
     .done(function(data){
-location.reload();
+      $('#ex2').modal({
+        fadeDuration: 250
+      });
+      NewForm('enquiry_form');
+      // form.trigger('reset');
+
+// location.reload();
     })
     .fail(function(xhr, status, error) {
         jQuery.each(xhr.responseJSON.errors, function(key, value){

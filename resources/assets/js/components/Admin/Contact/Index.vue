@@ -8,7 +8,7 @@
               <h5><i class="fas fa-key"></i> Contact </h5>
             </div>
             <div class="caption card-title-actions">
-              <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right" v-if="table_items.length == 0 ">Add Contact Details</b-button>
+              <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right" v-if="table_items && table_items.length == 0 ">Add Contact Details</b-button>
               <b-button @click="edit" variant="success" class="btn btn-sm green pull-right" v-else>Edit</b-button>
             </div>
           </div>
@@ -16,61 +16,61 @@
           <table class="table">
             <tr>
               <th class="text-uppercase">name</th>
-              <td>{{table_items.name}}</td>
+              <td v-if="table_items.name">{{table_items.name}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">phone</th>
-              <td>{{table_items.phone}}</td>
+              <td v-if="table_items.phone">{{table_items.phone}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">address</th>
-              <td>{{table_items.address}}</td>
+              <td v-if="table_items.address">{{table_items.address}}</td>
             </tr>
 
             <tr>
               <th class="text-uppercase">street name</th>
-              <td>{{table_items.street_name}}</td>
+              <td v-if="table_items.street_name">{{table_items.street_name}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">email</th>
-              <td>{{table_items.email}}</td>
+              <td v-if="table_items.email">{{table_items.email}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">Facebook</th>
-              <td>{{table_items.fb}}</td>
+              <td v-if="table_items.fb">{{table_items.fb}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">Instagram</th>
-              <td>{{table_items.in}}</td>
+              <td v-if="table_items.in">{{table_items.in}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">Twitter</th>
-              <td>{{table_items.tw}}</td>
+              <td v-if="table_items.tw">{{table_items.tw}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">Youtube</th>
-              <td>{{table_items.yt}}</td>
+              <td v-if="table_items.yt">{{table_items.yt}}</td>
             </tr>
 
             <tr>
               <th class="text-uppercase">ABN</th>
-              <td>{{table_items.ABN}}</td>
+              <td v-if="table_items.ABN">{{table_items.ABN}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">RTO</th>
-              <td>{{table_items.RTO}}</td>
+              <td v-if="table_items.RTO">{{table_items.RTO}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">CRICOS</th>
-              <td>{{table_items.CRICOS}}</td>
+              <td v-if="table_items.CRICOS">{{table_items.CRICOS}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">Call Time</th>
-              <td>{{table_items.call_time}}</td>
+              <td v-if="table_items.call_time">{{table_items.call_time}}</td>
             </tr>
             <tr>
               <th class="text-uppercase">Message</th>
-              <td>{{table_items.message}}</td>
+              <td v-if="table_items.message">{{table_items.message}}</td>
             </tr>
           </table>
 
@@ -278,7 +278,7 @@ export default {
       var formData = new FormData(form);
       let url = self.$root.baseUrl + '/api/admin/contact';
       axios.post(url, formData).then(function(response) {
-        self.table_items= response.data.data[0];
+          self.table_items= response.data.data[0];
         $(form)[0].reset();
         self.hideModal();
         self.$toastr.s("Contact data has been added.");
@@ -295,7 +295,9 @@ export default {
       let url = self.$root.baseUrl + '/api/admin/contact';
       axios.get(url)
       .then(function(response) {
-        vm.table_items = response.data.data[0];
+        if(response.data.data[0]){
+          self.table_items= response.data.data[0];
+        }
         vm.loading = false;
       })
       .catch(function(error) {

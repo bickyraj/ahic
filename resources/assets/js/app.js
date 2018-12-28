@@ -73,7 +73,7 @@ Vue.component('datepicker', Datepicker);
   import 'vue-croppa/dist/vue-croppa.css'
   import Croppa from 'vue-croppa'
 
-Vue.use(Croppa)       
+Vue.use(Croppa)
 
 Vue.component('draggable', draggable)
 Vue.component('editor', Editor)
@@ -114,6 +114,9 @@ Vue.use(VueSweetalert2);
 import Toastr from 'vue-toastr';
 require('vue-toastr/src/vue-toastr.scss');
 Vue.use(Toastr);
+
+import vmodal from 'vue-js-modal'
+    Vue.use(vmodal)
 
 import datePicker from 'vue-bootstrap-datetimepicker';
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';

@@ -11,7 +11,6 @@
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Course Category</b-button>
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add Course Category">
                 <form @submit.prevent="addCategory" ref="addCategoryForm" enctype="multipart/form-data">
-
                   <div class="form-group">
                     <label for="">Name </label>
                     <input type="text" name="name" class="form-control" placeholder="">
@@ -125,7 +124,7 @@
             console.log(response.data.data);
             if (response.status === 200 || response.status === 201) {
               self.modalInfo.row = index
-              self.modalInfo.title = `Edit Menu`
+              self.modalInfo.title = `Edit Course Category`
               self.modalInfo.data = response.data.data
               self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
               self.$root.$emit('bv::show::modal', 'modalInfo', button)
@@ -136,7 +135,7 @@
           });
       },
       resetModal() {
-        this.modalInfo.title = 'Edit Menu'
+        this.modalInfo.title = 'Edit Course Category'
         this.modalInfo.content = ''
       },
       editMenu: function() {

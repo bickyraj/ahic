@@ -274,7 +274,6 @@
         let url = self.$root.baseUrl + '/api/admin/intakes';
         axios.get(url)
           .then(function(response) {
-            console.log(response.data.data);
             vm.table_items = response.data.data;
             vm.loading = false;
           })

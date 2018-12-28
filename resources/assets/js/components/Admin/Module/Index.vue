@@ -20,7 +20,10 @@
                   </div>
                   <div class="form-group">
                     <label for="">Display Type</label>
-                    <input type="text" name="display_type" class="form-control" placeholder="">
+                    <select name="display_type" id="" class="form-control">
+                      <option value="1">Plain</option>
+                      <option value="2">Listing</option>
+                    </select>
                     <transition name="fade">
                       <p v-if="error.display_type" class="text-danger"> {{error.display_type[0]}}</p>
                     </transition>
@@ -35,16 +38,12 @@
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Display Type</th>
-                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(module, index) in table_items" :key="module.id">
                 <td> {{ module.title}} </td>
-                <td>{{ module.display_type}}</td>
-                <td>{{ module.status}}</td>
                 <td>
                   <router-link :to="'module/'+module.id">
                     <b-button size="sm" class="mr-1 btn-primary">
@@ -82,17 +81,17 @@
         </div>
         <div class="form-group">
           <label for="">Display Type</label>
-          <input type="text" name="display_type" v-bind:value="modalInfo.data.display_type" class="form-control" placeholder="" required>
+          <select name="display_type" :value="modalInfo.data.display_type" id="" class="form-control">
+            <option value="1">Plain</option>
+            <option value="2">Listing</option>
+          </select>
         </div>
-        <div class="form-group">
-          <label for="">Status</label>
           <div class="form-group">
             <label for="">Status </label>
             <select name="status" :value="modalInfo.data.status" id="" class="form-control">
               <option value="0">Disable</option>
               <option value="1">Enable</option>
             </select>
-          </div>
         </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModuleModal">Cancel</b-btn>

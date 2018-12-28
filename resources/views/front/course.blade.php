@@ -171,172 +171,180 @@
                 </p>
                 <div class="row mt-5">
 
-
+                  @if (count($course->requirements)>0)
                   <div class="col-md-6 my-2">
                    <h4>
                      Course Requirments
                    </h4>
                     <ul class="list-unstyled list-style-icon list-icon-check">
-                      @if ($course->requirements)
                         @foreach ($course->requirements as $requirement)
                           <li>{{$requirement->description}}</li>
                         @endforeach
-                      @else
-                        <p> No Requirements Added Yet</p>
-                      @endif
-
                     </ul>
                   </div>
+                @endif
 
+                @if(count($course->outcomes)>0)
                   <div class="col-md-6 my-2">
                    <h4>
                      Career Oppurtunities
                    </h4>
                     <ul class="list-unstyled list-style-icon list-icon-bullet">
-                      @if($course->outcomes)
                       @foreach ($course->outcomes as $outcome)
                         <li>{{$outcome->description}}</li>
                       @endforeach
-                    @else
-                      <p> No Requirements Added Yet</p>
-                    @endif
                     </ul>
                   </div>
+                @endif
 
+                @if (count($course->assessment)>0)
                   <div class="col-md-6 my-2">
                    <h4>
                      Assessments Methods
                    </h4>
                     <p>
-                      @if ($course->assessment)
                         {{ strip_tags($course->assessment->description) }}
-                      @endif
                     </p>
                   </div>
+                @endif
+
+                @if (count($course->rpl)>0)
                   <div class="col-md-6 my-2">
                    <h4>
                      Recognition of Prior Learning (RPL)
                    </h4>
                    <p>
-                     @if ($course->rpl)
                        {{ strip_tags($course->rpl->description) }}
-                     @endif
                    </p>
-
                   </div>
+                @endif
+
                 </div> <!-- END row-->
               </div> <!-- END tab-pane-->
 
               <div class="tab-pane fade" id="tabCurriculum" role="tabpanel">
               <div id="accordionCurriculum">
 
-                <div class="accordion-item list-group mb-3">
-                  <div class="list-group-item bg-light">
-                   <a class="row" href="#accordionCurriculum_1" data-toggle="collapse" aria-expanded="true">
-                     <span class="col-9 col-md-8">
-                       <span class="accordion__icon text-primary mr-2">
-                        <i class="ti-plus"></i>
-                        <i class="ti-minus"></i>
-                      </span>
-                      <span class="h6 d-inline">Elective Units</span>
-                     </span>
-                     <span class="col-2 d-none d-md-block text-right">
-                       <!-- 6 Lectures -->
-                     </span>
-                     <span class="col-3 col-md-2 text-right">
+                @php
+                  $count =0;
+                @endphp
+                @foreach ($course->relation as $relation)
+                    @if ($relation->course_unit_category_id == '2')
                        @php
-                         $count =0;
+                         $count++;
                        @endphp
-                       @foreach ($course->relation as $relation)
-                           @if ($relation->course_unit_category_id == '2')
-                              @php
-                                $count++;
-                              @endphp
-                           @endif
-                       @endforeach
-                        {{$count}} Units
+                    @endif
+                @endforeach
 
+
+@if ($count >0)
+
+                  <div class="accordion-item list-group mb-3">
+                    <div class="list-group-item bg-light">
+                     <a class="row" href="#accordionCurriculum_1" data-toggle="collapse" aria-expanded="true">
+                       <span class="col-9 col-md-8">
+                         <span class="accordion__icon text-primary mr-2">
+                          <i class="ti-plus"></i>
+                          <i class="ti-minus"></i>
+                        </span>
+                        <span class="h6 d-inline">Elective Units</span>
+                       </span>
+                       <span class="col-2 d-none d-md-block text-right">
+                         <!-- 6 Lectures -->
+                       </span>
+                       <span class="col-3 col-md-2 text-right">
+
+                          {{$count}} Units
+
+                       </span>
+                     </a>
+                    </div>
+
+                    <div id="accordionCurriculum_1" class="collapse show" data-parent="#accordionCurriculum">
+
+                        @foreach ($course->relation as $relation)
+                            @if ($relation->course_unit_category_id == '2')
+                              <div class="list-group-item">
+                                <span class="row">
+                                  <a class="col-9 col-md-8" href="#">
+                                    <i class="ti-control-play small mr-1 text-primary"></i>
+                                    {{$relation->competence->description}}
+                                  </a>
+
+                                  <span class="col-3 col-md-2 ml-auto text-right">
+                                    {{$relation->competence->unit_code}}
+                                   </span>
+                                </span>
+                              </div>
+                            @endif
+                        @endforeach
+                    </div>
+                  </div> <!-- END accordion-item -->
+@endif
+
+
+
+
+
+@php
+  $count =0;
+@endphp
+@foreach ($course->relation as $relation)
+    @if ($relation->course_unit_category_id == '1')
+       @php
+         $count++;
+       @endphp
+    @endif
+@endforeach
+
+    @if ($count >0)
+      <div class="accordion-item list-group mb-3">
+
+        <div class="list-group-item bg-light">
+         <a class="row collapsed" href="#accordionCurriculum_2" data-toggle="collapse" aria-expanded="true">
+           <span class="col-9 col-md-8">
+             <span class="accordion__icon text-primary mr-2">
+              <i class="ti-plus"></i>
+              <i class="ti-minus"></i>
+            </span>
+            <span class="h6 d-inline">Core Units</span>
+           </span>
+           <span class="col-2 d-none d-md-block text-right">
+             <!-- 19 Lectures -->
+           </span>
+           <span class="col-3 col-md-2 text-right">
+
+              {{$count}} Units
+           </span>
+         </a>
+        </div>
+
+        <div id="accordionCurriculum_2" class="collapse" data-parent="#accordionCurriculum">
+
+          @foreach ($course->relation as $relation)
+              @if ($relation->course_unit_category_id == '1')
+                <div class="list-group-item">
+                  <span class="row">
+                    <a class="col-9 col-md-8" href="#">
+                      <i class="ti-control-play small mr-1 text-primary"></i>
+                      {{$relation->competence->description}}
+                    </a>
+
+                    <span class="col-3 col-md-2 ml-auto text-right">
+                      {{$relation->competence->unit_code}}
                      </span>
-                   </a>
-                  </div>
-
-                  <div id="accordionCurriculum_1" class="collapse show" data-parent="#accordionCurriculum">
-
-                      @foreach ($course->relation as $relation)
-                          @if ($relation->course_unit_category_id == '2')
-                            <div class="list-group-item">
-                              <span class="row">
-                                <a class="col-9 col-md-8" href="#">
-                                  <i class="ti-control-play small mr-1 text-primary"></i>
-                                  {{$relation->competence->description}}
-                                </a>
-
-                                <span class="col-3 col-md-2 ml-auto text-right">
-                                  {{$relation->competence->unit_code}}
-                                 </span>
-                              </span>
-                            </div>
-                          @endif
-                      @endforeach
-                  </div>
-                </div> <!-- END accordion-item -->
-
-
-                <div class="accordion-item list-group mb-3">
-
-                  <div class="list-group-item bg-light">
-                   <a class="row collapsed" href="#accordionCurriculum_2" data-toggle="collapse" aria-expanded="true">
-                     <span class="col-9 col-md-8">
-                       <span class="accordion__icon text-primary mr-2">
-                        <i class="ti-plus"></i>
-                        <i class="ti-minus"></i>
-                      </span>
-                      <span class="h6 d-inline">Core Units</span>
-                     </span>
-                     <span class="col-2 d-none d-md-block text-right">
-                       <!-- 19 Lectures -->
-                     </span>
-                     <span class="col-3 col-md-2 text-right">
-                       @php
-                         $count =0;
-                       @endphp
-                       @foreach ($course->relation as $relation)
-                           @if ($relation->course_unit_category_id == '1')
-                              @php
-                                $count++;
-                              @endphp
-                           @endif
-                       @endforeach
-                        {{$count}} Units
-                     </span>
-                   </a>
-                  </div>
-
-                  <div id="accordionCurriculum_2" class="collapse" data-parent="#accordionCurriculum">
-
-                    @foreach ($course->relation as $relation)
-                        @if ($relation->course_unit_category_id == '1')
-                          <div class="list-group-item">
-                            <span class="row">
-                              <a class="col-9 col-md-8" href="#">
-                                <i class="ti-control-play small mr-1 text-primary"></i>
-                                {{$relation->competence->description}}
-                              </a>
-
-                              <span class="col-3 col-md-2 ml-auto text-right">
-                                {{$relation->competence->unit_code}}
-                               </span>
-                            </span>
-                          </div>
-                        @endif
-                    @endforeach
+                  </span>
+                </div>
+              @endif
+          @endforeach
 
 
 
-                  </div>
-                </div> <!-- END accordion-item -->
+        </div>
+      </div> <!-- END accordion-item -->
 
 
+    @endif
 
                 </div> <!-- END accordion-->
               </div> <!-- END tab-pane -->

@@ -83,7 +83,7 @@ class CourseController extends Controller
         $course->code = $request->input('code');
         $course->status = 1;
         $course->order_by = 1;
-        $image = $request->background_image;
+        $image = $request->image;
        $image_array_1 = explode(";", $image);
        if (array_key_exists("1",$image_array_1)){
         $image_array_2 = explode(",", $image_array_1[1]);
@@ -165,7 +165,7 @@ class CourseController extends Controller
         $course->offshore_fee = $request->input('offshore_fee');
         $course->code = $request->input('code');
         // $course->status = $request->input('status');
-        $image = $request->background_image;
+        $image = $request->image;
       $image_array_1 = explode(";", $image);
       if (array_key_exists("1",$image_array_1)){
         $oldimg = $course->background_image;
@@ -175,7 +175,7 @@ class CourseController extends Controller
         $rand = rand(0,99999999);
         $rand = md5($rand);
         $imageName = $rand . '.png';
-        $page->background_image=$imageName;
+        $course->background_image=$imageName;
       }
         if($course->save()){
           if(isset($imageName)){
@@ -209,7 +209,7 @@ class CourseController extends Controller
         $course->onshore_fee = $request->input('onshore_fee');
         $course->offshore_fee = $request->input('offshore_fee');
         // $course->status = $request->input('status');
-        $image = $request->background_image;
+        $image = $request->image;
       $image_array_1 = explode(";", $image);
       if (array_key_exists("1",$image_array_1)){
         $oldimg = $course->background_image;
