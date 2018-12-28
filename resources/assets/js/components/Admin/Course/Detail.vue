@@ -26,7 +26,7 @@
             </div>
             <div>
               <h5> Course Description </h5>
-              <img v-if="course.background_image" :src="'../../public/images/courses/'+course.background_image" class="img-fluid" />
+              <img v-if="course.background_image" :src="$root.baseUrl+'/public/images/courses/'+course.background_image" class="img-fluid col-md-6" />
               <h5>
                 <small v-if="course.category">
                   Category : {{course.category.name}}
@@ -333,6 +333,7 @@
   export default {
     data() {
       return {
+        myCroppa:{},
         ucategories: '',
         categories: '',
         acompetences: '',
@@ -349,7 +350,6 @@
               editor.save();
             });
             editor.on('load', function() {
-              console.log('loaded');
               editor.save();
             });
           },
@@ -364,7 +364,14 @@
       this.fetchUCategories();
       this.fetchCompetences();
     },
-    computed: {},
+    computed: {
+      img() {
+        if (this.course.background_image != null) {
+          this.myCroppa.refresh()
+          return this.$root.baseUrl+'/public/images/courses/' + this.course.background_image
+        }
+      }
+    },
     methods: {
       remove(event, id) {
         console.log(id);
@@ -372,7 +379,6 @@
         let vm = this;
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/' + type + '/';
-        console.log(url);
         axios.delete(url + id).then(function(response) {
             if (type == 'course_unit_relation') {
               self.$toastr.s("A course unit relation has been removed.");
@@ -461,11 +467,10 @@
       editCourse() {
         var self = this;
         var form = self.$refs.editCourseForm;
-        console.log(form);
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course/update';
+        formData.append('image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
-            console.log(response);
             self.fetchCourse();
             $(form)[0].reset();
             self.hideEditCourseModal();
@@ -480,7 +485,6 @@
       addCareer() {
         var self = this;
         var form = self.$refs.addCareerForm;
-        console.log(form);
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/career_outcome';
         axios.post(url, formData).then(function(response) {
@@ -498,7 +502,6 @@
       addRequirement() {
         var self = this;
         var form = self.$refs.addReqForm;
-        console.log(form);
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course_entry_requirement';
         axios.post(url, formData).then(function(response) {
@@ -516,7 +519,6 @@
       addAssessment() {
         var self = this;
         var form = self.$refs.addAssessmentForm;
-        console.log(form);
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course_assessment';
         axios.post(url, formData).then(function(response) {

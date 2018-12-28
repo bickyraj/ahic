@@ -117,16 +117,24 @@
             </p>
             <div class="row mt-5 mx-0">
               <div class="col-md-4 mb-4">
-                <input type="text" class="form-control" name="name"placeholder="Name" required>
+                <input type="text" class="form-control name" name="name" placeholder="Name"  >
+                <p class="error text-danger text-left"></p>
+
               </div>
               <div class="col-md-4 mb-4">
-                <input type="email" class="form-control" name="email" placeholder="Email" required>
+                <input type="email" class="form-control email" name="email" placeholder="Email">
+                <p class="error text-danger text-left"></p>
+
               </div>
               <div class="col-md-4 mb-4">
-                <input type="text" class="form-control" name="contact" placeholder="Phone number">
+                <input type="text" class="form-control contact" name="contact"  placeholder="Phone number">
+                <p class="error text-danger text-left"></p>
+
               </div>
               <div class="col-12">
-                <textarea class="form-control" name="message" placeholder="Message" rows="7"></textarea>
+                <textarea class="form-control message" name="message" placeholder="Message" rows="7"></textarea>
+                <p class="error text-danger text-left"></p>
+
                 <button type="button" class="btn btn-primary mt-4 message_submit_btn" >Send Message</button>
               </div>
             </div>
@@ -150,24 +158,31 @@
 @section('script')
   <script>
     $('.message_submit_btn').click(function(event) {
+      $(this).parent().parent().find('.error').each(function(){
+        $(this).text(' ');
+      });
       event.preventDefault();
       var formData = $('.message_form').serializeArray();
 
-      $.post('{{route('message')}}',formData,function(data){
-        $('.message_form').trigger('reset');
-        if(data =="true"){
-          //trigger message
-          // alert('done');
-          $('#ex1').modal({
-            fadeDuration: 250
-          });
-        }
-        else{
-          // alert('not done');
-        }
-      }
-    )
+      var url = "{{route('message')}}";
 
+      $.post(url, formData)
+  .done(function(data){
+    $('.message_form').trigger('reset');
+    if(data =="true"){
+      $('#ex1').modal({
+        fadeDuration: 250
+      });
+    }
+
+  })
+  .fail(function(xhr, status, error) {
+      jQuery.each(xhr.responseJSON.errors, function(key, value){
+        $("."+key).parent().find('.error').text(value);
+  });
+
+
+    });
     });
   </script>
 @endsection

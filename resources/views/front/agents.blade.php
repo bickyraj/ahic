@@ -82,11 +82,14 @@
                       <div class="col-lg-4 col-md-6 marginTop-35 wow fadeInUp" data-wow-delay=".1s">
 
                         <div class="card height-100p shadow-v1 text-center">
-                          @if($agent->logo != null)
                           <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
+                          @if($agent->logo != null)
                               <img src="{{asset('/')}}public/images/agents/{{$agent->logo}}" alt="" class="img-fluid">
-                           </span>
+                           @else
+                             <img src="{{asset('/')}}public/ahic/img/logo-black.png" alt="" class="">
+
                          @endif
+                       </span>
                           <div class="card-body">
                             <h4>
                             {{$agent->first_name}} {{$agent->last_name}}

@@ -45,6 +45,10 @@
   <h2> Thank You for subscribing.</h2>
   <p> That felt good.</p>
 </div>
+<div id="ex2" class="modal">
+  <h2> Thank You for enquiry.</h2>
+  <p> We will be back to you soon.</p>
+</div>
 
 @if (isset($header))
 <section class="padding-y-100">
@@ -349,6 +353,12 @@
 
 @section('style')
 <style media="screen">
+
+.z-index-5 {
+
+    z-index: 1;
+
+}
 .owl-carousel{
 }
 .bg{
@@ -389,7 +399,13 @@
 
         $.post(url, formData)
     .done(function(data){
-location.reload();
+      $('#ex2').modal({
+        fadeDuration: 250
+      });
+      NewForm('enquiry_form');
+      // form.trigger('reset');
+
+// location.reload();
     })
     .fail(function(xhr, status, error) {
         jQuery.each(xhr.responseJSON.errors, function(key, value){

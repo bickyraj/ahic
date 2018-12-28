@@ -18,7 +18,7 @@ class CreateCmsTable extends Migration
             $table->string('slug');
             $table->string('title');
             $table->string('sub_title')->nullable();
-            $table->string('description');
+            $table->longText('description');
             $table->string('image');
             $table->string('link');
             $table->timestamps();
