@@ -30,15 +30,14 @@
               <tr>
                 <th>Title</th>
                 <th>File Name</th>
-                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
               <tr v-for="(enquiry, index) in table_items" :key="enquiry.id">
                 <td>{{ enquiry.title }}</td>
-                <td>{{ enquiry.file }}</td>
-                <td>  {{enquiry.status}} </td>
+                <td v-if="enquiry.file">{{ enquiry.file }}</td>
+                <td v-else> -- </td>
                 <td>
                   <a  :href="'../public/downloads/'+enquiry.file" download >
                     <b-button size="sm" class="btn-primary">
@@ -78,6 +77,13 @@
         <div class="form-group">
           <label for="">File</label>
           <input type="file" name="file"  class="form-control" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="">Status</label>
+          <select class="form-control" name="status" v-model="modalInfo.data.status" >
+            <option value="0">Disable</option>
+            <option value="1">Enable</option>
+          </select>
         </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideDownloadModal">Cancel</b-btn>

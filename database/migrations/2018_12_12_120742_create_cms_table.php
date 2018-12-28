@@ -17,7 +17,7 @@ class CreateCmsTable extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->string('title');
-            $table->string('sub_title');
+            $table->string('sub_title')->nullable();
             $table->string('description');
             $table->string('image');
             $table->string('link');

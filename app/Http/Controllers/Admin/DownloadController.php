@@ -39,11 +39,12 @@ class DownloadController extends Controller
     $d = Download::findOrFail($id);
         return new Resource($d);
     }
-    
+
     public function edit(Request $request)
     {
         $d = Download::findOrFail($request->id);
         $d->title = $request->input('title');
+        $d->status = $request->input('status');
         $file = $request->file('file');
         if($file != null){
             $oldimg = $d->file;

@@ -41,6 +41,10 @@
 
 @endif
 
+<div id="ex1" class="modal">
+  <h2> Thank You for subscribing.</h2>
+  <p> That felt good.</p>
+</div>
 
 @if (isset($header))
 <section class="padding-y-100">
@@ -75,7 +79,7 @@
             </h2>
             <p class="my-4">
               @if ($header['description'])
-              {!!html_entity_decode($header['description'])!!}
+                {{ str_limit(strip_tags($header['description']), 75) }}
             @endif
             </p>
             <a href="{{route('welcome')}}" class="btn btn-outline-primary">
@@ -356,10 +360,12 @@
   .error.text-danger{
       font-size:15px !important;
   }
+
 </style>
 @endsection
 
 @section('script')
+
   <script type="text/javascript">
       // reset handler that clears the form
       function reseter(){

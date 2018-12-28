@@ -12,6 +12,7 @@
 @section('content')
 
 
+
     <div class="site-search">
      <div class="site-search__close bg-black-0_8"></div>
      <form class="form-site-search" action="#" method="POST">
@@ -65,9 +66,6 @@
                    <a href="mailto:{{$contact->email}}" class="h5">{{$contact->email}}</a>
                  @endif
 
-                 @if (isset($contact->call_time))
-                   <p> Call Us ({{$contact->call_time}}) </p>
-                 @endif
                </div>
              </div>
            </div>
@@ -95,6 +93,10 @@
      </div>
 
 
+     <div id="ex1" class="modal">
+       <h2> Thank You for messaging.</h2>
+       <p> That felt good.</p>
+     </div>
 
 
     <section class="padding-y-100 bg-light-v2">
@@ -155,10 +157,13 @@
         $('.message_form').trigger('reset');
         if(data =="true"){
           //trigger message
-          alert('done');
+          // alert('done');
+          $('#ex1').modal({
+            fadeDuration: 250
+          });
         }
         else{
-          alert('not done');
+          // alert('not done');
         }
       }
     )

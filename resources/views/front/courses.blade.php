@@ -104,9 +104,6 @@
               <p class="my-3">
                 {{$course->category->name}}
               </p>
-              {{-- <p class="mb-0">
-                {{ str_limit($course->description, 130) }}
-              </p> --}}
 
             </div>
             <div class="card-footer media align-items-center justify-content-between">
@@ -138,9 +135,15 @@
 <script type="text/javascript">
   function changeCategory(el){
     var v = el.value;
-    v = 'courses/' +v;
+    var a = window.location.hostname;
+    if(a == 'localhost'){
+      v = 'http://'+a+'/cms/courses/' +v;
+    }
+    else{
+      v = 'http://'+a+'/courses/' +v;
+    }
     // var host = window.location.hostname + '/cms/';
-    window.location.replace(v);
+    window.location.href = v;
 
   }
 

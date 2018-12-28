@@ -75,7 +75,11 @@
             <div class="col-md-12" v-for="category in ucategories" :key="category.id">
               <h5> {{category.name}} </h5>
               <ul class="">
-                <li v-for="c in competences" :key="c.id" v-if="c.course_unit_category_id == category.id"> {{c.competence.description}}<span class="ml-5">  {{c.competence.unit_code}} </span> <i class="fas fa-times-circle text-danger float-right " @click="remove($event,c.id)" type="course_unit_relation"></i> </li>
+                <li v-for="c in competences" :key="c.id" v-if="c.course_unit_category_id == category.id">
+                   {{c.competence.description}}
+                    <i class="fas fa-times-circle text-danger float-right " @click="remove($event,c.id)" type="course_unit_relation"></i>
+                    <span class="ml-5 float-right mr-5">  {{c.competence.unit_code}} </span>
+                  </li>
               </ul>
             </div>
           </b-card>
@@ -91,7 +95,10 @@
               <b-collapse visible id="collapse1">
                 <div class="col-md-12">
                   <ul class="no-m-p">
-                    <li v-for="require in course.requirements" :key="require.id"> {{require.description}} <i class="fas fa-times-circle text-danger float-right " @click="remove($event,require.id)" type="course_entry_requirement"></i> </li>
+                    <li v-for="require in course.requirements" :key="require.id">
+                       {{require.description}}
+                      <i class="fas fa-times-circle text-danger float-right " @click="remove($event,require.id)" type="course_entry_requirement"></i>
+                     </li>
                   </ul>
                 </div>
               </b-collapse>
@@ -115,7 +122,10 @@
                 <b-collapse visible id="collapse2">
                   <div class="col-md-12">
                     <ul class="no-m-p">
-                      <li v-for="outcome in course.outcomes" :key="outcome.id"> {{outcome.description}}<i class="fas fa-times-circle text-danger float-right " @click="remove($event,outcome.id)" type="career_outcome"></i> </li>
+                      <li v-for="outcome in course.outcomes" :key="outcome.id">
+                        {{outcome.description}}
+                        <i class="fas fa-times-circle text-danger float-right " @click="remove($event,outcome.id)" type="career_outcome"></i>
+                      </li>
                     </ul>
                   </div>
                 </b-collapse>
@@ -310,7 +320,7 @@
         <div class="form-group">
           <label for=""> Competence</label>
           <select name="course_unit_competence_id" id="" class="form-control">
-            <option v-for="c in acompetences" :value="c.id" :key="c.id"> {{c.description}} </option>
+            <option v-for="c in acompetences" :value="c.id" :key="c.id"> {{c.unit_code}} </option>
           </select>
         </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add Competence</b-btn>
@@ -512,7 +522,7 @@
         axios.post(url, formData).then(function(response) {
             self.fetchCourse();
             $(form)[0].reset();
-            self.hideReqModal();
+            self.hideAssessmentModal();
             self.$toastr.s("A course assessment has been added.");
           })
           .catch(function(error) {
@@ -547,7 +557,7 @@
         axios.post(url, formData).then(function(response) {
             self.fetchCourse();
             $(form)[0].reset();
-            self.hideReqModal();
+            self.hideRPLModal();
             self.$toastr.s("A course RPL has been added.");
           })
           .catch(function(error) {
