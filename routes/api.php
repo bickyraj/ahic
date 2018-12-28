@@ -26,11 +26,15 @@ Route::post('admin/change-password', 'AdminController@changePassword');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth:api', 'admin']], function () {
 Route::post('/form/submit', 'FormController@store');
 
-    // Icon functions.
-    Route::get('social_contacts', 'SocialContactController@index');
-    Route::post('social_contact', 'SocialContactController@store');
-    Route::post('social_contact/edit', 'SocialContactController@edit');
-    Route::delete('social_contact/{id}', 'SocialContactController@destroy');
+    // Newsletterfunctions.
+    Route::get('newsletters', 'NewsletterController@index');
+    Route::post('newsletter/edit', 'NewsletterController@edit');
+    Route::delete('newsletter/{id}', 'NewsletterController@destroy');
+
+    // Message functions.
+    Route::get('messages', 'MessageController@index');
+    Route::post('message/edit', 'MessageController@edit');
+    Route::delete('message/{id}', 'MessageController@destroy');
 
     // Role functions.
     Route::get('roles', 'RoleController@index');

@@ -1,7 +1,7 @@
 <template>
   <div class="animated">
     <b-row>
-      <b-col :cols="cols" >
+      <b-col :cols="checkEnquiry()" class="cms-transition">
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
@@ -11,22 +11,22 @@
           <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th class="col-md-3">Enquiry Date</th>
-                <th class="col-md-3">Name</th>
-                <th class="col-md-3">Status</th>
-                <th class="col-md-2">Action</th>
+                <th class="">Enquiry Date</th>
+                <th class="">Name</th>
+                <th class="">Status</th>
+                <th class="">Action</th>
               </tr>
             </thead>
             <tbody v-if="table_items.length > 0" v-show="!loading">
-              <tr v-for="(enquiry, index) in table_items" :key="enquiry.id" >
+              <tr v-for="(enquiry, index) in table_items" :key="enquiry.id">
                 <td>{{ format(enquiry.created_at) }}</td>
                 <td>{{ enquiry.name }}</td>
-        <td>
-          <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,$event.target)">
-            <option value="1">Pending</option>
-            <option value="2">Verified</option>
-            <option value="3">Applied</option>
-          </select></td>
+                <td>
+                  <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,$event.target)">
+                    <option value="1">Pending</option>
+                    <option value="2">Verified</option>
+                    <option value="3">Applied</option>
+                  </select></td>
                 <td><button class="btn btn-success" @click="view(enquiry,index)"> View </button></td>
               </tr>
             </tbody>
@@ -41,7 +41,6 @@
           </table>
         </b-card>
       </b-col>
-
       <b-col cols="6" v-if="enquiry">
         <b-card class="mb-2 trump-card">
           <div class="card-title">
@@ -54,37 +53,40 @@
               </b-button>
             </div>
           </div>
-              <table class="table trump-table">
-                  <tr>
-                    <th> Name</th>
-                    <td>{{ enquiry.name }}</td>
-                  </tr>
-                  <tr>
-                    <th> Phone</th>
-                    <td>{{ enquiry.phone }}</td>
-                  </tr>
-                  <tr>
-                    <th> Email</th>
-                    <td>{{ enquiry.email }}</td>
-                  </tr>
-                  <tr>
-                    <th> Course </th>
-                    <td>{{ enquiry.course.name }}</td>
-                  </tr>
-                  <tr>
-                    <th> Country </th>
-                    <td>{{ enquiry.country.name }}</td>
-                  </tr>
-                  <tr>
-                    <th> Message </th>
-                    <td>{{ enquiry.message }}</td>
-                  </tr>
-              </table>
-                  <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,$event.target)">
-                    <option value="1">Pending</option>
-                    <option value="2">Verified</option>
-                    <option value="3">Applied</option>
-                  </select>
+          <table class="table trump-table">
+            <tr>
+              <th> Name</th>
+              <td>{{ enquiry.name }}</td>
+            </tr>
+            <tr>
+              <th> Phone</th>
+              <td>{{ enquiry.phone }}</td>
+            </tr>
+            <tr>
+              <th> Email</th>
+              <td>{{ enquiry.email }}</td>
+            </tr>
+            <tr>
+              <th> Course </th>
+              <div v-if="enquiry.course">
+                <td>{{ enquiry.course.name }}</td>
+              </div>
+              <div v-else>--</div>
+            </tr>
+            <tr>
+              <th> Country </th>
+              <td>{{ enquiry.country.name }}</td>
+            </tr>
+            <tr>
+              <th> Message </th>
+              <td>{{ enquiry.message }}</td>
+            </tr>
+          </table>
+          <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,$event.target)">
+            <option value="1">Pending</option>
+            <option value="2">Verified</option>
+            <option value="3">Applied</option>
+          </select>
         </b-card>
       </b-col>
     </b-row>
@@ -104,11 +106,11 @@
   </div>
 </template>
 <script>
-   import moment from 'moment'
+  import moment from 'moment'
   export default {
     data() {
       return {
-        enquiry:null,
+        enquiry: null,
         loading: true,
         table_items: [],
         role_table_fields: ['name', 'action'],
@@ -122,33 +124,40 @@
     created() {
       this.fetchEnquirys();
     },
-    computed:{
-
-      cols(){
-        if(this.enquiry == null){
+    computed: {
+      cols() {
+        if (this.enquiry == null) {
           return 6;
-        }
-        else{
+        } else {
           return 6;
         }
       }
     },
     methods: {
-      format(date){
-          return moment(String(date)).format('MMM DD, YYYY')
+      checkEnquiry() {
+        if (this.enquiry != null) {
+          return '6';
+        } else {
+          return '12';
+        }
       },
-      close(){
+      format(date) {
+        return moment(String(date)).format('MMM DD, YYYY')
+      },
+      close() {
         this.enquiry = null
       },
-      view(e,i){
+      view(e, i) {
         this.enquiry = e;
         this.enquiry.index = i;
       },
-      updateEnq(item,el){
+      updateEnq(item, el) {
         let self = this;
-        let url = self.$root.baseUrl + '/api/admin/enquiry/edit/'+item;
+        let url = self.$root.baseUrl + '/api/admin/enquiry/edit/' + item;
         var val = el.value;
-        axios.post(url,{val:val}).then(response=>{
+        axios.post(url, {
+          val: val
+        }).then(response => {
           self.table_items = response.data.data;
           self.$swal({
             type: 'success',
@@ -208,7 +217,7 @@
           });
       },
       deleteEnquiry: function(item, row, event) {
-        this.enquiry ="";
+        this.enquiry = "";
         var self = this;
         self.$swal({
           type: 'info',

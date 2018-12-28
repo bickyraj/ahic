@@ -104,7 +104,7 @@
         <input type="hidden" name="id" :value="modalInfo.data.id">
         <div class="form-group">
           <label for="">Title </label>
-          <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="" required>
+          <input type="text" name="title" v-model="modalInfo.data.title" class="form-control" placeholder="" required>
         </div>
         <div class="form-group">
           <label> Date </label>

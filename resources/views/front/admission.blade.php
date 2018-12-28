@@ -257,7 +257,6 @@
                       else{
                         $num = $count.  "th";
                       }
-
                       @endphp
                       <li class="ec-timeline-portlet__item">
                           <h6>{!!html_entity_decode($num)!!}</h6>

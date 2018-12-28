@@ -42,7 +42,7 @@
         "vue-tinymce-editor": "^1.6.2",
         "vue-toastr": "^2.0.14",
         "vue-validator": "^3.0.0-alpha.2",
-        "vue2-google-maps": "^0.10.0",
+        "vue2-google-maps": "^0.10.5",
         "vuedraggable": "^2.17.0",
         "vuejs-datepicker": "^1.5.4",
         "vuex": "^3.0.1"

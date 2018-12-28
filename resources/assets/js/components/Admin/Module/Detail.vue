@@ -36,13 +36,7 @@
                     <p v-if="error.image" class="text-danger"> {{error.image[0]}}</p>
                     </transition>
                   </div> -->
-                  <div class="form-group">
-                    <label for="">Order By</label>
-                    <input type="text" name="order_by" class="form-control" >
-                             <transition name="fade">
-                    <p v-if="error.image" class="text-danger"> {{error.order_by[0]}}</p>
-                    </transition>
-                  </div>
+
                   <div class="form-group">
                     <label for="">Description</label>
                    <editor  name="description" :init="editor"></editor>
@@ -140,10 +134,6 @@
                   <div class="form-group">
                     <label for="">Description</label>
                    <editor name="description" v-model="modalInfo.data.description" :init="editor"></editor>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Order By</label>
-                    <input type="text" name="order_by" class="form-control"  :value="modalInfo.data.order_by">
                   </div>
        <div class="form-group">
           <label for="">Status</label>

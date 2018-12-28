@@ -29,7 +29,7 @@
             <thead>
               <tr>
                 <th>Title</th>
-                <th>File</th>
+                <th>File Name</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -40,6 +40,11 @@
                 <td>{{ enquiry.file }}</td>
                 <td>  {{enquiry.status}} </td>
                 <td>
+                  <a  :href="'../public/downloads/'+enquiry.file" download >
+                    <b-button size="sm" class="btn-primary">
+                      <i class="fa fa-download"></i>
+                    </b-button>
+                  </a>
                   <b-button size="sm" @click.stop="info(enquiry, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>

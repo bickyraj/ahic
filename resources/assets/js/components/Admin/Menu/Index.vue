@@ -38,7 +38,7 @@
               </b-modal>
             </div>
           </div>
-          <table class="table trump-table table-hover">
+          <table class="table trump-table table-hover ">
             <thead>
               <tr>
                 <th>Name</th>
@@ -48,7 +48,7 @@
               </tr>
             </thead>
             <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" @update="updateMenuOrder">
-              <tr v-for="(menu, index) in table_items" :key="menu.id">
+              <tr v-for="(menu, index) in table_items" :key="menu.id" class="table-drag">
                 <td>{{ menu.name}}</td>
                 <td v-if="menu.parent_menu">{{ menu.parent_menu.name }}</td>
                 <td v-else>--</td>
@@ -102,6 +102,21 @@
     </b-modal>
   </div>
 </template>
+
+<style media="screen">
+  .table_drag{
+    cursor:move;
+    cursor: -webkit-grab; /* Chrome 1-21, Safari 4+ */
+ cursor:    -moz-grab; /* Firefox 1.5-26 */
+ cursor:         grab; /* W3C standards syntax, should come least */
+  }
+
+  .table_drag:active {
+    cursor: -webkit-grabbing;
+    cursor:    -moz-grabbing;
+    cursor:         grabbing;
+}
+</style>
 <script>
   export default {
     data() {

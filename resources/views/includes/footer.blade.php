@@ -62,14 +62,13 @@
             <div class="width-3rem bg-primary height-3 mt-3"></div>
             <div class="marginTop-40">
               <p class="mb-4">Subscribe to get update and information. Don't worry, we won't send spam!</p>
-              <form class="marginTop-30" action="#" method="POST">
                 <div class="input-group">
-                  <input type="text" placeholder="Enter your email" class="form-control py-3 border-white" required="">
+                  <input type="text" placeholder="Enter your email"id="subscribe_email" class="form-control py-3 border-white" >
                   <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Subscribe</button>
+                    <button class="btn btn-primary subscribe_btn" type="button">Subscribe</button>
                   </div>
                 </div>
-              </form>
+                <p class="text-danger email_val"></p>
             </div>
           </div>
 

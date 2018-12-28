@@ -9,7 +9,7 @@
             </div>
             <div class="caption card-title-actions">
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Option</b-button>
-              <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add Role">
+              <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add New Option">
                 <form @submit.prevent="addRole" ref="addRoleForm">
                   <div class="form-group">
                     <label for="exampleFormControlInput1">Title</label>
@@ -157,7 +157,7 @@
       cols(){
         if(this.option == null){
 
-          return 12;
+          return 6;
         }
         else{
           return 6;
@@ -199,7 +199,7 @@
               self.$swal({
                 // position: 'top-end',
                 type: 'success',
-                title: 'Payment option successfully.',
+                title: 'Payment option successfully updated.',
                 showConfirmButton: true,
                 // timer: 1500,
                 customClass: 'crm-swal',

@@ -496,3 +496,15 @@ button:focus {
 		cursor: pointer;
 	}
 }
+
+.cms-transition {
+	transition: all cubic-bezier(.29,.29,0,.93) 0.5s;
+}
+
+.agent-detail-table {
+	>tr {
+		>th {
+			width: 130px;
+		}
+	}
+}

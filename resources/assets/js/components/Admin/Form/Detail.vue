@@ -28,7 +28,7 @@
                 <div class="col-md-12 data-head">
                   <h4> A. Course And Date Of Commencement </h4>
                 </div>
-                <div class="col-md-12 data-content">
+                <div class="col-md-12 data-content" v-if="application.date_of_intake != null">
                   <p> Intake Year : {{application.date_of_intake.year}}</p>
                   <p> Inake Date : {{application.date_of_intake.date}} </p>
                 </div>

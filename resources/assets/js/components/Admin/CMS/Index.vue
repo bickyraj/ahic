@@ -17,36 +17,6 @@
 
     <div class="" v-if="!loading">
       <b-row>
-        <b-col>
-          <b-card class="mb-2 trump-card">
-            <div class="card-title">
-              <div class="caption">
-                <h5><i class="fas fa-key"></i> Header </h5>
-              </div>
-              <div class="caption card-title-actions">
-                <b-button v-if="header" @click="info('header',$event.target)" variant="success" class="btn btn-sm green pull-right">Edit Header</b-button>
-                <b-button v-else @click="showModal('header')" variant="primary" class="btn btn-sm green pull-right">Add New Header</b-button>
-              </div>
-            </div>
-            <b-row  v-if="header">
-              <b-col md="3">
-                <img :src="'../public/images/cms/'+header.image" alt="" class="img-fluid">
-              </b-col>
-              <b-col md="6">
-                      {{header.title}}
-                      <br>
-                      {{header.sub_title}}
-                      <br>
-                      <span :html="header.description">
-                      </span>
-                      <br>
-                      {{header.link}}
-              </b-col>
-            </b-row>
-          </b-card>
-        </b-col>
-      </b-row>
-      <b-row>
         <b-col md="6">
           <b-card class="mb-2 trump-card">
             <div class="card-title">
@@ -144,12 +114,13 @@
           <label for="">Title </label>
           <input type="text" name="title" class="form-control" placeholder="" required>
         </div>
-        <div class="form-group">
+        <div class="form-group" v-if="slug =='welcome'">
           <label for="">Sub Title </label>
           <input type="text" name="sub_title" class="form-control" placeholder="" >
         </div>
         <div class="form-group">
           <label for="">Image  </label>
+          <br>
           <croppa
            v-model="myCroppa"
            :width="crop.width"
@@ -182,11 +153,11 @@
         <input type="hidden" name="slug" v-model="slug">
                   <div class="form-group">
                     <label for="">Title </label>
-                    <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="" required>
+                    <input type="text" name="title" v-model="modalInfo.data.title" class="form-control" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="">Sub Title </label>
-                    <input type="text" name="sub_title" :value="modalInfo.data.sub_title" class="form-control" placeholder="" required>
+                    <input type="text" name="sub_title" v-model="modalInfo.data.sub_title" class="form-control" placeholder="" required>
                   </div>
                   <div class="form-group" v-if="modalInfo.data.image == null">
                     <label for="">Image  </label>
@@ -212,7 +183,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Link </label>
-                    <input type="text" name="sub_title" :value="modalInfo.data.link" class="form-control" placeholder="" >
+                    <input type="text" name="sub_title" v-model="modalInfo.data.link" class="form-control" placeholder="" >
                   </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update Content</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideNewsModal">Cancel</b-btn>
@@ -305,22 +276,10 @@
                 self.crop.scale = 2.5;
 
               }
-              else if(self.slug="header"){
-                self.crop.height = 400;
-                self.crop.width = 400;
-                self.crop.scale = 2.5;
-              }
           },
             table_items(){
               var self = this;
               let data  = this.table_items;
-              var result = self.find(data, { slug: "header" });
-              if(result.length > 0 ){
-                  self.header =result[0];
-              }
-              else{
-                self.header = '';
-              }
 
               var result = self.find(data, { slug: "lc" });
               if(result.length > 0 ){

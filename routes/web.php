@@ -34,6 +34,8 @@ Route::get('/news/{news}', 'NewsController@singleNews')->name('singleNews');
 
 
 Route::post('/enquiry','EnquiryController@store')->name('enquiry');
+Route::post('/newsletter','NewsletterController@store')->name('newsletter');
+Route::post('/message','MessageController@store')->name('message');
 
 
 Route::get('/logout', function () {

@@ -117,11 +117,11 @@
         <input type="hidden" name="id" :value="modalInfo.data.id">
         <div class="form-group">
           <label for="">Title </label>
-          <input type="text" name="title" :value="modalInfo.data.title" class="form-control" placeholder="" required>
+          <input type="text" name="title" v-model="modalInfo.data.title" class="form-control" placeholder="" required>
         </div>
         <div class="form-group">
           <label for="">Sub Title </label>
-          <input type="text" name="sub_title" :value="modalInfo.data.sub_title" class="form-control" placeholder="" required>
+          <input type="text" name="sub_title" v-model="modalInfo.data.sub_title" class="form-control" placeholder="" required>
         </div>
         <div class="form-group" v-if="modalInfo.data.image == null">
           <label for="">Image </label>
@@ -129,6 +129,7 @@
         </div>
         <div class="form-group" v-else>
           <label for="">Image </label>
+          <br>
           <croppa v-model="myCroppa" :width="332" :initial-image="img" :height="126" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :prevent-white-space="true">
           </croppa>
         </div>
@@ -138,7 +139,7 @@
         </div>
         <div class="form-group">
           <label for="">Status </label>
-          <select name="status" :value="modalInfo.data.status" id="" class="form-control">
+          <select name="status" v-model="modalInfo.data.status" id="" class="form-control">
             <option value="0">Disable</option>
             <option value="1">Enable</option>
           </select>

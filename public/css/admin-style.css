@@ -539,3 +539,12 @@ button:focus {
   background-color: #e6e6e6;
   cursor: pointer;
 }
+
+.cms-transition {
+  -webkit-transition: all cubic-bezier(0.29, 0.29, 0, 0.93) 0.5s;
+  transition: all cubic-bezier(0.29, 0.29, 0, 0.93) 0.5s;
+}
+
+.agent-detail-table > tr > th {
+  width: 130px;
+}

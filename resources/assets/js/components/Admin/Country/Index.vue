@@ -68,7 +68,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Status</label>
-                    <select class="form-control" name="" v-model="modalInfo.data.status" >
+                    <select class="form-control" name="status" v-model="modalInfo.data.status" >
                       <option value="0">Disable</option>
                       <option value="1">Enable</option>
                     </select>
@@ -130,8 +130,6 @@
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/country/edit';
         axios.post(url, formData).then(function(response) {
-          console.log(response);
-            if (response.status === 200) {
            self.table_items = response.data.data
               self.hideMenuModal();
               self.$swal({
@@ -143,7 +141,6 @@
                 customClass: 'crm-swal',
                 confirmButtonText: 'Thanks',
               })
-            }
           })
           .catch(function(error) {});
       },
@@ -162,7 +159,6 @@
           if (result.value) {
             let url = self.$root.baseUrl + '/api/admin/country/';
             axios.delete(url + menu.id).then(function(response) {
-                if (response.status === 200) {
                   self.table_items.splice(row, 1);
                   self.$swal({
                     // position: 'top-end',
@@ -175,7 +171,6 @@
                   }).then((result) => {
                     if (result.value) {}
                   })
-                }
               })
               .catch(function(error) {});
           }

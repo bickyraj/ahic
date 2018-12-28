@@ -21,6 +21,15 @@
                       <p v-if="error.pan" class="text-danger"> {{error.pan[0]}}</p>
                     </transition>
                   </div>
+
+                  <div class="form-group">
+                    <label for="">Start Date</label>
+                    <datepicker format="yyyy-MM-dd" name="start_date"  bootstrap-styling :initialView="'year'" ></datepicker>
+                    <transition name="fade">
+                    <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
+                    </transition>
+                  </div>
+
                   <div class="form-group">
                     <label for="">Logo</label>
                     <div>
@@ -65,16 +74,10 @@
                   </div>
                   <div class="form-group">
                     <label for="">Address</label>
-                    <input type="text" name="address" class="form-control" placeholder="">
+                    <gmap-autocomplete class="form-control" name="address" placeholder=""></gmap-autocomplete>
+                    <!-- <input type="text" name="address" class="form-control" placeholder="" > -->
                     <transition name="fade">
                       <p v-if="error.address" class="text-danger"> {{error.address[0]}}</p>
-                    </transition>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Start Date</label>
-                    <datepicker format="yyyy-MM-dd" name="start_date" bootstrap-styling :initialView="'year'"></datepicker>
-                    <transition name="fade">
-                      <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
                     </transition>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Agent</b-btn>
@@ -138,69 +141,77 @@
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
       <form @submit.prevent="editMenu" :row="modalInfo.row" ref="editMenuForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
-        <div class="form-group">
-          <label for="">ABN / Registration No / PAN </label>
-          <input type="text" name="pan" class="form-control" placeholder="" :value="modalInfo.data.pan">
-          <transition name="fade">
-            <p v-if="error.pan" class="text-danger"> {{error.pan[0]}}</p>
-          </transition>
-        </div>
-        <div class="form-group">
-          <label for="">Logo </label>
-          <div>
-            <croppa v-model="myCroppa" :width="200" :height="200" :initial-image="cropimage" placeholder="click to choose an image" :placeholder-font-size="14" :disabled="false" :quality="1" :prevent-white-space="true">
-            </croppa>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="">First Name </label>
-          <input type="text" name="first_name" class="form-control" :value="modalInfo.data.first_name" placeholder="">
-          <transition name="fade">
-            <p v-if="error.first_name" class="text-danger"> {{error.first_name[0]}}</p>
-          </transition>
-        </div>
-        <div class="form-group">
-          <label for="">Last Name </label>
-          <input type="text" name="last_name" class="form-control" :value="modalInfo.data.last_name" placeholder="">
-          <transition name="fade">
-            <p v-if="error.last_name" class="text-danger"> {{error.last_name[0]}}</p>
-          </transition>
-        </div>
-        <div class="form-group">
-          <label for="">Telephone </label>
-          <input type="text" name="telephone" class="form-control" :value="modalInfo.data.telephone" placeholder="">
-          <transition name="fade">
-            <p v-if="error.telephone" class="text-danger"> {{error.telephone[0]}}</p>
-          </transition>
-        </div>
-        <div class="form-group">
-          <label for="">Mobile Number </label>
-          <input type="text" name="mobile_no" class="form-control" :value="modalInfo.data.mobile_no" placeholder="">
-          <transition name="fade">
-            <p v-if="error.mobile_no" class="text-danger"> {{error.mobile_no[0]}}</p>
-          </transition>
-        </div>
-        <div class="form-group">
-          <label for="">Email</label>
-          <input type="text" name="email" class="form-control" :value="modalInfo.data.email" placeholder="">
-          <transition name="fade">
-            <p v-if="error.email" class="text-danger"> {{error.email[0]}}</p>
-          </transition>
-        </div>
-        <div class="form-group">
-          <label for="">Address</label>
-          <input type="text" name="address" class="form-control" :value="modalInfo.data.address" placeholder="">
-          <transition name="fade">
-            <p v-if="error.address" class="text-danger"> {{error.address[0]}}</p>
-          </transition>
-        </div>
-        <div class="form-group">
-          <label for="">Start Date</label>
-          <datepicker format="yyyy-MM-dd" name="start_date" bootstrap-styling :initialView="'year'" :value="modalInfo.data.start_date"></datepicker>
-          <transition name="fade">
-            <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
-          </transition>
-        </div>
+              <div class="form-group">
+                    <label for="">ABN / Registration No / PAN </label>
+                    <input type="text" name="pan" class="form-control" placeholder="" :value="modalInfo.data.pan" >
+                    <transition name="fade">
+                    <p v-if="error.pan" class="text-danger"> {{error.pan[0]}}</p>
+                    </transition>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Start Date</label>
+                    <datepicker format="yyyy-MM-dd" name="start_date"  bootstrap-styling :initialView="'year'" :value="modalInfo.data.start_date"  ></datepicker>
+                    <transition name="fade">
+                    <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
+                    </transition>
+                  </div>
+                        <div class="form-group" >
+                    <label for="">Logo </label>
+                    <br>
+                    <croppa v-model="myCroppa"
+                       :width="200"
+                       :height="200"
+                       :initial-image="cropimage"
+                       placeholder="Choose an image"
+                       :placeholder-font-size="0"
+                       :disabled="false"
+                       :quality="1"
+                       :prevent-white-space="true"
+                    >
+                  </croppa>
+                  </div>
+                  <div class="form-group">
+                    <label for="">First Name </label>
+                    <input type="text" name="first_name" class="form-control"  :value="modalInfo.data.first_name" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.first_name" class="text-danger"> {{error.first_name[0]}}</p>
+                    </transition>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Last Name </label>
+                    <input type="text" name="last_name" class="form-control" :value="modalInfo.data.last_name" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.last_name" class="text-danger"> {{error.last_name[0]}}</p>
+                    </transition>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Telephone </label>
+                    <input type="text" name="telephone" class="form-control" :value="modalInfo.data.telephone" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.telephone" class="text-danger"> {{error.telephone[0]}}</p>
+                    </transition>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Mobile Number </label>
+                    <input type="text" name="mobile_no" class="form-control" :value="modalInfo.data.mobile_no" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.mobile_no" class="text-danger"> {{error.mobile_no[0]}}</p>
+                    </transition>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="text" name="email" class="form-control" :value="modalInfo.data.email" placeholder="" >
+                    <transition name="fade">
+                    <p v-if="error.email" class="text-danger"> {{error.email[0]}}</p>
+                    </transition>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Address</label>
+                    <gmap-autocomplete class="form-control" name="address" :value="modalInfo.data.address" ></gmap-autocomplete>
+                    <transition name="fade">
+                    <p v-if="error.address" class="text-danger"> {{error.address[0]}}</p>
+                    </transition>
+                  </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>
