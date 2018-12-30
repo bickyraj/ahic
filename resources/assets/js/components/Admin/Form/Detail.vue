@@ -140,7 +140,12 @@
                   <h4> H. Current English Level </h4>
                 </div>
                 <div class="col-md-12 data-content">
-                  <p> English First Language : {{application.english.english_first_lang}}</p>
+                  <p> English First Language :
+                    <span v-if="application.english.english_first_lang == 1">
+                    Yes </span>
+                    <span v-else> No</span>
+                  </p>
+
                   <p> English Language Test :
                     <span v-if="application.english.english_lang_test =='0'"> IELTS</span>
                     <span v-if="application.english.english_lang_test =='1'"> TOEFL</span>
@@ -173,8 +178,18 @@
                   <h4> J. Additional Services </h4>
                 </div>
                 <div class="col-md-12 data-content">
-                  <p>Airport Pickup : {{application.services.airport_pickup}}</p>
-                  <p>Assistance With Accomodation : {{application.services.assistance_with_accomodation}}</p>
+                  <p>Airport Pickup :
+
+                    <span v-if="application.services.airport_pickup == 1">
+                    Yes </span>
+                    <span v-else> No</span>
+                  </p>
+                  <p>Assistance With Accomodation :
+
+                                        <span v-if="application.services.assistance_with_accomodation == 1">
+                                        Yes </span>
+                                        <span v-else> No</span>
+                                      </p>
                   <p>Accommodation Start Date : {{application.services.accomodation_start_date}}</p>
                   <p>Disability :
                     <span v-if="application.services.disability == '1'"> Yes</span>
@@ -199,12 +214,12 @@
                   <h4> L. Check List </h4>
                 </div>
                 <div class="col-md-12 data-content">
-                  <p>Compled All Form : {{application.checklist.completed_all_form}}</p>
-                  <p>Enclosed Certified Passport And Visa : {{application.checklist.enclosed_certified_passport_and_visa}}</p>
-                  <p>Enclosed Certified Qualification: {{application.checklist.enclosed_qualification}}</p>
-                  <p>Enclosed Certified English Language Proficiency : {{application.checklist.enclosed_english_lang_proficiency}}</p>
-                  <p>Enclosed Certified Documents : {{application.checklist.enclosed_certified_documents}}</p>
-                  <p>Read And Ticked Declaration : {{application.checklist.read_ticked_declaration}}</p>
+                  <p>Compled All Form :<span v-if="application.checklist.completed_all_form == 1">Yes </span><span v-else> No</span></p>
+                  <p>Enclosed Certified Passport And Visa :<span v-if="application.checklist.enclosed_certified_passport_and_visa == 1">Yes </span><span v-else> No</span></p>
+                  <p>Enclosed Certified Qualification: <span v-if="application.checklist.enclosed_qualification == 1">Yes </span><span v-else> No</span></p>
+                  <p>Enclosed Certified English Language Proficiency :<span v-if="application.checklist.enclosed_english_lang_proficiency == 1">Yes </span><span v-else> No</span></p>
+                  <p>Enclosed Certified Documents :  <span v-if="application.checklist.enclosed_certified_documents == 1">Yes </span><span v-else> No</span></p>
+                  <p>Read And Ticked Declaration : <span v-if="application.checklist.read_ticked_declaration == 1">Yes </span><span v-else> No</span></p>
                 </div>
               </div>
               <div class="row">

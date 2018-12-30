@@ -22,6 +22,8 @@ class AgentDocumentController extends Controller
         return Resource::collection($doc);
     }
 
+    
+
     public function validator($request){
 
             $this->validate($request,[
@@ -47,7 +49,7 @@ class AgentDocumentController extends Controller
     public function store(Request $request)
     {
       $this->validator($request);
-      
+
         $data['agent_id']  = $request->agent_id;
         $data['company_name'] = $request->company_name;
         $data['location'] = $request->location;

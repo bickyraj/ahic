@@ -75,7 +75,7 @@
                     <label for="">Name </label>
                     <input type="text" name="name" :value="modalInfo.data.name" class="form-control" placeholder="" required>
                   </div>
-                  <div class="form-group" v-if="modalInfo.data.image_background == null">
+                  <!-- <div class="form-group" v-if="modalInfo.data.image_background == null">
                     <label for="">Image Background </label>
                     <input type="file" name="image_background" class="form-control">
                   </div>
@@ -84,7 +84,7 @@
                <img :src="'../public/images/course_category/'+modalInfo.data.image_background" class="img-fluid" />
                     <input type="file" name="image_background" class="form-control">
 
-                  </div>
+                  </div> -->
 
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>

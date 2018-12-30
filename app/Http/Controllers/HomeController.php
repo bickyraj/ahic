@@ -22,10 +22,21 @@ class HomeController extends Controller
 {
 
   public function searchCourse(Request $request){
+
+    $this->validate($request,[
+      'search_term' =>'required',
+    ],
+    [
+    ]);
+    $categories = CourseCategory::all();
+    $courses =    Course::with('category')->get();
+    if($request->input('search_term')){
       $search =  $request->input('search_term');
       $results = Course::where('name','LIKE',"%$search%")->get();
-      $categories = CourseCategory::all();
       return view('front.courses',compact('categories'))->with('courses',$results);
+      }
+        return view('front.courses',compact('categories','courses'));
+
   }
     public function index()
     {
@@ -98,7 +109,7 @@ class HomeController extends Controller
     }
 
     public function download(){
-      $downloads = Download::all();
+      $downloads = Download::where('status','1')->get();
       return view('front.download',compact('downloads'));
     }
     public function contact(){

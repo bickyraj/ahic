@@ -252,7 +252,7 @@
                         $num = $count. "nd";
                       }
                       elseif ($c === 3) {
-                        $num = $count. "nd";
+                        $num = $count. "rd";
                       }
                       else{
                         $num = $count.  "th";

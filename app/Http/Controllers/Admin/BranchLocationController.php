@@ -96,7 +96,7 @@ class BranchLocationController extends Controller
 
          $data['country_id'] = $request->input('country_id');
         $data['location'] = $request->input('location');
-        $data['status'] = 1;
+        $data['status'] = $request->input('status');
         $creater = $location->update($data);
          $locations = BranchLocation::with('country')->get();
         return Resource::collection($locations);

@@ -21,6 +21,20 @@ class AgentInformationController extends Controller
       }
     }
 
+    public function getStudents($id){
+      $students=[];
+      $res = AgentInformation::where('id',$id)->with('documents.students.details')->first();
+      $count = 0;
+      foreach ($res['documents'] as $doc) {
+          foreach ($doc['students'] as $std) {
+            $students[$count] = $std['details'];
+            $count++;
+          }
+      }
+      return $students;
+// return Resource::collection($students);
+    }
+
     public function index()
     {
        $agents = AgentInformation::with('documents')->get();

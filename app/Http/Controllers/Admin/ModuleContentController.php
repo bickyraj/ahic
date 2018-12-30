@@ -86,7 +86,7 @@ class ModuleContentController extends Controller
     $module_content->title = $request->title;
     $module_content->description = $request->description;
     $module_content->status = $request->status;
-    $module_content->order_by = $request->order_by;
+    $module_content->order_by = rand(0,9);
     // $file = $request->file('image');
     // if($file != null){
     //   $oldimg = $module_content->image;
@@ -113,7 +113,7 @@ class ModuleContentController extends Controller
     $module_content->title = $request->input('title');
     $module_content->description = $request->input('description');
     $module_content->status = $request->input('status');
-    $module_content->order_by = $request->input('order_by');
+    $module_content->order_by = rand(0,9);
     // $file = $request->file('image');
     // if($file != null){
     //   $oldimg = $module_content->image;

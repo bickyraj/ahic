@@ -10,6 +10,8 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
+      echo 'a';
+      die();
 
       $this->validate($request,[
         'name' =>'required',
@@ -22,7 +24,7 @@ class MessageController extends Controller
         'email.required' =>'Email is required',
         'email.email' =>'Please provide valid email',
         'message.required' =>'Message cannot be empty',
-        'contact.required' =>'Contact cannot bre empty',
+        'contact.required' =>'Contact cannot be empty',
       ]);
 
         $data['name'] = $request->input('name');
