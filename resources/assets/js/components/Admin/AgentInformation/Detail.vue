@@ -67,12 +67,7 @@
               <div class="card-title">
                 <div class="caption">
                   <h5><i class="fas fa-users"></i> Student Report<small class="float-right">
-                    <select name="student_year" id="" class="form-control" v-model="student_filter">
-                      <option value="2017" > 2017 </option>
-                      <option value="2018">2018 </option>
-                      <option value="2019"> 2019 </option>
-                      <option value="2020"> 2020 </option>
-                    </select>
+                    <!-- <select name="" id="" class="form-control"> <option selected> Year </option></select>  -->
                   </small></h5>
                 </div>
               </div>

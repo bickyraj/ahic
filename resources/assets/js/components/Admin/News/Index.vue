@@ -27,9 +27,10 @@
                   </div>
                   <div class="form-group">
                     <label for="">Image </label>
-                    <br>
-                    <croppa v-model="myCroppa" :width="384" :height="256" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="2.5" :prevent-white-space="true">
-                    </croppa>
+                    <div>
+                      <croppa v-model="myCroppa" :width="384" :height="256" placeholder="click to choose an image" :placeholder-font-size="14" :disabled="false" :quality="2.5" :prevent-white-space="true">
+                      </croppa>
+                    </div>
                   </div>
                   <div class="form-group">
                     <label> Description </label>
@@ -115,8 +116,10 @@
         </div>
         <div class="form-group" v-else>
           <label for="">Image </label> <br>
-          <croppa v-model="myCroppa" :width="384" :initial-image="cropimage" :height="256" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="2.5" :prevent-white-space="true">
-          </croppa>
+          <div>
+            <croppa v-model="myCroppa" :width="384" :initial-image="cropimage" :height="256" placeholder="click to choose an image" :placeholder-font-size="14" :disabled="false" :quality="2.5" :prevent-white-space="true">
+            </croppa>
+          </div>
         </div>
         <div class="form-group">
           <label> Description </label>

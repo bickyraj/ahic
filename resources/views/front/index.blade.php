@@ -1,35 +1,29 @@
 @extends('layouts.master')
-
 @section('content')
-
   @if (isset($sliders) && count($sliders) > 0 )
-
-
-
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
     <div class="carousel-inner">
-      @foreach ($sliders as $slider)
+        @foreach ($sliders as $slider)
         <div class="carousel-item padding-y-80 height-80vh @if($sliders[0] == $slider) active @endif">
-         <div class="bg-absolute" data-dark-overlay="5" style="background:url('{{asset('/')}}public/images/sliders/{{$slider->image}}') no-repeat"></div>
+            <div class="bg-absolute" data-dark-overlay="5" style="background:url('{{asset('/')}}public/images/sliders/{{$slider->image}}') no-repeat"></div>
             <div class="container">
-              <div class="row">
-                <div class="col-lg-10 mx-auto  text-white">
-                  <h1 class="display-lg-4 font-weight-bold text-primary animated slideInUp">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto  text-white">
+                        <h1 class="display-lg-4 font-weight-bold text-primary animated slideInUp">
                     {{$slider->title}}
                   </h1>
-                  <h4 class="display-lg-4 font-weight-bold animated slideInUp">
+                        <h4 class="display-lg-4 font-weight-bold animated slideInUp">
                     {{$slider->sub_title}}
                   </h4>
-                  <p class="lead animated fadeInUp">
-                    {{ strip_tags($slider->description) }}
-                  </p>
-                  <!-- <a href="#" class="btn btn-primary mt-3 mx-2 animated slideInUp">Learn More</a> -->
+                        <p class="lead animated fadeInUp">
+                            {{ strip_tags($slider->description) }}
+                        </p>
+                        <!-- <a href="#" class="btn btn-primary mt-3 mx-2 animated slideInUp">Learn More</a> -->
+                    </div>
                 </div>
-              </div>
             </div>
         </div>
-      @endforeach
-
+        @endforeach
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
       <i class="ti-angle-left iconbox bg-black-0_5 hover:primary"></i>
@@ -52,19 +46,19 @@
 
 @if (isset($header))
 <section class="padding-y-100">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-        <div class="row align-items-center">
-          <div class="col-md-6 my-5">
-           <div class="position-relative">
-             @if ($header['image'])
-            <img class="rounded w-100" src="{{asset('/')}}public/images/cms/{{$header['image']}}" alt="">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row align-items-center">
+                    <div class="col-md-6 my-5">
+                        <div class="position-relative">
+                            @if ($header['image'])
+                            <img class="rounded w-100" src="{{asset('/')}}public/images/cms/{{$header['image']}}" alt="">
             @endif
            </div>
-          </div>
-          <div class="col-md-6 mt-4">
-            <h2>
+                        </div>
+                        <div class="col-md-6 mt-4">
+                            <h2>
               <small class="d-block text-gray">
                 @if ($header['title'])
                   {{$header['title']}}
@@ -89,13 +83,13 @@
             <a href="{{route('welcome')}}" class="btn btn-outline-primary">
               Read More
             </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mt-5 mt-md-0">
-        <div class="card shadow-v2 z-index-5" data-offset-top-xl="-160">
-          <div class="card-header bg-primary text-white border-bottom-0">
-            <span class="lead font-semiBold text-uppercase">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-5 mt-md-0">
+                    <div class="card shadow-v2 z-index-5" data-offset-top-xl="-160">
+                        <div class="card-header bg-primary text-white border-bottom-0">
+                            <span class="lead font-semiBold text-uppercase">
               Enquiry Form
             </span>
           </div>
@@ -170,38 +164,38 @@
 @endif
 @if (isset($courses) && count($courses) > 0 )
 <section class="padding-y-100 bg-light">
-  <div class="container">
-    <div class="row">
-     <div class="col-12 text-center mb-5">
-       <h2 class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="mb-4">
         Courses
       </h2>
-      <div class="width-3rem height-4 rounded bg-primary mx-auto"></div>
-     </div>
-      <div class="col-12">
-       <div class="owl-carousel arrow-on-hover" data-state-outer-class="py-3" data-space="30" data-arrow="true" data-loop="true">
-         @foreach ($courses as $course)
-           <div class="card shadow-v3 hover:parent">
-             @if ($course->background_image)
-               <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
+                <div class="width-3rem height-4 rounded bg-primary mx-auto"></div>
+            </div>
+            <div class="col-12">
+                <div class="owl-carousel arrow-on-hover" data-state-outer-class="py-3" data-space="30" data-arrow="true" data-loop="true">
+                    @foreach ($courses as $course)
+                    <div class="card shadow-v3 hover:parent">
+                        @if ($course->background_image)
+                        <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
 
              @else
-               <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+                        <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
 
              @endif
-            <div class="card-body">
-              <h4>
-                {{$course->category->name}}
+                        <div class="card-body">
+                            <h4>
+                {{$course->category->name or ''}}
               </h4>
-              <p class="text-primary">
-                {{ str_limit($course->name, 28) }}
-              </p>
-              <p class="mb-0">
-                {{ str_limit(strip_tags($course->description), 180) }}
-              </p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center border-top position-relative p-4">
-             <span class="d-inline-block bg-primary text-white px-4 py-1 rounded-pill">
+                            <p class="text-primary">
+                                {{ str_limit($course->name, 28) }}
+                            </p>
+                            <p class="mb-0">
+                                {{ str_limit(strip_tags($course->description), 180) }}
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center border-top position-relative p-4">
+                            <span class="d-inline-block bg-primary text-white px-4 py-1 rounded-pill">
                @php
                  $string = explode(' ',$course->duration);
                  $slug = str_replace(' ', '_', $course->name);
@@ -213,147 +207,128 @@
                {{$string[1]}}
                @endif
              </span>
-              <a href="{{route('course',$slug)}}" class="position-absolute btn btn-primary btn-m left-20 hover:show">
+                            <a href="{{route('course',$slug)}}" class="position-absolute btn btn-primary btn-m left-20 hover:show">
                 View Details
               </a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
             </div>
-          </div>
-         @endforeach
-       </div>
-      </div>
-      <div class="col-12 mt-5 text-center">
-        <a href="{{route('courses')}}" class="btn btn-primary">
+            <div class="col-12 mt-5 text-center">
+                <a href="{{route('courses')}}" class="btn btn-primary">
           See All Courses
         </a>
-      </div>
-    </div> <!-- END row-->
-  </div> <!-- END container-->
+            </div>
+        </div> <!-- END row-->
+    </div> <!-- END container-->
 </section>
-
 @endif
-
-
 @if (isset($lc) && isset($rc))
-  <section>
+<section>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6 bg-cover bg-center text-white padding-y-80" style="background:url('{{asset('/')}}public/images/cms/{{$lc->image}}') no-repeat">
-          <div class="padding-x-lg-100 wow pulse">
-            <h2 class="text-white mb-4">
+        <div class="row">
+            <div class="col-md-6 bg-cover bg-center text-white padding-y-80" style="background:url('{{asset('/')}}public/images/cms/{{$lc->image}}') no-repeat">
+                <div class="padding-x-lg-100 wow pulse">
+                    <h2 class="text-white mb-4">
             {{$lc['title']}}
             </h2>
-            <p>
-              {!!html_entity_decode($lc['description'])!!}
-            </p>
-            <a href="apply-no1w.php" class="btn btn-white mt-4">Apply now</a>
-          </div>
-        </div>
+                    <p>
+                        {!!html_entity_decode($lc['description'])!!}
+                    </p>
+                    <a href="apply-no1w.php" class="btn btn-white mt-4">Apply now</a>
+                </div>
+            </div>
             <div class="col-md-6 bg-cover bg-center text-white padding-y-80" style="background:url('{{asset('/')}}public/images/cms/{{$rc->image}}') no-repeat">
-          <div class="padding-x-lg-100 wow pulse">
-            <h2 class="text-white mb-4">
+                <div class="padding-x-lg-100 wow pulse">
+                    <h2 class="text-white mb-4">
               {{$rc['title']}}
             </h2>
-            <p>
-              {!!html_entity_decode($rc['description'])!!}
-            </p>
-            <a href="apply-no1w.php" class="btn btn-white mt-4">Apply now</a>
-          </div>
+                    <p>
+                        {!!html_entity_decode($rc['description'])!!}
+                    </p>
+                    <a href="apply-no1w.php" class="btn btn-white mt-4">Apply now</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div> <!-- END container-->
-  </section>
+</section>
 @endif
-
-
-
 @if (isset($news) && count($news) > 0 )
 <section class="padding-y-100 bg-light-v2">
-  <div class="container">
-    <div class="row">
-
-      <div class="col-12 text-center">
-        <h2 class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="mb-4">
           Latest AHIC News
         </h2>
-        <div class="width-3rem height-4 rounded bg-primary mx-auto"></div>
-      </div>
-    </div> <!-- END row-->
-
-    <div class="row mt-4">
-      @foreach($news as $new)
-                 @php
-              $date = date_create($new->date);
-              $newdate = date_format($date,'M d, Y');
-                  $slug = str_replace(' ', '_', $new->title);
-           @endphp
-      <div class="col-lg-4 col-md-6 marginTop-30 wow slideInUp" data-wow-delay=".1s">
-        <div class="card padding-30 shadow-v1">
-         <p class="text-primary">
-
-         {{$newdate}}
-         </p>
-         <a href="{{route('singleNews',$slug)}}" class="h4 mb-3">
+                <div class="width-3rem height-4 rounded bg-primary mx-auto"></div>
+            </div>
+        </div> <!-- END row-->
+        <div class="row mt-4">
+            @foreach($news as $new)
+            @php
+            $date = date_create($new->date);
+            $newdate = date_format($date,'M d, Y');
+            $slug = str_replace(' ', '_', $new->title);
+            @endphp
+            <div class="col-lg-4 col-md-6 marginTop-30 wow slideInUp" data-wow-delay=".1s">
+                <div class="card padding-30 shadow-v1">
+                    <p class="text-primary">
+                        {{$newdate}}
+                    </p>
+                    <a href="{{route('singleNews',$slug)}}" class="h4 mb-3">
 
             {{$new->title}}
          </a>
-         <img class="card-img-top" src="{{asset('/')}}public/images/news/{{$new->image}}" alt="">
-
-         <p class="paddingTop-10">
-                {!! html_entity_decode(str_limit($new->description, 180)) !!}
-         </p>
-         <a href="{{route('singleNews',$slug)}}" class="btn btn-outline-primary align-self-start mt-2">
+                    <img class="card-img-top" src="{{asset('/')}}public/images/news/{{$new->image}}" alt="">
+                    <p class="paddingTop-10">
+                        {!! html_entity_decode(str_limit($new->description, 180)) !!}
+                    </p>
+                    <a href="{{route('singleNews',$slug)}}" class="btn btn-outline-primary align-self-start mt-2">
            Read More
          </a>
-        </div>
-      </div>
-      @endforeach
+                </div>
+            </div>
+            @endforeach
             <div class="col-12 mt-5 text-center">
-        <a href="{{route('news')}}" class="btn btn-primary">
+                <a href="{{route('news')}}" class="btn btn-primary">
           View All News
         </a>
-      </div>
-    </div> <!-- END row-->
-  </div> <!-- END container-->
+            </div>
+        </div> <!-- END row-->
+    </div> <!-- END container-->
 </section>
-
 @endif
-
-
-
 
 @if (isset($gallery) && count($gallery) > 0 )
 <section class="paddingTop-100">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="mb-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="mb-4">
           AHIC Gallery
         </h2>
-        <div class="width-3rem height-4 rounded bg-primary mx-auto"></div>
-      </div>
-    </div> <!-- END row-->
-
-    <div class="row marginTop-60">
-      <div class="owl-carousel arrow-edge arrow-black" data-items="4" data-arrow="true" data-tablet-items="2" data-mobile-items="1">
-        @foreach($gallery as $image)
-        <div class="hover:parent  bg" style="background:url('{{asset('/')}}public/images/gallery/{{$image->image}}')">
-          <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
-            <a href="{{asset('/')}}public/images/gallery/{{$image->image}}" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
-          </div>
-        </div>
-        @endforeach
-      </div>
-    </div> <!-- END row-->
-
-  </div> <!-- END container-->
+                <div class="width-3rem height-4 rounded bg-primary mx-auto"></div>
+            </div>
+        </div> <!-- END row-->
+        <div class="row marginTop-60">
+            <div class="owl-carousel arrow-edge arrow-black" data-items="4" data-arrow="true" data-tablet-items="2" data-mobile-items="1">
+                @foreach($gallery as $image)
+                <div class="hover:parent  bg" style="background:url('{{asset('/')}}public/images/gallery/{{$image->image}}')">
+                    <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
+                        <a href="{{asset('/')}}public/images/gallery/{{$image->image}}" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div> <!-- END row-->
+    </div> <!-- END container-->
 </section>
 @endif
-
 @endsection
-
 @section('style')
 <style media="screen">
-
 .z-index-5 {
 
     z-index: 1;
@@ -373,7 +348,6 @@
 
 </style>
 @endsection
-
 @section('script')
 
   <script type="text/javascript">

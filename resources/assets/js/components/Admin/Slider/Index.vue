@@ -28,18 +28,19 @@
                   </div>
                   <div class="form-group">
                     <label for="">Image </label>
-                    <br>
-                    <croppa
-                    v-model="myCroppa"
-                    :width="332"
-                    :height="126"
-                    placeholder="Choose an image"
-                    :placeholder-font-size="0"
-                    :disabled="false"
-                    :quality="5"
-                    :show-remove-button="false"
-                    :prevent-white-space="true">
-                    </croppa>
+                    <div>
+                      <croppa
+                      v-model="myCroppa"
+                      :width="332"
+                      :height="126"
+                      placeholder="Click to choose an image"
+                      :placeholder-font-size="14"
+                      :disabled="false"
+                      :quality="5"
+                      :show-remove-button="true"
+                      :prevent-white-space="true">
+                      </croppa>
+                    </div>
                   </div>
                   <transition name="fade">
                   <p v-if="error.image" class="text-danger"> {{error.image[0]}}</p>
