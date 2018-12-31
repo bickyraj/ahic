@@ -507,26 +507,26 @@ const routes = [
             roleId: 1
         },
     },
-    {
-        path: admin_url + 'courses',
-        component: require('./components/Admin/Course/Index'),
-        name:'courses',
-        meta: {
-            layout: 'admin',
-            breadcrumb: [
-                {
-                    name: 'Home',
-                    path: admin_url,
-                },
-                {
-                    name: 'Course',
-                    path: admin_url + 'courses',
-                }
-            ],
-            middlewareAuth: true,
-            roleId: 1
-        },
-    },
+    // {
+    //     path: admin_url + 'courses',
+    //     component: require('./components/Admin/Course/Index'),
+    //     name:'courses',
+    //     meta: {
+    //         layout: 'admin',
+    //         breadcrumb: [
+    //             {
+    //                 name: 'Home',
+    //                 path: admin_url,
+    //             },
+    //             {
+    //                 name: 'Course',
+    //                 path: admin_url + 'courses',
+    //             }
+    //         ],
+    //         middlewareAuth: true,
+    //         roleId: 1
+    //     },
+    // },
     {
         path: admin_url + 'course_category/:course_id/course/:id',
         component: require('./components/Admin/Course/Detail'),

@@ -201,6 +201,7 @@
                   </b-card>
                 </div>
               </div>
+              <hr>
           </div>
               <!-- </div> -->
             </b-card>
@@ -494,7 +495,6 @@
             s.created_at = sd;
             return s.created_at.includes(date);
           });
-          console.log(res)
           return res;
         }
 

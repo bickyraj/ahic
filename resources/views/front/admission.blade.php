@@ -88,7 +88,7 @@
                  </a>
                </li>
                <li class="nav-item m-1 ">
-                 <a class="nav-link border rounded text-center p-3" href="#" role="tab" aria-selected="true">
+                 <a class="nav-link border rounded text-center p-3" href="{{url('/')}}/public/files/applynow.pdf" target="_blank" role="tab" aria-selected="true">
                   <span class=" d-block ">Apply Now</span>
                  </a>
                </li>
