@@ -330,9 +330,7 @@
 @section('style')
 <style media="screen">
 .z-index-5 {
-
     z-index: 1;
-
 }
 .owl-carousel{
 }
@@ -376,10 +374,11 @@
       $('#ex2').modal({
         fadeDuration: 250
       });
-      NewForm('enquiry_form');
-      // form.trigger('reset');
+      $(document).click(function(){
+        form.trigger('reset');
+  location.reload();
+      })
 
-// location.reload();
     })
     .fail(function(xhr, status, error) {
         jQuery.each(xhr.responseJSON.errors, function(key, value){

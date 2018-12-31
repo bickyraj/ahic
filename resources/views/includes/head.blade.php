@@ -34,14 +34,14 @@
     <link rel="stylesheet" href="{{asset('/')}}public/ahic/css/vendors.bundle.css">
     <link rel="stylesheet" href="{{asset('/')}}public/ahic/css/style.css">
     <link rel="stylesheet" href="{{asset('/')}}public/modal/jquery.modal.min.css">
-    
+
 
     <style media="screen">
     .close-modal{
       display:none !important;
     }
 
-    #ex1{
+    #ex1,#ex2{
       background: -moz-linear-gradient(268deg, rgba(255,235,230,1) 0%, rgba(227,244,234,1) 45%, rgba(194,255,239,1) 99%, rgba(194,255,239,1) 100%); /* ff3.6+ */
      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,235,230,1)), color-stop(45%, rgba(227,244,234,1)), color-stop(99%, rgba(194,255,239,1)), color-stop(100%, rgba(194,255,239,1))); /* safari4+,chrome */
      background: -webkit-linear-gradient(268deg, rgba(255,235,230,1) 0%, rgba(227,244,234,1) 45%, rgba(194,255,239,1) 99%, rgba(194,255,239,1) 100%); /* safari5.1+,chrome10+ */
