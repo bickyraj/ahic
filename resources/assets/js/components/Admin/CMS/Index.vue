@@ -179,11 +179,11 @@
     </div>
     <div class="form-group">
       <label> Description </label>
-      <editor name="description"  :init="editor" v-model="modalInfo.data.description"></editor>
+      <editor name="description" id="editCmsTextEditor" ref="editCmsTextEditor" :init="editor" v-model="modalInfo.data.description"></editor>
     </div>
     <div class="form-group">
       <label for="">Link </label>
-      <input type="text" name="sub_title" v-model="modalInfo.data.link" class="form-control" placeholder="" >
+      <input type="text" name="link" v-model="modalInfo.data.link" class="form-control" placeholder="" >
     </div>
     <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update Content</b-btn>
     <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideNewsModal">Cancel</b-btn>
@@ -378,6 +378,8 @@ export default{
       var form = self.$refs.editNewsForm;
       var row_index = form.getAttribute('row');
       var formData = new FormData(form);
+      var content = tinymce.get('editCmsTextEditor').getContent();
+      formData.append('description', content);
       formData.append('image',this.myCroppa.generateDataUrl())
       let url = self.$root.baseUrl + '/api/admin/cms/edit';
       axios.post(url, formData).then(function(response) {

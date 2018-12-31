@@ -69,15 +69,15 @@
                 $string = explode(" ",$header['sub_title'],2);
                 @endphp
                <span class="text-primary">{{$string[0]}}</span>
-               @if (isset($string[0]))
-               {{$string[0]}}
+               @if (isset($string[1]))
+               {{$string[1]}}
                @endif
              @endif
 
             </h2>
             <p class="my-4">
               @if ($header['description'])
-                {{ str_limit(strip_tags($header['description']), 75) }}
+                {{ str_limit(strip_tags($header['description']), 250) }}
             @endif
             </p>
             <a href="{{route('welcome')}}" class="btn btn-outline-primary">

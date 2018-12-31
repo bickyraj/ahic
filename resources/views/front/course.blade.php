@@ -197,7 +197,7 @@
                   </div>
                 @endif
 
-                @if (count($course->assessment)>0)
+                @if ($course->assessment)
                   <div class="col-md-6 my-2">
                    <h4>
                      Assessments Methods
@@ -208,7 +208,7 @@
                   </div>
                 @endif
 
-                @if (count($course->rpl)>0)
+                @if ($course->rpl)
                   <div class="col-md-6 my-2">
                    <h4>
                      Recognition of Prior Learning (RPL)
