@@ -77,7 +77,7 @@
             </h2>
             <p class="my-4">
               @if ($header['description'])
-                {{ str_limit(strip_tags($header['description']), 75) }}
+                {{ str_limit(strip_tags($header['description']), 250) }}
             @endif
             </p>
             <a href="{{route('welcome')}}" class="btn btn-outline-primary">
