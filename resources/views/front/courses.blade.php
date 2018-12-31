@@ -102,7 +102,7 @@
                 {{$course->name}}
               </a>
               <p class="my-3">
-                {{$course->category->name}}
+                {{$course->category->name or '-'}}
               </p>
 
             </div>

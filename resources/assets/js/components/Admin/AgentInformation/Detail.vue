@@ -71,16 +71,24 @@
                   </small></h5>
                 </div>
               </div>
-              <table class="table trump-table">
-                <tr>
-                  <th> Name </th>
-                </tr>
-                <tbody class="students_list">
-                <tr v-for="student in filterStudents">
-                  <td>{{student.firstname}} </td>
-                </tr>
-                </tbody>
-              </table>
+              <div class="table-responsive">
+                <table class="table trump-table">
+                  <thead>
+                    <tr>
+                      <th> Name </th>
+                      <th> Gender </th>
+                      <th> Country </th>
+                    </tr>
+                  </thead>
+                  <tbody class="students_list">
+                    <tr v-for="student in filterStudents">
+                      <td>{{student.firstname}} </td>
+                      <td>{{student.gender}} </td>
+                      <td>{{student.birth_country}} </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </b-card>
         </div>
@@ -96,27 +104,20 @@
                 </h5>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-10">
-                <table class="table table-borderless col-md-10">
-                  <tr>
-                    <th class="col-md-1"> Company Name <span class="float-right">:</span> </th>
-                    <td class="col-md-8"> {{company.company_name}} </td>
-                  </tr>
-                  <tr>
-                    <th class="col-md-2"> Address <span class="float-right">:</span> </th>
-                    <td class="col-md-8"> {{company.location}}</td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-md-2">
-                <img  v-if="agent.logo" :src="$root.baseUrl+'/public/images/agents/'+agent.logo" alt="" class="img-fluid">
-                <img  v-else :src="$root.baseUrl+'/public/ahic/img/logo-black.png'" alt="" style="max-height:100px">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 company-profile">
+                  <div class="company-profile-pic">
+                    <img v-if="agent.logo" :src="$root.baseUrl+'/public/images/agents/'+agent.logo" alt="" class="img-fluid">
+                    <img v-if :src="$root.baseUrl+'/public/ahic/img/logo-black.png'" alt="" style="max-height:100px">
+                  </div>
+                  <ul class="company-profile-ul">
+                    <li> {{ company.company_name }} </li>
+                    <li> <small>{{ company.location }}</small></li>
+                  </ul>
+                </div>
               </div>
               <hr>
-            </div>
-            <hr>
-            <div class="row">
               <div class="col-md-6 float-left" style="border-right:1px solid rgba(0,0,0,0.1)">
                 <b-card class="row mb-2 trump-card " >
                   <div class="col-md-12">
@@ -197,9 +198,9 @@
                 </div>
               </div>
               <!-- </div> -->
-            </b-card>
-          </div>
-        </b-row>
+          </b-card>
+        </div>
+      </b-row>
         <b-modal class="ess-modal" ref="editAgentModal" hide-footer title="Edit Agent">
           <form @submit.prevent="editAgent" ref="editAgentForm">
             <input type="hidden" name="id" :value="agent.id">
@@ -460,7 +461,7 @@
         countries: '',
         locations: '',
         loading: true,
-        students:{},
+        students:null,
       }
     },
     created() {
@@ -488,7 +489,6 @@
             s.created_at = sd;
             return s.created_at.includes(date);
           });
-          console.log(res)
           return res;
         }
 

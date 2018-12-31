@@ -39,7 +39,7 @@ button:focus {
 }
 
 .router-link-exact-active {
-  background-color: #384c57  !important;
+  background-color: #384c57 !important;
   color: white !important;
 }
 
@@ -79,7 +79,8 @@ button:focus {
   color: #29363d;
 }
 
-.trump-card .card-title > .caption h5 > i.fas, .trump-card .card-title > .caption h5 > i.fab {
+.trump-card .card-title > .caption h5 > i.fas,
+.trump-card .card-title > .caption h5 > i.fab {
   color: #536c79;
   font-size: 14px;
 }
@@ -368,7 +369,7 @@ button:focus {
 
 .yenkii-sidebar-nav .nav-link:hover {
   color: white !important;
-  background-color: #3870b3  !important;
+  background-color: #3870b3 !important;
 }
 
 .glass {
@@ -547,4 +548,27 @@ button:focus {
 
 .agent-detail-table > tr > th {
   width: 130px;
+}
+
+.company-profile .company-profile-pic {
+  float: left;
+  width: auto;
+  display: inline-block;
+}
+
+.company-profile .company-profile-ul {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0px;
+  margin-top: 22px;
+  margin-left: 12px;
+}
+
+.company-profile .company-profile-ul li:first-child {
+  color: #6f6f6f;
+}
+
+.company-profile .company-profile-ul li small {
+  color: #313131;
+  font-weight: bold;
 }
