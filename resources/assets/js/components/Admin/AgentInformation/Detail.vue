@@ -67,7 +67,11 @@
               <div class="card-title">
                 <div class="caption">
                   <h5><i class="fas fa-users"></i> Student Report<small class="float-right">
-                    <!-- <select name="" id="" class="form-control"> <option selected> Year </option></select>  -->
+                    <select name="" id="" class="form-control" v-model="student_filter">
+                      <option value="2017"> 2017 </option>
+                      <option value="2018"> 2018 </option>
+                      <option value="2019"> 2019 </option>
+                    </select>
                   </small></h5>
                 </div>
               </div>
@@ -86,7 +90,7 @@
         </div>
       </b-row>
       <b-row>
-        <div class="col-md-12" v-for="company in companies" :key="company.id">
+        <div class="col-md-12" >
           <b-card class="mb-2 trump-card ">
             <div class="card-title">
               <div class="caption">
@@ -96,6 +100,7 @@
                 </h5>
               </div>
             </div>
+          <div class="container-fluid" v-for="company in companies" :key="company.id">
             <div class="row">
               <div class="col-md-10">
                 <table class="table table-borderless col-md-10">
@@ -196,6 +201,7 @@
                   </b-card>
                 </div>
               </div>
+          </div>
               <!-- </div> -->
             </b-card>
           </div>
@@ -481,7 +487,7 @@
       },
       filterStudents(){
         var self =this;
-        if(self.students){
+        if(Array.isArray(this.students)){
           var date = self.student_filter;
           var res = self.students.filter(s=>{
             var sd =self.format(s.created_at);

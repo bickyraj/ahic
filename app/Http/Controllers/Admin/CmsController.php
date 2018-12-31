@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Cms;
-use Illuminate\Support\Facades\Log;
 use App\Http\Resources\Menu as Resource;
 use Illuminate\Http\Request;
 
@@ -24,6 +23,10 @@ class CmsController extends Controller
     $a = Cms::all();
     return Resource::collection($a);
   }
+
+public function validator($request){
+  $this->
+}
 
 public function slug($slug){
   $s = Cms::where('slug',$slug)->first();

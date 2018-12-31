@@ -252,9 +252,7 @@
             r = agent;
           } else if (s == "on" || s == "off") {
             if (agent.shore != null) {
-              //check both get both
-              a = agent.shore.includes(s);
-              // b =agent.shore.includes('all')
+              return agent.shore.includes(s)
             }
           }
           return r;

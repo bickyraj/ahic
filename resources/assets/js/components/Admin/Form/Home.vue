@@ -14,7 +14,7 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Gender</th>
+                <th>Created Date</th>
                 <th>Country</th>
                 <th>Action</th>
               </tr>
@@ -22,7 +22,7 @@
             <tbody v-if="applications.length > 0" v-show="!loading">
               <tr v-for="(menu) in applications" :key="menu.id">
                 <td>  {{ menu.firstname}}  </td>
-                <td>{{ menu.gender}}</td>
+                <td>{{ menu.created_at}}</td>
                 <td>{{ menu.birth_country}}</td>
                 <td>
                 <router-link :to="'student/'+menu.id">
@@ -103,7 +103,8 @@
             let url = self.$root.baseUrl + '/api/admin/application_form/';
             axios.delete(url + id).then(function(response) {
                 if (response.status === 200) {
-                  self.table_items= response.data.data
+                  self.fetchAdmissions()
+                  // self.table_items= response.data.data
                   self.$swal({
                     // position: 'top-end',
                     type: 'success',
