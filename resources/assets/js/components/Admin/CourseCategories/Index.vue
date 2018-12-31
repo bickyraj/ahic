@@ -151,7 +151,7 @@
               self.$swal({
                 // position: 'top-end',
                 type: 'success',
-                title: 'Unit Course Category updated successfully.',
+                title: 'Course Category is updated successfully.',
                 showConfirmButton: true,
                 // timer: 1500,
                 customClass: 'crm-swal',

@@ -29,7 +29,10 @@
                   <b-button size="sm"  class="mr-1 btn-primary">
                     View
                   </b-button>
-                  </router-link>
+                </router-link>
+                  <b-button size="sm"  class="mr-1 btn-danger" @click="deleter(menu.id)">
+                    Delete
+                  </b-button>
                 </td>
               </tr>
             </tbody>
@@ -84,6 +87,40 @@
           });
 
       },
+      deleter(id){
+        var self = this;
+        self.$swal({
+          // position: 'top-end',
+          type: 'info',
+          title: 'Are you sure you want to delete this?',
+          showConfirmButton: true,
+          showCancelButton: true,
+          // timer: 1500,
+          customClass: 'crm-swal',
+          confirmButtonText: 'Yes',
+        }).then((result) => {
+          if (result.value) {
+            let url = self.$root.baseUrl + '/api/admin/application_form/';
+            axios.delete(url + id).then(function(response) {
+                if (response.status === 200) {
+                  self.table_items= response.data.data
+                  self.$swal({
+                    // position: 'top-end',
+                    type: 'success',
+                    title: 'Deleted',
+                    showConfirmButton: true,
+                    // timer: 1500,
+                    customClass: 'crm-swal',
+                    confirmButtonText: 'Ok',
+                  }).then((result) => {
+                    if (result.value) {}
+                  })
+                }
+              })
+              .catch(function(error) {});
+          }
+        })
+      }
     },
   }
 </script>

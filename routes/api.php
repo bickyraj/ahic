@@ -267,6 +267,7 @@ Route::post('/form/submit', 'FormController@store');
       //Agent Agreement
     Route::get('application_forms','ApplicationFormController@index');
     Route::get('application_form/{id}','ApplicationFormController@fetch');
+    Route::delete('application_form/{id}','ApplicationFormController@destroy');
 
 
     Route::post('intake','ApplicationDateOfIntakeController@store');

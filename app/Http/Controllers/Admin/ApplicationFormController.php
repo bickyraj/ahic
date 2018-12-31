@@ -81,8 +81,17 @@ class ApplicationFormController extends Controller
      * @param  \App\ApplicationForm  $applicationForm
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ApplicationForm $applicationForm)
-    {
-        //
-    }
+       public function destroy($id)
+        {
+            // get role.
+            $role = ApplicationForm::findOrFail($id);
+            $status = 0;
+            if ($role->delete()) {
+                $status = 1;
+            }
+
+            $applications = ApplicationForm::with('edu')->get();
+            return Resource::collection($applications);
+          }
+
 }

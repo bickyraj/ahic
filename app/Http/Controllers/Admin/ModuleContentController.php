@@ -55,7 +55,7 @@ class ModuleContentController extends Controller
     $data['module_id'] = $request->input('module_id');
     $data['title'] = $request->input('title');
     $data['description'] = $request->input('description');
-    $data['order_by'] = $request->input('order_by');
+    $data['order_by'] = rand(0,9);
     $data['status'] = 1;
     // $file = $request->file('image');
     // if($file != null){
