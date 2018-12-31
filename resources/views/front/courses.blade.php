@@ -136,11 +136,12 @@
   function changeCategory(el){
     var v = el.value;
     var a = window.location.hostname;
+    var l = '{{url('/')}} '+ v;
     if(a == 'localhost'){
       v = 'http://'+a+'/cms/courses/' +v;
     }
     else{
-      v = 'http://'+a+'/courses/' +v;
+      v = l;
     }
     // var host = window.location.hostname + '/cms/';
     window.location.href = v;

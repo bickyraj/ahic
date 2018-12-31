@@ -25,22 +25,22 @@
           <ul class="list-inline mb-0">
             @if (isset($contact['fb']))
               <li class="list-inline-item mr-0 p-3  border-left border-white-0_1">
-                <a href="https://{{$contact['fb']}}"><i class="ti-facebook"></i></a>
+                <a href="vo{{$contact['fb']}}"><i class="ti-facebook"></i></a>
               </li>
             @endif
             @if (isset($contact['tw']))
               <li class="list-inline-item mr-0 p-3 border-left  border-white-0_1">
-                <a href="https://{{$contact['tw']}}"><i class="ti-twitter"></i></a>
+                <a href="vo{{$contact['tw']}}"><i class="ti-twitter"></i></a>
               </li>
             @endif
             @if (isset($contact['in']))
               <li class="list-inline-item mr-0 p-3 border-left border-white-0_1">
-                <a href="https://{{$contact['in']}}"><i class="ti-instagram"></i></a>
+                <a href="vo{{$contact['in']}}"><i class="ti-instagram"></i></a>
               </li>
             @endif
             @if (isset($contact['yt']))
               <li class="list-inline-item mr-0 p-3 border-right border-left border-white-0_1">
-                <a href="https://{{$contact['yt']}}"><i class="ti-youtube"></i></a>
+                <a href="vo{{$contact['yt']}}"><i class="ti-youtube"></i></a>
               </li>
             @endif
 

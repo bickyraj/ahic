@@ -155,7 +155,7 @@
     data() {
       return {
         error:'',
-        myCroppa: null,
+        myCroppa: {},
         view: null,
         loading: true,
         table_items: [],
@@ -209,10 +209,10 @@
         }
       },
       img(){
-        // if (this.modalInfo.data.image != null) {
-        //   this.myCroppa.refresh()
-        //   return '../public/images/pages/'+this.modalInfo.data.image
-        // }
+        if (this.modalInfo.data.image != null) {
+          this.myCroppa.refresh()
+          return '../public/images/pages/'+this.modalInfo.data.image
+        }
       },
       // cropimage() {
       //   if (this.modalInfo.data.image != null) {
@@ -253,9 +253,6 @@
           .catch(function(error) {
             self.error = '';
             self.error = error.response.data.errors;
-            if (error.response.status === 422) {
-              self.$toastr.e(error.response.data.errors.name);
-            }
           });
       },
       resetModal() {

@@ -156,6 +156,7 @@
                   </div>
                   <div class="form-group" v-if="modalInfo.data.background_image == null">
                     <label for="">Image </label>
+                    <br>
                     <croppa v-model="myCroppa" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
                   </div>
                   <div class="form-group" v-else>
@@ -269,7 +270,7 @@
       img() {
         if (this.modalInfo.data.background_image != null) {
           this.myCroppa.refresh()
-          return '../public/images/courses/' + this.modalInfo.data.background_image
+          return this.$root.baseUrl+'/public/images/courses/' + this.modalInfo.data.background_image
         }
       }
 
@@ -313,7 +314,7 @@
         var form = self.$refs.editCourseForm;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
-        formData.append('background_image', this.myCroppa.generateDataUrl())
+        formData.append('image', this.myCroppa.generateDataUrl())
                     let id = parseInt(this.$route.params.id);
         let url = self.$root.baseUrl + '/api/admin/course/edit/'+id;
         axios.post(url, formData).then(function(response) {
@@ -372,7 +373,7 @@
         var form = self.$refs.addCourseForm;
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/course';
-        formData.append('background_image', this.myCroppa.generateDataUrl())
+        formData.append('image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
               var menu = response.data.data;
               var menu_data = {

@@ -314,6 +314,7 @@ export default{
 
     info(slug,button) {
       let self = this;
+      self.modalInfo.data = [];
       self.slug = slug;
       var s = self.capitalizeString(slug);
       let url = self.$root.baseUrl + '/api/admin/cms/'+slug;

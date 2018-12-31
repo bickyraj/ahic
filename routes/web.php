@@ -26,8 +26,6 @@ Route::get('/download', 'HomeController@download')->name('download');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/welcome', 'HomeController@readMore')->name('welcome');
 Route::post('/course/search', 'HomeController@searchCourse')->name('search');
-
-
 // News
 Route::get('/news', 'NewsController@news')->name('news');
 Route::get('/news/{news}', 'NewsController@singleNews')->name('singleNews');

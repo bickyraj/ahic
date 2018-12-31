@@ -123,7 +123,7 @@
           self.$swal({
             // position: 'top-end',
             type: 'success',
-            title: 'Enquiry updated successfully.',
+            title: 'Downloads updated successfully.',
             showConfirmButton: true,
             // timer: 1500,
             customClass: 'crm-swal',
@@ -148,7 +148,7 @@
           });
       },
       resetModal() {
-        this.modalInfo.title = 'Edit Enquiry'
+        this.modalInfo.title = 'Edit Downloads'
         this.modalInfo.content = ''
       },
       editDownload: function() {
@@ -164,7 +164,7 @@
               self.$swal({
                 // position: 'top-end',
                 type: 'success',
-                title: 'Enquiry updated successfully.',
+                title: 'Download updated successfully.',
                 showConfirmButton: true,
                 // timer: 1500,
                 customClass: 'crm-swal',

@@ -20,7 +20,7 @@ class CreateCmsTable extends Migration
             $table->string('sub_title')->nullable();
             $table->longText('description');
             $table->string('image');
-            $table->string('link');
+            $table->string('link')->nullable();
             $table->timestamps();
         });
     }

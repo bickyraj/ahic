@@ -224,7 +224,7 @@ Route::post('/form/submit', 'FormController@store');
 
       //Agent Information
     Route::get('agent_informations','AgentInformationController@index');
-    Route::get('agent_information/students', 'AgentInformationController@students');
+    Route::get('agent_information/students/{id}','AgentInformationController@getStudents');
     Route::get('agent_information/{id}','AgentInformationController@show');
     Route::get('agent_informations/{id}','AgentInformationController@get');
     Route::post('agent_information', 'AgentInformationController@store');
@@ -267,6 +267,7 @@ Route::post('/form/submit', 'FormController@store');
       //Agent Agreement
     Route::get('application_forms','ApplicationFormController@index');
     Route::get('application_form/{id}','ApplicationFormController@fetch');
+    Route::delete('application_form/{id}','ApplicationFormController@destroy');
 
 
     Route::post('intake','ApplicationDateOfIntakeController@store');
