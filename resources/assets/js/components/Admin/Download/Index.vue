@@ -39,7 +39,7 @@
                 <td v-if="enquiry.file">{{ enquiry.file }}</td>
                 <td v-else> -- </td>
                 <td>
-                  <a  :href="'../public/downloads/'+enquiry.file" download >
+                  <a  :href="'../public/files/'+enquiry.file" download >
                     <b-button size="sm" class="btn-primary">
                       <i class="fa fa-download"></i>
                     </b-button>
