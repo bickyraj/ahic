@@ -48,16 +48,19 @@
       <div class="col-md-6 mt-3">
       @if ($welcome['title'] != null)
         <h2>
-          @php
-            $string = explode(' ',$welcome['title']);
-          @endphp
          <small class="text-primary d-block">
-           @if ($string[0] != null)
-           {{$string[0]}}
-         @endif
+           {{$welcome['title']}}
          </small>
         </h2>
       @endif
+      @if ($welcome['sub_title'] != null)
+        <h2>
+          <small class="text-dark d-block">
+           {{$welcome['sub_title']}}
+         </small>
+        </h2>
+      @endif
+
             {!!html_entity_decode($welcome['description'])!!}
     @endif
       </div>

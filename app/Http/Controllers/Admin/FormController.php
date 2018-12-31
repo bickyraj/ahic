@@ -195,7 +195,7 @@ $this->validator($request);
                 $data['visa_expired_date']= $request->input('v_exp_date');
                 $data['visa_office_applying_for']= $request->input('v_office');
                 $data['islander_origin']= $request->input('origin');
-
+                $data['status'] = 1;
                 $creater = ApplicationForm::create($data);
                 if($creater){
                     $application_form_id = $creater->id;

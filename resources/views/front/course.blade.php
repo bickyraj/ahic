@@ -66,7 +66,6 @@
               <div class="border-right height-100p">
                 <span class="text-gray">Study Methods:</span>
                 <p class="mb-0">
-
                   <span class="text-dark"> {{$course->study_method}} </span>
                   {{-- <span>(per Week)</span> --}}
                 </p>

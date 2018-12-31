@@ -24,10 +24,6 @@ class CmsController extends Controller
     return Resource::collection($a);
   }
 
-public function validator($request){
-  $this->
-}
-
 public function slug($slug){
   $s = Cms::where('slug',$slug)->first();
   return new Resource($s);

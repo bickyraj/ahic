@@ -17,6 +17,7 @@ class ApplicationFormController extends Controller
      */
     public function index()
     {
+        // $applications = ApplicationForm::with('edu')->orderBy('created_at','DESC')->paginate(1);
         $applications = ApplicationForm::with('edu')->get();
         return Resource::collection($applications);
     }
@@ -58,10 +59,14 @@ class ApplicationFormController extends Controller
      * @param  \App\ApplicationForm  $applicationForm
      * @return \Illuminate\Http\Response
      */
-    public function edit(ApplicationForm $applicationForm)
-    {
-        //
-    }
+     public function edit(Request $request,$id)
+     {
+         $e = ApplicationForm::findOrFail($id);
+         $e->status = $request->val;
+         $e->save();
+         $applications = ApplicationForm::with('edu')->get();
+         return Resource::collection($applications);
+     }
 
     /**
      * Update the specified resource in storage.
