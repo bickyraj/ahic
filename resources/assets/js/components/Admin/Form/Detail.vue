@@ -142,7 +142,7 @@
                 <div class="col-md-12 data-content">
                   <p> English First Language :
                     <span v-if="application.english.english_first_lang == 1">
-                    Yes </span>
+                    Yes, English as first language </span>
                     <span v-else> No</span>
                   </p>
 
@@ -195,7 +195,10 @@
                     <span v-if="application.services.disability == '1'"> Yes</span>
                     <span v-if="application.services.disability == '0'"> No</span>
                   </p>
-                  <p>If Disability : {{application.services.if_disability}}</p>
+                  <p>If Disability :
+                    <span v-if="application.services.if_disability"> {{application.services.if_disability}} </span>
+                    <span v-else> -- </span>
+                  </p>
                 </div>
               </div>
               <div class="row">

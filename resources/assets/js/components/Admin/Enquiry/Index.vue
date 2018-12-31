@@ -7,6 +7,14 @@
             <div class="caption">
               <h5><i class="fas fa-key"></i> Enquiries</h5>
             </div>
+            <div class="caption card-title-actions">
+              <select class="form-control" name="" v-model="filterBy">
+                <option value="0">All</option>
+                <option value="1">Pending</option>
+                <option value="2">Verified</option>
+                <option value="3">Applied</option>
+              </select>
+            </div>
           </div>
           <table class="table trump-table table-hover">
             <thead>
@@ -17,8 +25,8 @@
                 <th class="">Action</th>
               </tr>
             </thead>
-            <tbody v-if="table_items.length > 0" v-show="!loading">
-              <tr v-for="(enquiry, index) in table_items" :key="enquiry.id">
+            <tbody v-if="filterData.length > 0" v-show="!loading">
+              <tr v-for="(enquiry, index) in filterData" :key="enquiry.id">
                 <td>{{ format(enquiry.created_at) }}</td>
                 <td>{{ enquiry.name }}</td>
                 <td>
@@ -110,6 +118,7 @@
   export default {
     data() {
       return {
+        filterBy:0,
         enquiry: null,
         loading: true,
         table_items: [],
@@ -131,7 +140,23 @@
         } else {
           return 6;
         }
+      },
+      filterData(){
+        var self = this
+        var filter = this.filterBy
+        if(Array.isArray(this.table_items)){
+        return this.table_items.filter(i=>{
+            if(filter == 0){
+              return i;
+            }
+            if(i.status == filter){
+              return i;
+            }
+        })
       }
+
+
+      },
     },
     methods: {
       checkEnquiry() {

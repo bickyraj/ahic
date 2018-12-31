@@ -236,7 +236,7 @@
                     <p>
                         {!!html_entity_decode($lc['description'])!!}
                     </p>
-                    <a href="apply-no1w.php" class="btn btn-white mt-4">Apply now</a>
+                    <a  href="{{url('/')}}/public/files/applynow.pdf" target="_blank"  class="btn btn-white mt-4">Apply now</a>
                 </div>
             </div>
             <div class="col-md-6 bg-cover bg-center text-white padding-y-80" style="background:url('{{asset('/')}}public/images/cms/{{$rc->image}}') no-repeat">
@@ -247,7 +247,7 @@
                     <p>
                         {!!html_entity_decode($rc['description'])!!}
                     </p>
-                    <a href="apply-no1w.php" class="btn btn-white mt-4">Apply now</a>
+                    <a href="{{url('/')}}/public/files/applynow.pdf" target="_blank" class="btn btn-white mt-4">Apply now</a>
                 </div>
             </div>
         </div>

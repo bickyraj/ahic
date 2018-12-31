@@ -29,6 +29,7 @@ class CreateApplicationFormsTable extends Migration
             $table->date('visa_expired_date');
             $table->string('visa_office_applying_for');
             $table->integer('islander_origin');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

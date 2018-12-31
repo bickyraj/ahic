@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Cms;
-use Illuminate\Support\Facades\Log;
 use App\Http\Resources\Menu as Resource;
 use Illuminate\Http\Request;
 

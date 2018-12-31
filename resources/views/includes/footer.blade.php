@@ -29,7 +29,7 @@
                <div class="media">
                 <i class="ti-location-pin mt-2 mr-3"></i>
                 <div class="media-body">
-                  <span>{{$contact['address']}} {{$contact['street_name']}}</span>
+                  <span>{{$contact['street_name']}}, {{$contact['address']}} </span>
                 </div>
                </div>
               </li>

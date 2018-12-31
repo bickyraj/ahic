@@ -66,7 +66,6 @@
               <div class="border-right height-100p">
                 <span class="text-gray">Study Methods:</span>
                 <p class="mb-0">
-
                   <span class="text-dark"> {{$course->study_method}} </span>
                   {{-- <span>(per Week)</span> --}}
                 </p>
@@ -85,7 +84,7 @@
   {{$string[1]}}
 @endif
                 </h2>
-                <a class="btn btn-primary" href="#">Apply Now</a>
+                <a class="btn btn-primary" href="{{url('/')}}/public/files/apply_now.pdf" target="_blank">Apply Now</a>
               </div>
             </div>
           </div> <!-- END row-->

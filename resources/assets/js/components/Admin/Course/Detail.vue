@@ -338,7 +338,7 @@
         categories: '',
         acompetences: '',
         competences: '',
-        course: '',
+        course: {},
         requirements: '',
         outcomes: '',
         loading: true,
@@ -347,9 +347,6 @@
           toolbar: ['undo redo | link image |code'],
           setup: function(editor) {
             editor.on('change', function() {
-              editor.save();
-            });
-            editor.on('load', function() {
               editor.save();
             });
           },

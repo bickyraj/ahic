@@ -792,7 +792,7 @@
             axios.post(url, formData).then(function(response) {
               //reload page
               self.$toastr.s("A form has been submitted.");
-              router.push("allStudents")
+              self.$router.push("students")
             })
             .catch(function(error) {
               self.error = '';

@@ -67,7 +67,11 @@
               <div class="card-title">
                 <div class="caption">
                   <h5><i class="fas fa-users"></i> Student Report<small class="float-right">
-                    <!-- <select name="" id="" class="form-control"> <option selected> Year </option></select>  -->
+                    <select name="" id="" class="form-control" v-model="student_filter">
+                      <option value="2017"> 2017 </option>
+                      <option value="2018"> 2018 </option>
+                      <option value="2019"> 2019 </option>
+                    </select>
                   </small></h5>
                 </div>
               </div>
@@ -94,7 +98,7 @@
         </div>
       </b-row>
       <b-row>
-        <div class="col-md-12" v-for="company in companies" :key="company.id">
+        <div class="col-md-12" >
           <b-card class="mb-2 trump-card ">
             <div class="card-title">
               <div class="caption">
@@ -104,7 +108,7 @@
                 </h5>
               </div>
             </div>
-            <div class="card-body">
+            <div class="container-fluid" v-for="company in companies" :key="company.id">
               <div class="row">
                 <div class="col-md-12 company-profile">
                   <div class="company-profile-pic">
@@ -116,88 +120,89 @@
                     <li> <small>{{ company.location }}</small></li>
                   </ul>
                 </div>
-              </div>
-              <hr>
-              <div class="col-md-6 float-left" style="border-right:1px solid rgba(0,0,0,0.1)">
-                <b-card class="row mb-2 trump-card " >
-                  <div class="col-md-12">
-                    <div class="card-title">
-                      <div class="caption">
-                        <h5><i class="fas fa-key"></i> Agent Document <small class="float-right"> <button class="btn btn-sm btn-success" @click="showEditDocumentModal(company.id)"> Edit</button> </small> </h5>
-                      </div>
-                    </div>
-                    <table class="table table-borderless">
-                      <tr>
-                        <th class="col-md-1"> EOI <span class="float-right">:</span> </th>
-                        <a :href="$root.baseUrl+'/public/images/documents/'+company.EOI" download>
-                          <td class="col-md-8"> {{company.EOI}} </td>
-                        </a>
-                      </tr>
-                      <tr>
-                        <th class="col-md-2"> ABN <span class="float-right">:</span> </th>
-                        <a :href="$root.baseUrl+'/public/images/documents/'+company.ABN" download>
-                          <td class="col-md-8"> {{company.ABN}}</td>
-                        </a>
-                      </tr>
-                      <tr>
-                        <th class="col-md-2"> Reference <span class="float-right">:</span> </th>
-                        <a :href="$root.baseUrl+'/public/images/documents/'+company.reference" download>
-                          <td class="col-md-8"> {{company.reference}}</td>
-                        </a>
-                      </tr>
-                      <tr>
-                        <th class="col-md-3"> Qualification <span class="float-right">:</span> </th>
-                        <a :href="$root.baseUrl+'/public/images/documents/'+company.qualification" download>
-                          <td class="col-md-8"> {{company.qualification}}</td>
-                        </a>
-                      </tr>
-                      <tr>
-                        <th class="col-md-2"> Profile <span class="float-right">:</span> </th>
-                        <a :href="$root.baseUrl+'/public/images/documents/'+company.profile" download>
-                          <td class="col-md-8"> {{company.profile}}</td>
-                        </a>
-                      </tr>
-                    </table>
-                    <p class="pt-3" v-html="agent.description"></p>
-                  </div>
-                </b-card>
-              </div>
-              <div class="col-md-6 float-left">
-                <b-card class="row mb-2 trump-card ">
-                  <div class="col-md-12">
-                    <div class="card-title">
-                      <div class="caption">
-                        <h5><i class="fas fa-key"></i>  Agreement Process<small class="float-right">
-                          <button class="btn btn-sm btn-success" @click="showEditProcessModal(company.process.id)" v-if="company.process"> Edit</button>
-                          <button class="btn btn-sm btn-success" @click="showAddProcessModal(company.id)" v-else> Add</button> </small> </h5>
+                <hr>
+                <div class="col-md-6 float-left" style="border-right:1px solid rgba(0,0,0,0.1)">
+                  <b-card class="row mb-2 trump-card " >
+                    <div class="col-md-12">
+                      <div class="card-title">
+                        <div class="caption">
+                          <h5><i class="fas fa-key"></i> Agent Document <small class="float-right"> <button class="btn btn-sm btn-success" @click="showEditDocumentModal(company.id)"> Edit</button> </small> </h5>
                         </div>
                       </div>
-                      <div v-if="company.process">
-                        <table class="table table-borderless">
-                          <tr>
-                            <th class="col-md-4"> Sent Date <span class="float-right">:</span> </th>
-                            <td class="col-md-8"> {{company.process.sent_date}} </td>
-                          </tr>
-                          <tr>
-                            <th class="col-md-4"> Agreement <span class="float-right">:</span> </th>
-                            <td class="col-md-8"> {{company.process.agreement}} </td>
-                          </tr>
-                          <tr>
-                            <th class="col-md-4"> Recieve Date <span class="float-right">:</span> </th>
-                            <td class="col-md-8"> {{company.process.received_date}} </td>
-                          </tr>
-                          <tr>
-                            <th class="col-md-4"> Signed <span class="float-right">:</span> </th>
-                            <td class="col-md-8"> {{company.process.signed}} </td>
-                          </tr>
-                        </table>
-                      </div>
+                      <table class="table table-borderless">
+                        <tr>
+                          <th class="col-md-1"> EOI <span class="float-right">:</span> </th>
+                          <a :href="$root.baseUrl+'/public/images/documents/'+company.EOI" download>
+                            <td class="col-md-8"> {{company.EOI}} </td>
+                          </a>
+                        </tr>
+                        <tr>
+                          <th class="col-md-2"> ABN <span class="float-right">:</span> </th>
+                          <a :href="$root.baseUrl+'/public/images/documents/'+company.ABN" download>
+                            <td class="col-md-8"> {{company.ABN}}</td>
+                          </a>
+                        </tr>
+                        <tr>
+                          <th class="col-md-2"> Reference <span class="float-right">:</span> </th>
+                          <a :href="$root.baseUrl+'/public/images/documents/'+company.reference" download>
+                            <td class="col-md-8"> {{company.reference}}</td>
+                          </a>
+                        </tr>
+                        <tr>
+                          <th class="col-md-3"> Qualification <span class="float-right">:</span> </th>
+                          <a :href="$root.baseUrl+'/public/images/documents/'+company.qualification" download>
+                            <td class="col-md-8"> {{company.qualification}}</td>
+                          </a>
+                        </tr>
+                        <tr>
+                          <th class="col-md-2"> Profile <span class="float-right">:</span> </th>
+                          <a :href="$root.baseUrl+'/public/images/documents/'+company.profile" download>
+                            <td class="col-md-8"> {{company.profile}}</td>
+                          </a>
+                        </tr>
+                      </table>
                       <p class="pt-3" v-html="agent.description"></p>
                     </div>
                   </b-card>
                 </div>
-              </div>
-              <!-- </div> -->
+                <div class="col-md-6 float-left">
+                  <b-card class="row mb-2 trump-card ">
+                    <div class="col-md-12">
+                      <div class="card-title">
+                        <div class="caption">
+                          <h5><i class="fas fa-key"></i>  Agreement Process<small class="float-right">
+                            <button class="btn btn-sm btn-success" @click="showEditProcessModal(company.process.id)" v-if="company.process"> Edit</button>
+                            <button class="btn btn-sm btn-success" @click="showAddProcessModal(company.id)" v-else> Add</button> </small> </h5>
+                          </div>
+                        </div>
+                        <div v-if="company.process">
+                          <table class="table table-borderless">
+                            <tr>
+                              <th class="col-md-4"> Sent Date <span class="float-right">:</span> </th>
+                              <td class="col-md-8"> {{company.process.sent_date}} </td>
+                            </tr>
+                            <tr>
+                              <th class="col-md-4"> Agreement <span class="float-right">:</span> </th>
+                              <td class="col-md-8"> {{company.process.agreement}} </td>
+                            </tr>
+                            <tr>
+                              <th class="col-md-4"> Recieve Date <span class="float-right">:</span> </th>
+                              <td class="col-md-8"> {{company.process.received_date}} </td>
+                            </tr>
+                            <tr>
+                              <th class="col-md-4"> Signed <span class="float-right">:</span> </th>
+                              <td class="col-md-8"> {{company.process.signed}} </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <p class="pt-3" v-html="agent.description"></p>
+                      </div>
+                    </b-card>
+                  </div>
+                </div>
+                <hr>
+            </div>
+            <!-- </div> -->
           </b-card>
         </div>
       </b-row>
@@ -482,7 +487,7 @@
       },
       filterStudents(){
         var self =this;
-        if(self.students){
+        if(Array.isArray(this.students)){
           var date = self.student_filter;
           var res = self.students.filter(s=>{
             var sd =self.format(s.created_at);
