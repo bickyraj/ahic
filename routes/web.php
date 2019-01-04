@@ -52,10 +52,13 @@ Route::get('sendNotification', function () {
     return "event fired";
 });
 
-
-Route::get('{any}', function () {
+Route::get('/admin', function () {
+    return view('layouts.app');
+})->where('any', '.*');
+Route::get('/admin/{any}', function () {
     return view('layouts.app');
 })->where('any', '.*');
 
-Route::get('{slug}/{subslug}','PageController@slug');
 Route::get('{slug}/','PageController@slug');
+
+Route::get('{slug}/{subslug}','PageController@slug');

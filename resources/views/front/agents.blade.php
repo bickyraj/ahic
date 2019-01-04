@@ -7,6 +7,20 @@
     background-position:center;
     background-size:cover;
   }
+  #mapModal{
+    z-index: 9999 !important;
+    padding: 0px !important;
+    height: 600px !important;
+
+  }
+  #map{
+    position: static !important;
+    height:100%;
+    width:100%;
+  }
+  .modal{
+    max-width: 100% !important;
+  }
 </style>
 @endsection
 
@@ -117,6 +131,9 @@
                               </li>
 
                             </ul>
+                              <button class="btn btn-primary mt-2 mapModal"  data-address="{{$company->address}}">
+                                View Map
+                              </button>
                           </div>
                         </div>
                       </div> <!-- END col-lg-3 col-md-6-->
@@ -169,6 +186,9 @@
                                 </li>
 
                               </ul>
+                              <button class="btn btn-primary mt-2 mapModal"  data-address="{{$company->address}}">
+                                View Map
+                              </button>
                             </div>
                           </div>
                         </div> <!-- END col-lg-3 col-md-6-->
@@ -186,6 +206,131 @@
     </section> <!-- END section-->
 
 
+    <div id="mapModal" class="modal">
+      <div id="map"></div>
+    </div>
 
+
+
+
+@endsection
+@section('script')
+
+
+  <script>
+
+
+  $(document).ready(function() {
+
+    $('.mapModal').click(function(e){
+      e.preventDefault();
+
+      var address = $(this).data('address');
+      var geocoder = new google.maps.Geocoder();
+geocoder.geocode( { 'address': address}, function(results, status) {
+
+if (status == google.maps.GeocoderStatus.OK) {
+  var latitude = results[0].geometry.location.lat();
+  var longitude = results[0].geometry.location.lng();
+
+  var map;
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat:latitude, lng:longitude},
+      zoom: 15,
+      styles: [
+           {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+           {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+           {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+           {
+             featureType: 'administrative.locality',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#d59563'}]
+           },
+           {
+             featureType: 'poi',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#d59563'}]
+           },
+           {
+             featureType: 'poi.park',
+             elementType: 'geometry',
+             stylers: [{color: '#263c3f'}]
+           },
+           {
+             featureType: 'poi.park',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#6b9a76'}]
+           },
+           {
+             featureType: 'road',
+             elementType: 'geometry',
+             stylers: [{color: '#38414e'}]
+           },
+           {
+             featureType: 'road',
+             elementType: 'geometry.stroke',
+             stylers: [{color: '#212a37'}]
+           },
+           {
+             featureType: 'road',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#9ca5b3'}]
+           },
+           {
+             featureType: 'road.highway',
+             elementType: 'geometry',
+             stylers: [{color: '#746855'}]
+           },
+           {
+             featureType: 'road.highway',
+             elementType: 'geometry.stroke',
+             stylers: [{color: '#1f2835'}]
+           },
+           {
+             featureType: 'road.highway',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#f3d19c'}]
+           },
+           {
+             featureType: 'transit',
+             elementType: 'geometry',
+             stylers: [{color: '#2f3948'}]
+           },
+           {
+             featureType: 'transit.station',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#d59563'}]
+           },
+           {
+             featureType: 'water',
+             elementType: 'geometry',
+             stylers: [{color: '#17263c'}]
+           },
+           {
+             featureType: 'water',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#515c6d'}]
+           },
+           {
+             featureType: 'water',
+             elementType: 'labels.text.stroke',
+             stylers: [{color: '#17263c'}]
+           }
+         ]
+
+    });
+
+    }
+});
+
+      $('#mapModal').modal({
+        fadeDuration: 250
+      });
+
+    })
+  });
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYzQSFe_kpl4XGNUruHsH2dLXN3nXgOpY"
+    async defer></script>
 
 @endsection

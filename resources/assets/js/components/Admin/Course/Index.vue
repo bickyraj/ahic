@@ -245,7 +245,6 @@
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/course/';
         axios.get(url + menu.id).then(function(response) {
-            console.log(response.data.data);
             if (response.status === 200 || response.status === 201) {
               self.modalInfo.row = index
               self.modalInfo.title = `Edit Course`

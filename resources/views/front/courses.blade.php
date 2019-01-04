@@ -25,9 +25,7 @@
       <h2 class="h1">
         All AHIC Courses
       </h2>
-      <!-- <p class="lead">
-        <span class="text-primary">13</span> courses found
-      </p> -->
+
      </div>
      <form class="col-lg-5 my-2 ml-auto" action="{{route('search')}}" method="POST">
        {{csrf_field()}}
