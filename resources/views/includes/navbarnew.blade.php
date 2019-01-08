@@ -45,6 +45,21 @@
                                  </ul>
                                </li>
 
+                                               @elseif (!empty($menu['submenus']))
+                                                 <li class="nav-item nav-item__has-dropdown">
+                                                   <a href="{{url('/')}}/{{$menu['parent_page']['slug']}}"  class="nav-link text-capitalize dropdown-toggle course_dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                     {{$menu['name']}}
+                                                     <span class="caret"></span></a>
+                                                     <ul class="dropdown-menu ">
+                                                       @foreach ($menu['submenus'] as $submenus)
+                                                         {{-- <li class=""><a href="/{{$menu['parent_page']['slug']}}/{{$name}}" class="nav-link__list"> --}}
+                                                         <li class=""><a href="{{url('/')}}/{{$menu['parent_page']['slug']}}/{{$submenus['name']}}"  class="nav-link__list">
+                                                           {{$submenus['name']}}
+                                                         </a></li>
+                                                       @endforeach
+                                                     </ul>
+                                                   </li>
+
                               @elseif ($menu['parent_page']['slug'] == 'home')
                                <li class="nav-item"><a href="{{url('/')}}" class="nav-link text-capitalize <?= ((\Request::segment(1) == $menu['parent_page']['slug'] || ($menu['parent_page']['slug'] == 'home' && \Request::segment(1) == ''))?'active': ''); ?>">
                                  {{ $menu['name'] }}</a></li>

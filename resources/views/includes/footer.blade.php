@@ -43,7 +43,10 @@
               @foreach ($menus as $menu)
                 @if(isset($menu['parent_page']))
                   @php
-                     $route = route($menu['parent_page']['slug']);
+                     $name= $menu['parent_page']['name'];
+                     $name = strTolower($name);
+                     $slug = str_replace(' ', '-', $name);
+                     $route = route('home').'/'. $slug;
                   @endphp
                   @if ($menu['name'] =="home")
 
