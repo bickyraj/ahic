@@ -72,12 +72,12 @@
            <ul class="nav tab-line tab-line tab-line--3x border-bottom mb-4" role="tablist">
              <li class="nav-item">
               <a class="nav-link active" data-toggle="tab" href="#Tabs_4-1" role="tab" aria-selected="true">
-                OffShore
+                Onshore
               </a>
              </li>
              <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#Tabs_4-2" role="tab" aria-selected="true">
-                OnShore
+                OffShore
               </a>
              </li>
 
@@ -92,7 +92,7 @@
                 @endphp
                 @foreach ($agents as $agent)
                   @foreach ($agent->documents as $company)
-                    @if ($company->country != 'Australia')
+                    @if ($company->country == 'Australia')
                       <div class="col-lg-4 col-md-6 marginTop-35 wow fadeInUp" data-wow-delay=".1s">
 
                         <div class="card height-100p shadow-v1 text-center">
@@ -145,20 +145,42 @@
               </div>
             </div>
               <div class="tab-pane fade" id="Tabs_4-2" role="tabpanel">
-                <div class="row">
+                <div class="row d-flex justify-content-end">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <select name="country" class="form-control country_filter">
+                          <option value="" selected> SELECT A COUNTRY</option>
+                            @foreach ($countries as $country)
+                                <option value="{{$country->name}}">{{$country->name}}</option>
+                            @endforeach
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <select name="country" class="form-control address_filter">
+                          <option value="" selected> SELECT A LOCATION</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
+                <div class="row" id="filterDataContent">
                   @php
                     $count = 0;
                   @endphp
                   @foreach ($agents as $agent)
                     @foreach ($agent->documents as $company)
-                      @if ($company->country == 'Australia')
+                      @if ($company->country != 'Australia')
                         <div class="col-lg-4 col-md-6 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
                           <div class="card height-100p shadow-v1 text-center">
-                            @if($agent->logo != null)
                             <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
+                            @if($agent->logo != null)
                                 <img src="{{asset('/')}}public/images/agents/{{$agent->logo}}" alt="" class="img-fluid">
-                             </span>
+                             @else
+                               <img src="{{asset('/')}}public/ahic/img/logo-black.png" alt="" class="">
+
                            @endif
+                         </span>
                             <div class="card-body">
                               <h4>
                               {{$agent->first_name}} {{$agent->last_name}}
@@ -217,6 +239,30 @@
 @section('script')
 
 
+  <script>
+  $(document).ready(function() {
+    $('.country_filter').change(function(event) {
+      var value = $(this).val();
+
+        $.post('{{url('/')}}/agents/country_filter',{id:value},function(data){
+            $('#filterDataContent').html(data);
+        })
+
+        $.post('{{url('/')}}/agents/country_filter/locations',{id:value},function(data){
+            $('.address_filter').html(data);
+        })
+
+
+    });
+    $('.address_filter').change(function(event) {
+      var value = $(this).val();
+      $.post('{{url('/')}}/agents/address_filter',{id:value},function(data){
+          $('#filterDataContent').html(data);
+      })
+
+    });
+  });
+  </script>
   <script>
 
 

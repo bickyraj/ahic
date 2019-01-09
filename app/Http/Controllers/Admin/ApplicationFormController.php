@@ -22,8 +22,10 @@ class ApplicationFormController extends Controller
         return Resource::collection($applications);
     }
 
+
     public function fetch($id){
-            $application = ApplicationForm::find($id)->with('edu','date_of_intake','fee','services','application_course.course','passport','aus','home','econtact','english','rpl','services','checklist','underage')->first();
+            // $application = ApplicationForm::find($id)->with('edu','date_of_intake','fee','services','application_course.course','passport','aus','home','econtact','english','rpl','services','checklist','underage')->first();
+            $application = ApplicationForm::where('id',$id)->with('edu','date_of_intake','fee','services','application_course.course','passport','aus','home','econtact','english','rpl','services','checklist','underage')->first();
             return new Resource($application);
     }
     public function create()

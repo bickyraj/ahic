@@ -10,7 +10,6 @@
 }
 
 
-
 $trump_blue: #5263ff;
 $border_color: #ebebeb;
 
@@ -570,4 +569,9 @@ button:focus {
 			}
 		}
 	}
+}
+
+
+nav.ec-nav > .container{
+  max-width: 1200px !important;
 }

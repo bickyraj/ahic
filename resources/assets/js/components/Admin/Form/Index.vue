@@ -188,7 +188,7 @@
                          </div>
                             <div class="form-group col-md-3">
                             <label for="">Visa Expired Date</label>
-                            <datepicker format="yyyy-MM-dd" name="v_exp_date"  bootstrap-styling  :initialView="''" ></datepicker>
+                            <datepicker format="yyyy-MM-dd" name="v_exp_date"  bootstrap-styling  :initialView="'year'" ></datepicker>
                             <transition name="fade">
                             <p v-if="error.v_exp_date" class="text-danger"> {{error.v_exp_date[0]}}</p>
                             </transition>
@@ -391,7 +391,7 @@
                         </div>
     <div class="row" v-for="(n,qs) in q" :key="n" :ref="'Q'+n" :use="qs">
     <div class="col-md-12">
-      <h4> Qualification {{n}}
+      <h4> Qualification
        <small class="float-right"> <button class="btn btn-danger" @click.prevent="removeQ(n)">
          <i class="fa fa-minus-circle" aria-hidden="true"></i>
  </button> </small>
@@ -461,7 +461,7 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for=""> Year Taken</label>
-                                <input type="text" class="form-control" name="year_taken" value="">
+                            <datepicker format="yyyy" name="year_taken"  bootstrap-styling :minimumView="'year'" :maximumView="'year'" :initialView="'year'"   ></datepicker>
                                 <transition name="fade">
                                 <p v-if="error.year_taken" class="text-danger"> {{error.year_taken[0]}}</p>
                                 </transition>

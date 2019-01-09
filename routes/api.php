@@ -26,6 +26,16 @@ Route::post('admin/change-password', 'AdminController@changePassword');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth:api', 'admin']], function () {
 Route::post('/form/submit', 'FormController@store');
 
+
+
+  //CCF fucntions
+    Route::post('/ccf','CountryCourseFeeController@store');
+    Route::get('/ccf/{id}','CountryCourseFeeController@getCCF');
+    Route::get('/ccf/get/{id}','CountryCourseFeeController@show');
+    Route::post('/ccf/update','CountryCourseFeeController@update');
+    Route::delete('/ccf/{id}','CountryCourseFeeController@destroy');
+    // Route::get('/ccf/{id}','CourseController@ccf');
+
     // Newsletterfunctions.
     Route::get('newsletters', 'NewsletterController@index');
     Route::post('newsletter/edit', 'NewsletterController@edit');
@@ -267,6 +277,7 @@ Route::post('/form/submit', 'FormController@store');
       //Agent Agreement
     Route::get('application_forms','ApplicationFormController@index');
     Route::get('application_form/{id}','ApplicationFormController@fetch');
+
     Route::post('application_form/edit/{id}','ApplicationFormController@edit');
     Route::delete('application_form/{id}','ApplicationFormController@destroy');
 

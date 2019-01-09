@@ -47,7 +47,7 @@
 
                                                @elseif (!empty($menu['submenus']))
                                                  <li class="nav-item nav-item__has-dropdown">
-                                                   <a href="{{url('/')}}/{{$menu['parent_page']['slug']}}"  class="nav-link text-capitalize dropdown-toggle course_dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                   <a href="{{url('/')}}/{{$menu['parent_page']['slug']}}"  class="nav-link text-capitalize dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                                      {{$menu['name']}}
                                                      <span class="caret"></span></a>
                                                      <ul class="dropdown-menu ">

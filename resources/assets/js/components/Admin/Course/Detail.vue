@@ -173,9 +173,91 @@
               </b-collapse>
             </div>
           </b-card>
+          <b-card class="trump-card ">
+            <div>
+              <div class="card-title">
+                <div class="caption">
+                  <h5> <i class="fas fa-key"></i>  Country Course Fees
+                    <small class="float-right">
+                      <button class="btn btn-success"  @click="showCCFModal"> Add </button>
+                        <button class="btn " v-b-toggle.collapse9>
+                          <i class="far fa-eye" ></i>
+                        </button>
+                    </small>
+                  </h5>
+                </div>
+              </div>
+              <b-collapse visible id="collapse9">
+                <div class="col-md-12" v-if="ccf">
+                  <table class="table trump-table">
+                    <tr>
+                      <th> Country </th>
+                      <th> Price </th>
+                      <th> Action </th>
+                    </tr>
+
+                    <tr v-for="c in ccf">
+                      <td>{{c.country.name}}</td>
+                      <td>{{c.fee}}</td>
+                      <td>
+                        <b-button size="sm" @click.stop="showCCF(c.id)" class="mr-1 btn-success">
+                          Edit
+                        </b-button>
+                        <b-button size="sm" @click="deleteCCF(c.id)" class="mr-1 btn-danger">
+                          Delete
+                        </b-button></td>
+                    </tr>
+                  </table>
+                </div>
+              </b-collapse>
+            </div>
+          </b-card>
+
         </div>
       </div>
     </b-row>
+
+    <b-modal class="ess-modal" ref="addccfModal" hide-footer title="Add Country Course Fee">
+      <form @submit.prevent="addCCF" ref="addCCFForm">
+        <div class="form-group">
+          <label for=""> Country </label>
+          <select class="form-control" name="country_id">
+              <option value=""> SELECT A COUNTRY</option>
+              <option  v-for="country in countries" :value="country.id"> {{country.name}} </option>
+          </select>
+        </div>
+          <input type="hidden" name="course_id" class="form-control" :value="$route.params.id">
+        <div class="form-group">
+          <label for=""> Fee </label>
+          <input type="text" name="fee" class="form-control">
+        </div>
+
+        <b-btn class="mt-3 pull-right" variant="primary" type="submit">Add Country Course Fee</b-btn>
+        <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideCCFModal">Cancel</b-btn>
+      </form>
+    </b-modal>
+
+    <b-modal class="ess-modal" ref="editccfModal" hide-footer title="Edit Country Course Fee">
+      <form @submit.prevent="editCCF" ref="editCCFForm">
+        <input type="hidden" name="id" :value="editccf.id">
+        <div class="form-group">
+          <label for=""> Country </label>
+          <select class="form-control" name="country_id" v-model="editccf.country_id">
+              <option value=""> SELECT A COUNTRY</option>
+              <option  v-for="country in countries" :value="country.id"> {{country.name}} </option>
+          </select>
+        </div>
+          <input type="hidden" name="course_id" class="form-control" :value="$route.params.id">
+        <div class="form-group">
+          <label for=""> Fee </label>
+          <input type="text" name="fee" class="form-control" :value="editccf.fee">
+        </div>
+
+        <b-btn class="mt-3 pull-right" variant="primary" type="submit">Edit Country Course Fee</b-btn>
+        <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditCCFModal">Cancel</b-btn>
+      </form>
+    </b-modal>
+
     <b-modal class="ess-modal" ref="courseModal" hide-footer title="Edit Course">
       <form @submit.prevent="editCourse" ref="editCourseForm">
         <input type="hidden" name="id" :value="course.id">
@@ -338,6 +420,9 @@
         categories: '',
         acompetences: '',
         competences: '',
+        countries:'',
+        ccf:'',
+        editccf:'',
         course: {},
         requirements: '',
         outcomes: '',
@@ -360,6 +445,9 @@
       this.fetchAllCompetences();
       this.fetchUCategories();
       this.fetchCompetences();
+      this.fetchCountries();
+      this.fetchCCF();
+
     },
     computed: {
       img() {
@@ -370,6 +458,101 @@
       }
     },
     methods: {
+      fetchCCF(){
+        let vm = this;
+        let self = this;
+        let id = parseInt(this.$route.params.id);
+        let url = self.$root.baseUrl + '/api/admin/ccf/';
+        axios.get(url + id).then(function(response) {
+            vm.ccf = response.data.data;
+            vm.loading = false;
+          })
+          .catch(function(error) {
+            console.log(error);
+            vm.loading = false;
+          });
+      },
+      addCCF(){
+        var self = this;
+        var form = self.$refs.addCCFForm;
+        var formData = new FormData(form);
+        let url = self.$root.baseUrl + '/api/admin/ccf';
+        axios.post(url, formData).then(function(response) {
+            self.fetchCCF();
+            $(form)[0].reset();
+            self.hideCCFModal();
+            self.$toastr.s("A country course fee has been added.");
+          })
+          .catch(function(error) {
+            if (error.response.status === 422) {
+              self.$toastr.e(error.response.data.errors.name);
+            }
+          });
+      },
+      showCCF(id){
+        var self = this;
+          let url = self.$root.baseUrl + '/api/admin/ccf/get/'+id;
+        axios.get(url).then(function(response) {
+          self.editccf= response.data.data
+            self.showEditCCFModal();
+          })
+          .catch(function(error) {
+            if (error.response.status === 422) {
+              self.$toastr.e(error.response.data.errors.name);
+            }
+          });
+      },
+      editCCF(){
+        var self = this;
+        var form = self.$refs.editCCFForm;
+        var formData = new FormData(form);
+        let url = self.$root.baseUrl + '/api/admin/ccf/update';
+        axios.post(url, formData).then(function(response) {
+          self.fetchCCF();
+            $(form)[0].reset();
+            self.hideEditCCFModal();
+            self.$toastr.s("A country course fee has been edited.");
+          })
+          .catch(function(error) {
+            if (error.response.status === 422) {
+              self.$toastr.e(error.response.data.errors.name);
+            }
+          });
+      },
+      deleteCCF(id){
+        var self = this;
+        self.$swal({
+          // position: 'top-end',
+          type: 'info',
+          title: 'Are you sure you want to delete this?',
+          showConfirmButton: true,
+          showCancelButton: true,
+          // timer: 1500,
+          customClass: 'crm-swal',
+          confirmButtonText: 'Yes',
+        }).then((result) => {
+          if (result.value) {
+            let url = self.$root.baseUrl + '/api/admin/ccf/';
+            axios.delete(url +id).then(function(response) {
+                if (response.status === 200) {
+                  self.fetchCCF();
+                  self.$swal({
+                    // position: 'top-end',
+                    type: 'success',
+                    title: 'Deleted',
+                    showConfirmButton: true,
+                    // timer: 1500,
+                    customClass: 'crm-swal',
+                    confirmButtonText: 'Ok',
+                  }).then((result) => {
+                    if (result.value) {}
+                  })
+                }
+              })
+              .catch(function(error) {});
+          }
+        })
+      },
       remove(event, id) {
         console.log(id);
         let type = event.currentTarget.attributes['type'].value;
@@ -385,6 +568,8 @@
             vm.fetchAllCompetences();
             vm.fetchUCategories();
             vm.fetchCompetences();
+            this.fetchCountries();
+
           })
           .catch(function(error) {
             console.log(error);
@@ -601,6 +786,18 @@
             }
           });
       },
+      fetchCountries(){
+        var self = this;
+        let url = self.$root.baseUrl + '/api/admin/countries';
+        axios.get(url).then(function(response) {
+          self.countries = response.data.data;
+          })
+          .catch(function(error) {
+            if (error.response.status === 422) {
+              console.log(error);
+            }
+          });
+      },
       showEditCourseModal() {
         this.$refs.courseModal.show()
       },
@@ -645,6 +842,18 @@
       },
       showRPLModal() {
         this.$refs.rplModal.show()
+      },
+      showCCFModal() {
+        this.$refs.addccfModal.show()
+      },
+      hideCCFModal() {
+        this.$refs.addccfModal.hide()
+      },
+      showEditCCFModal() {
+        this.$refs.editccfModal.show()
+      },
+      hideEditCCFModal() {
+        this.$refs.editccfModal.hide()
       },
       hideRPLModal() {
         this.$refs.rplModal.hide()

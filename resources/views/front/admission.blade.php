@@ -154,7 +154,19 @@
                   </div>
                 </div>
                 <div class="tab-pane fade show fade" id="Tabs_8-2" role="tabpanel">
-                  <div class="row">
+                  <div class="row d-flex justify-content-end">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <select name="country" class="form-control country_filter">
+                            <option value="" selected> SELECT A COUNTRY</option>
+                              @foreach ($countries as $country)
+                                  <option value="{{$country->id}}">{{$country->name}}</option>
+                              @endforeach
+                          </select>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row" id="filterFees">
 
                       @foreach ($courses as $category)
     @if (count($category->courses) > 0)
@@ -399,4 +411,18 @@
 
 
 
+@endsection
+
+@section('script')
+  <script>
+  $(document).ready(function() {
+    $('.country_filter').prop('selectedIndex',0);
+    $('.country_filter').change(function(event) {
+        var val = $(this).val();
+        $.post('{{url('/')}}/course/country_filter',{id:val},function(data){
+            $('#filterFees').html(data);
+        })
+    });
+  });
+  </script>
 @endsection

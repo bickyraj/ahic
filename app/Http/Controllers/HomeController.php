@@ -9,12 +9,15 @@ use App\CourseCategory;
 use App\PaymentOption;
 use App\PageModule;
 use App\AgentInformation;
+use App\AgentDocument;
 use App\Country;
 use App\Download;
 use App\News;
+use App\BranchLocation;
 use App\Gallery;
 use App\Slider;
 use App\Cms as CMS;
+use App\CountryCourseFee;
 use App\ApplicationDateOfIntake;
 
 
@@ -86,13 +89,10 @@ class HomeController extends Controller
         $page = Page::where('slug',$route)->first()->id;
         $modules = PageModule::where('page_id',$page)->with('module','module.content')->get();
       }
-      // $courses = Course::all();
-      // $categories = CourseCategory::all();
       $intakeyear = ApplicationDateOfIntake::groupBy('year')->get();
       $intakes = ApplicationDateOfIntake::all();
 
       $courses = CourseCategory::with('courses')->get();
-      // $this->debug($modules);
       return view('front.admission',compact('courses','categories','intakeyear','intakes','modules'));
     }
     public function studentService(){
@@ -118,8 +118,29 @@ class HomeController extends Controller
 
     public function agents(){
       $agents = AgentInformation::with('documents')->get();
-      // $this->debug($agents);
       return view('front.agents',compact('agents'));
+    }
+
+    public function filterCountry(Request $request){
+        $id = $request->id;
+        $agents = AgentDocument::where('country',$id)->with('agent')->get();
+        return view('front.partials.agentFilter')->with('agents',$agents)->render();
+    }
+    public function filterAddress(Request $request){
+        $id = $request->id;
+        $agents = AgentDocument::where('location',$id)->with('agent')->get();
+        return view('front.partials.agentFilterL')->with('agents',$agents)->render();
+    }
+    public function filterCountryL(Request $request){
+        $id = $request->id;
+        $id = Country::where('name',$id)->first()->id;
+        $locations = BranchLocation::where('country_id',$id)->get();
+        return view('front.partials.locationFilter')->with('locations',$locations)->render();
+    }
+    public function filterFees(Request $request){
+      $fees = CountryCourseFee::where('country_id',$request->id)->get();
+      $courses = CourseCategory::with('courses')->get();
+      return view('front.partials.filterFees')->with('fees',$fees)->with('courses',$courses)->render();
     }
 
     public function debug($a){
