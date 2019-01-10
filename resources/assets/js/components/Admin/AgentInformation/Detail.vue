@@ -13,7 +13,6 @@
 
 .students_list{
   max-height:200px !important;
-  /* height:418px !important; */
   overflow-y:scroll;
 }
 

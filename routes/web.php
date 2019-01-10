@@ -14,6 +14,12 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::post('/agents/country_filter','HomeController@filterCountry');
+Route::post('/agents/address_filter','HomeController@filterAddress');
+Route::post('/agents/country_filter/locations','HomeController@filterCountryL');
+
+Route::post('/course/country_filter','HomeController@filterFees');
+
 
 
 Route::get('/course/{course}', 'HomeController@course')->name('course');
@@ -52,10 +58,13 @@ Route::get('sendNotification', function () {
     return "event fired";
 });
 
-
-Route::get('{any}', function () {
+Route::get('/admin', function () {
+    return view('layouts.app');
+})->where('any', '.*');
+Route::get('/admin/{any}', function () {
     return view('layouts.app');
 })->where('any', '.*');
 
-Route::get('{slug}/{subslug}','PageController@slug');
 Route::get('{slug}/','PageController@slug');
+
+Route::get('{slug}/{subslug}','PageController@slug');

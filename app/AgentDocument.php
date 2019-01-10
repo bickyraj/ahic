@@ -19,4 +19,7 @@ class AgentDocument extends Model
     public function students(){
       return $this->hasMany('App\ApplicationAgent','company_id','id');
     }
+    public function agent(){
+      return $this->belongsTo('App\AgentInformation');
+    }
 }

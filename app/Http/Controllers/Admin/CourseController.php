@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Menu as Resource;
 use App\Course;
+use App\CountryCourseFee;
 use Illuminate\Http\Request;
 
 
@@ -49,6 +50,8 @@ class CourseController extends Controller
          $course = Course::with('category')->get();
         return Resource::collection($course);
     }
+
+
 
     /**
      * Show the form for creating a new resource.

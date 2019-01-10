@@ -25,9 +25,7 @@
       <h2 class="h1">
         All AHIC Courses
       </h2>
-      <!-- <p class="lead">
-        <span class="text-primary">13</span> courses found
-      </p> -->
+
      </div>
      <form class="col-lg-5 my-2 ml-auto" action="{{route('search')}}" method="POST">
        {{csrf_field()}}
@@ -95,7 +93,13 @@
         @endphp
         <div class="col-lg-4 col-md-6 marginTop-30">
           <div href="{{route('course',$course->name)}}" class="card height-100p text-gray shadow-v1">
-            <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/business-1.jpg" alt="">
+            {{-- <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/business-1.jpg" alt=""> --}}
+            @if($course->background_image)
+              <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
+@else
+  <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+
+            @endif
             <div class="card-body">
 
               <a href="{{route('course',$stripped)}}" class="h5">

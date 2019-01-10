@@ -13,6 +13,9 @@ class Page extends Model
   public function banners(){
     return $this->hasMany('App\Banner','page_id','id');
   }
+  public function module(){
+    return $this->hasMany('App\Module','page_id','id');
+  }
   public function subpages(){
     return $this->hasMany('App\Page','parent_id' ,'id');
   }

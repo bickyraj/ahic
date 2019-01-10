@@ -13,6 +13,7 @@ class Menu extends Model
   public function submenus(){
     return $this->hasMany('App\Menu','parent_id','id');
   }
+
   public function parent_menu(){
     return $this->belongsTo('App\Menu','parent_id','id');
   }

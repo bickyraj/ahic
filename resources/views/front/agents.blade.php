@@ -7,6 +7,20 @@
     background-position:center;
     background-size:cover;
   }
+  #mapModal{
+    z-index: 9999 !important;
+    padding: 0px !important;
+    height: 600px !important;
+
+  }
+  #map{
+    position: static !important;
+    height:100%;
+    width:100%;
+  }
+  .modal{
+    max-width: 100% !important;
+  }
 </style>
 @endsection
 
@@ -58,12 +72,12 @@
            <ul class="nav tab-line tab-line tab-line--3x border-bottom mb-4" role="tablist">
              <li class="nav-item">
               <a class="nav-link active" data-toggle="tab" href="#Tabs_4-1" role="tab" aria-selected="true">
-                OffShore
+                Onshore
               </a>
              </li>
              <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#Tabs_4-2" role="tab" aria-selected="true">
-                OnShore
+                OffShore
               </a>
              </li>
 
@@ -78,7 +92,7 @@
                 @endphp
                 @foreach ($agents as $agent)
                   @foreach ($agent->documents as $company)
-                    @if ($company->country != 'Australia')
+                    @if ($company->country == 'Australia')
                       <div class="col-lg-4 col-md-6 marginTop-35 wow fadeInUp" data-wow-delay=".1s">
 
                         <div class="card height-100p shadow-v1 text-center">
@@ -117,6 +131,9 @@
                               </li>
 
                             </ul>
+                              <button class="btn btn-primary mt-2 mapModal"  data-address="{{$company->address}}">
+                                View Map
+                              </button>
                           </div>
                         </div>
                       </div> <!-- END col-lg-3 col-md-6-->
@@ -128,20 +145,42 @@
               </div>
             </div>
               <div class="tab-pane fade" id="Tabs_4-2" role="tabpanel">
-                <div class="row">
+                <div class="row d-flex justify-content-end">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <select name="country" class="form-control country_filter">
+                          <option value="" selected> SELECT A COUNTRY</option>
+                            @foreach ($countries as $country)
+                                <option value="{{$country->name}}">{{$country->name}}</option>
+                            @endforeach
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <select name="country" class="form-control address_filter">
+                          <option value="" selected> SELECT A LOCATION</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
+                <div class="row" id="filterDataContent">
                   @php
                     $count = 0;
                   @endphp
                   @foreach ($agents as $agent)
                     @foreach ($agent->documents as $company)
-                      @if ($company->country == 'Australia')
+                      @if ($company->country != 'Australia')
                         <div class="col-lg-4 col-md-6 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
                           <div class="card height-100p shadow-v1 text-center">
-                            @if($agent->logo != null)
                             <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
+                            @if($agent->logo != null)
                                 <img src="{{asset('/')}}public/images/agents/{{$agent->logo}}" alt="" class="img-fluid">
-                             </span>
+                             @else
+                               <img src="{{asset('/')}}public/ahic/img/logo-black.png" alt="" class="">
+
                            @endif
+                         </span>
                             <div class="card-body">
                               <h4>
                               {{$agent->first_name}} {{$agent->last_name}}
@@ -169,6 +208,9 @@
                                 </li>
 
                               </ul>
+                              <button class="btn btn-primary mt-2 mapModal"  data-address="{{$company->address}}">
+                                View Map
+                              </button>
                             </div>
                           </div>
                         </div> <!-- END col-lg-3 col-md-6-->
@@ -186,6 +228,155 @@
     </section> <!-- END section-->
 
 
+    <div id="mapModal" class="modal">
+      <div id="map"></div>
+    </div>
 
+
+
+
+@endsection
+@section('script')
+
+
+  <script>
+  $(document).ready(function() {
+    $('.country_filter').change(function(event) {
+      var value = $(this).val();
+
+        $.post('{{url('/')}}/agents/country_filter',{id:value},function(data){
+            $('#filterDataContent').html(data);
+        })
+
+        $.post('{{url('/')}}/agents/country_filter/locations',{id:value},function(data){
+            $('.address_filter').html(data);
+        })
+
+
+    });
+    $('.address_filter').change(function(event) {
+      var value = $(this).val();
+      $.post('{{url('/')}}/agents/address_filter',{id:value},function(data){
+          $('#filterDataContent').html(data);
+      })
+
+    });
+  });
+  </script>
+  <script>
+
+
+  $(document).ready(function() {
+
+    $('.mapModal').click(function(e){
+      e.preventDefault();
+
+      var address = $(this).data('address');
+      var geocoder = new google.maps.Geocoder();
+geocoder.geocode( { 'address': address}, function(results, status) {
+
+if (status == google.maps.GeocoderStatus.OK) {
+  var latitude = results[0].geometry.location.lat();
+  var longitude = results[0].geometry.location.lng();
+
+  var map;
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat:latitude, lng:longitude},
+      zoom: 15,
+      styles: [
+           {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+           {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+           {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+           {
+             featureType: 'administrative.locality',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#d59563'}]
+           },
+           {
+             featureType: 'poi',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#d59563'}]
+           },
+           {
+             featureType: 'poi.park',
+             elementType: 'geometry',
+             stylers: [{color: '#263c3f'}]
+           },
+           {
+             featureType: 'poi.park',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#6b9a76'}]
+           },
+           {
+             featureType: 'road',
+             elementType: 'geometry',
+             stylers: [{color: '#38414e'}]
+           },
+           {
+             featureType: 'road',
+             elementType: 'geometry.stroke',
+             stylers: [{color: '#212a37'}]
+           },
+           {
+             featureType: 'road',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#9ca5b3'}]
+           },
+           {
+             featureType: 'road.highway',
+             elementType: 'geometry',
+             stylers: [{color: '#746855'}]
+           },
+           {
+             featureType: 'road.highway',
+             elementType: 'geometry.stroke',
+             stylers: [{color: '#1f2835'}]
+           },
+           {
+             featureType: 'road.highway',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#f3d19c'}]
+           },
+           {
+             featureType: 'transit',
+             elementType: 'geometry',
+             stylers: [{color: '#2f3948'}]
+           },
+           {
+             featureType: 'transit.station',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#d59563'}]
+           },
+           {
+             featureType: 'water',
+             elementType: 'geometry',
+             stylers: [{color: '#17263c'}]
+           },
+           {
+             featureType: 'water',
+             elementType: 'labels.text.fill',
+             stylers: [{color: '#515c6d'}]
+           },
+           {
+             featureType: 'water',
+             elementType: 'labels.text.stroke',
+             stylers: [{color: '#17263c'}]
+           }
+         ]
+
+    });
+
+    }
+});
+
+      $('#mapModal').modal({
+        fadeDuration: 250
+      });
+
+    })
+  });
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYzQSFe_kpl4XGNUruHsH2dLXN3nXgOpY"
+    async defer></script>
 
 @endsection

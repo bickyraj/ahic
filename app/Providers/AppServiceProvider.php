@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Menu;
 use App\Page;
 use App\Contact;
+use App\Country;
 use App\CourseCategory;
 
 
@@ -24,8 +25,11 @@ class AppServiceProvider extends ServiceProvider
 
       Schema::defaultStringLength(191);
       $menus = Menu::where('parent_id',null)->where('status','1')->orderBy('menu_order','asc')->with('submenus.parent_page','parent_page')->orderBy('menu_order','desc')->get()->toArray();
+      // echo "<pre>";
+      // print_r($menus);
+      // die();
       $cats = CourseCategory::orderBy('order_by','asc')->get();
-
+      $countries = Country::all();
       $contact = Contact::all();
       if($contact){
         if(isset($contact[0]))
@@ -41,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
       view()->share('contact', $contact);
       view()->share('menus', $menus);
       view()->share('cats',$cats);
+      view()->share('countries',$countries);
 
     }
 
