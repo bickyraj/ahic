@@ -30,7 +30,7 @@
               <tr>
                 <th>Name</th>
                 <th>Created Date</th>
-                <th class="col-md-2">Status</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
