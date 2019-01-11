@@ -141,14 +141,7 @@
     var v = el.value;
     var a = window.location.hostname;
     var l = '{{url('/')}}/courses/'+v;
-    if(a == 'localhost'){
-      v = 'http://'+a+'/cms/courses/' +v;
-    }
-    else{
-      v = l;
-    }
-    // var host = window.location.hostname + '/cms/';
-    window.location.href = v;
+    window.location.href = l;
 
   }
 
