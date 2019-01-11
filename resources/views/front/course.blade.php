@@ -84,7 +84,7 @@
   {{$string[1]}}
 @endif
                 </h2>
-                <a class="btn btn-primary" href="{{url('/')}}/public/files/apply_now.pdf" target="_blank">Apply Now</a>
+                <a class="btn btn-primary" href="{{route('apply_now')}}" target="_blank">Apply Now</a>
               </div>
             </div>
           </div> <!-- END row-->
