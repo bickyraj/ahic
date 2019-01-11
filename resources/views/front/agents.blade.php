@@ -26,22 +26,6 @@
 
 @section('content')
 
-
-    <div class="site-search">
-     <div class="site-search__close bg-black-0_8"></div>
-     <form class="form-site-search" action="#" method="POST">
-      <div class="input-group">
-        <input type="text" placeholder="Search" class="form-control py-3 border-white" required="">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit"><i class="ti-search"></i></button>
-        </div>
-      </div>
-     </form>
-    </div> <!-- END site-search-->
-
-
-
-
     <div class="py-5 bg-cover text-white" data-dark-overlay="5" >
       <div class="container">
        <div class="row align-items-center">
@@ -94,7 +78,6 @@
                   @foreach ($agent->documents as $company)
                     @if ($company->country == 'Australia')
                       <div class="col-lg-4 col-md-6 marginTop-35 wow fadeInUp" data-wow-delay=".1s">
-
                         <div class="card height-100p shadow-v1 text-center">
                           <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
                           @if($agent->logo != null)
@@ -151,7 +134,10 @@
                         <select name="country" class="form-control country_filter">
                           <option value="" selected> SELECT A COUNTRY</option>
                             @foreach ($countries as $country)
-                                <option value="{{$country->name}}">{{$country->name}}</option>
+                              @if ($country->name == 'Australia')
+                              @else
+                                <option  value="{{$country->name}}">{{$country->name}}</option>
+                              @endif
                             @endforeach
                         </select>
                       </div>
@@ -241,6 +227,11 @@
 
   <script>
   $(document).ready(function() {
+//reset select options
+    $('.country_filter').prop('selectedIndex',0);
+    $('.address_filter').prop('selectedIndex',0);
+
+//trigger country filter and display new contnt as response
     $('.country_filter').change(function(event) {
       var value = $(this).val();
 
@@ -254,6 +245,7 @@
 
 
     });
+    // response for location change trigger
     $('.address_filter').change(function(event) {
       var value = $(this).val();
       $.post('{{url('/')}}/agents/address_filter',{id:value},function(data){
@@ -263,9 +255,9 @@
     });
   });
   </script>
+  {{-- //map stuff  --}}
+
   <script>
-
-
   $(document).ready(function() {
 
     $('.mapModal').click(function(e){

@@ -16,10 +16,10 @@ use App\News;
 use App\BranchLocation;
 use App\Gallery;
 use App\Slider;
+use App\Testimonial;
 use App\Cms as CMS;
 use App\CountryCourseFee;
 use App\ApplicationDateOfIntake;
-
 
 class HomeController extends Controller
 {
@@ -48,10 +48,11 @@ class HomeController extends Controller
         $news  =      News::where('status','1')->limit(3)->get();
         $gallery =    Gallery::all();
         $sliders =    Slider::where('status','1')->get();
+        $testimonials = Testimonial::where('status','1')->get();
         $header = CMS::where('slug','welcome')->first();
         $lc = CMS::where('slug','lc')->first();
         $rc = CMS::where('slug','rc')->first();
-        return view('front.index',compact('courses','countries','news','gallery','sliders','header','lc','rc'));
+        return view('front.index',compact('courses','countries','news','gallery','sliders','header','lc','rc','testimonials'));
     }
     public function courses()
     {
@@ -121,6 +122,32 @@ class HomeController extends Controller
       return view('front.agents',compact('agents'));
     }
 
+    public function form(){
+      $intake_dates = ApplicationDateOfIntake::groupBy('year')->get();
+      $ids = ApplicationDateOfIntake::all();
+      $courses = Course::where('status',1)->get();
+      $companies = AgentDocument::all();
+      return view('front.apply-now1',compact('intake_dates','courses','companies','ids'));
+    }
+
+
+
+
+    //filter form
+    public function intakes(Request $request){
+        $year = $request->year;
+        $dates = ApplicationDateOfIntake::where('year',$year)->get();
+        return view('front.partials.intake_dates')->with('dates',$dates)->render();
+    }
+    public function intake_date(Request $request){
+        $year = $request->year;
+        $date = $request->month;
+        return ApplicationDateOfIntake::where(function($q) use ($year) {
+                    $q->where('year', $year);
+                })->where('date',$date)->first();
+    }
+
+    //Filter Functions
     public function filterCountry(Request $request){
         $id = $request->id;
         $agents = AgentDocument::where('country',$id)->with('agent')->get();

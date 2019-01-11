@@ -195,6 +195,25 @@ const routes = [
         },
     },
     {
+        path: admin_url + 'testimonials',
+        component: require('./components/Admin/Testimonial/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Testimonials',
+                    path: admin_url + 'testimonials',
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
         path: admin_url + 'Pages',
         component: require('./components/Admin/Page/Index'),
         meta: {

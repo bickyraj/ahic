@@ -212,7 +212,7 @@ $this->validator($request);
     public function destroy($id)
     {
       $course = AgentInformation::findOrFail($id);
-       $this->destroyimage($course->image);
+       $this->destroyimage($course->logo);
         if ($course->delete()) {
             $status = 1;
         }

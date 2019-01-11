@@ -41,6 +41,15 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('newsletter/edit', 'NewsletterController@edit');
     Route::delete('newsletter/{id}', 'NewsletterController@destroy');
 
+    // Testimonial functions.
+    Route::get('testimonials', 'TestimonialController@index');
+    Route::get('testimonial/{id}', 'TestimonialController@show');
+    Route::post('testimonial', 'TestimonialController@store');
+    // Route::post('testimonial/update-order', 'TestimonialController@updateOrder');
+    Route::post('testimonial/edit', 'TestimonialController@edit');
+    Route::post('testimonial/update', 'TestimonialController@update');
+    Route::delete('testimonial/{id}', 'TestimonialController@destroy');
+
     // Message functions.
     Route::get('messages', 'MessageController@index');
     Route::post('message/edit', 'MessageController@edit');

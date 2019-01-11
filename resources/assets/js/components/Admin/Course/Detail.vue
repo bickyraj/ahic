@@ -223,7 +223,9 @@
           <label for=""> Country </label>
           <select class="form-control" name="country_id">
               <option value=""> SELECT A COUNTRY</option>
-              <option  v-for="country in countries" :value="country.id"> {{country.name}} </option>
+              <template v-for="country in countries" >
+                <option v-if="country.name != 'Australia'" :value="country.id"> {{country.name}} </option>
+              </template>
           </select>
         </div>
           <input type="hidden" name="course_id" class="form-control" :value="$route.params.id">

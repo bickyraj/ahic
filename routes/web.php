@@ -20,7 +20,15 @@ Route::post('/agents/country_filter/locations','HomeController@filterCountryL');
 
 Route::post('/course/country_filter','HomeController@filterFees');
 
+Route::get('/apply-now', 'HomeController@form')->name('apply_now');
+Route::post('/intake/year', 'HomeController@intakes');
+Route::post('/intake/date', 'HomeController@intake_date');\
 
+Route::get('/addEdu/{count}', function($count){
+  return view('front.partials.addEdu')->with('count',$count);
+});
+
+Route::post('/submit-admission','FormController@submitform');
 
 Route::get('/course/{course}', 'HomeController@course')->name('course');
 Route::get('/courses', 'HomeController@courses')->name('courses');

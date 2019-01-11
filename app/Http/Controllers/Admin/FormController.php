@@ -179,7 +179,6 @@ $this->validator($request);
 
             $application_form_id ='';
 
-      $data=[];
                 $data = [];
                 $data['date_of_intake_id'] =$request->input('intake_id');
                 $data['firstname']= $request->input('firstname');

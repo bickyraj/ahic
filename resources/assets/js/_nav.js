@@ -194,6 +194,14 @@ export default {
       }
     },
     {
+      name: 'Testimonials',
+      url: url + 'testimonials',
+      icon: 'fas fa-cloud-download-alt',
+      badge: {
+        variant: 'primary',
+      }
+    },
+    {
       name: 'Settings',
       url: '/settings',
       icon: 'fas fa-cog',

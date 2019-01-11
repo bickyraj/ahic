@@ -56,6 +56,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+  
       view()->composer('*', function ($view) {
         $route = \Route::current()->uri;
 
