@@ -140,7 +140,7 @@
   function changeCategory(el){
     var v = el.value;
     var a = window.location.hostname;
-    var l = '{{url('/')}}/'+v;
+    var l = '{{url('/')}}/courses/'+v;
     if(a == 'localhost'){
       v = 'http://'+a+'/cms/courses/' +v;
     }
