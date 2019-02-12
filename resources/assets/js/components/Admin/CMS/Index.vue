@@ -179,7 +179,7 @@
     </div>
     <div class="form-group">
       <label> Description </label>
-      <editor name="description" id="editCmsTextEditor" ref="editCmsTextEditor" :init="editor" v-model="modalInfo.data.description"></editor>
+      <editor name="description"  id="editCmsTextEditor" ref="editCmsTextEditor" :init="editor" v-model="modalInfo.data.description"></editor>
     </div>
     <div class="form-group">
       <label for="">Link </label>

@@ -54,6 +54,10 @@
         <div class="col-lg-9 marginTop-30">
           <h1>
           {{$course->name}}
+          <br>
+          <small>
+            {{$course->code}}
+          </small>
           </h1>
           <div class="row mt-3">
             <div class="col-lg-3 col-md-6 my-2">

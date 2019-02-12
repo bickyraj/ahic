@@ -57,7 +57,7 @@ class HomeController extends Controller
     public function courses()
     {
         $courses = Course::with('category')->get();
-        $categories = CourseCategory::all();
+        $categories = CourseCategory::with('courses')->get();
         return view('front.courses',compact('courses','categories'));
     }
 
@@ -150,20 +150,35 @@ class HomeController extends Controller
     //Filter Functions
     public function filterCountry(Request $request){
         $id = $request->id;
-        $agents = AgentDocument::where('country',$id)->with('agent')->get();
+        if($id == ""){
+          $agents = AgentDocument::with('agent')->get();
+        }
+        else{
+          $agents = AgentDocument::where('country',$id)->with('agent')->get();
+        }
         return view('front.partials.agentFilter')->with('agents',$agents)->render();
     }
     public function filterAddress(Request $request){
         $id = $request->id;
-        $agents = AgentDocument::where('location',$id)->with('agent')->get();
+        $id = $request->id;
+        if($id == ""){
+          $agents = AgentDocument::with('agent')->get();
+        }
+        else{
+          $agents = AgentDocument::where('location',$id)->with('agent')->get();
+        }
         return view('front.partials.agentFilterL')->with('agents',$agents)->render();
     }
+
+    //
     public function filterCountryL(Request $request){
         $id = $request->id;
         $id = Country::where('name',$id)->first()->id;
         $locations = BranchLocation::where('country_id',$id)->get();
         return view('front.partials.locationFilter')->with('locations',$locations)->render();
     }
+
+    //Admisson fees
     public function filterFees(Request $request){
       $fees = CountryCourseFee::where('country_id',$request->id)->get();
       $courses = CourseCategory::with('courses')->get();
