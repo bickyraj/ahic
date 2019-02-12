@@ -10,8 +10,8 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
-      echo 'a';
-      die();
+      // echo 'a';
+      // die();
 
       $this->validate($request,[
         'name' =>'required',

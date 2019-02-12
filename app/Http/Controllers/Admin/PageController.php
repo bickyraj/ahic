@@ -32,10 +32,9 @@ class PageController extends Controller
     }
 
     public function get($id){
-        $page = Page::where('id',$id);
-        if(count($page->get())>0){
-            $page = $page->first();
-        return new PageResource($page);
+        $page = Page::where('id',$id)->first();
+        if (isset($page) && !empty($page)) {
+          return new PageResource($page);
         }
         else{
             return 'error';

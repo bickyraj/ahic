@@ -1,4 +1,17 @@
 @if ($contact)
+<style type="text/css">
+  .footer-sponser-ul {
+    padding: 0px; list-style-type: none; margin: 0px;
+    margin-top: 50px !important;
+  }
+  .footer-sponser-ul li {
+    width: 140px;
+    padding: 13px;
+    background-color: white;
+    margin-bottom: 15px;
+    border-radius: 3px;
+  }
+</style>
   <footer class="site-footer">
     <div class="footer-top bg-dark text-white-0_6 pt-5 paddingBottom-100">
       <div class="container">
@@ -18,12 +31,23 @@
               <li class="list-inline-item"><a class="iconbox bg-white-0_2 hover:primary" href="{{$contact['yt']}}"><i class="ti-youtube"></i></a></li>
             </ul>
           </div>
+          
+          <div class="col-lg-2 col-md-6 mt-5">
+            <ul class="footer-sponser-ul">
+              <li>
+               <img src="{{asset('/')}}public/images/sponsers/sponser1.jpg" alt="img">
+              </li>
+              <li>
+               <img src="{{asset('/')}}public/images/sponsers/sponser2.jpg" alt="img">
+              </li>
+            </ul>
+          </div>
 
           <div class="col-lg-3 col-md-6 mt-5">
             <h4 class="h5 text-white">Contact Us</h4>
             <div class="width-3rem bg-primary height-3 mt-3"></div>
             <ul class="list-unstyled marginTop-40">
-              <li class="mb-3"><i class="ti-headphone mr-3"></i><a href="tel:+8801740411513">{{$contact['phone']}} </a></li>
+              <li class="mb-3"><i class="ti-mobile mr-3"></i><a href="tel:+8801740411513">{{$contact['phone']}} </a></li>
               <li class="mb-3"><i class="ti-email mr-3"></i><a href="mailto:{{$contact['email']}}">{{$contact['email']}}</a></li>
               <li class="mb-3">
                <div class="media">
@@ -36,7 +60,7 @@
             </ul>
           </div>
 
-          <div class="col-lg-2 col-md-6 mt-5">
+          <!-- <div class="col-lg-2 col-md-6 mt-5">
             <h4 class="h5 text-white">Quick links</h4>
             <div class="width-3rem bg-primary height-3 mt-3"></div>
             <ul class="list-unstyled marginTop-40">
@@ -49,16 +73,16 @@
                      $route = route('home').'/'. $slug;
                   @endphp
                   @if ($menu['name'] =="home")
-
+          
                     @else
                       <li class="mb-2 text-capitalize"><a href="{{$route}}">{{$menu['name']}}</a></li>
-
+          
                   @endif
                 @endif
-
+          
               @endforeach
             </ul>
-          </div>
+          </div> -->
 
           <div class="col-lg-4 col-md-6 mt-5">
             <h4 class="h5 text-white">Newsletter</h4>

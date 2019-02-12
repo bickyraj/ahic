@@ -397,14 +397,10 @@
                            </div>
                          </div>
                         </div>
-
                       @endif
-
                     @endforeach
-
                   </div>
                   </div>
-
                   @endforeach
           </div>
         </div> <!-- END tab-content-->
