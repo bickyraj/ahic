@@ -123,11 +123,12 @@ class HomeController extends Controller
     }
 
     public function form(){
+      $page = Page::where('slug', 'apply-now')->first();
       $intake_dates = ApplicationDateOfIntake::groupBy('year')->get();
       $ids = ApplicationDateOfIntake::all();
       $courses = Course::where('status',1)->get();
       $companies = AgentDocument::all();
-      return view('front.apply-now1',compact('intake_dates','courses','companies','ids'));
+      return view('front.apply-now1',compact('intake_dates','courses','companies','ids', 'page'));
     }
 
 

@@ -226,53 +226,8 @@
 </section>
 @endif
 
-@if (isset($testimonials) && count($testimonials) > 0 )
-<section class="bg-light testimonial-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center mb-5">
-                <h2 class="mb-4">
-        Testimonials
-      </h2>
-                <div class="width-3rem height-4 rounded bg-primary mx-auto"></div>
-            </div>
-            <div class="col-12">
-                <div class="owl-carousel arrow-on-hover" data-state-outer-class="py-3" data-space="30" data-arrow="true" data-loop="true">
-                    @foreach ($testimonials as $testimonial)
-                    <div class="card shadow-v3 hover:parent">
-                        @if ($testimonial->image)
-                        <img class="testimonial-img" src="{{asset('/')}}public/images/testimonials/{{$testimonial->image}}" alt="">
-
-             @else
-                        <img class="testimonial-img" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="">
-
-             @endif
-                        <div class="card-body">
-
-              <p class="mb-0">
-                  {{ str_limit(strip_tags($testimonial->description), 70) }}
-              </p>
-                            <h4 class="text-right">
-                {{$testimonial->name or ''}}
-              </h4>
-
-                            <p class="text-primary text-right">
-                                {{ $testimonial->country->name }}
-                            </p>
-
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-
-        </div> <!-- END row-->
-    </div> <!-- END container-->
-</section>
-@endif
-
 @if (isset($lc) && isset($rc))
-<section>
+<section style="margin-bottom: 50px;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 bg-cover bg-center text-white padding-y-80" style="background:url('{{asset('/')}}public/images/cms/{{$lc->image}}') no-repeat">
@@ -301,6 +256,7 @@
     </div> <!-- END container-->
 </section>
 @endif
+
 @if (isset($news) && count($news) > 0 )
 <section class="padding-y-100 bg-light-v2">
     <div class="container">
@@ -343,6 +299,51 @@
           View All News
         </a>
             </div>
+        </div> <!-- END row-->
+    </div> <!-- END container-->
+</section>
+@endif
+
+@if (isset($testimonials) && count($testimonials) > 0 )
+<section class="bg-light testimonial-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="mb-4">
+        Testimonials
+      </h2>
+                <div class="width-3rem height-4 rounded bg-primary mx-auto"></div>
+            </div>
+            <div class="col-12">
+                <div class="owl-carousel arrow-on-hover" data-state-outer-class="py-3" data-space="30" data-arrow="true" data-loop="true">
+                    @foreach ($testimonials as $testimonial)
+                    <div class="card shadow-v3 hover:parent">
+                        @if ($testimonial->image)
+                        <img class="testimonial-img" src="{{asset('/')}}public/images/testimonials/{{$testimonial->image}}" alt="">
+
+             @else
+                        <img class="testimonial-img" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="">
+
+             @endif
+                        <div class="card-body">
+
+              <p class="mb-0">
+                  {{ str_limit(strip_tags($testimonial->description), 70) }}
+              </p>
+                            <h4 class="text-right">
+                {{$testimonial->name or ''}}
+              </h4>
+
+                            <p class="text-primary text-right">
+                                {{ $testimonial->country->name }}
+                            </p>
+
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+
         </div> <!-- END row-->
     </div> <!-- END container-->
 </section>

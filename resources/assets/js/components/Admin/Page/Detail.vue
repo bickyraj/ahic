@@ -74,7 +74,7 @@
         </div>
         <div class="form-group">
           <label for="">Description</label>
-          <textarea name="description" id="" class="form-control" rows="5" v-bind:value="page.description"></textarea>
+          <editor name="description" id="editPageTextEditor" ref="editPageTextEditor" v-model="page.description"></editor>
         </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Edit Page</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditPageModal">Cancel</b-btn>
@@ -156,7 +156,6 @@
           });
       },
       remove(event, id) {
-        console.log(id);
         let type = event.currentTarget.attributes['type'].value;
         let vm = this;
         let self = this;
@@ -208,7 +207,6 @@
             if (response.data == 'error') {
               self.$router.push('../pages');
             }
-            // console.log(response);
             self.page = response.data.data;
             self.loading = false;
           })
@@ -237,8 +235,9 @@
         var formData = new FormData(form);
         let url = self.$root.baseUrl + '/api/admin/edit-page';
         formData.append('image', this.myCroppa.generateDataUrl())
+        var content = tinymce.get('editPageTextEditor').getContent();
+        formData.append('description', content);
         axios.post(url, formData).then(function(response) {
-            console.log(response);
             self.fetchPage();
             $(form)[0].reset();
             self.hideEditPageModal();

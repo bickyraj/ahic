@@ -16,6 +16,7 @@ use App\ApplicationAdditionalServices;
 use App\ApplicationCourseAndOtherFees;
 use App\ApplicationCheckList;
 use App\ApplicationAgent;
+use Illuminate\Support\Facades\Log;
 use App\ApplicationIfStudentUnderAge;
 
 use Illuminate\Http\Request;
@@ -179,6 +180,7 @@ class FormController extends Controller
 
       public function submitform(Request $request){
 
+        // Log::info($request->all());
         $this->validator($request);
 
         $application_form_id ='';

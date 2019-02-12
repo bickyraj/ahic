@@ -37,7 +37,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-                    <editor id="description" name="description"></editor>
+                    <editor id="description" v-model="getAddPageContent" name="description"></editor>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create page</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -117,7 +117,7 @@
         </div>
         <div class="form-group">
           <label for="">Description</label>
-          <editor name="description" v-model="modalInfo.data.description"></editor>
+          <editor name="description" id="editPageTextEditor" ref="editPageTextEditor" v-model="getEditPageContent"></editor>
         </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
@@ -129,6 +129,8 @@
   export default {
     data() {
       return {
+        getAddPageContent: "",
+        getEditPageContent: "",
         myCroppa: null,
         dataUrl: '',
         loading: true,
@@ -162,6 +164,10 @@
               self.modalInfo.title = `Edit page`
               self.modalInfo.data = response.data.data
               self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
+              self.getEditPageContent = response.data.data.description
+              if (response.data.data.description == null) {
+                self.getEditPageContent = "";
+              } 
               self.$root.$emit('bv::show::modal', 'modalInfo', button)
             }
           })
@@ -178,6 +184,8 @@
         var form = self.$refs.editMenuForm;
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
+        var content = tinymce.get('editPageTextEditor').getContent();
+        formData.append('description', content);
         let url = self.$root.baseUrl + '/api/admin/edit-page';
         formData.append('image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
@@ -236,19 +244,22 @@
         var self = this;
         var form = self.$refs.addMenuForm;
         var formData = new FormData(form);
+        var des = this.getAddPageContent;
+        formData.append('description', des);
+
         let url = self.$root.baseUrl + '/api/admin/page';
         formData.append('image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
-            self.table_items = response.data.data;
-            $(form)[0].reset();
-            self.hideModal();
-            self.$toastr.s("A Page has been added.");
-          })
-          .catch(function(error) {
-            if (error.response.status === 422) {
-              self.$toastr.e(error.response.data.errors.name);
-            }
-          });
+          self.table_items = response.data.data;
+          $(form)[0].reset();
+          self.hideModal();
+          self.$toastr.s("A Page has been added.");
+        })
+        .catch(function(error) {
+          if (error.response.status === 422) {
+            self.$toastr.e(error.response.data.errors.name);
+          }
+        });
       },
       fetchMenus() {
         let vm = this;

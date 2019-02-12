@@ -3,6 +3,36 @@
 @section('style')
   <link rel="stylesheet" href="{{url('/')}}/public/jquery-ui/jquery-ui.min.css">
   <style media="screen">
+    .py-5.bg-cover{
+      @if (isset($page->image))
+      background:url('{{asset('/')}}public/images/pages/{{$page->image}}') no-repeat;
+      @endif
+      background-position:center;
+      background-size:cover;
+    }
+  .apply-now-remove-btn {
+    background-color: transparent;
+  }
+  .apply-now-remove-btn i {
+    color: red;
+  }
+  .apply-now-add-btn {
+    padding: 5px 20px;
+    border: 1px solid white;
+    border-radius: 0px;
+    background-color: transparent;
+    color: white;
+  }
+  .apply-now-add-btn:hover {
+    background-color: #44a9f9;
+  }
+  .apply-now-div h5 {
+    color: white;
+    margin-bottom: 0px;
+  }
+  .apply-now-div {
+    margin-bottom: 20px !important;
+  }
   #if_acco{
     display:none;
   }
@@ -17,10 +47,10 @@
 @endsection
 @section('content')
 
-  <div class="container-fluid bg-secondary py-5 mb-5">
+  <div class="container-fluid bg-secondary py-5 mb-5 bg-cover text-white" data-dark-overlay="5">
     <div class="row">
       <div class="container">
-        <h1 class="text-center"> Apply Form - Students </h1>
+        <h1 class="text-center"> {{ $page->name }} </h1>
       </div>
     </div>
   </div>
@@ -28,11 +58,11 @@
   <section class="paddingBottom-100">
 
     <div class="container">
-      <div class="row">
+      <div class="row" style="padding-bottom: 100px;border: 1px solid #eaeaea;">
         <div class="col-md-12">
           <form id="admissionForm">
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Course And Date Commencement</h5>
               </div>
 
@@ -63,7 +93,7 @@
             </div>
 
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Course Description</h5>
               </div>
 
@@ -95,132 +125,133 @@
             </div>
 
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Personal Details</h5>
               </div>
-              <div class="row">
+              <div class="col-md-12">
+                
+                <div class="row">
 
-                <div class="form-group col-md-3">
-                  <label >Title And Family Name</label>
-                  <input type="text" class="form-control" name="familyname" value="">
-                  <span class="error"></span>
+                  <div class="form-group col-md-3">
+                    <label >Title And Family Name</label>
+                    <input type="text" class="form-control" name="familyname" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >First Name</label>
+                    <input type="text" name="firstname" class="form-control" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Middle Name</label>
+                    <input type="text" name="middlename" class="form-control" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >DOB</label>
+                    <input type="text" name="dob" value="" class="form-control datepicker">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Gender</label>
+                    <input type="text" name="gender" class="form-control" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Place Of Birth City </label>
+                    <input type="text" name="birth_city" class="form-control" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Country </label>
+                    <input type="text" name="birth_country" class="form-control" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Nationality </label>
+                    <input type="text" name="nationality" class="form-control" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Passport Number </label>
+                    <input type="text" name="passport_number" class="form-control" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Issued Date </label>
+                    <input type="text" name="p_issued_date" value="" class="form-control datepicker">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Expired Date </label>
+                    <input type="text"  name="p_expired_date" value="" class="form-control datepicker">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Place Of Issue </label>
+                    <input type="text" name="place_of_issue" class="form-control" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Unique Stident Identifier (USI Number) </label>
+                    <input type="text" name="usi_number" class="form-control" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >UVisa - Are You In Australia now?  </label> <br>
+                    <input type="radio" value="1" name="in_aus"> YES
+                    <input type="radio" value="0" name="in_aus" > NO
+                    <br>
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Visa Category</label>
+                    <input type="text"  class="form-control" name="v_category" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Visa Expired Date</label>
+                    <input type="text" name="v_exp_date" class="form-control datepicker" value="" >
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >At which office are you going to apply ur visa</label>
+                    <input type="text" name="v_office" class="form-control" value="">
+                    <span class="error"></span>
+                  </div>
+
+                  <div class="form-group col-md-9">
+                    <label >Are You Aboriginal or Torress Strait Islander origin?</label><br>
+                    <input type="radio" name="origin" value="0" > No
+                    <input type="radio" name="origin" value="1"> Yes, Aboriginal
+                    <input type="radio" name="origin" value="2" > Yes, Torress Strait Islander
+                    <input type="radio" name="origin" value="3" > Yes, both Aboriginal Torress Strait Islander
+                    <br>
+                    <span class="error"></span>
+                  </div>
                 </div>
-
-                <div class="form-group col-md-3">
-                  <label >First Name</label>
-                  <input type="text" name="firstname" class="form-control" value="">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Middle Name</label>
-                  <input type="text" name="middlename" class="form-control" value="">
-                  <span class="error"></span>
-                </div>
-
-
-                <div class="form-group col-md-3">
-                  <label >DOB</label>
-                  <input type="text" name="dob" value="" class="form-control datepicker">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Gender</label>
-                  <input type="text" name="gender" class="form-control" value="">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Place Of Birth City </label>
-                  <input type="text" name="birth_city" class="form-control" value="">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Country </label>
-                  <input type="text" name="birth_country" class="form-control" value="">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Nationality </label>
-                  <input type="text" name="nationality" class="form-control" value="">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Passport Number </label>
-                  <input type="text" name="passport_number" class="form-control" value="">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Issued Date </label>
-                  <input type="text" name="p_issued_date" value="" class="form-control datepicker">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Expired Date </label>
-                  <input type="text"  name="p_expired_date" value="" class="form-control datepicker">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Place Of Issue </label>
-                  <input type="text" name="place_of_issue" class="form-control" value="">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Unique Stident Identifier (USI Number) </label>
-                  <input type="text" name="usi_number" class="form-control" value="">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >UVisa - Are You In Australia now?  </label> <br>
-                  <input type="radio" value="1" name="in_aus"> YES
-                  <input type="radio" value="0" name="in_aus" > NO
-                  <br>
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Visa Category</label>
-                  <input type="text"  class="form-control" name="v_category" value="">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >Visa Expired Date</label>
-                  <input type="text" name="v_exp_date" class="form-control datepicker" value="" >
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-3">
-                  <label >At which office are you going to apply ur visa</label>
-                  <input type="text" name="v_office" class="form-control" value="">
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group col-md-9">
-                  <label >Are You Aboriginal or Torress Strait Islander origin?</label><br>
-                  <input type="radio" name="origin" value="0" > No
-                  <input type="radio" name="origin" value="1"> Yes, Aboriginal
-                  <input type="radio" name="origin" value="2" > Yes, Torress Strait Islander
-                  <input type="radio" name="origin" value="3" > Yes, both Aboriginal Torress Strait Islander
-                  <br>
-                  <span class="error"></span>
-                </div>
-
               </div>
 
             </div>
 
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Address In Australia</h5>
               </div>
 
@@ -269,7 +300,7 @@
             </div>
 
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Address In Home Country</h5>
               </div>
 
@@ -318,7 +349,7 @@
             </div>
 
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Emergency Contact</h5>
               </div>
 
@@ -360,62 +391,63 @@
 
             </div>
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
-                <h5 class="">Educational Qualifications <small> <button class="btn btn-success float-right add_edu_qua" type="button">Add</button> </small> </h5>
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
+                <h5 class="">Educational Qualifications <small> <button class="btn float-right apply-now-add-btn add_edu_qua" type="button"><i class="fa fa-plus"></i> Add</button> </small> </h5>
               </div>
-              <div class="row" id="eduQua">
-                <div class="col-md-12 qua" id="">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <h4> Qualification
-                        <small class="float-right"> <button class="btn btn-danger remove_edu_qua"  type="button">
-                          <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                        </button> </small>
-                      </h4>
+              <div class="col-lg-12 col-md-12">
+                <div class="row" id="eduQua">
+                  <div class="col-md-12 qua" id="">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h4> Qualification
+                          <small class="float-right"> <button title="remove" class="btn apply-now-remove-btn remove_edu_qua"  type="button">
+                            <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                          </button> </small>
+                        </h4>
+                      </div>
                     </div>
+                    <div class="row">
+
+                      <div class="form-group col-md-6">
+                        <label > Qualification/Award</label>
+                        <input type="text" class="form-control" name="edu[1][qualification]" value="">
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label > Educational Institution</label>
+                        <input type="text" class="form-control" name="edu[1][institution]" value="">
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label > Started Month</label>
+                        <input type="text" class="form-control" name="edu[1][started_month]" value="">
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label > Started Year</label>
+                        <input type="text" class="form-control" name="edu[1][started_year]" value="">
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label > Completed Month</label>
+                        <input type="text" class="form-control" name="edu[1][completed_month]" value="">
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label > Completed Year</label>
+                        <input type="text" class="form-control" name="edu[1][completed_year]" value="">
+                      </div>
+
+                    </div>
+                    <hr>
                   </div>
-                  <div class="row">
-
-                    <div class="form-group col-md-6">
-                      <label > Qualification/Award</label>
-                      <input type="text" class="form-control" name="edu[1][qualification]" value="">
-                    </div>
-
-                    <div class="form-group col-md-6">
-                      <label > Educational Institution</label>
-                      <input type="text" class="form-control" name="edu[1][institution]" value="">
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <label > Started Month</label>
-                      <input type="text" class="form-control" name="edu[1][started_month]" value="">
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <label > Started Year</label>
-                      <input type="text" class="form-control" name="edu[1][started_year]" value="">
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <label > Completed Month</label>
-                      <input type="text" class="form-control" name="edu[1][completed_month]" value="">
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <label > Completed Year</label>
-                      <input type="text" class="form-control" name="edu[1][completed_year]" value="">
-                    </div>
-
-                  </div>
-                  <hr>
                 </div>
-
               </div>
 
 
             </div>
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Current English Level</h5>
               </div>
 
@@ -481,7 +513,7 @@
 
             </div>
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Recognition Of Prior Learning</h5>
               </div>
 
@@ -495,7 +527,7 @@
 
             </div>
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Course and Other Fees</h5>
               </div>
 
@@ -526,7 +558,7 @@
 
             </div>
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Additional Services</h5>
               </div>
 
@@ -570,7 +602,7 @@
             </div>
 
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">Check List</h5>
               </div>
 
@@ -619,7 +651,7 @@
             </div>
 
             <div class="row">
-              <div class="col-md-12 bg-primary p-3 mb-1">
+              <div class="col-md-12 bg-primary p-3 mb-1 apply-now-div">
                 <h5 class="">If Student Under Age</h5>
               </div>
 
@@ -645,7 +677,7 @@
             <hr>
             <div class="row">
               <div class="col-md-12">
-                <button class="btn btn-success add-apply-form"> Add </button></div>
+                <button class="btn btn-primary add-apply-form"> Add </button></div>
               </div>
             </form>
           </div>

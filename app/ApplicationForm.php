@@ -23,13 +23,13 @@ class ApplicationForm extends Model
         return $this->hasOne('App\ApplicantPassport','application_form_id','id');
     }
     public function aus(){
-        return $this->hasOne('App\ApplicationAddressInAustralia','application_form_id','id');
+        return $this->hasOne('App\ApplicationAddressInAustralia');
     }
     public function home(){
         return $this->hasOne('App\ApplicationAddressInHomeCountry','application_form_id','id');
     }
     public function econtact(){
-        return $this->hasOne('App\ApplicationEmergencyContact','application_form_id','id');
+        return $this->hasOne('App\ApplicationEmergencyContact');
     }
     public function english(){
         return $this->hasOne('App\ApplicationCurrentEnglishLevel','application_form_id','id');
