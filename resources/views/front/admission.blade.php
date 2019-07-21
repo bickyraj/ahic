@@ -22,10 +22,6 @@
     </div>
    </form>
   </div> <!-- END site-search-->
-
-
-
-
   <div class="py-5 bg-cover text-white" data-dark-overlay="6"  >
     <div class="container">
      <div class="row align-items-center">
@@ -88,7 +84,8 @@
                  </a>
                </li>
                <li class="nav-item m-1 ">
-                 <a class="nav-link border rounded text-center p-3" href="{{url('/')}}/public/files/applynow.pdf" target="_blank" role="tab" aria-selected="true">
+                 <!-- <a class="nav-link border rounded text-center p-3" href="{{url('/')}}/public/files/applynow.pdf" target="_blank" role="tab" aria-selected="true"> -->
+                 <a class="nav-link border rounded text-center p-3" href="{{url('/')}}/apply-now" target="_blank" role="tab" aria-selected="true">
                   <span class=" d-block ">Apply Now</span>
                  </a>
                </li>

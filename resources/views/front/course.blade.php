@@ -3,7 +3,8 @@
 @section('style')
 <style media="screen">
   .bg-cover{
-    background:url('{{asset('/')}}public/images/pages/{{$banner}}') no-repeat;
+    /*background:url('{{asset('/')}}public/images/pages/{{$banner}}') no-repeat;*/
+    background:url('{{asset('/')}}public/images/courses/default-bg.png') no-repeat;
     background-position:center;
     background-size:cover;
   }
@@ -53,7 +54,7 @@
      <div class="row">
         <div class="col-lg-9 marginTop-30">
           <h1>
-          {{$course->name}}
+          {{$course->code . ' ' . $course->name}}
           </h1>
           <div class="row mt-3">
             <div class="col-lg-3 col-md-6 my-2">
@@ -73,18 +74,19 @@
             </div>
             <div class="col-lg-3 col-md-6 my-2">
               <div class="text-md-right height-100p">
-                <h2 class="font-weight-bold text-primary mb-2">
-                  @php
+                <h2 class="font-weight-bold text-primary mb-2" style="font-size: 13px;">
+                  {{ $course->duration }}
+                  <!-- @php
                     $string = explode(' ',$course->duration);
                   @endphp
-@if(isset($string[0]))
-  {{$string[0]}}
-@endif
-@if(isset($string[1]))
-  {{$string[1]}}
-@endif
+                  @if(isset($string[0]))
+                    {{$string[0]}}
+                  @endif
+                  @if(isset($string[1]))
+                    {{$string[1]}}
+                  @endif -->
                 </h2>
-                <a class="btn btn-primary" href="{{route('apply_now')}}" target="_blank">Apply Now</a>
+                <a class="btn btn-sm btn-primary" href="{{route('apply_now')}}" target="_blank">Apply Now</a>
               </div>
             </div>
           </div> <!-- END row-->
@@ -99,7 +101,7 @@
             <!-- <iframe src="https://www.youtube.com/embed/nrJtHemSPW4?rel=0"></iframe> -->
           </div>
 
-          <div class="card padding-30 shadow-v3">
+          <!-- <div class="card padding-30 shadow-v3">
             <h4>
               Features Includes:
             </h4>
@@ -129,7 +131,7 @@
                 <span class="ml-2">30-Day Money-Back Guarantee of Completion</span>
               </li>
             </ul>
-          </div>
+          </div> -->
 
           <div class="col-12 mt-4">
            <ul class="nav tab-line tab-line tab-line--3x border-bottom mb-5" role="tablist">

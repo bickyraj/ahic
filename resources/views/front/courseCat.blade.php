@@ -2,8 +2,9 @@
 
 @section('style')
 <style media="screen">
-  .py-5.bg-cover{
-    background:url('{{asset('/')}}public/images/pages/{{$banner}}') no-repeat;
+  .bg-cover{
+    /*background:url('{{asset('/')}}public/images/pages/{{$banner}}') no-repeat;*/
+    background:url('{{asset('/')}}public/images/courses/default-bg.png') no-repeat;
     background-position:center;
     background-size:cover;
   }

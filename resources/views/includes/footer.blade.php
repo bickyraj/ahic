@@ -18,7 +18,8 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 mt-5">
-           <img src="{{asset('/')}}public/ahic/img/logo-black.png" alt="Logo" width="55"> {{$contact['name']}}
+           <!-- <img src="{{asset('/')}}public/ahic/img/logo-black.png" alt="Logo" width="55"> {{$contact['name']}} -->
+           <h4 class="h5 text-white">Australian Harbour International College</h4>
            <div class="margin-y-40">
              <p>
               ABN: {{$contact['ABN']}} <br> RTO NO:{{$contact['RTO']}} <br> CRICOS Provider Code: {{$contact['CRICOS']}}
