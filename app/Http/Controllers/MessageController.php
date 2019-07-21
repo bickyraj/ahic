@@ -35,7 +35,7 @@ class MessageController extends Controller
           return 'true';
         }
         else{
-          return 'false';
+        return 'false';
         }
     }
 

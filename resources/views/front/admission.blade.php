@@ -7,6 +7,9 @@
     background-position:center;
     background-size:cover;
   }
+  #filterFees{
+    display:none;
+}
 </style>
 @endsection
 
@@ -95,11 +98,10 @@
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="Tabs_8-1" role="tabpanel">
                   <div class="row">
-
                       @foreach ($courses as $category)
-@if (count($category->courses) > 0)
+                        @if (count($category->courses) > 0)
 
-                        <div class="col-lg-6 col-md-6 marginTop-30 wow fadeInUp " data-wow-delay=".1s">
+                        <div class="col-lg-6 col-md-6 marginTop-30 wow fadeInUp float-left " data-wow-delay=".1s">
                           <div class=" p-1 text-center bg-light bg-primary border-bottom">
                             <h5 class="my-4 text-white">
                               {{$category->name}}
@@ -157,18 +159,21 @@
                           <select name="country" class="form-control country_filter">
                             <option value="" selected> SELECT A COUNTRY</option>
                               @foreach ($countries as $country)
+                                @if ($country->name!="Australia")
                                   <option value="{{$country->id}}">{{$country->name}}</option>
+                                @endif
                               @endforeach
                           </select>
                         </div>
                       </div>
                   </div>
                   <div class="row" id="filterFees">
-
+                    {{-- //Not needed when after request --}}
+{{--
                       @foreach ($courses as $category)
-    @if (count($category->courses) > 0)
+                        @if (count($category->courses) > 0)
 
-                        <div class="col-lg-6 col-md-6 marginTop-30 wow fadeInUp " data-wow-delay=".1s">
+                        <div class="col-lg-6 col-md-6 marginTop-30 wow fadeInUp float-left" data-wow-delay=".1s">
                           <div class=" p-1 text-center bg-light bg-primary border-bottom">
                             <h5 class="my-4 text-white">
                               {{$category->name}}
@@ -214,7 +219,7 @@
                         </div>
                       @endif
 
-                      @endforeach
+                      @endforeach --}}
                     </div>
                 </div>
 
@@ -414,6 +419,7 @@
         var val = $(this).val();
         $.post('{{url('/')}}/course/country_filter',{id:val},function(data){
             $('#filterFees').html(data);
+            $('#filterFees').css('display','block');
         })
     });
   });

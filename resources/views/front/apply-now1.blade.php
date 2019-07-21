@@ -50,7 +50,8 @@
   <div class="container-fluid bg-secondary py-5 mb-5 bg-cover text-white" data-dark-overlay="5">
     <div class="row">
       <div class="container">
-        <h1 class="text-center"> {{ $page->name }} </h1>
+        {{-- <h1 class="text-center"> {{ $page->name }} </h1> --}}
+        <h1 class="text-center">Apply Now </h1>
       </div>
     </div>
   </div>
@@ -129,7 +130,7 @@
                 <h5 class="">Personal Details</h5>
               </div>
               <div class="col-md-12">
-                
+
                 <div class="row">
 
                   <div class="form-group col-md-3">

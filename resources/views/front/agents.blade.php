@@ -8,7 +8,7 @@
     background-size:cover;
   }
   #mapModal{
-    z-index: 9999 !important;
+    z-index: 2222 !important;
     padding: 0px !important;
     height: 600px !important;
 
@@ -17,6 +17,9 @@
     position: static !important;
     height:100%;
     width:100%;
+    z-index: 2222 !important;
+
+
   }
   .modal{
     max-width: 100% !important;
@@ -76,7 +79,14 @@
                 @endphp
                 @foreach ($agents as $agent)
                   @foreach ($agent->documents as $company)
+                    @if ($count ==0)
+                      <p>No Agents Onshore Yet</p>
+                    @endif
                     @if ($company->country == 'Australia')
+                          @php
+                          $count++;
+                          @endphp
+
                       <div class="col-lg-4 col-md-6 marginTop-35 wow fadeInUp" data-wow-delay=".1s">
                         <div class="card height-100p shadow-v1 text-center">
                           <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
@@ -95,7 +105,7 @@
                               {{$company->company_name}}
                             </p>
                             <p class="mb-0 ">
-                              {{$company->address}}
+                              {{$company->location}}
                             </p>
                           </div>
                           <div class="card-footer border-top">
@@ -132,7 +142,7 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <select name="country" class="form-control country_filter">
-                          <option value="" selected> SELECT A COUNTRY</option>
+                          <option value="" selected> All Countries</option>
                             @foreach ($countries as $country)
                               @if ($country->name == 'Australia')
                               @else
@@ -145,7 +155,7 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <select name="country" class="form-control address_filter">
-                          <option value="" selected> SELECT A LOCATION</option>
+                          <option value="" selected> All Location</option>
                         </select>
                       </div>
                     </div>
@@ -175,7 +185,7 @@
                                 {{$company->company_name}}
                               </p>
                               <p class="mb-0 ">
-                                {{$company->address}}
+                                {{$company->location}}
                               </p>
                             </div>
                             <div class="card-footer border-top">

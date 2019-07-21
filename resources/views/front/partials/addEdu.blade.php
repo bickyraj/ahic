@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <h4> Qualification
-        <small class="float-right"> <button class="btn btn-danger remove_edu_qua"  type="button">
+        <small class="float-right"> <button title="remove" class="btn apply-now-remove-btn remove_edu_qua"  type="button">
           <i class="fa fa-minus-circle" aria-hidden="true"></i>
         </button> </small>
       </h4>

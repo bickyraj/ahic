@@ -81,56 +81,64 @@
 
 <section class="padding-y-60 bg-light-v2">
   <div class="container">
-    <div class="row">
-      @if (count($courses) > 0 )
+    <div class="col-md-12">
+      @forelse ($categories as $category)
+        <h1 class="pt-4">{{$category->name}}</h1>
+        <div class="row mb-4">
+          @if (count($category->courses) > 0 )
+            @else
+              <p> No matcing courses were found. </p>
+          @endif
+          @foreach ($category->courses as $course)
+            @php
+              $stripped = str_replace(' ', '_', $course->name);
+            @endphp
+            <div class="col-lg-4 col-md-6 marginTop-30">
+              <div href="{{route('course',$course->name)}}" class="card height-100p text-gray shadow-v1">
+                {{-- <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/business-1.jpg" alt=""> --}}
+                @if($course->background_image)
+                  <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
+    @else
+      <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
 
-        @else
-          <p> No matcing courses were found. </p>
-      @endif
-      @foreach ($courses as $course)
-        @php
-          $stripped = str_replace(' ', '_', $course->name);
-        @endphp
-        <div class="col-lg-4 col-md-6 marginTop-30">
-          <div href="{{route('course',$course->name)}}" class="card height-100p text-gray shadow-v1">
-            {{-- <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/business-1.jpg" alt=""> --}}
-            @if($course->background_image)
-              <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
-@else
-  <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+                @endif
+                <div class="card-body">
 
-            @endif
-            <div class="card-body">
+                  <a href="{{route('course',$stripped)}}" class="h5">
+                    {{$course->name}}
+                  </a>
+                  <p class="my-3">
+                    {{$course->category->name or '-'}}
+                  </p>
 
-              <a href="{{route('course',$stripped)}}" class="h5">
-                {{$course->name}}
-              </a>
-              <p class="my-3">
-                {{$course->category->name or '-'}}
-              </p>
+                </div>
+                <div class="card-footer media align-items-center justify-content-between">
+                    <h4 class="h5 text-right ">
+                    <span class="text-primary">
+                      @php
+                        $string = explode(' ',$course->duration);
+                      @endphp
+                        @if(isset($string[0]))
+                      {{$string[0]}}
+                      @endif
+                        @if(isset($string[1]))
+                      {{$string[1]}}
+                      @endif
 
+                      </span>
+                  </h4>
+                </div>
+              </div>
             </div>
-            <div class="card-footer media align-items-center justify-content-between">
-                <h4 class="h5 text-right ">
-                <span class="text-primary">
-                  @php
-                    $string = explode(' ',$course->duration);
-                  @endphp
-                    @if(isset($string[0]))
-                  {{$string[0]}}
-                  @endif
-                    @if(isset($string[1]))
-                  {{$string[1]}}
-                  @endif
+          @endforeach
 
-                  </span>
-              </h4>
-            </div>
-          </div>
-        </div>
-      @endforeach
+        </div> <!-- END row-->
 
-    </div> <!-- END row-->
+      @empty
+
+      @endforelse
+    </div>
+
   </div> <!-- END container-->
 </section>
 @endsection

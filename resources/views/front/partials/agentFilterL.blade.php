@@ -22,7 +22,7 @@
             {{$company->company_name}}
           </p>
           <p class="mb-0 ">
-            {{$company->address}}
+            {{$company->location}}
           </p>
         </div>
         <div class="card-footer border-top">
