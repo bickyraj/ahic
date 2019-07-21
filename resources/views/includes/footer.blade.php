@@ -38,9 +38,9 @@
               <li>
                <img src="{{asset('/')}}public/images/sponsers/sponser1.jpg" alt="img">
               </li>
-              <li>
+              <!-- <li>
                <img src="{{asset('/')}}public/images/sponsers/sponser2.jpg" alt="img">
-              </li>
+              </li> -->
             </ul>
           </div>
 
