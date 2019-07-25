@@ -37,7 +37,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-                    <editor id="description" v-model="getAddPageContent" name="description"></editor>
+                    <editor id="description" v-model="getAddPageContent" :init="editor" name="description"></editor>
                   </div>
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create page</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
@@ -117,7 +117,7 @@
         </div>
         <div class="form-group">
           <label for="">Description</label>
-          <editor name="description" id="editPageTextEditor" ref="editPageTextEditor" v-model="getEditPageContent"></editor>
+          <editor name="description" id="editPageTextEditor" ref="editPageTextEditor" :init="editor" v-model="getEditPageContent"></editor>
         </div>
         <b-btn class="mt-3 pull-right" variant="primary" type="submit">Update</b-btn>
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
@@ -129,6 +129,40 @@
   export default {
     data() {
       return {
+        editor: {
+          plugins: ['table', 'link', 'image code'],
+          toolbar: ['undo redo | link image |code'],
+          setup: function(editor) {
+            editor.on('change', function() {
+              editor.save();
+            });
+          },
+          image_title: true,
+          automatic_uploads: true,
+          file_picker_types: 'image',
+          // and here's our custom image picker
+          file_picker_callback: function(cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+            input.onchange = function() {
+              var file = this.files[0];
+              var reader = new FileReader();
+              reader.onload = function() {
+                var id = 'blobid' + (new Date()).getTime();
+                var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                var base64 = reader.result.split(',')[1];
+                var blobInfo = blobCache.create(id, file, base64);
+                blobCache.add(blobInfo);
+                cb(blobInfo.blobUri(), {
+                  title: file.name
+                });
+              };
+              reader.readAsDataURL(file);
+            };
+            input.click();
+          }
+        },
         getAddPageContent: "",
         getEditPageContent: "",
         myCroppa: null,

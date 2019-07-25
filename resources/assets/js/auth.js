@@ -27,9 +27,9 @@ class Auth {
     }
 
     redirectTo() {
-        if (this.roleId === 1) {
+        if (this.roleId == 1) {
             window.location.href = "./admin"
-        } else if (this.roleId === 2) {
+        } else if (this.roleId == 2) {
             window.location.href = "./client"
         }
     }
