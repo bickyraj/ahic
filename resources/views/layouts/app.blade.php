@@ -14,18 +14,17 @@
     <title>AHIC - Australian Harbour International College | Admin</title>
 
     <!-- Favicon and Apple Icons-->
-    <link rel="icon" type="image/x-icon" href="{{asset('/')}}public/ahic/img/favicon/favicon.ico">
-    <link rel="shortcut icon" href="{{asset('/')}}public/ahic/img/favicon/114x114.png">
-    <link rel="apple-touch-icon-precomposed" href="{{asset('/')}}public/ahic/img/favicon/96x96.png">
+    <link rel="icon" type="image/x-icon" href="{{ url('') }}/public/ahic/img/favicon/favicon.ico">
+    <link rel="shortcut icon" href="{{ url('') }}/public/ahic/img/favicon/114x114.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ url('') }}/public/ahic/img/favicon/96x96.png">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-    <!-- <link href="{{ asset('assets/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" /> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link href="{{ asset('assets/global/plugins/simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('') }}/public/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
     
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/animate.css') }}">
-    <link href="{{ asset('public/css/admin-style.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/login-style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('') }}/public/css/admin-style.css" rel="stylesheet" type="text/css" />
+    <link href="{{ url('') }}/public/css/login-style.css" rel="stylesheet" type="text/css" />
     <style>
     .mce-widget.mce-notification.mce-in{
       display:none !important;

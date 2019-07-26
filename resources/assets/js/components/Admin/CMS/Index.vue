@@ -30,7 +30,7 @@
 
               <b-row  v-if="lc">
                 <b-col md="6">
-                  <img :src="'../public/images/cms/'+lc.image" alt="" class="img-fluid">
+                  <img :src="this.$root.baseUrl +'/public/images/cms/'+lc.image" alt="" class="img-fluid">
                 </b-col>
                 <b-col md="6">
                   {{lc.title}}
@@ -59,7 +59,7 @@
             </div>
             <b-row  v-if="rc">
               <b-col md="6">
-                <img :src="'../public/images/cms/'+rc.image" alt="" class="img-fluid">
+                <img :src="this.$root.baseUrl +'/public/images/cms/' + rc.image" alt="" class="img-fluid">
               </b-col>
               <b-col md="6">
                 {{rc.title}}
@@ -88,7 +88,7 @@
             </div>
             <b-row  v-if="welcome">
               <b-col md="3">
-                <img :src="'../public/images/cms/'+welcome.image" alt="" class="img-fluid">
+                <img :src="this.$root.baseUrl +'/public/images/cms/'+welcome.image" alt="" class="img-fluid">
               </b-col>
               <b-col md="9">
                 {{welcome.title}}
@@ -179,7 +179,7 @@
     </div>
     <div class="form-group">
       <label> Description </label>
-      <editor name="description"  id="editCmsTextEditor" ref="editCmsTextEditor" :init="editor" v-model="modalInfo.data.description"></editor>
+      <editor name="description"  id="editCmsTextEditor" ref="editCmsTextEditor" :init="editor" v-model="editDescription"></editor>
     </div>
     <div class="form-group">
       <label for="">Link </label>
@@ -198,6 +198,7 @@
 export default{
   data(){
     return{
+      editDescription: "",
       myCroppa:{},
       crop:{
         height:200,
@@ -303,8 +304,6 @@ export default{
       else{
         self.welcome = '';
       }
-
-
     }
   },
   methods:{
@@ -314,6 +313,11 @@ export default{
 
     info(slug,button) {
       let self = this;
+      self.crop = {
+        height : 400,
+        width : 400,
+        scale : 2.5
+      }
       self.modalInfo.data = [];
       self.slug = slug;
       var s = self.capitalizeString(slug);
@@ -324,6 +328,8 @@ export default{
         self.modalInfo.data = response.data.data
         self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
         self.$root.$emit('bv::show::modal', 'modalInfo', button)
+        tinymce.get('editCmsTextEditor').setContent(response.data.data.description);
+        self.editDescription = response.data.data.description
       })
       .catch(function(error) {
         console.log(error)
