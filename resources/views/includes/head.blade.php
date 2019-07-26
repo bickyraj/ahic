@@ -33,6 +33,7 @@
     <!-- stylesheet-->
     <link rel="stylesheet" href="{{asset('/')}}public/ahic/css/vendors.bundle.css">
     <link rel="stylesheet" href="{{asset('/')}}public/ahic/css/style.css">
+    <link rel="stylesheet" href="{{asset('/')}}public/css/front-styles.css">
     <link rel="stylesheet" href="{{asset('/')}}public/modal/jquery.modal.min.css">
 
 
