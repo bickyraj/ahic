@@ -46,7 +46,7 @@
 
           <div class="col-lg-3 col-md-6 mt-5">
             <h4 class="h5 text-white">Contact Us</h4>
-            <div class="width-3rem bg-primary height-3 mt-3"></div>
+            <div class="width-3rem bg-white height-3 mt-3"></div>
             <ul class="list-unstyled marginTop-40">
               <li class="mb-3"><i class="ti-mobile mr-3"></i><a href="tel:+8801740411513">{{$contact['phone']}} </a></li>
               <li class="mb-3"><i class="ti-email mr-3"></i><a href="mailto:{{$contact['email']}}">{{$contact['email']}}</a></li>
@@ -63,7 +63,7 @@
 
           <!-- <div class="col-lg-2 col-md-6 mt-5">
             <h4 class="h5 text-white">Quick links</h4>
-            <div class="width-3rem bg-primary height-3 mt-3"></div>
+            <div class="width-3rem bg-white height-3 mt-3"></div>
             <ul class="list-unstyled marginTop-40">
               @foreach ($menus as $menu)
                 @if(isset($menu['parent_page']))
@@ -87,7 +87,7 @@
 
           <div class="col-lg-4 col-md-6 mt-5">
             <h4 class="h5 text-white">Newsletter</h4>
-            <div class="width-3rem bg-primary height-3 mt-3"></div>
+            <div class="width-3rem bg-white height-3 mt-3"></div>
             <div class="marginTop-40">
               <p class="mb-4">Subscribe to get update and information. Don't worry, we won't send spam!</p>
                 <div class="input-group">

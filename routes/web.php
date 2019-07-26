@@ -12,6 +12,12 @@
 */
 
 
+// Route::get('/clear-cache', function() {
+//     $exitCode = Artisan::call('cache:clear');
+//     $exitCode = Artisan::call('route:clear');
+//     // return what you want
+// });
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::post('/agents/country_filter','HomeController@filterCountry');

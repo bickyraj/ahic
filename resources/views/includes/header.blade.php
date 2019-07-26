@@ -4,7 +4,7 @@
     <header class="site-header bg-dark text-white-0_5">
       <div class="container">
         <div class="row align-items-center justify-content-between mx-0">
-          <ul class="list-inline d-none d-lg-block mb-0">
+          <ul class="list-inline d-none d-lg-block mb-0 theme-header-social-ul">
             <li class="list-inline-item mr-3">
              <div class="d-flex align-items-center">
               <i class="ti-email mr-2"></i>
@@ -22,7 +22,7 @@
              </div>
             </li>
           </ul>
-          <ul class="list-inline mb-0">
+          <ul class="list-inline mb-0 theme-header-social-ul">
             @if (isset($contact['fb']))
               <li class="list-inline-item mr-0 p-3  border-left border-white-0_1">
                 <a href="{{$contact['fb']}}"><i class="ti-facebook"></i></a>
@@ -47,7 +47,7 @@
           </ul>
           <ul class="list-inline mb-0">
             <li class="list-inline-item mr-0 p-md-3 p-2 border-right border-left border-white-0_1">
-              <a href="https://learner.mywisenet.com.au/AHI/Account/LogOn?ReturnUrl=%2FAHI" target="_blank">My AHIC Login</a>
+              <a class="theme-login" href="https://learner.mywisenet.com.au/AHI/Account/LogOn?ReturnUrl=%2FAHI" target="_blank">My AHIC Login</a>
               <!-- <a href="#" target="_blank">My AHIC Login</a> -->
             </li>
             <!-- <li class="list-inline-item mr-0 p-md-3 p-2 border-right border-white-0_1">

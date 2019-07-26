@@ -54,9 +54,9 @@ axios.interceptors.response.use(function (response) {
   NProgress.done() //shows the progress bar
   var status = error.response.status
 
-  if (status === 401) {
+  if (status == 401) {
     auth.logout();
-  } else if (status === 403) {
+  } else if (status == 403) {
     router.push({ name: '404'})
   } else {
     return Promise.reject(error);
@@ -173,7 +173,7 @@ Vue.use(VueGoogleMaps, {
 router.beforeEach((to, from, next) => {
     if (to.matched.length) {
       if (to.matched.some(record => record.meta.middlewareAuth)) {
-        if (!auth.check() || to.matched[0].meta.roleId !== auth.roleId) {
+        if (!auth.check() || to.matched[0].meta.roleId != auth.roleId) {
           next({name: 'login'})
         } else {
           next()
