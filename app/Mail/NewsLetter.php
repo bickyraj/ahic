@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Contact;
 
 class NewsLetter extends Mailable
 {
@@ -33,8 +34,10 @@ class NewsLetter extends Mailable
     {
         $message = $this->message;
         // $msg = $message['message'];
+        $contact = Contact::first();
         return $this->subject($message['subject'])->view('emails.newsletter')->with([
-            'ahic_message' => $message['message']
+            'ahic_message' => $message['message'],
+            'ahic_contact' => $contact
         ]);
     }
 }
