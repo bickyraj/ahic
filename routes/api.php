@@ -28,7 +28,7 @@ Route::post('/form/submit', 'FormController@store');
 
 
 
-  //CCF fucntions
+    //CCF fucntions
     Route::post('/ccf','CountryCourseFeeController@store');
     Route::get('/ccf/{id}','CountryCourseFeeController@getCCF');
     Route::get('/ccf/get/{id}','CountryCourseFeeController@show');
@@ -40,6 +40,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::get('newsletters', 'NewsletterController@index');
     Route::post('newsletter/edit', 'NewsletterController@edit');
     Route::delete('newsletter/{id}', 'NewsletterController@destroy');
+    Route::post('/send-email-to-subscribers', 'NewsletterController@sendEmailToSubscribers');
 
     // Testimonial functions.
     Route::get('testimonials', 'TestimonialController@index');

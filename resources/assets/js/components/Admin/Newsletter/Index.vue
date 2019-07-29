@@ -42,6 +42,36 @@
           </table>
         </b-card>
       </b-col>
+      <b-col>
+        <b-card class="mb-2 trump-card">
+          <div class="card-title">
+            <div class="caption">
+              <h5><i class="fab fa-typo3"></i> Send Email</h5>
+            </div>
+          </div>
+          <div>
+            <form @submit.prevent="addEmail" ref="addEmailForm">
+              <!-- <div class="form-group">
+                <b-img center ref="image_preview" class="custom-form-image-preview" style="margin-bottom:10px;" :src="imagePreview" alt="center image" />
+                <input type="file" ref="input_image" name="file" style="display:none;" v-on:change="handleFileUpload()">
+                <div class="button-group">
+                  <b-button class="mx-auto d-block" @click = "clickFileInupt">Upload Icon</b-button>
+                  <b-button class="mx-auto d-block custom-remove-btn" @click = "clickRemoveFileInupt"><i class="fa fa-times"></i></b-button>
+                </div>
+              </div> -->
+              <div class="form-group">
+                <label for="">Subject</label>
+                <input type="text" class="form-control" name="subject">
+              </div>
+              <div class="form-group">
+                <label for="">Message</label>
+                <textarea name="message" id="" required="required" cols="30" rows="10" class="form-control"></textarea>
+              </div>
+              <b-btn class="mt-3 pull-right" variant="primary" type="submit">Sent Email</b-btn>
+            </form>
+          </div>
+        </b-card>
+      </b-col>
     </b-row>
     <!-- Info modal -->
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
@@ -79,6 +109,25 @@
 
     },
     methods: {
+      addEmail: function() {
+        var self = this;
+        var form = self.$refs.addEmailForm;
+        var formData = new FormData(form);
+        // var des = this.getAddEmailContent;
+        // formData.append('description', des);
+        let url = this.$root.baseUrl + '/api/admin/send-email-to-subscribers';
+
+        axios.post(url, formData).then(function(response) {
+          if (response.status === 200) {
+            var email = response.data.data;
+            $(form)[0].reset();
+            self.$toastr.s("Email has been sent.");
+          }
+        })
+        .catch(function(error) {
+          self.unique = false;
+        });
+      },
       info(item, index, button) {
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/newsletter/';

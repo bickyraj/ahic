@@ -1,21 +1,19 @@
 <template>
   <div class="animated">
     <b-row>
-      <b-col :md="cols">
+      <b-col class="col-md-8">
         <b-card class="mb-2 trump-card">
           <div class="card-title">
             <div class="caption">
               <h5><i class="fas fa-key"></i> Testimonials </h5>
             </div>
             <div class="caption card-title-actions">
-
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Testimonial</b-button>
               <select class="col-md-5 pull-right mr-4 form-control" name="" v-model="filterData">
                 <option value="3"> All</option>
                 <option value="1"> Published</option>
                 <option value="0"> Un-Published</option>
               </select>
-
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add New Testimonial">
                 <form @submit.prevent="addNews" ref="addNewsForm" enctype="multipart/form-data">
                   <div class="form-group">
@@ -76,8 +74,12 @@
               <tr v-for="(news, index) in filteredData" :key="news.id">
                 <td> {{ news.name}} </td>
                 <td> {{ news.testimonial_date}} </td>
-                <td v-if="news.status == 1"> <b-button size="sm" @click="updateStatus(news.id,0)" class="mr-1 btn-danger"> Unpublish </b-button></td>
-                <td v-else> <b-button size="sm" @click="updateStatus(news.id,1)" class="mr-1 btn-success"> Publish </b-button></td>
+                <td v-if="news.status == 1">
+                  <b-button size="sm" @click="updateStatus(news.id,0)" class="mr-1 btn-danger"> Unpublish </b-button>
+                </td>
+                <td v-else>
+                  <b-button size="sm" @click="updateStatus(news.id,1)" class="mr-1 btn-success"> Publish </b-button>
+                </td>
                 <td>
                   <b-button size="sm" @click="view = news" class="mr-1 btn-primary">
                     View
@@ -100,28 +102,27 @@
               </tr>
             </tbody>
           </table>
-<div class="row">
-  <div class="col-md ml-auto mr-auto">
-       <nav aria-label="Page navigation" class="ml-auto mr-auto">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" @click="fetchPaginate(pagination.prev_page_url)"  aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">{{pagination.current_page}} </a></li>
-                <li class="page-item">
-                  <a class="page-link"  @click="fetchPaginate(pagination.next_page_url)"  aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-  </div>
-</div>
-   
+          <div class="row">
+            <div class="col-md ml-auto mr-auto">
+              <nav aria-label="Page navigation" class="ml-auto mr-auto">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" @click="fetchPaginate(pagination.prev_page_url)" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">{{pagination.current_page}} </a></li>
+                  <li class="page-item">
+                    <a class="page-link" @click="fetchPaginate(pagination.next_page_url)" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
         </b-card>
       </b-col>
       <b-col md="4" v-if="view != null">
@@ -139,10 +140,8 @@
             <h4>{{view.name}}</h4>
             <h6>{{view.country.name}}</h6>
             <p v-html="view.description"></p>
-
-            <b-button  v-if="view.status == 1" size="sm" @click="updateStatus(view.id,0)" class="mr-1 btn-danger"> Unpublish </b-button>
+            <b-button v-if="view.status == 1" size="sm" @click="updateStatus(view.id,0)" class="mr-1 btn-danger"> Unpublish </b-button>
             <b-button v-else size="sm" @click="updateStatus(view.id,1)" class="mr-1 btn-success"> Publish </b-button>
-
           </div>
         </b-card>
       </b-col>
@@ -198,270 +197,265 @@
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      pagination:[],
-      error: '',
-      url:'',
-      myCroppa: null,
-      view: null,
-      loading: true,
-      table_items: [],
-      filterData:3,
-      modalInfo: {
-        title: '',
-        content: '',
-        data: []
-      },
-
-      countries:'',
-      editor: {
-        plugins: ['table', 'link', 'image code'],
-        toolbar: ['undo redo | link image |code'],
-        setup: function(editor) {
-          editor.on('change', function() {
-            editor.save();
-          });
-          editor.on('load', function () {
-            console.log('loaded');
-            editor.save();
-          });
+  export default {
+    data() {
+      return {
+        pagination: [],
+        error: '',
+        url: '',
+        myCroppa: null,
+        view: null,
+        loading: true,
+        table_items: [],
+        filterData: 3,
+        modalInfo: {
+          title: '',
+          content: '',
+          data: []
         },
-        image_title: true,
-        automatic_uploads: true,
-        file_picker_types: 'image',
-        // and here's our custom image picker
-        file_picker_callback: function(cb, value, meta) {
-          var input = document.createElement('input');
-          input.setAttribute('type', 'file');
-          input.setAttribute('accept', 'image/*');
-          input.onchange = function() {
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.onload = function() {
-              var id = 'blobid' + (new Date()).getTime();
-              var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-              var base64 = reader.result.split(',')[1];
-              var blobInfo = blobCache.create(id, file, base64);
-              blobCache.add(blobInfo);
-              cb(blobInfo.blobUri(), {
-                title: file.name
-              });
+        countries: '',
+        editor: {
+          plugins: ['table', 'link', 'image code'],
+          toolbar: ['undo redo | link image |code'],
+          setup: function(editor) {
+            editor.on('change', function() {
+              editor.save();
+            });
+            editor.on('load', function() {
+              console.log('loaded');
+              editor.save();
+            });
+          },
+          image_title: true,
+          automatic_uploads: true,
+          file_picker_types: 'image',
+          // and here's our custom image picker
+          file_picker_callback: function(cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+            input.onchange = function() {
+              var file = this.files[0];
+              var reader = new FileReader();
+              reader.onload = function() {
+                var id = 'blobid' + (new Date()).getTime();
+                var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                var base64 = reader.result.split(',')[1];
+                var blobInfo = blobCache.create(id, file, base64);
+                blobCache.add(blobInfo);
+                cb(blobInfo.blobUri(), {
+                  title: file.name
+                });
+              };
+              reader.readAsDataURL(file);
             };
-            reader.readAsDataURL(file);
-          };
-          input.click();
+            input.click();
+          }
+        },
+      }
+    },
+    computed: {
+      baseUrl() {
+        return this.$root.baseUrl
+      },
+      cols() {
+        if (this.view == null) {
+          return 6;
+        } else {
+          return 6;
         }
       },
-    }
-  },
-  computed: {
-    baseUrl(){
-      return this.$root.baseUrl
-    },
-    cols() {
-      if (this.view == null) {
-        return 6;
-      } else {
-        return 6;
-      }
-    },
-    cropimage() {
-      if (this.modalInfo.data.image != null) {
-        this.myCroppa.refresh()
-        return '../public/images/testimonials/' + this.modalInfo.data.image
-      }
-    },
-    filteredData(){
-      var fil = this.filterData;
-      return this.table_items.filter(i=>{
-        if(fil == 3)
-        {
-          return i;
+      cropimage() {
+        if (this.modalInfo.data.image != null) {
+          this.myCroppa.refresh()
+          return '../public/images/testimonials/' + this.modalInfo.data.image
         }
-        else
-        {
-          if(i.status == fil)
-          {
+      },
+      filteredData() {
+        var fil = this.filterData;
+        return this.table_items.filter(i => {
+          if (fil == 3) {
             return i;
-          }
-        }
-      })
-
-    },
-  },
-  created() {
-    this.fetchNews();
-    this.fetchCountries();
-  },
-  methods: {
-    fetchPaginate(url){
-  this.url = url
-  this.fetchNews()
-    },
-    makePagination(data){
-      let pagination ={
-        current_page:data.meta.current_page,
-        last_page:data.meta.last_page,
-        next_page_url:data.links.next,
-        prev_page_url:data.links.prev,
-      }
-      this.pagination = pagination;
-
-    },
-    updateStatus(id,status){
-      var self = this;
-      let url = self.$root.baseUrl + '/api/admin/testimonial/update';
-      var formData = {id:id,status:status};
-      axios.post(url, formData).then(function(response) {
-        self.fetchNews();
-        self.hideNewsModal();
-        self.$swal({
-          // position: 'top-end',
-          type: 'success',
-          title: 'Status updated successfully.',
-          showConfirmButton: true,
-          // timer: 1500,
-          customClass: 'crm-swal',
-          confirmButtonText: 'Thanks',
-        })
-      })
-      .catch(function(error) {});
-    },
-    fetchCountries(){
-      let vm = this;
-      let url = vm.$root.baseUrl + '/api/admin/countries';
-      axios.get(url)
-      .then(function(response) {
-        vm.countries = response.data.data;
-        vm.loading = false;
-      })
-      .catch(function(error) {
-        console.log(error);
-        vm.loading = false;
-      });
-    },
-    fetchNews() {
-      let vm = this;
-      // let url = vm.$root.baseUrl + '/api/admin/testimonials';
-      axios.get(vm.url || vm.$root.baseUrl + '/api/admin/testimonials')
-      .then(function(response) {
-        vm.makePagination(response.data)
-        vm.table_items = response.data.data;
-        vm.loading = false;
-      })
-      .catch(function(error) {
-        console.log(error);
-        vm.loading = false;
-      });
-    },
-    addNews() {
-      var self = this;
-      var form = self.$refs.addNewsForm;
-      var formData = new FormData(form);
-      let url = self.$root.baseUrl + '/api/admin/testimonial';
-      formData.append('image', this.myCroppa.generateDataUrl())
-      axios.post(url, formData).then(function(response) {
-        self.fetchNews();
-        $(form)[0].reset();
-        self.hideModal();
-        self.$toastr.s("A testimonial has been added.");
-      })
-      .catch(function(error) {
-        self.error = '';
-        self.error = error.response.data.errors;
-        if (error.response.status === 422) {
-          self.$toastr.e(error.response.data.errors.name);
-        }
-      });
-    },
-    resetModal() {
-      this.modalInfo.title = 'Edit Testimonial'
-      this.modalInfo.content = ''
-    },
-    info(menu, index, button) {
-      let self = this;
-      let url = self.$root.baseUrl + '/api/admin/testimonial/';
-      axios.get(url + menu.id).then(function(response) {
-        if (response.status === 200 || response.status === 201) {
-          self.modalInfo.row = index
-          self.modalInfo.title = `Edit Testimonial`
-          self.modalInfo.data = response.data.data
-          self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
-          self.$root.$emit('bv::show::modal', 'modalInfo', button)
-        }
-      })
-      .catch(function(error) {
-        self.$toastr.e('Something went wrong please try again.');
-      });
-    },
-    editNews: function() {
-      var self = this;
-      var form = self.$refs.editNewsForm;
-      var row_index = form.getAttribute('row');
-      var formData = new FormData(form);
-      let url = self.$root.baseUrl + '/api/admin/testimonial/edit';
-      formData.append('image', this.myCroppa.generateDataUrl())
-      axios.post(url, formData).then(function(response) {
-        self.fetchNews();
-
-        self.hideNewsModal();
-        self.$swal({
-          // position: 'top-end',
-          type: 'success',
-          title: 'Testimonial updated successfully.',
-          showConfirmButton: true,
-          // timer: 1500,
-          customClass: 'crm-swal',
-          confirmButtonText: 'Thanks',
-        })
-      })
-      .catch(function(error) {});
-    },
-    deleteNews: function(news, row, event) {
-      var self = this;
-      self.$swal({
-        // position: 'top-end',
-        type: 'info',
-        title: 'Are you sure you want to delete this?',
-        showConfirmButton: true,
-        showCancelButton: true,
-        // timer: 1500,
-        customClass: 'crm-swal',
-        confirmButtonText: 'Yes',
-      }).then((result) => {
-        if (result.value) {
-          let url = self.$root.baseUrl + '/api/admin/testimonial/';
-          axios.delete(url + news.id).then(function(response) {
-            if (response.status === 200) {
-              self.fetchNews();
-              self.$swal({
-                // position: 'top-end',
-                type: 'success',
-                title: 'Deleted',
-                showConfirmButton: true,
-                // timer: 1500,
-                customClass: 'crm-swal',
-                confirmButtonText: 'Ok',
-              }).then((result) => {
-                if (result.value) {}
-              })
+          } else {
+            if (i.status == fil) {
+              return i;
             }
+          }
+        })
+      },
+    },
+    created() {
+      this.fetchNews();
+      this.fetchCountries();
+    },
+    methods: {
+      fetchPaginate(url) {
+        this.url = url
+        this.fetchNews()
+      },
+      makePagination(data) {
+        let pagination = {
+          current_page: data.meta.current_page,
+          last_page: data.meta.last_page,
+          next_page_url: data.links.next,
+          prev_page_url: data.links.prev,
+        }
+        this.pagination = pagination;
+      },
+      updateStatus(id, status) {
+        var self = this;
+        let url = self.$root.baseUrl + '/api/admin/testimonial/update';
+        var formData = {
+          id: id,
+          status: status
+        };
+        axios.post(url, formData).then(function(response) {
+            self.fetchNews();
+            self.hideNewsModal();
+            self.$swal({
+              // position: 'top-end',
+              type: 'success',
+              title: 'Status updated successfully.',
+              showConfirmButton: true,
+              // timer: 1500,
+              customClass: 'crm-swal',
+              confirmButtonText: 'Thanks',
+            })
           })
           .catch(function(error) {});
-        }
-      })
+      },
+      fetchCountries() {
+        let vm = this;
+        let url = vm.$root.baseUrl + '/api/admin/countries';
+        axios.get(url)
+          .then(function(response) {
+            vm.countries = response.data.data;
+            vm.loading = false;
+          })
+          .catch(function(error) {
+            console.log(error);
+            vm.loading = false;
+          });
+      },
+      fetchNews() {
+        let vm = this;
+        // let url = vm.$root.baseUrl + '/api/admin/testimonials';
+        axios.get(vm.url || vm.$root.baseUrl + '/api/admin/testimonials')
+          .then(function(response) {
+            vm.makePagination(response.data)
+            vm.table_items = response.data.data;
+            vm.loading = false;
+          })
+          .catch(function(error) {
+            console.log(error);
+            vm.loading = false;
+          });
+      },
+      addNews() {
+        var self = this;
+        var form = self.$refs.addNewsForm;
+        var formData = new FormData(form);
+        let url = self.$root.baseUrl + '/api/admin/testimonial';
+        formData.append('image', this.myCroppa.generateDataUrl())
+        axios.post(url, formData).then(function(response) {
+            self.fetchNews();
+            $(form)[0].reset();
+            self.hideModal();
+            self.$toastr.s("A testimonial has been added.");
+          })
+          .catch(function(error) {
+            self.error = '';
+            self.error = error.response.data.errors;
+            if (error.response.status === 422) {
+              self.$toastr.e(error.response.data.errors.name);
+            }
+          });
+      },
+      resetModal() {
+        this.modalInfo.title = 'Edit Testimonial'
+        this.modalInfo.content = ''
+      },
+      info(menu, index, button) {
+        let self = this;
+        let url = self.$root.baseUrl + '/api/admin/testimonial/';
+        axios.get(url + menu.id).then(function(response) {
+            if (response.status === 200 || response.status === 201) {
+              self.modalInfo.row = index
+              self.modalInfo.title = `Edit Testimonial`
+              self.modalInfo.data = response.data.data
+              self.modalInfo.content = JSON.stringify(response.data.data, null, 2)
+              self.$root.$emit('bv::show::modal', 'modalInfo', button)
+            }
+          })
+          .catch(function(error) {
+            self.$toastr.e('Something went wrong please try again.');
+          });
+      },
+      editNews: function() {
+        var self = this;
+        var form = self.$refs.editNewsForm;
+        var row_index = form.getAttribute('row');
+        var formData = new FormData(form);
+        let url = self.$root.baseUrl + '/api/admin/testimonial/edit';
+        formData.append('image', this.myCroppa.generateDataUrl())
+        axios.post(url, formData).then(function(response) {
+            self.fetchNews();
+            self.hideNewsModal();
+            self.$swal({
+              // position: 'top-end',
+              type: 'success',
+              title: 'Testimonial updated successfully.',
+              showConfirmButton: true,
+              // timer: 1500,
+              customClass: 'crm-swal',
+              confirmButtonText: 'Thanks',
+            })
+          })
+          .catch(function(error) {});
+      },
+      deleteNews: function(news, row, event) {
+        var self = this;
+        self.$swal({
+          // position: 'top-end',
+          type: 'info',
+          title: 'Are you sure you want to delete this?',
+          showConfirmButton: true,
+          showCancelButton: true,
+          // timer: 1500,
+          customClass: 'crm-swal',
+          confirmButtonText: 'Yes',
+        }).then((result) => {
+          if (result.value) {
+            let url = self.$root.baseUrl + '/api/admin/testimonial/';
+            axios.delete(url + news.id).then(function(response) {
+                if (response.status === 200) {
+                  self.fetchNews();
+                  self.$swal({
+                    // position: 'top-end',
+                    type: 'success',
+                    title: 'Deleted',
+                    showConfirmButton: true,
+                    // timer: 1500,
+                    customClass: 'crm-swal',
+                    confirmButtonText: 'Ok',
+                  }).then((result) => {
+                    if (result.value) {}
+                  })
+                }
+              })
+              .catch(function(error) {});
+          }
+        })
+      },
+      showModal() {
+        this.$refs.myModalRef.show()
+      },
+      hideModal() {
+        this.$refs.myModalRef.hide()
+      },
+      hideNewsModal() {
+        this.$refs.editModal.hide();
+      },
     },
-    showModal() {
-      this.$refs.myModalRef.show()
-    },
-    hideModal() {
-      this.$refs.myModalRef.hide()
-    },
-    hideNewsModal() {
-      this.$refs.editModal.hide();
-    },
-  },
-}
+  }
 </script>

@@ -266,7 +266,7 @@
           </div>
           <div class="form-group">
             <label for=""> Start Date </label>
-            <datepicker format="yyyy-MM-dd" name="start_date" bootstrap-styling :initialView="'year'" :value="agent.start_date"></datepicker>
+            <datepicker format="yyyy-MM-dd" name="start_date" bootstrap-styling :initialView="'year'" :value="agentStartDate"></datepicker>
             <transition name="fade">
               <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
             </transition>
@@ -316,17 +316,17 @@
             <label for=""> Country </label>
             <select name="country" id="" class="form-control" @change="changeLocation">
               <option value=""> Choose A Country</option>
-              <option v-for="(country,index) in countries" :value="country.name" :key="country.id" :index="index"> {{country.name}} </option>
+              <option v-for="(con,index) in countries" :value="con.name" :key="con.id" :index="index"> {{con.name}} </option>
             </select>
             <transition name="fade">
-              <p v-if="error.country" class="text-danger"> {{error.country[0]}}</p>
+              <p v-if="error.con" class="text-danger"> {{error.con[0]}}</p>
             </transition>
           </div>
           <div class="form-group">
             <label for=""> Location </label>
             <select name="location" id="" class="form-control">
               <option value=""> Choose A Location</option>
-              <option v-for="country in locations" :value="country.location" :key="country.id"> {{country.location}} </option>
+              <option v-for="con in locations" :value="con.location" :key="con.id"> {{con.location}} </option>
             </select>
             <transition name="fade">
               <p v-if="error.location" class="text-danger"> {{error.location[0]}}</p>
@@ -349,18 +349,20 @@
           </div>
           <div class="form-group">
             <label for=""> Country </label>
-            <select name="country" id="" class="form-control" @change="changeLocation" @load="changeLocation" v-model="document.country">
+            <select name="country" id="" class="form-control" ref="editSelectedCountry" @change="changeLocation" @load="changeLocation" v-model="country">
               <option value=""> Choose A Country</option>
-              <option v-for="(country,index) in countries" :value="country.name" :key="country.name" :index="index"> {{country.name}} </option>
+              <option v-for="(con,index) in countries" :value="con.name" :key="con.name" :index="index"> {{con.name}} </option>
             </select>
           </div>
-          <div class="form-group">
-            <label for=""> Location </label>
-            <select name="location" id="" class="form-control" :value="document.location">
-              <option value=""> Choose A Location</option>
-              <option v-for="country in locations" :value="country.location" :key="country.id"> {{country.location}} </option>
-            </select>
-          </div>
+          <template v-if="editSelectedCountryId">
+            <div class="form-group">
+              <label for=""> Location </label>
+              <select name="location" id="" class="form-control" :value="document.location">
+                <option value=""> Choose A Location</option>
+                <option v-for="con in countries[editSelectedCountryId].locations" :selected="con.location == document.location" :value="con.location" :key="con.id"> {{con.location}} </option>
+              </select>
+            </div>
+          </template>
           <div class="form-group">
             <label for=""> EOI </label>
             <input type="file" name="EOI" class="form-control">
@@ -453,6 +455,9 @@
   export default {
     data() {
       return {
+        agentStartDate: '',
+        editSelectedCountryId: '',
+        country: '',
         student_filter: 2018,
         myCroppa: {},
         error: '',
@@ -473,7 +478,12 @@
       this.fetchCountries();
       this.getStudents();
     },
-    watch: {},
+    watch: {
+      country: function(val) {
+        let index = this.countries.map(function(o) { return o.name; }).indexOf(val);
+        this.editSelectedCountryId = index;
+      }
+    },
     computed: {
       cropimage() {
         if (this.agent.logo != null) {
@@ -580,7 +590,7 @@
         let url = self.$root.baseUrl + '/api/admin/agent_agreement_process/edit';
         axios.post(url, formData).then(function(response) {
             self.fetchDocuments();
-            $(form)[0].reset();
+            // $(form)[0].reset();
             self.hideEditProcessModal();
             self.$toastr.s("A agent agreement process has been edited.");
           })
@@ -598,7 +608,7 @@
         let url = self.$root.baseUrl + '/api/admin/agent_document/edit';
         axios.post(url, formData).then(function(response) {
             self.fetchDocuments();
-            $(form)[0].reset();
+            // $(form)[0].reset();
             self.hideEditDocumentModal();
             self.$toastr.s("A agent document has been edited.");
           })
@@ -626,7 +636,6 @@
         let vm = this;
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/' + type + '/';
-        console.log(url);
         axios.delete(url + id).then(function(response) {
             vm.fetchCourse();
           })
@@ -645,6 +654,7 @@
               self.$router.push('../agent_information');
             }
             vm.agent = response.data.data;
+            self.agentStartDate = self.agent.start_date
             vm.loading = false;
           })
           .catch(function(error) {
@@ -661,7 +671,8 @@
         axios.post(url, formData).then(function(response) {
             self.fetchDocuments();
             self.fetchAgent();
-            $(form)[0].reset();
+            self.agentStartDate = self.agent.start_date
+            // $(form)[0].reset();
             self.hideEditAgentModal();
             self.$toastr.s("A agent has been edited.");
           })
@@ -707,13 +718,16 @@
         let url = self.$root.baseUrl + '/api/admin/agent_document/';
         axios.get(url + docid).then(function(response) {
             self.document = response.data.data;
+            self.country = self.document.country
             let country = (response.data.data.country);
             let url = self.$root.baseUrl + '/api/admin/branch_locations/getid/';
             axios.get(url + country).then(function(response) {
               country = response.data;
               let url = self.$root.baseUrl + '/api/admin/branch_locations/';
               axios.get(url + country).then(function(response) {
-                self.locations = response.data.data.locations;
+                // console.log(response);
+                // self.locations = response.data.data.locations;
+                // console.log(self.locations);
               })
             })
           })

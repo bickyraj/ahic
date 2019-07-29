@@ -30,7 +30,7 @@
                 <td>{{ format(enquiry.created_at) }}</td>
                 <td>{{ enquiry.name }}</td>
                 <td>
-                  <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,$event.target)">
+                  <select class="form-control" name="" v-model="enquiry.status" @change="updateEnq(enquiry.id,$event.target, index)">
                     <option value="1">Pending</option>
                     <option value="2">Verified</option>
                     <option value="3">Applied</option>
@@ -176,14 +176,15 @@
         this.enquiry = e;
         this.enquiry.index = i;
       },
-      updateEnq(item, el) {
+      updateEnq(item, el, index = null) {
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/enquiry/edit/' + item;
         var val = el.value;
         axios.post(url, {
           val: val
         }).then(response => {
-          self.table_items = response.data.data;
+          // self.table_items = response.data.data;
+          // self.table_items.splice(index, 1, response.data.data)
           self.$swal({
             type: 'success',
             title: 'Enquiry updated successfully.',
