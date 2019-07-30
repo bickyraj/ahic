@@ -205,75 +205,77 @@
         </div>
       </b-row>
       <b-modal class="ess-modal" ref="editAgentModal" hide-footer title="Edit Agent">
-        <form @submit.prevent="editAgent" ref="editAgentForm">
-          <input type="hidden" name="id" :value="agent.id">
-          <div class="form-group">
-            <label for=""> PAN</label>
-            <input type="text" name="pan" class="form-control" :value="agent.pan">
-            <transition name="fade">
-              <p v-if="error.pan" class="text-danger"> {{error.pan[0]}}</p>
-            </transition>
-          </div>
-          <div class="form-group">
-            <label for=""> First Name </label>
-            <input type="text" name="first_name" class="form-control" :value="agent.first_name">
-            <transition name="fade">
-              <p v-if="error.first_name" class="text-danger"> {{error.first_name[0]}}</p>
-            </transition>
-          </div>
-          <div class="form-group">
-            <label for=""> Last Name </label>
-            <input type="text" name="last_name" class="form-control" :value="agent.last_name">
-            <transition name="fade">
-              <p v-if="error.last_name" class="text-danger"> {{error.last_name[0]}}</p>
-            </transition>
-          </div>
-          <div class="form-group">
-            <label for="">Logo </label>
-            <div>
-              <croppa v-model="myCroppa" :width="200" :height="200" :initial-image="cropimage" placeholder="click to choose an image" :placeholder-font-size="14" :disabled="false" :quality="1" :prevent-white-space="true">
-              </croppa>
+        <template v-if="agent">
+          <form @submit.prevent="editAgent" ref="editAgentForm">
+            <input type="hidden" name="id" :value="agent.id">
+            <div class="form-group">
+              <label for=""> PAN</label>
+              <input type="text" name="pan" class="form-control" :value="agent.pan">
+              <transition name="fade">
+                <p v-if="error.pan" class="text-danger"> {{error.pan[0]}}</p>
+              </transition>
             </div>
-          </div>
-          <div class="form-group">
-            <label for=""> Telephone </label>
-            <input type="text" name="telephone" class="form-control" :value="agent.telephone">
-            <transition name="fade">
-              <p v-if="error.telephone" class="text-danger"> {{error.telephone[0]}}</p>
-            </transition>
-          </div>
-          <div class="form-group">
-            <label for=""> Mobile Number </label>
-            <input type="text" name="mobile_no" class="form-control" :value="agent.mobile_no">
-            <transition name="fade">
-              <p v-if="error.mobile_no" class="text-danger"> {{error.mobile_no[0]}}</p>
-            </transition>
-          </div>
-          <div class="form-group">
-            <label for=""> Email </label>
-            <input type="text" name="email" class="form-control" :value="agent.email">
-            <transition name="fade">
-              <p v-if="error.email" class="text-danger"> {{error.email[0]}}</p>
-            </transition>
-          </div>
-          <div class="form-group">
-            <label for=""> Address </label>
-            <gmap-autocomplete class="form-control" :value="agent.address" name="address"></gmap-autocomplete>
-            <!-- <input type="text" name="address" class="form-control" :value="agent.address"> -->
-            <transition name="fade">
-              <p v-if="error.address" class="text-danger"> {{error.address[0]}}</p>
-            </transition>
-          </div>
-          <div class="form-group">
-            <label for=""> Start Date </label>
-            <datepicker format="yyyy-MM-dd" name="start_date" bootstrap-styling :initialView="'year'" :value="agentStartDate"></datepicker>
-            <transition name="fade">
-              <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
-            </transition>
-          </div>
-          <b-btn class="mt-3 pull-right" variant="primary" type="submit">Save Agent</b-btn>
-          <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditAgentModal">Cancel</b-btn>
-        </form>
+            <div class="form-group">
+              <label for=""> First Name </label>
+              <input type="text" name="first_name" class="form-control" :value="agent.first_name">
+              <transition name="fade">
+                <p v-if="error.first_name" class="text-danger"> {{error.first_name[0]}}</p>
+              </transition>
+            </div>
+            <div class="form-group">
+              <label for=""> Last Name </label>
+              <input type="text" name="last_name" class="form-control" :value="agent.last_name">
+              <transition name="fade">
+                <p v-if="error.last_name" class="text-danger"> {{error.last_name[0]}}</p>
+              </transition>
+            </div>
+            <div class="form-group">
+              <label for="">Logo </label>
+              <div>
+                <croppa v-model="myCroppa" :width="200" :height="200" :initial-image="cropimage" placeholder="click to choose an image" :placeholder-font-size="14" :disabled="false" :quality="1" :prevent-white-space="true">
+                </croppa>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for=""> Telephone </label>
+              <input type="text" name="telephone" class="form-control" :value="agent.telephone">
+              <transition name="fade">
+                <p v-if="error.telephone" class="text-danger"> {{error.telephone[0]}}</p>
+              </transition>
+            </div>
+            <div class="form-group">
+              <label for=""> Mobile Number </label>
+              <input type="text" name="mobile_no" class="form-control" :value="agent.mobile_no">
+              <transition name="fade">
+                <p v-if="error.mobile_no" class="text-danger"> {{error.mobile_no[0]}}</p>
+              </transition>
+            </div>
+            <div class="form-group">
+              <label for=""> Email </label>
+              <input type="text" name="email" class="form-control" :value="agent.email">
+              <transition name="fade">
+                <p v-if="error.email" class="text-danger"> {{error.email[0]}}</p>
+              </transition>
+            </div>
+            <div class="form-group">
+              <label for=""> Address </label>
+              <gmap-autocomplete class="form-control" :value="agent.address" name="address"></gmap-autocomplete>
+              <!-- <input type="text" name="address" class="form-control" :value="agent.address"> -->
+              <transition name="fade">
+                <p v-if="error.address" class="text-danger"> {{error.address[0]}}</p>
+              </transition>
+            </div>
+            <div class="form-group">
+              <label for=""> Start Date </label>
+              <datepicker format="yyyy-MM-dd" name="start_date" bootstrap-styling :initialView="'year'" :value="agentStartDate"></datepicker>
+              <transition name="fade">
+                <p v-if="error.start_date" class="text-danger"> {{error.start_date[0]}}</p>
+              </transition>
+            </div>
+            <b-btn class="mt-3 pull-right" variant="primary" type="submit">Save Agent</b-btn>
+            <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideEditAgentModal">Cancel</b-btn>
+          </form>
+        </template>
       </b-modal>
       <b-modal class="ess-modal" ref="addCompanyModal" hide-footer title="Add Company">
         <form @submit.prevent="addCompany" ref="addCompanyForm">
@@ -470,6 +472,7 @@
         locations: '',
         loading: true,
         students: null,
+        cropimage: '',
       }
     },
     created() {
@@ -485,14 +488,14 @@
       }
     },
     computed: {
-      cropimage() {
-        if (this.agent.logo != null) {
-          // this.myCroppa.refresh()
-          return this.$root.baseUrl + '/public/images/agents/' + this.agent.logo
-        } else {
-          return " "
-        }
-      },
+      // cropimage() {
+      //   if (this.agent.logo != null) {
+      //     // this.myCroppa.refresh()
+      //     return this.$root.baseUrl + '/public/images/agents/' + this.agent.logo
+      //   } else {
+      //     return " "
+      //   }
+      // },
       filterStudents() {
         var self = this;
         if (Array.isArray(this.students)) {
@@ -655,6 +658,11 @@
             }
             vm.agent = response.data.data;
             self.agentStartDate = self.agent.start_date
+            if (self.agent.logo) {
+              self.cropimage = self.$root.baseUrl + '/public/images/agents/' + self.agent.logo            
+            } else {
+              self.cropimage = '';
+            }
             vm.loading = false;
           })
           .catch(function(error) {
