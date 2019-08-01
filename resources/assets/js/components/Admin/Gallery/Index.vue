@@ -25,6 +25,12 @@
               <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add New Images">
                 <form @submit.prevent="addImages" ref="addImagesForm" enctype="multipart/form-data">
                   <div class="form-group">
+                    <label for="parent news_event">Select Category</label>
+                    <select class="form-control" name="gallery_category_id">
+                      <option v-for="item in categories" :value="item.id" :key="item.id">{{ item.name }}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label for="">Image </label>
                     <input type="file" name="image[]" class="form-control" multiple>
                   </div>
@@ -37,7 +43,8 @@
           <table class="table trump-table table-hover">
             <thead>
               <tr>
-                <th class="col-md-3">Image</th>
+                <th>Image</th>
+                <th>Category</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -47,6 +54,11 @@
                   <div style="width:200px;">
                     <img :src="'../public/images/gallery/'+images.image" class="img-fluid" alt="">
                   </div>
+                </td>
+                <td>
+                  <select class="form-control" name="gallery_category_id" @change="changeCategory(images, index, $event.target)">
+                    <option v-for="item in categories" :selected="item.id == images.gallery_category_id" :value="item.id" :key="item.id">{{ item.name }}</option>
+                  </select>
                 </td>
                 <td>
                   <b-button size="sm" @click="deleteImages(images, index, $event.target)" class="mr-1 btn-danger">
@@ -74,7 +86,10 @@
     data() {
       return {
         loading: true,
-        table_items: [],
+        table_items: {
+          gallery_category: []
+        },
+        categories: null,
         modalInfo: {
           title: '',
           content: '',
@@ -84,8 +99,20 @@
     },
     created() {
       this.fetchImages();
+      this.fetchCategories();
     },
     methods: {
+      fetchCategories() {
+        let vm = this;
+        let self = this;
+        let url = self.$root.baseUrl + '/api/admin/gallery-categories';
+        axios.get(url)
+          .then(function(response) {
+            vm.categories = response.data.data;
+          })
+          .catch(function(error) {
+          });
+      },
       fetchImages() {
         let vm = this;
         let self = this;
@@ -173,6 +200,19 @@
       },
       hideImagesModal() {
         this.$refs.editModal.hide();
+      },
+
+      changeCategory(item, row, event) {
+        var ps_value = event.value;
+        var self = this;
+        let url = this.$root.baseUrl + '/api/admin/gallery/' + item.id + '/change-category'
+        axios.post(url, {gallery_category_id: ps_value}).then(function(response) {
+            if (response.status == 200) {
+              self.$toastr.s('Updated');
+            }
+        })
+        .catch(function(error) {
+        });
       },
     },
   }

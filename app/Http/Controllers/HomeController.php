@@ -20,6 +20,7 @@ use App\Testimonial;
 use App\Cms as CMS;
 use App\CountryCourseFee;
 use App\ApplicationDateOfIntake;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -47,12 +48,13 @@ class HomeController extends Controller
         $countries =  Country::where('status','1')->get();
         $news  =      News::where('status','1')->limit(3)->get();
         $gallery =    Gallery::all();
+        $gallery_category = \App\GalleryCategory::with('latest_gallery')->has('latest_gallery')->get()->toArray();
         $sliders =    Slider::where('status','1')->get();
         $testimonials = Testimonial::where('status','1')->get();
         $header = CMS::where('slug','welcome')->first();
         $lc = CMS::where('slug','lc')->first();
         $rc = CMS::where('slug','rc')->first();
-        return view('front.index',compact('courses','countries','news','gallery','sliders','header','lc','rc','testimonials'));
+        return view('front.index',compact('courses','countries','news','gallery','sliders','header','lc','rc','testimonials', 'gallery_category'));
     }
     public function courses()
     {

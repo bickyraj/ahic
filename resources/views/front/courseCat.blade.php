@@ -52,6 +52,33 @@
 
 <section class="py-3 position-relative shadow-v1">
   <div class="container">
+    <div class="row">
+      <div class="col-12">
+       <ul class="nav tab-state-primary mb-3 justify-content-center" role="tablist">
+        <li class="nav-item m-1">
+          <a class="nav-link border rounded text-center p-3 <?= ((\Request::segment(2) == "")?'active':''); ?>" data-toggle="tab" href="#Tabs_0; ?>" data-course="" role="tab" aria-selected="false">
+            All
+          </a>
+        </li>
+          @foreach ($categories as $category)
+            @php
+              $stripped = str_replace(' ', '_', $category->name);
+            @endphp
+            <li class="nav-item m-1">
+              <a class="nav-link border rounded text-center p-3 <?= (($stripped == \Request::segment(2))?'active':''); ?>" data-toggle="tab" href="#Tabs_<?= $category->id; ?>" data-course="<?= $stripped; ?>" role="tab" aria-selected="false">
+               <!-- <i class="ti-home d-block mb-1"></i> -->
+                {{ $category->name }}
+              </a>
+            </li>
+        @endforeach
+       </ul>
+      </div> <!-- END col-12 -->    
+    </div>
+  </div>
+</section>
+
+<!-- <section class="py-3 position-relative shadow-v1">
+  <div class="container">
     <form class="row">
       <div class="col-md-9 my-2"></div>
       <div class="col-md-3 my-2">
@@ -76,14 +103,14 @@
           </li>
         </ul>
       </div>
-    </form> <!-- END row-->
-  </div> <!-- END container-->
-</section>
+    </form> END row
+  </div> END container
+</section> -->
 
 
 
 
-<section class="padding-y-60 bg-light-v2">
+<section class="padding-y-30 bg-light-v2">
   <div class="container">
     <div class="row">
         @if($catgs != null)
@@ -92,41 +119,44 @@
           $stripped = str_replace(' ', '_', $course->name);
         @endphp
         <div class="col-lg-4 col-md-6 marginTop-30">
-          <div href="{{route('courseCategory',$course->name)}}" class="card height-100p text-gray shadow-v1">
-            @if($course->background_image)
+          <div class="card shadow-v3 hover:parent">
+              @if ($course->background_image)
               <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
-@else
-  <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
-
-            @endif
-            <div class="card-body">
-
-              <a href="{{route('course',$stripped)}}" class="h5">
-                {{$course->name}}
-              </a>
-              <p class="my-3">
-                {{$course->category->name}}
-              </p>
-              <p class="mb-0">
-                {{ str_limit(strip_tags($course->description), 180) }}
-              </p>
-
-            </div>
-            <div class="card-footer media align-items-center justify-content-between">
-                <h4 class="h5 text-right ">
-                  <span class="text-primary">
-                    @php
+              @else
+              <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+              @endif
+              <div class="card-body theme-course-card-body">
+                  <div class="theme-ribbon-right"></div>
+                  <h4>
+                      <!-- {{ str_limit($course->name, 28) }} -->
+                      {{ $course->name }}
+                  </h4>
+                  <p class="text-primary">
+                      {{$course->cricos_code or 'Cricos Code'}}
+                  </p>
+                  <!-- <p class="mb-0">
+                      {{ str_limit(strip_tags($course->description), 180) }}
+                  </p> -->
+              </div>
+              <div class="d-flex justify-content-between align-items-center border-top position-relative p-4">
+                  <div class="theme-ribbon-bottom-left"></div>
+                  <span class="d-inline-block px-4 py-1">
+                      <i class="far fa-clock" style="color: #a7a7a7;"></i>
+                      @php
                       $string = explode(' ',$course->duration);
-                    @endphp
-                    @if (isset($string[0]))
+                      $slug = str_replace(' ', '_', $course->name);
+                      @endphp
+                      @if (isset($string[0]))
                       {{$string[0]}}
-                    @endif
-                    @if (isset($string[1]))
+                      @endif
+                      @if (isset($string[1]))
                       {{$string[1]}}
-                    @endif
-                    </span>
-              </h4>
-            </div>
+                      @endif
+                  </span>
+                  <a href="{{route('course',$slug)}}" class="btn btn-primary btn-sm left-20">
+                      View Details
+                  </a>
+              </div>
           </div>
         </div>
       @endforeach
@@ -145,13 +175,24 @@
 <script type="text/javascript">
   $(document).ready(function() {
 
-  });
-  function changeCategory(el){
-    var v = el.value;
-    // var host = window.location.hostname + '/cms/';
-    window.location.replace(v);
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      var target = $(e.target).data('course') // activated tab
+      var v = target;
+      if (v == "") {
+        var l = '{{url('/')}}/courses';
+        window.location.href = l;
+      } else {
+        window.location.replace(v);
+      }
+    });
 
-  }
+  });
+  // function changeCategory(el){
+  //   var v = el.value;
+  //   // var host = window.location.hostname + '/cms/';
+  //   window.location.replace(v);
+
+  // }
 
 </script>
 @endsection

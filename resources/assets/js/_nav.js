@@ -155,6 +155,14 @@ export default {
            }
         },
         {
+         name: 'Gallery Categories',
+           url: url + 'gallery-categories',
+           icon: 'fas fa-images',
+           badge: {
+             variant: 'primary',
+           }
+        },
+        {
          name: 'Gallery',
            url: url + 'gallery',
            icon: 'fas fa-images',

@@ -22,32 +22,32 @@
              </div>
             </li>
           </ul>
-          <ul class="list-inline mb-0 theme-header-social-ul">
+          <ul class="list-inline mb-0 theme-header-social-ul theme-social-ul">
             @if (isset($contact['fb']))
-              <li class="list-inline-item mr-0 p-3  border-left border-white-0_1">
+              <li class="list-inline-item">
                 <a href="{{$contact['fb']}}"><i class="ti-facebook"></i></a>
               </li>
             @endif
             @if (isset($contact['tw']))
-              <li class="list-inline-item mr-0 p-3 border-left  border-white-0_1">
+              <li class="list-inline-item">
                 <a href="{{$contact['tw']}}"><i class="ti-twitter"></i></a>
               </li>
             @endif
             @if (isset($contact['in']))
-              <li class="list-inline-item mr-0 p-3 border-left border-white-0_1">
+              <li class="list-inline-item">
                 <a href="{{$contact['in']}}"><i class="ti-instagram"></i></a>
               </li>
             @endif
             @if (isset($contact['yt']))
-              <li class="list-inline-item mr-0 p-3 border-right border-left border-white-0_1">
+              <li class="list-inline-item">
                 <a href="{{$contact['yt']}}"><i class="ti-youtube"></i></a>
               </li>
             @endif
 
           </ul>
           <ul class="list-inline mb-0">
-            <li class="list-inline-item mr-0 p-md-3 p-2 border-right border-left border-white-0_1">
-              <a class="theme-login" href="https://learner.mywisenet.com.au/AHI/Account/LogOn?ReturnUrl=%2FAHI" target="_blank">My AHIC Login</a>
+            <li class="list-inline-item">
+              <a class="mr-0 border-right border-left border-white-0_1 theme-login" href="https://learner.mywisenet.com.au/AHI/Account/LogOn?ReturnUrl=%2FAHI" target="_blank">My AHIC Login</a>
               <!-- <a href="#" target="_blank">My AHIC Login</a> -->
             </li>
             <!-- <li class="list-inline-item mr-0 p-md-3 p-2 border-right border-white-0_1">

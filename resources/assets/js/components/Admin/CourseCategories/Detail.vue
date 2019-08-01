@@ -6,7 +6,7 @@
           <div class="card-title">
             <div class="caption">
               <h5><i class="fas fa-key"></i>
-              {{category}} </h5>
+                {{category}} </h5>
             </div>
             <div class="caption card-title-actions">
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Course</b-button>
@@ -16,100 +16,105 @@
                     <label for="">Name </label>
                     <input type="text" name="name" class="form-control" placeholder="">
                     <transition name="fade">
-                    <p v-if="error.name" class="text-danger"> {{error.name[0]}}</p>
+                      <p v-if="error.name" class="text-danger"> {{error.name[0]}}</p>
                     </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Course Code </label>
                     <input type="text" name="code" class="form-control" placeholder="">
                     <transition name="fade">
-                    <p v-if="error.code" class="text-danger"> {{error.code[0]}}</p>
+                      <p v-if="error.code" class="text-danger"> {{error.code[0]}}</p>
+                    </transition>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Cricos Code </label>
+                    <input type="text" name="cricos_code" class="form-control" placeholder="">
+                    <transition name="fade">
+                      <p v-if="error.cricos_code" class="text-danger"> {{error.cricos_code[0]}}</p>
                     </transition>
                   </div>
                   <div class="form-group d-none">
                     <label for=""> Course Category</label>
-                      <select name="course_category_id" class="form-control" v-model="id">
-                          <option value="">Select A Category</option>
-                          <option v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
-                      </select>
-                      <transition name="fade">
+                    <select name="course_category_id" class="form-control" v-model="id">
+                      <option value="">Select A Category</option>
+                      <option v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
+                    </select>
+                    <transition name="fade">
                       <p v-if="error.course_category_id" class="text-danger"> {{error.course_category_id[0]}}</p>
-                      </transition>
+                    </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Background Image </label>
                     <croppa v-model="myCroppa" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="false" :prevent-white-space="true">
                     </croppa>
                     <transition name="fade">
-                    <p v-if="error.background_image" class="text-danger"> {{error.background_image[0]}}</p>
+                      <p v-if="error.background_image" class="text-danger"> {{error.background_image[0]}}</p>
                     </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Video Link </label>
-                    <input type="text" name="video_link" class="form-control" placeholder="" >
+                    <input type="text" name="video_link" class="form-control" placeholder="">
                     <transition name="fade">
-                    <p v-if="error.video_link" class="text-danger"> {{error.video_link[0]}}</p>
+                      <p v-if="error.video_link" class="text-danger"> {{error.video_link[0]}}</p>
                     </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Duration </label>
-                    <input type="text" name="duration" class="form-control" placeholder="" >
+                    <input type="text" name="duration" class="form-control" placeholder="">
                     <transition name="fade">
-                    <p v-if="error.duration" class="text-danger"> {{error.duration[0]}}</p>
+                      <p v-if="error.duration" class="text-danger"> {{error.duration[0]}}</p>
                     </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Study Method </label>
-                    <input type="text" name="study_method" class="form-control" placeholder="" >
+                    <input type="text" name="study_method" class="form-control" placeholder="">
                     <transition name="fade">
-                    <p v-if="error.study_method" class="text-danger"> {{error.study_method[0]}}</p>
+                      <p v-if="error.study_method" class="text-danger"> {{error.study_method[0]}}</p>
                     </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Onshore Fee </label>
-                    <input type="text" name="onshore_fee" class="form-control" placeholder="" >
+                    <input type="text" name="onshore_fee" class="form-control" placeholder="">
                     <transition name="fade">
-                    <p v-if="error.onshore_fee" class="text-danger"> {{error.onshore_fee[0]}}</p>
+                      <p v-if="error.onshore_fee" class="text-danger"> {{error.onshore_fee[0]}}</p>
                     </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Offshore Fee </label>
-                    <input type="text" name="offshore_fee" class="form-control" placeholder="" >
+                    <input type="text" name="offshore_fee" class="form-control" placeholder="">
                     <transition name="fade">
-                    <p v-if="error.offshore_fee" class="text-danger"> {{error.offshore_fee[0]}}</p>
+                      <p v-if="error.offshore_fee" class="text-danger"> {{error.offshore_fee[0]}}</p>
                     </transition>
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-               <editor  name="description" :init="editor"></editor>
-               <transition name="fade">
-               <p v-if="error.description" class="text-danger"> {{error.description[0]}}</p>
-               </transition>
+                    <editor name="description" :init="editor"></editor>
+                    <transition name="fade">
+                      <p v-if="error.description" class="text-danger"> {{error.description[0]}}</p>
+                    </transition>
                   </div>
-
                   <b-btn class="mt-3 pull-right" variant="primary" type="submit">Create Course</b-btn>
                   <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideModal">Cancel</b-btn>
                 </form>
               </b-modal>
             </div>
           </div>
-
-                <table class="table trump-table table-hover">
+          <table class="table trump-table table-hover">
             <thead>
               <tr>
                 <th>Name</th>
                 <th>Action</th>
               </tr>
             </thead>
-           <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" @update="updateCourseOrder">
+            <draggable v-model="table_items" :element="'tbody'" v-if="table_items.length > 0" v-show="!loading" @update="updateCourseOrder">
               <tr v-for="(menu, index) in table_items" :key="menu.id">
-                <td>  {{ menu.name}}  </td>
+                <td> {{ menu.name}} </td>
                 <td>
                   <router-link :to="menu.course_category_id+'/course/'+menu.id">
-                  <b-button size="sm"  class="mr-1 btn-primary">
-                    View
-                  </b-button>
-                </router-link>
+                    <b-button size="sm" class="mr-1 btn-primary">
+                      View
+                    </b-button>
+                  </router-link>
                   <b-button size="sm" @click.stop="info(menu, index, $event.target)" class="mr-1 btn-success">
                     Edit
                   </b-button>
@@ -118,7 +123,7 @@
                   </b-button>
                 </td>
               </tr>
-             </draggable>
+            </draggable>
             <tbody v-else>
               <tr>
                 <td colspan="6">
@@ -128,67 +133,66 @@
               </tr>
             </tbody>
           </table>
-
-
         </b-card>
       </b-col>
     </b-row>
-
-
-     <!-- Info modal -->
+    <!-- Info modal -->
     <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
       <form @submit.prevent="editCourse" :row="modalInfo.row" ref="editCourseForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
-            <div class="form-group">
-                    <label for="">Name </label>
-                    <input type="text" name="name" class="form-control" ref="modalname" v-model="modalInfo.data.name" placeholder="" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Course Code </label>
-                    <input type="text" name="code" class="form-control" placeholder=""  v-model="modalInfo.data.code">
-                  </div>
-            <div class="form-group">
-                    <label for=""> Course Category</label>
-                      <select name="course_category_id" class="form-control" v-model="modalInfo.data.course_category_id" >
-                          <option value="">Select A Category</option>
-                          <option  v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
-                      </select>
-                  </div>
-                  <div class="form-group" v-if="modalInfo.data.background_image == null">
-                    <label for="">Image </label>
-                    <br>
-                    <croppa v-model="myCroppa" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
-                  </div>
-                  <div class="form-group" v-else>
-                    <label for="">Image </label> <br>
-                    <croppa v-model="myCroppa" :initial-image="img" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Video Link </label>
-                    <input type="text" name="video_link" class="form-control"  v-model="modalInfo.data.video_link" placeholder="" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Duration </label>
-                    <input type="text" name="duration" class="form-control"  v-model="modalInfo.data.duration" placeholder="" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Study Method </label>
-                    <input type="text" name="study_method" class="form-control"  v-model="modalInfo.data.study_method" placeholder="" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Onshore Fee  </label>
-                    <input type="text" name="onshore_fee" class="form-control"  v-model="modalInfo.data.onshore_fee" placeholder="" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Offshore Fee </label>
-                    <input type="text" name="offshore_fee" class="form-control"  v-model="modalInfo.data.offshore_fee" placeholder="" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Description</label>
-                   <editor  name="description" v-model="modalInfo.data.description" :init="editor"></editor>
-                  </div>
-
-                      <!-- <div class="form-group">
+        <div class="form-group">
+          <label for="">Name </label>
+          <input type="text" name="name" class="form-control" ref="modalname" v-model="modalInfo.data.name" placeholder="" required>
+        </div>
+        <div class="form-group">
+          <label for="">Course Code </label>
+          <input type="text" name="code" class="form-control" placeholder="" v-model="modalInfo.data.code">
+        </div>
+        <div class="form-group">
+          <label for="">Cricos Code </label>
+          <input type="text" name="cricos_code" class="form-control" placeholder="" v-model="modalInfo.data.cricos_code">
+        </div>
+        <div class="form-group">
+          <label for=""> Course Category</label>
+          <select name="course_category_id" class="form-control" v-model="modalInfo.data.course_category_id">
+            <option value="">Select A Category</option>
+            <option v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" v-if="modalInfo.data.background_image == null">
+          <label for="">Image </label>
+          <br>
+          <croppa v-model="myCroppa" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
+        </div>
+        <div class="form-group" v-else>
+          <label for="">Image </label> <br>
+          <croppa v-model="myCroppa" :initial-image="img" :width="360" :height="220" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :show-remove-button="true" :prevent-white-space="true"></croppa>
+        </div>
+        <div class="form-group">
+          <label for="">Video Link </label>
+          <input type="text" name="video_link" class="form-control" v-model="modalInfo.data.video_link" placeholder="" required>
+        </div>
+        <div class="form-group">
+          <label for="">Duration </label>
+          <input type="text" name="duration" class="form-control" v-model="modalInfo.data.duration" placeholder="" required>
+        </div>
+        <div class="form-group">
+          <label for="">Study Method </label>
+          <input type="text" name="study_method" class="form-control" v-model="modalInfo.data.study_method" placeholder="" required>
+        </div>
+        <div class="form-group">
+          <label for="">Onshore Fee </label>
+          <input type="text" name="onshore_fee" class="form-control" v-model="modalInfo.data.onshore_fee" placeholder="" required>
+        </div>
+        <div class="form-group">
+          <label for="">Offshore Fee </label>
+          <input type="text" name="offshore_fee" class="form-control" v-model="modalInfo.data.offshore_fee" placeholder="" required>
+        </div>
+        <div class="form-group">
+          <label for="">Description</label>
+          <editor name="description" v-model="modalInfo.data.description" :init="editor"></editor>
+        </div>
+        <!-- <div class="form-group">
           <label for="">Status</label>
           <select name="status" id="" v-model="modalInfo.data.status" class="form-control">
             <option value="0"> Disable</option>
@@ -199,37 +203,34 @@
         <b-btn class="mt-3 pull-right" style="margin-right:5px;" variant="default" @click="hideMenuModal">Cancel</b-btn>
       </form>
     </b-modal>
-
   </div>
 </template>
-
 <script>
   export default {
     data() {
       return {
-        error:'',
+        error: '',
         myCroppa: null,
-          categories:'',
-          category:'',
+        categories: '',
+        category: '',
         loading: true,
         table_items: [],
-        pages:[],
-        menu_table_fields: ['id','name','course_category_id','description','onshore_fee','offshore_fee','video_link','duration','study_method','order_by','status'],
+        pages: [],
+        menu_table_fields: ['id', 'name', 'course_category_id', 'description', 'onshore_fee', 'offshore_fee', 'video_link', 'duration', 'study_method', 'order_by', 'status'],
         modalInfo: {
           title: '',
           content: '',
           data: []
         },
-             editor:{
-                  plugins:['table','link','image code'],
-                  toolbar:['undo redo | link image |code'],
-                  setup: function (editor) {
-                editor.on('change', function () {
-                    editor.save();
-                });
-
-      },
-          image_title:true,
+        editor: {
+          plugins: ['table', 'link', 'image code'],
+          toolbar: ['undo redo | link image |code'],
+          setup: function(editor) {
+            editor.on('change', function() {
+              editor.save();
+            });
+          },
+          image_title: true,
           automatic_uploads: true,
           file_picker_types: 'image',
           // and here's our custom image picker
@@ -237,24 +238,24 @@
             var input = document.createElement('input');
             input.setAttribute('type', 'file');
             input.setAttribute('accept', 'image/*');
-                input.onchange = function() {
+            input.onchange = function() {
               var file = this.files[0];
               var reader = new FileReader();
-              reader.onload = function () {
+              reader.onload = function() {
                 var id = 'blobid' + (new Date()).getTime();
-                var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                var blobCache = tinymce.activeEditor.editorUpload.blobCache;
                 var base64 = reader.result.split(',')[1];
                 var blobInfo = blobCache.create(id, file, base64);
                 blobCache.add(blobInfo);
-                cb(blobInfo.blobUri(), { title: file.name });
+                cb(blobInfo.blobUri(), {
+                  title: file.name
+                });
               };
               reader.readAsDataURL(file);
             };
             input.click();
           }
         },
-
-
       }
     },
     created() {
@@ -263,32 +264,29 @@
       this.fetchCategories();
     },
     computed: {
-      id(){
-        return  parseInt(this.$route.params.id);
+      id() {
+        return parseInt(this.$route.params.id);
       },
-
       img() {
         if (this.modalInfo.data.background_image != null) {
           this.myCroppa.refresh()
-          return this.$root.baseUrl+'/public/images/courses/' + this.modalInfo.data.background_image
+          return this.$root.baseUrl + '/public/images/courses/' + this.modalInfo.data.background_image
         }
       }
-
     },
     methods: {
-      categoryName(){
+      categoryName() {
         let self = this;
         var c;
-        let cid =   parseInt(this.$route.params.id);
-        let url = this.$root.baseUrl + '/api/admin/course_category/get/'+cid;
+        let cid = parseInt(this.$route.params.id);
+        let url = this.$root.baseUrl + '/api/admin/course_category/get/' + cid;
         axios.get(url).then(function(response) {
-           self.category =  response.data.data.name
+            self.category = response.data.data.name
           })
           .catch(function(error) {
             self.$toastr.e('Something went wrong please try again.');
           });
-
-    },
+      },
       info(menu, index, button) {
         let self = this;
         let url = self.$root.baseUrl + '/api/admin/course/';
@@ -315,11 +313,11 @@
         var row_index = form.getAttribute('row');
         var formData = new FormData(form);
         formData.append('image', this.myCroppa.generateDataUrl())
-                    let id = parseInt(this.$route.params.id);
-        let url = self.$root.baseUrl + '/api/admin/course/edit/'+id;
+        let id = parseInt(this.$route.params.id);
+        let url = self.$root.baseUrl + '/api/admin/course/edit/' + id;
         axios.post(url, formData).then(function(response) {
             if (response.status === 200) {
-           self.table_items = response.data.data;
+              self.table_items = response.data.data;
               self.hideMenuModal();
               self.$swal({
                 // position: 'top-end',
@@ -375,23 +373,24 @@
         let url = self.$root.baseUrl + '/api/admin/course';
         formData.append('image', this.myCroppa.generateDataUrl())
         axios.post(url, formData).then(function(response) {
-              var menu = response.data.data;
-              var menu_data = {
-                id: menu.id,
-                name: menu.name,
-                background_image: menu.background_image,
-                video_link: menu.video_link,
-                duration: menu.duration,
-                order_by: menu.order_by,
-                status: menu.status,
-                code: menu.code,
-                description: menu.description,
-                study_method: menu.study_method,
-              }
-              self.table_items.push(menu_data);
-              $(form)[0].reset();
-              self.hideModal();
-              self.$toastr.s("A course has been added.");
+            var menu = response.data.data;
+            var menu_data = {
+              id: menu.id,
+              name: menu.name,
+              background_image: menu.background_image,
+              video_link: menu.video_link,
+              duration: menu.duration,
+              order_by: menu.order_by,
+              status: menu.status,
+              code: menu.code,
+              cricos_code: menu.cricos_code,
+              description: menu.description,
+              study_method: menu.study_method,
+            }
+            self.table_items.push(menu_data);
+            $(form)[0].reset();
+            self.hideModal();
+            self.$toastr.s("A course has been added.");
           })
           .catch(function(error) {
             self.error = '';
@@ -404,9 +403,9 @@
       fetchCourses() {
         let vm = this;
         let self = this;
-                    let id = parseInt(this.$route.params.id);
+        let id = parseInt(this.$route.params.id);
         let url = self.$root.baseUrl + '/api/admin/courses/';
-        axios.get(url+id+'/showByCategory')
+        axios.get(url + id + '/showByCategory')
           .then(function(response) {
             vm.table_items = response.data.data;
             vm.loading = false;
@@ -415,7 +414,6 @@
             console.log(error);
             vm.loading = false;
           });
-
       },
       fetchCategories() {
         let vm = this;
@@ -430,19 +428,17 @@
             console.log(error);
             vm.loading = false;
           });
-
       },
-     updateCourseOrder() {
+      updateCourseOrder() {
         var self = this;
         let url = self.$root.baseUrl + '/api/admin/course/update-order';
-      	axios.post(url, self.table_items)
-		.then(function (response) {
-			if (response.data.status === 1) {
-				self.$toastr.s("Order Updated");
-			}
-    })
-            },
-
+        axios.post(url, self.table_items)
+          .then(function(response) {
+            if (response.data.status === 1) {
+              self.$toastr.s("Order Updated");
+            }
+          })
+      },
       showModal() {
         this.$refs.myModalRef.show()
       },

@@ -28,7 +28,9 @@ Route::post('/course/country_filter','HomeController@filterFees');
 
 Route::get('/apply-now', 'HomeController@form')->name('apply_now');
 Route::post('/intake/year', 'HomeController@intakes');
-Route::post('/intake/date', 'HomeController@intake_date');\
+Route::post('/intake/date', 'HomeController@intake_date');
+
+Route::get('/galleries', 'GalleryCategoryController@getAllGalleries')->name('galleries');
 
 Route::get('/addEdu/{count}', function($count){
   return view('front.partials.addEdu')->with('count',$count);

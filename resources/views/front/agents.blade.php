@@ -55,12 +55,12 @@
                 <ul class="nav tab-line tab-line tab-line--3x border-bottom mb-4" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#Tabs_4-1" role="tab" aria-selected="true">
-                            Onshore
+                            Authorized Agent For Australia
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#Tabs_4-2" role="tab" aria-selected="true">
-                            OffShore
+                            Authorized International Agent
                         </a>
                     </li>
                 </ul>
@@ -77,15 +77,24 @@
                                             @php
                                                 $count++;
                                             @endphp
-                                            <div class="col-lg-4 col-md-6 marginTop-35 wow fadeInUp" data-wow-delay=".1s">
-                                                <div class="card height-100p shadow-v1 text-center">
-                                                    <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
+                                            <div class="col-lg-4 col-md-6 marginTop-35 wow fadeInUp position-relative" data-wow-delay=".1s">
+                                                <div class='business-card'>
+                                                  <div class='bc__logo'>
+                                                    {{-- <figure><i></i></figure> --}}
+                                                    <h2>{{$agent->first_name}} {{$agent->last_name}}</h2>
+                                                  </div>
+                                                  <div class='bc__tagline'>
+                                                    <p>{{$company->company_name}} <br>{{$company->location}}</p>
+                                                  </div>
+                                                </div>
+                                                <!-- <div class="card height-100p shadow-v1 text-center">
+                                                    {{-- <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
                                                         @if($agent->logo != null)
                                                         <img src="{{asset('/')}}public/images/agents/{{$agent->logo}}" alt="" class="img-fluid">
                                                         @else
                                                         <img src="{{asset('/')}}public/ahic/img/logo-black.png" alt="" class="">
                                                         @endif
-                                                    </span>
+                                                    </span> --}}
                                                     <div class="card-body">
                                                         <h4>
                                                             {{$agent->first_name}} {{$agent->last_name}}
@@ -97,7 +106,7 @@
                                                             {{$company->location}}
                                                         </p>
                                                     </div>
-                                                    <div class="card-footer border-top">
+                                                   {{--  <div class="card-footer border-top">
                                                         <ul class="list-inline mb-0">
                                                             <li class="list-inline-item mr-0 px-2">
                                                                 <a href="mailto:{{$agent->email}}">{{$agent->email}}</a><br>
@@ -112,11 +121,11 @@
                                                                 @endif
                                                             </li>
                                                         </ul>
-                                                        <button class="btn btn-primary mt-2 mapModal" data-address="{{$company->address}}">
+                                                        <button class="btn btn-primary mt-2 mapModal" data-companyname="{{ $company->company_name }}" data-address="{{$company->address}}">
                                                             View Map
                                                         </button>
-                                                    </div>
-                                                </div>
+                                                    </div> --}}
+                                                </div> -->
                                             </div> <!-- END col-lg-3 col-md-6-->
                                         @endif
                                     @endforeach
@@ -157,15 +166,24 @@
                             @foreach ($agent->documents as $company)
                             @if ($company->country != 'Australia')
                             <div class="col-lg-4 col-md-6 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
-                                <div class="card height-100p shadow-v1 text-center">
-                                    <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
+                                <div class='business-card'>
+                                  <div class='bc__logo'>
+                                    {{-- <figure><i></i></figure> --}}
+                                    <h2>{{$agent->first_name}} {{$agent->last_name}}</h2>
+                                  </div>
+                                  <div class='bc__tagline'>
+                                    <p>{{$company->company_name}} <br>{{$company->location}}</p>
+                                  </div>
+                                </div>
+                                <!-- <div class="card height-100p shadow-v1 text-center">
+                                    {{-- <span class="iconbox iconbox-lg rounded  mx-auto" data-offset-top-md="-25">
                                         @if($agent->logo != null)
                                         <img src="{{asset('/')}}public/images/agents/{{$agent->logo}}" alt="" class="img-fluid">
                                         @else
                                         <img src="{{asset('/')}}public/ahic/img/logo-black.png" alt="" class="">
                                         @endif
-                                    </span>
-                                    <div class="card-body">
+                                    </span> --}}
+                                    {{-- <div class="card-body">
                                         <h4>
                                             {{$agent->first_name}} {{$agent->last_name}}
                                         </h4>
@@ -175,8 +193,8 @@
                                         <p class="mb-0 ">
                                             {{$company->location}}
                                         </p>
-                                    </div>
-                                    <div class="card-footer border-top">
+                                    </div> --}}
+                                    {{-- <div class="card-footer border-top">
                                         <ul class="list-inline mb-0">
                                             <li class="list-inline-item mr-0 px-2">
                                                 <a href="mailto:{{$agent->email}}">{{$agent->email}}</a><br>
@@ -191,11 +209,11 @@
                                                 @endif
                                             </li>
                                         </ul>
-                                        <button class="btn btn-primary mt-2 mapModal" data-address="{{$company->address}}">
+                                        <button class="btn btn-primary mt-2 mapModal" data-companyname="{{ $company->company_name }}" data-address="{{$company->address}}">
                                             View Map
                                         </button>
-                                    </div>
-                                </div>
+                                    </div> --}}
+                                </div> -->
                             </div> <!-- END col-lg-3 col-md-6-->
                             @endif
                             @endforeach
@@ -251,6 +269,7 @@ $(document).ready(function() {
         e.preventDefault();
 
         var address = $(this).data('address');
+        var self = $(this);
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({ 'address': address }, function(results, status) {
 
@@ -259,90 +278,96 @@ $(document).ready(function() {
                 var longitude = results[0].geometry.location.lng();
 
                 var map;
+                var center = { lat: latitude, lng: longitude };
                 map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: latitude, lng: longitude },
+                    center: center,
                     zoom: 15,
-                    styles: [
-                        { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
-                        { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
-                        { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
-                        {
-                            featureType: 'administrative.locality',
-                            elementType: 'labels.text.fill',
-                            stylers: [{ color: '#d59563' }]
-                        },
-                        {
-                            featureType: 'poi',
-                            elementType: 'labels.text.fill',
-                            stylers: [{ color: '#d59563' }]
-                        },
-                        {
-                            featureType: 'poi.park',
-                            elementType: 'geometry',
-                            stylers: [{ color: '#263c3f' }]
-                        },
-                        {
-                            featureType: 'poi.park',
-                            elementType: 'labels.text.fill',
-                            stylers: [{ color: '#6b9a76' }]
-                        },
-                        {
-                            featureType: 'road',
-                            elementType: 'geometry',
-                            stylers: [{ color: '#38414e' }]
-                        },
-                        {
-                            featureType: 'road',
-                            elementType: 'geometry.stroke',
-                            stylers: [{ color: '#212a37' }]
-                        },
-                        {
-                            featureType: 'road',
-                            elementType: 'labels.text.fill',
-                            stylers: [{ color: '#9ca5b3' }]
-                        },
-                        {
-                            featureType: 'road.highway',
-                            elementType: 'geometry',
-                            stylers: [{ color: '#746855' }]
-                        },
-                        {
-                            featureType: 'road.highway',
-                            elementType: 'geometry.stroke',
-                            stylers: [{ color: '#1f2835' }]
-                        },
-                        {
-                            featureType: 'road.highway',
-                            elementType: 'labels.text.fill',
-                            stylers: [{ color: '#f3d19c' }]
-                        },
-                        {
-                            featureType: 'transit',
-                            elementType: 'geometry',
-                            stylers: [{ color: '#2f3948' }]
-                        },
-                        {
-                            featureType: 'transit.station',
-                            elementType: 'labels.text.fill',
-                            stylers: [{ color: '#d59563' }]
-                        },
-                        {
-                            featureType: 'water',
-                            elementType: 'geometry',
-                            stylers: [{ color: '#17263c' }]
-                        },
-                        {
-                            featureType: 'water',
-                            elementType: 'labels.text.fill',
-                            stylers: [{ color: '#515c6d' }]
-                        },
-                        {
-                            featureType: 'water',
-                            elementType: 'labels.text.stroke',
-                            stylers: [{ color: '#17263c' }]
-                        }
-                    ]
+                    // styles: [
+                    //     { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
+                    //     { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
+                    //     { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
+                    //     {
+                    //         featureType: 'administrative.locality',
+                    //         elementType: 'labels.text.fill',
+                    //         stylers: [{ color: '#d59563' }]
+                    //     },
+                    //     {
+                    //         featureType: 'poi',
+                    //         elementType: 'labels.text.fill',
+                    //         stylers: [{ color: '#d59563' }]
+                    //     },
+                    //     {
+                    //         featureType: 'poi.park',
+                    //         elementType: 'geometry',
+                    //         stylers: [{ color: '#263c3f' }]
+                    //     },
+                    //     {
+                    //         featureType: 'poi.park',
+                    //         elementType: 'labels.text.fill',
+                    //         stylers: [{ color: '#6b9a76' }]
+                    //     },
+                    //     {
+                    //         featureType: 'road',
+                    //         elementType: 'geometry',
+                    //         stylers: [{ color: '#38414e' }]
+                    //     },
+                    //     {
+                    //         featureType: 'road',
+                    //         elementType: 'geometry.stroke',
+                    //         stylers: [{ color: '#212a37' }]
+                    //     },
+                    //     {
+                    //         featureType: 'road',
+                    //         elementType: 'labels.text.fill',
+                    //         stylers: [{ color: '#9ca5b3' }]
+                    //     },
+                    //     {
+                    //         featureType: 'road.highway',
+                    //         elementType: 'geometry',
+                    //         stylers: [{ color: '#746855' }]
+                    //     },
+                    //     {
+                    //         featureType: 'road.highway',
+                    //         elementType: 'geometry.stroke',
+                    //         stylers: [{ color: '#1f2835' }]
+                    //     },
+                    //     {
+                    //         featureType: 'road.highway',
+                    //         elementType: 'labels.text.fill',
+                    //         stylers: [{ color: '#f3d19c' }]
+                    //     },
+                    //     {
+                    //         featureType: 'transit',
+                    //         elementType: 'geometry',
+                    //         stylers: [{ color: '#2f3948' }]
+                    //     },
+                    //     {
+                    //         featureType: 'transit.station',
+                    //         elementType: 'labels.text.fill',
+                    //         stylers: [{ color: '#d59563' }]
+                    //     },
+                    //     {
+                    //         featureType: 'water',
+                    //         elementType: 'geometry',
+                    //         stylers: [{ color: '#17263c' }]
+                    //     },
+                    //     {
+                    //         featureType: 'water',
+                    //         elementType: 'labels.text.fill',
+                    //         stylers: [{ color: '#515c6d' }]
+                    //     },
+                    //     {
+                    //         featureType: 'water',
+                    //         elementType: 'labels.text.stroke',
+                    //         stylers: [{ color: '#17263c' }]
+                    //     }
+                    // ]
 
+                });
+                var marker = new google.maps.Marker({
+                    position: center,
+                    map: map,
+                    title: self.data('companyname')
                 });
 
             }

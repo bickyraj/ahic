@@ -42,26 +42,41 @@
 <section class="padding-y-100 border-bottom border-white bg-light">
     <div class="container">
         <div class="row">
-            @foreach($downloads as $download)
-            <div class="col-lg-4 col-md-4 marginTop-30 wow fadeInUp" data-wow-delay=".1s">
+            <div class="col">
                 <div class="card height-100p shadow-v1 text-center">
-                    <!-- <img class="card-img-top" src="assets/img/262x230/5.jpg" alt=""> -->
                     <div class="card-body">
-                        <h4>
-                            {{$download->title}}
-                        </h4>
+                      <div class="table-responsive my-4">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th scope="col" class="font-weight-semiBold">SN</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <?php $n = 0; ?>
+                              @foreach($downloads as $download)
+                                <tr>
+                                  <th scope="row" class="font-weight-semiBold">{{ ++$n }}</th>
+                                  <td>{{$download->title}}</td>
+                                  <td>
+                                      @if($download->file)
+                                      <a download href="{{ url('') }}/public/files/{{ $download->file }}" target="_blank"> <button class="btn btn-primary mr-3 mb-3">Download Now</button> </a>
+                                      @else
+                                      <button class="btn btn-primary mr-3 mb-3 btn-disabled" disabled>
+                                          No File
+                                      </button>
+                                      @endif
+                                  </td>
+                                </tr>
+                              @endforeach
+                          </tbody>
+                        </table>
+                      </div>  
                     </div>
-                    <div class="card-footer border-top">
-                        @if($download->file)
-                        <a download href="{{ url('') }}/public/files/{{ $download->file }}" target="_blank"> <button class="btn btn-primary mr-3 mb-3">Download Now</button> </a>
-                        @else
-                        <button class="btn btn-primary mr-3 mb-3 btn-disabled" disabled>
-                            No File
-                        </button>
-                        @endif </div>
                 </div>
-            </div> <!-- END col-lg-3 col-md-6-->
-            @endforeach
+            </div>
         </div>
     </div>
 </section>

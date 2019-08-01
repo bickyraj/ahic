@@ -72,9 +72,9 @@
                 </p>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 my-2">
+            <div class="col-lg-3 col-md-6 my-2" style="padding: 0px;">
               <div class="text-md-right height-100p">
-                <h2 class="font-weight-bold text-primary mb-2" style="font-size: 13px;">
+                <h2 class="font-weight-bold text-primary mb-2" style="color: #ae0303 !important; font-size: 14px;">
                   {{ $course->duration }}
                   <!-- @php
                     $string = explode(' ',$course->duration);

@@ -100,6 +100,24 @@ const routes = [
         },
     },
     {
+        path: admin_url + 'gallery-categories',
+        component: require('./components/Admin/GalleryCategory/Index'),
+        meta: {
+            layout: 'admin',
+            breadcrumb: [
+                {
+                    name: 'Home',
+                    path: admin_url,
+                },
+                {
+                    name: 'Gallery Category'
+                }
+            ],
+            middlewareAuth: true,
+            roleId: 1
+        },
+    },
+    {
         path: admin_url + 'menus',
         component: require('./components/Admin/Menu/Index'),
         meta: {

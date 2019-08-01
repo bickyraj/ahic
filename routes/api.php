@@ -63,6 +63,13 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('edit-role', 'RoleController@edit');
     Route::delete('role/{id}', 'RoleController@destroy');
 
+    // Role functions.
+    Route::get('gallery-categories', 'GalleryCategoryController@index');
+    Route::get('gallery-category/{id}', 'GalleryCategoryController@show');
+    Route::post('gallery-category', 'GalleryCategoryController@store');
+    Route::post('edit-gallery-category', 'GalleryCategoryController@edit');
+    Route::delete('gallery-category/{id}', 'GalleryCategoryController@destroy');
+
     // Enq functions.
     Route::get('enquiries', 'EnquiryController@index');
     Route::get('enquiry/{id}', 'EnquiryController@show');
@@ -105,6 +112,7 @@ Route::post('/form/submit', 'FormController@store');
     Route::post('gallery', 'GalleryController@store');
     Route::post('gallery/update-order', 'GalleryController@updateOrder');
     Route::delete('gallery/{id}', 'GalleryController@destroy');
+    Route::post('gallery/{id}/change-category', 'GalleryController@changeCategory');
 
     // Contact functions.
     Route::get('contact', 'ContactController@index');

@@ -4,7 +4,7 @@
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <div class="home-carousel carousel-inner">
         @foreach ($sliders as $slider)
-        <div class="carousel-item padding-y-80 height-80vh @if($sliders[0] == $slider) active @endif">
+        <div class="carousel-item padding-y-20 height-70vh @if($sliders[0] == $slider) active @endif">
             <div class="bg-absolute" data-dark-overlay="5" style="background:url('{{asset('/')}}public/images/sliders/{{$slider->image}}') no-repeat"></div>
             <div class="container">
                 <div class="row">
@@ -42,48 +42,43 @@
     <p> We will be back to you soon.</p>
 </div>
 @if (isset($header))
-<section class="padding-y-100">
+<section class="padding-y-30 bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
                 <div class="row align-items-center">
-                    <div class="col-md-6 my-5">
+                    {{-- <div class="col-md-6 my-5">
                         <div class="position-relative">
                             @if ($header['image'])
                             <img class="rounded w-100" src="{{asset('/')}}public/images/cms/{{$header['image']}}" alt="">
                             @endif
                         </div>
-                    </div>
-                    <div class="col-md-6 mt-4">
+                    </div> --}}
+                    <div class="col mt-1">
                         <h2>
-                            <small class="d-block text-gray">
+                            <small class="d-block" style="color: #ae0303;">
                                 @if ($header['title'])
                                 {{$header['title']}}
                                 @endif
                             </small>
                             @if ($header['sub_title'])
-                            @php
-                            $string = explode(" ",$header['sub_title'],2);
-                            @endphp
-                            <span class="text-primary">{{$string[0]}}</span>
-                            @if (isset($string[1]))
-                            {{$string[1]}}
-                            @endif
+                            <span class="text-primary">{{ $header['sub_title'] }}</span>
                             @endif
                         </h2>
                         <p class="my-4">
                             @if ($header['description'])
-                            {{ str_limit(strip_tags($header['description']), 250) }}
+                            {{-- {{ str_limit(strip_tags($header['description']), 500) }} --}}
+                            <?= $header['description']; ?>
                             @endif
                         </p>
-                        <a href="{{route('welcome')}}" class="btn btn-outline-primary">
+                        {{-- <a href="{{route('welcome')}}" class="btn btn-outline-primary">
                             Read More
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 mt-5 mt-md-0">
-                <div class="card shadow-v2 z-index-5" data-offset-top-xl="-160">
+                <div class="card shadow-v2 z-index-5" data-offset-top-xl="-83">
                     <div class="card-header bg-primary text-white border-bottom-0">
                         <span class="lead font-semiBold text-uppercase">
                             Enquiry Form
@@ -150,38 +145,45 @@
 </section>
 @endif
 @if (isset($courses) && count($courses) > 0 )
-<section class="padding-y-100 bg-light">
+<section class="padding-y-30 bg-light bg-light">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center mb-5">
-                <h2 class="mb-4">
+                <div class="ribbon">
                     Courses
-                </h2>
-                <div class="width-3rem height-4 rounded bg-dark mx-auto"></div>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+                {{-- <div class="width-3rem height-4 rounded bg-dark mx-auto"></div> --}}
             </div>
             <div class="col-12">
                 <div class="owl-carousel arrow-on-hover" data-state-outer-class="py-3" data-space="30" data-arrow="true" data-loop="true">
                     @foreach ($courses as $course)
-                    <div class="card shadow-v3 hover:parent" style="min-height: 460px;">
+                    <div class="card shadow-v3 hover:parent">
                         @if ($course->background_image)
                         <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
                         @else
                         <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
                         @endif
-                        <div class="card-body">
+                        <div class="card-body theme-course-card-body">
+                            <div class="theme-ribbon-right"></div>
                             <h4>
                                 <!-- {{ str_limit($course->name, 28) }} -->
                                 {{ $course->name }}
                             </h4>
                             <p class="text-primary">
-                                {{$course->category->name or ''}}
+                              {{$course->cricos_code or 'Cricos Code'}}
                             </p>
                             <!-- <p class="mb-0">
                                 {{ str_limit(strip_tags($course->description), 180) }}
                             </p> -->
                         </div>
                         <div class="d-flex justify-content-between align-items-center border-top position-relative p-4">
-                            <span class="d-inline-block bg-primary text-white px-4 py-1 rounded-pill">
+                            <div class="theme-ribbon-bottom-left"></div>
+                            <span class="d-inline-block px-4 py-1">
+                                <i class="far fa-clock" style="color: #a7a7a7;"></i>
                                 @php
                                 $string = explode(' ',$course->duration);
                                 $slug = str_replace(' ', '_', $course->name);
@@ -193,7 +195,7 @@
                                 {{$string[1]}}
                                 @endif
                             </span>
-                            <a href="{{route('course',$slug)}}" class="position-absolute btn btn-primary btn-m left-20 hover:show">
+                            <a href="{{route('course',$slug)}}" class="btn btn-primary btn-sm left-20">
                                 View Details
                             </a>
                         </div>
@@ -211,7 +213,7 @@
 </section>
 @endif
 @if (isset($lc) && isset($rc))
-<section style="margin-bottom: 50px;">
+<section>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 bg-cover bg-center text-white padding-y-80" style="background:url('{{asset('/')}}public/images/cms/{{$lc->image}}') no-repeat">
@@ -241,14 +243,21 @@
 </section>
 @endif
 @if (isset($news) && count($news) > 0 )
-<section class="padding-y-100 bg-light-v2">
+<section class="padding-y-30 bg-light">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="mb-4">
+                {{-- <h2 class="mb-2 home-h2">
                     Latest AHIC News
-                </h2>
-                <div class="width-3rem height-4 rounded bg-dark mx-auto"></div>
+                </h2> --}}
+                <div class="ribbon">
+                    Latest AHIC News
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+                {{-- <div class="width-3rem height-4 rounded bg-dark mx-auto"></div> --}}
             </div>
         </div> <!-- END row-->
         <div class="row mt-4">
@@ -286,17 +295,17 @@
 </section>
 @endif
 @if (isset($testimonials) && count($testimonials) > 0 )
-<section class="bg-light testimonial-section pt-3">
+<section class="padding-y-30 testimonial-section">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center mb-3">
-                <h2 class="mb-4">
+                <h2 class="mb-2 home-h2">
                     Testimonials
                 </h2>
-                <div class="width-3rem height-4 rounded bg-dark mx-auto"></div>
+                {{-- <div class="width-3rem height-4 rounded bg-dark mx-auto"></div> --}}
             </div>
             <div class="col-12">
-                <div class="owl-carousel arrow-on-hover front-testimonial-carousel" data-interval="5000" data-state-outer-class="py-5" data-items="1" data-space="30" data-arrow="true" data-auto-paly="false" data-loop="true">
+                <div class="owl-carousel arrow-on-hover front-testimonial-carousel" data-interval="5000" data-state-outer-class="py-3" data-items="1" data-space="30" data-arrow="true" data-auto-paly="false" data-loop="true">
                     @foreach ($testimonials as $testimonial)
                     <div class="card shadow-v3 hover:parent">
                         @if ($testimonial->image)
@@ -324,23 +333,37 @@
     </div> <!-- END container-->
 </section>
 @endif
-@if (isset($gallery) && count($gallery) > 0 )
-<section class="paddingTop-100">
+@if (isset($gallery_category) && count($gallery_category) > 0)
+<section class="paddingTop-50">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="mb-4">
+                {{-- <h2 class="mb-2 home-h2">
                     AHIC Gallery
-                </h2>
-                <div class="width-3rem height-4 rounded bg-dark mx-auto"></div>
+                </h2> --}}
+                <div class="ribbon">
+                    AHIC Gallery
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+                {{-- <div class="width-3rem height-4 rounded bg-dark mx-auto"></div> --}}
             </div>
         </div> <!-- END row-->
-        <div class="row marginTop-60">
+        <div class="row">
+            <div class="col">
+                <a href="{{route('galleries')}}" class="btn btn-primary" style="float: right;">
+                    Go To Gallery
+                </a>
+            </div>
+        </div>
+        <div class="row marginTop-20">
             <div class="owl-carousel arrow-edge arrow-black" data-items="4" data-arrow="true" data-tablet-items="2" data-mobile-items="1">
-                @foreach($gallery as $image)
-                <div class="hover:parent  bg" style="background:url('{{asset('/')}}public/images/gallery/{{$image->image}}')">
+                @foreach($gallery_category as $category)
+                <div class="hover:parent  bg" style="background:url('{{asset('/')}}public/images/gallery/{{$category['latest_gallery']['image']}}')">
                     <div class="card-img-overlay  transition-0_3 flex-center bg-black-0_7 hover:show">
-                        <a href="{{asset('/')}}public/images/gallery/{{$image->image}}" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
+                        <a href="{{asset('/')}}public/images/gallery/{{$category['latest_gallery']['image']}}" data-fancybox="gallery1" class="iconbox bg-white ti-zoom-in text-primary"></a>
                     </div>
                 </div>
                 @endforeach
