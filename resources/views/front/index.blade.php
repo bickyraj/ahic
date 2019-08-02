@@ -42,7 +42,7 @@
     <p> We will be back to you soon.</p>
 </div>
 @if (isset($header))
-<section class="padding-y-30 bg-light">
+<section class="padding-y-30">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -305,7 +305,7 @@
                 {{-- <div class="width-3rem height-4 rounded bg-dark mx-auto"></div> --}}
             </div>
             <div class="col-12">
-                <div class="owl-carousel arrow-on-hover front-testimonial-carousel" data-interval="5000" data-state-outer-class="py-3" data-items="1" data-space="30" data-arrow="true" data-auto-paly="false" data-loop="true">
+                <div class="owl-carousel arrow-on-hover front-testimonial-carousel" data-autospeed="5000" data-state-outer-class="py-3" data-items="1" data-space="30" data-autoplay="true" data-autoplayhoverpause="true" data-arrow="true" data-loop="true">
                     @foreach ($testimonials as $testimonial)
                     <div class="card shadow-v3 hover:parent">
                         @if ($testimonial->image)
@@ -402,11 +402,6 @@
 <script type="text/javascript">
 // process enq
 $(function() {
-  $(".front-testimonial-carousel").carousel({
-    interval : 30000,
-    pause: "hover",
-    stopOnHover : true
-  });
 });
 $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
 $('.enquiry_btn').click(function(event) {

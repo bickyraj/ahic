@@ -38,7 +38,7 @@
 
 
 
-     <div class="py-5 shadow-v2 position-relative">
+     <div class="padding-y-30 shadow-v2 position-relative">
        <div class="container">
          <div class="row">
 
@@ -99,7 +99,7 @@
      </div>
 
 
-    <section class="padding-y-100 bg-light-v2">
+    <section class="padding-y-30 bg-light-v2">
     <div class="container">
       <div class="row">
        <div class="col-12 text-center mb-5">

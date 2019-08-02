@@ -39,7 +39,7 @@
         </div>
     </div>
 </div>
-<section class="padding-y-100 border-bottom border-white bg-light">
+<section class="padding-y-30 border-bottom border-white bg-light">
     <div class="container">
         <div class="row">
             <div class="col">

@@ -48,7 +48,7 @@
         </div>
     </div>
 </div>
-<section class="padding-y-100 border-bottom border-white bg-light">
+<section class="padding-y-30 border-bottom border-white bg-light">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -81,10 +81,10 @@
                                                 <div class='business-card'>
                                                   <div class='bc__logo'>
                                                     {{-- <figure><i></i></figure> --}}
-                                                    <h2>{{$agent->first_name}} {{$agent->last_name}}</h2>
+                                                    <h2>{{$company->company_name}}</h2>
                                                   </div>
                                                   <div class='bc__tagline'>
-                                                    <p>{{$company->company_name}} <br>{{$company->location}}</p>
+                                                    <p>{{$agent->first_name}} {{$agent->last_name}}<br>{{$company->location}}</p>
                                                   </div>
                                                 </div>
                                                 <!-- <div class="card height-100p shadow-v1 text-center">
@@ -169,10 +169,10 @@
                                 <div class='business-card'>
                                   <div class='bc__logo'>
                                     {{-- <figure><i></i></figure> --}}
-                                    <h2>{{$agent->first_name}} {{$agent->last_name}}</h2>
+                                    <h2>{{$company->company_name}}</h2>
                                   </div>
                                   <div class='bc__tagline'>
-                                    <p>{{$company->company_name}} <br>{{$company->location}}</p>
+                                    <p>{{$agent->first_name}} {{$agent->last_name}}<br>{{$company->location}}</p>
                                   </div>
                                 </div>
                                 <!-- <div class="card height-100p shadow-v1 text-center">

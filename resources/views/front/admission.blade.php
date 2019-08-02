@@ -1,7 +1,12 @@
 <?php 
   $ip = $_SERVER['REMOTE_ADDR'];
   $ipdetails = json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
-  $country_abbr = strtoupper($ipdetails->country);
+  if (isset($ipdetails) && !empty($ipdetails)) {
+    $country_abbr = "AU";
+  } else {
+
+    $country_abbr = strtoupper($ipdetails->country);
+  }
 
   function code_to_country( $code ){
 
@@ -310,7 +315,7 @@
     </div>
   </div>
 
-  <section class="padding-y-100 border-bottom border-light">
+  <section class="padding-y-30 border-bottom border-light">
   <div class="container">
     <div class="row">
       <div class="col-12">
