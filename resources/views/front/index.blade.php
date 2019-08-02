@@ -4,7 +4,7 @@
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <div class="home-carousel carousel-inner">
         @foreach ($sliders as $slider)
-        <div class="carousel-item padding-y-20 height-70vh @if($sliders[0] == $slider) active @endif">
+        <div class="carousel-item padding-y-20 height-60vh @if($sliders[0] == $slider) active @endif">
             <div class="bg-absolute" data-dark-overlay="5" style="background:url('{{asset('/')}}public/images/sliders/{{$slider->image}}') no-repeat"></div>
             <div class="container">
                 <div class="row">
