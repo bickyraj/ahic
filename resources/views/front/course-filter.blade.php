@@ -1,6 +1,6 @@
 <?php  
   // echo "<pre>";
-  // print_r($courses);
+  // print_r($keyword);
 ?>
 @extends('layouts.master')
 
@@ -75,50 +75,18 @@
   </div>
 </section>
 
-<!-- <section class="py-3 position-relative shadow-v1">
-  <div class="container">
-    <form class="row">
-      <div class="col-md-9 my-2"></div>
-      <div class="col-md-3 my-2">
-        <ul class="list-inline">
-          <li class="list-inline-item my-2">
-            <select class="form-control" onchange="changeCategory(this)">
-              <option selected>Select Category</option>
-              @foreach ($categories as $category)
-                @php
-                  $stripped = str_replace(' ', '_', $category->name);
-                @endphp
-              <option
-                    @if ($stripped == \Request::segment(2))
-                      selected
-                    @endif
-                      value="{{$stripped}}">
-                      {{$category->name}}
-             </option>
-            @endforeach
-
-            </select>
-          </li>
-        </ul>
-      </div>
-    </form> END row
-  </div> END container
-</section> -->
-
-
-
-
 <section class="padding-y-30 bg-light-v2">
   <div class="container">
     <div class="col-md-12">
-      @forelse ($categories as $category)
-        <h1 class="pt-4">{{$category->name}}</h1>
+        <h1 class="pt-4">Results for '{{$keyword}}'</h1>
         <div class="row mb-4">
-          @if (count($category->courses) > 0 )
+          @if (count($courses) > 0 )
             @else
-              <p> No matcing courses were found. </p>
+              <div class="col">
+                <p> No matcing courses were found. </p>
+              </div>
           @endif
-          @foreach ($category->courses as $course)
+          @foreach ($courses as $course)
             @php
               $stripped = str_replace(' ', '_', $course->name);
             @endphp
@@ -166,10 +134,6 @@
           @endforeach
 
         </div> <!-- END row-->
-
-      @empty
-
-      @endforelse
     </div>
 
   </div> <!-- END container-->

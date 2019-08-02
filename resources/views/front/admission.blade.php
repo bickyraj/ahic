@@ -1,7 +1,7 @@
 <?php 
   $ip = $_SERVER['REMOTE_ADDR'];
   $ipdetails = json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
-  if (isset($ipdetails) && !empty($ipdetails)) {
+  if (!isset($ipdetails->country) && empty($ipdetails->country)) {
     $country_abbr = "AU";
   } else {
 
