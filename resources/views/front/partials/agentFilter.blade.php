@@ -19,7 +19,7 @@ $agent = $company->agent;
             @if($agent->logo != null)
             <img src="{{asset('/')}}public/images/agents/{{$agent->logo}}" alt="" class="img-fluid">
             @else
-            <img src="{{asset('/')}}public/ahic/img/logo-black.png" alt="" class="">
+            <img src="{{asset('/')}}public/front/img/logo-black.png" alt="" class="">
             @endif
         </span> --}}
         {{-- <div class="card-body">

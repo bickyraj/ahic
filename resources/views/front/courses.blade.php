@@ -127,7 +127,7 @@
                   @if ($course->background_image)
                   <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
                   @else
-                  <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+                  <img class="card-img-top" src="{{asset('/')}}public/front/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
                   @endif
                   <div class="card-body theme-course-card-body">
                       <div class="theme-ribbon-right"></div>

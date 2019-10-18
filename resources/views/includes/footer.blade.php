@@ -18,7 +18,7 @@
         <div class="row">
 
           <div class="col-lg-5 col-md-5 mt-3">
-           <!-- <img src="{{asset('/')}}public/ahic/img/logo-black.png" alt="Logo" width="55"> {{$contact['name']}} -->
+           <!-- <img src="{{asset('/')}}public/front/img/logo-black.png" alt="Logo" width="55"> {{$contact['name']}} -->
            <h4 class="h5 text-white">Australian Harbour International College</h4>
            <div class="margin-y-20">
              <p>

@@ -112,7 +112,7 @@
                 <div class="col-md-12 company-profile">
                   <div class="company-profile-pic">
                     <img v-if="agent.logo" :src="$root.baseUrl+'/public/images/agents/'+agent.logo" alt="" class="img-fluid">
-                    <img v-else :src="$root.baseUrl+'/public/ahic/img/logo-black.png'" alt="" style="max-height:100px">
+                    <img v-else :src="$root.baseUrl+'/public/front/img/logo-black.png'" alt="" style="max-height:100px">
                   </div>
                     <ul class="company-profile-ul">
                       <li> {{ company.company_name }} </li>

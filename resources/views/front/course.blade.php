@@ -96,7 +96,7 @@
 
             <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="" class="img-fluid">
           @else
-            <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+            <img class="card-img-top" src="{{asset('/')}}public/front/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
           @endif
             <!-- <iframe src="https://www.youtube.com/embed/nrJtHemSPW4?rel=0"></iframe> -->
           </div>

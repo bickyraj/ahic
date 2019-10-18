@@ -4,7 +4,7 @@
             <div class="navbar-brand">
                 <a class="logo-default" href="{{route('home')}}">
                     <div class="" style="float:left;">
-                        <img alt="" src="{{asset('/')}}public/ahic/img/logo-black.png" class="responsive" width="60">
+                        <img alt="" src="{{asset('/')}}public/front/img/logo-black.png" class="responsive" width="60">
                     </div>
                     <div class="marginTop-10" style="float:left; padding-left:15px;">
                         <div class="">

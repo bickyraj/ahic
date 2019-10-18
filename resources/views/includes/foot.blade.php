@@ -1,6 +1,6 @@
-<script src="{{asset('/')}}public/ahic/js/vendors.bundle.js"></script>
-<script src="{{asset('/')}}public/ahic/js/scripts.js"></script>
-<script src="{{asset('/')}}public/ahic/js/bootstrap-notify.min.js"></script>
+<script src="{{asset('/')}}public/front/js/vendors.bundle.js"></script>
+<script src="{{asset('/')}}public/front/js/scripts.js"></script>
+<script src="{{asset('/')}}public/front/js/bootstrap-notify.min.js"></script>
 <script src="{{asset('/')}}public/modal/jquery.modal.min.js"> </script>
 
 @yield('script')

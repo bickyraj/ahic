@@ -104,7 +104,7 @@ export default {
             email: "",
             password: "" ,
             remember_me: "",
-            logo: this.$root.baseUrl + '/public/ahic/img/logo-black.png',
+            logo: this.$root.baseUrl + '/public/front/img/logo-black.png',
             loginBg: this.$root.baseUrl + '/public/img/login-bg.jpg',
             appstore: this.$root.baseUrl + '/public/img/appstore.png',
             applestore: this.$root.baseUrl + '/public/img/applestore.jpg',

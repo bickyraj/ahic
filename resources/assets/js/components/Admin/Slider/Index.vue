@@ -10,7 +10,7 @@
             </div>
             <div class="caption card-title-actions">
               <b-button @click="showModal" variant="primary" class="btn btn-sm green pull-right">Add New Slider</b-button>
-              <b-modal class="ess-modal" ref="myModalRef" hide-footer title="Add New Slider">
+              <b-modal class="ess-modal" ref="myModalRef" size="lg" hide-footer title="Add New Slider">
                 <form @submit.prevent="addSlider" ref="addSliderForm" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="">Title </label>
@@ -112,7 +112,7 @@
       </b-col>
     </b-row>
     <!-- Info modal -->
-    <b-modal class="ess-modal" id="modalInfo" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
+    <b-modal class="ess-modal" id="modalInfo" size="lg" ref="editModal" hide-footer @hide="resetModal" :title="modalInfo.title">
       <form @submit.prevent="editSlider" :row="modalInfo.row" ref="editSliderForm">
         <input type="hidden" name="id" :value="modalInfo.data.id">
         <div class="form-group">
@@ -165,8 +165,9 @@
           data: []
         },
         editor: {
-          plugins: ['table', 'link', 'image code'],
-          toolbar: ['undo redo | link image |code'],
+         plugins: 'image code paste textcolor colorpicker textpattern lists',
+         toolbar: 'fontselect fontsizeselect undo redo | link image | code | formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | removeformat',
+          height: 200,
           setup: function(editor) {
             editor.on('change', function() {
               editor.save();

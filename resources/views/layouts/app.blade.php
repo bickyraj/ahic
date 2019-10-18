@@ -14,9 +14,9 @@
     <title>AHIC - Australian Harbour International College | Admin</title>
 
     <!-- Favicon and Apple Icons-->
-    <link rel="icon" type="image/x-icon" href="{{ url('') }}/public/ahic/img/favicon/favicon.ico">
-    <link rel="shortcut icon" href="{{ url('') }}/public/ahic/img/favicon/114x114.png">
-    <link rel="apple-touch-icon-precomposed" href="{{ url('') }}/public/ahic/img/favicon/96x96.png">
+    <link rel="icon" type="image/x-icon" href="{{ url('') }}/public/front/img/favicon/favicon.ico">
+    <link rel="shortcut icon" href="{{ url('') }}/public/front/img/favicon/114x114.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ url('') }}/public/front/img/favicon/96x96.png">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">

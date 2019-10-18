@@ -1,9 +1,9 @@
 @if ($contact)
 
 
-    <header class="site-header bg-dark text-white-0_5">
+    <header class="site-header bg-dark text-white-0_5" style="height: 40px;">
       <div class="container">
-        <div class="row align-items-center justify-content-between mx-0">
+        <div class="row align-items-center justify-content-between mx-0" style="line-height: 0px;">
           <ul class="list-inline d-none d-lg-block mb-0 theme-header-social-ul">
             <li class="list-inline-item mr-3">
              <div class="d-flex align-items-center">

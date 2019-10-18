@@ -9,14 +9,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 mx-auto  text-white">
-                        <h1 class="display-lg-4 font-weight-bold text-primary animated slideInUp">
+                        {{-- <h1 class="display-lg-4 font-weight-bold text-primary animated slideInUp">
                             {{$slider->title}}
-                        </h1>
-                        <h4 class="display-lg-4 font-weight-bold animated slideInUp">
+                        </h1> --}}
+                        {{-- <h4 class="display-lg-4 font-weight-bold animated slideInUp">
                             {{$slider->sub_title}}
-                        </h4>
+                        </h4> --}}
                         <p class="lead animated fadeInUp">
-                            {{ strip_tags($slider->description) }}
+                            {{-- {{ strip_tags($slider->description) }} --}}
+                            <?= $slider->description; ?>
                         </p>
                         <!-- <a href="#" class="btn btn-primary mt-3 mx-2 animated slideInUp">Learn More</a> -->
                     </div>
@@ -165,7 +166,7 @@
                         @if ($course->background_image)
                         <img class="card-img-top" src="{{asset('/')}}public/images/courses/{{$course->background_image}}" alt="">
                         @else
-                        <img class="card-img-top" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
+                        <img class="card-img-top" src="{{asset('/')}}public/front/img/360x220/accounting-2.jpg" alt="" class="img-fluid">
                         @endif
                         <div class="card-body theme-course-card-body">
                             <div class="theme-ribbon-right"></div>
@@ -268,7 +269,7 @@
             $slug = str_replace(' ', '_', $new->title);
             @endphp
             <div class="col-lg-4 col-md-6 marginTop-30 wow slideInUp" data-wow-delay=".1s">
-                <div class="card padding-30 shadow-v1" style="min-height: 500px !important;">
+                <div class="card padding-30 shadow-v1 theme-news-card" style="min-height: 500px !important;">
                     <p class="text-primary">
                         {{$newdate}}
                     </p>
@@ -311,7 +312,7 @@
                         @if ($testimonial->image)
                         <img class="testimonial-img" src="{{asset('/')}}public/images/testimonials/{{$testimonial->image}}" alt="">
                         @else
-                        <img class="testimonial-img" src="{{asset('/')}}public/ahic/img/360x220/accounting-2.jpg" alt="">
+                        <img class="testimonial-img" src="{{asset('/')}}public/front/img/360x220/accounting-2.jpg" alt="">
                         @endif
                         <div class="card-body">
                             <p class="mb-0" style="text-align: center !important;">

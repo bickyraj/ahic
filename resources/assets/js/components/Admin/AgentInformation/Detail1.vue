@@ -113,7 +113,7 @@ overflow-y:scroll;
                 <div class="col-md-2">
 
                   <img  v-if="agent.logo" :src="$root.baseUrl+'/public/images/agents/'+agent.logo" alt="" class="img-fluid">
-                  <img  v-else :src="$root.baseUrl+'/public/ahic/img/logo-black.png'" alt="" style="max-height:100px">
+                  <img  v-else :src="$root.baseUrl+'/public/front/img/logo-black.png'" alt="" style="max-height:100px">
 
                   </div>
                   <hr>

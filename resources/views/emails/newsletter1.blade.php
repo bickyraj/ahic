@@ -153,7 +153,7 @@
 									<div class="contentEditableContainer contentImageEditable">
 					                	<div class="contentEditable" align='center' >
                                             <!-- <a href="{{ url('/') }}" target="_blank"><img src="https://demo.stripo.email/content/guids/63e2d676-6c40-455c-98b7-4e304a4e8b2a/images/55711537086452503.png" alt="logo" style="display: block;" width="132"></a> -->
-                                            <a href="{{ url('/') }}" target="_blank"><img src="{{url('')}}/public/ahic/img/logo-black.png" alt="logo" style="display: block;" width="132"></a>
+                                            <a href="{{ url('/') }}" target="_blank"><img src="{{url('')}}/public/front/img/logo-black.png" alt="logo" style="display: block;" width="132"></a>
 					                	</div>
 					              	</div>
 								</td>
