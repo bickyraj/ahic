@@ -19,12 +19,17 @@
                             {{-- {{ strip_tags($slider->description) }} --}}
                             <?= $slider->description; ?>
                         </p>
-                        <!-- <a href="#" class="btn btn-primary mt-3 mx-2 animated slideInUp">Learn More</a> -->
+                        @if(isset($slider->link) && !empty($slider->link))
+                            <a href="{{ $slider->link }}" class="btn btn-primary mt-3 mx-2 slider-link-button">Learn More</a>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
         @endforeach
+    </div>
+    <div class="sub-banner">
+        Harbour College <i class="fas fa-angle-double-right"></i> Where Seekers Become Achievers
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <i class="ti-angle-left iconbox bg-black-0_5 hover:primary"></i>
@@ -334,7 +339,7 @@
     </div> <!-- END container-->
 </section>
 @endif
-@if (isset($gallery_category) && count($gallery_category) > 0)
+<!-- @if (isset($gallery_category) && count($gallery_category) > 0)
 <section class="paddingTop-50">
     <div class="container-fluid">
         <div class="row">
@@ -351,7 +356,7 @@
                 </div>
                 {{-- <div class="width-3rem height-4 rounded bg-dark mx-auto"></div> --}}
             </div>
-        </div> <!-- END row-->
+        </div> END row
         <div class="row">
             <div class="col">
                 <a href="{{route('galleries')}}" class="btn btn-primary" style="float: right;">
@@ -369,10 +374,10 @@
                 </div>
                 @endforeach
             </div>
-        </div> <!-- END row-->
-    </div> <!-- END container-->
+        </div> END row
+    </div> END container
 </section>
-@endif
+@endif -->
 @endsection
 @section('style')
 <style media="screen">

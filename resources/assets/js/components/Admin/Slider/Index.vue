@@ -46,6 +46,10 @@
                   <p v-if="error.image" class="text-danger"> {{error.image[0]}}</p>
                   </transition>
                   <div class="form-group">
+                    <label for="">Link</label>
+                    <input type="text" name="link" class="form-control">
+                  </div>
+                  <div class="form-group">
                     <label> Description </label>
                     <editor name="description" :init="editor"></editor>
                     <transition name="fade">
@@ -132,6 +136,10 @@
           <br>
           <croppa v-model="myCroppa" :width="332" :initial-image="img" :height="126" placeholder="Choose an image" :placeholder-font-size="0" :disabled="false" :quality="5" :prevent-white-space="true">
           </croppa>
+        </div>
+        <div class="form-group">
+          <label for="">Link</label>
+          <input type="text" v-model="modalInfo.data.link" name="link" class="form-control">
         </div>
         <div class="form-group">
           <label> Description </label>

@@ -584,3 +584,24 @@ body {
   font-size: 18px;
 }
 /*end of enws card*/
+
+.slider-link-button {
+  background-color: transparent !important;
+  border: 2px solid red !important;
+  border-radius: 50px !important;
+  color: #ffffff !important;
+  padding: 4px 25px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.sub-banner {
+  color: white;
+  background-color: #255397;
+  text-align: center;
+  padding: 10px 0px;
+  font-size: 26px;
+  font-weight: bold;
+  font-style: italic;
+  letter-spacing: 1px;
+}
