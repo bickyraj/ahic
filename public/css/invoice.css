@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'Roboto-Light';
+  src: url("roboto/Roboto-Light.ttf");
+}
+
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url("roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url("open-sans/OpenSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url("helvetica-neue/HelveticaNeue-Roman.otf");
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: url("segoe-ui/Segoe-ui.ttf");
+}
+
+html {
+	font-size: 14px;
+}
+
+body {
+	color: #404E67 !important;
+  font-family: 'Open Sans', 'Segoe UI', 'Roboto-Regular', BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+}
+
+#invoice-template {
+	/*padding: 0rem;*/
+}
